@@ -1,4 +1,6 @@
 package selab.desktop.resource_management.cloudresourceManagement.domain;
 
-public class index {
+public class User {
+    private Integer id;
+
 }
