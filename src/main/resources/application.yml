@@ -6,11 +6,11 @@ spring:
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      #????????
+      # 链接池初始化大小
       initial-size: 8
-      # ?????
+      # 最大活跃数
       max-active: 16
-      # ?????
+      # 最小空闲数
       min-idle: 1
-      # ??????
+      # 最大等待时间
       max-wait: 6000
