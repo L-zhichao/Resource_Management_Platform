@@ -13,7 +13,7 @@ class ResourceManagementPlatformApplicationTests {
     private UserMapper userMapper;
     @Test
     void contextLoads() {
-        User user = userMapper.selectById(1);
+        User user = userMapper.selectByUserNameAndPassword("admain"," ");
         System.out.println(user);
     }
 
