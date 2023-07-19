@@ -14,9 +14,3 @@ spring:
       min-idle: 1
       # 最大等待时间
       max-wait: 6000
-
-
-      # 开启驼峰命名
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true
