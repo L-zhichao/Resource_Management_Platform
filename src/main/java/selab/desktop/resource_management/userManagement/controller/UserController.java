@@ -1,6 +1,7 @@
 package selab.desktop.resource_management.userManagement.controller;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -8,12 +9,12 @@ import selab.desktop.resource_management.userManagement.domain.vo.UserVo;
 import selab.desktop.resource_management.userManagement.service.impl.UserServiceImpl;
 import selab.desktop.resource_management.userManagement.utils.JsonResult;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserServiceImpl userServiceImpl;
+    private final UserServiceImpl userServiceImpl;
     /**
      * 注册用户
      * @param userVo

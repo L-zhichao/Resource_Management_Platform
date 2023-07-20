@@ -1,5 +1,6 @@
 package selab.desktop.resource_management.userManagement.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -16,11 +17,12 @@ import java.util.Date;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements IUserservice {
 
 
-    @Autowired
-    private UserMapper userMapper;
+
+    private final UserMapper userMapper;
 
 
     @Override
