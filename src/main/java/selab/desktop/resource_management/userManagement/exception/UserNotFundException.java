@@ -1,4 +1,4 @@
-package selab.desktop.resource_management.cloudresourceManagement.exception;
+package selab.desktop.resource_management.userManagement.exception;
 
 public class UserNotFundException extends ServiceException{
     public UserNotFundException() {

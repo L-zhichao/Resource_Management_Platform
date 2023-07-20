@@ -1,8 +1,7 @@
-package selab.desktop.resource_management.cloudresourceManagement.service;
+package selab.desktop.resource_management.userManagement.service;
 
 import org.springframework.stereotype.Service;
-import selab.desktop.resource_management.cloudresourceManagement.domain.vo.UserVo;
-import selab.desktop.resource_management.cloudresourceManagement.mapper.UserMapper;
+import selab.desktop.resource_management.userManagement.domain.vo.UserVo;
 
 @Service
 public interface IUserservice {

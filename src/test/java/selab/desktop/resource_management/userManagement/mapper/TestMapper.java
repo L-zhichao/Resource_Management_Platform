@@ -3,10 +3,8 @@ package selab.desktop.resource_management.userManagement.mapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import selab.desktop.resource_management.cloudresourceManagement.domain.User;
-import selab.desktop.resource_management.cloudresourceManagement.mapper.UserMapper;
+import selab.desktop.resource_management.userManagement.domain.User;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @SpringBootTest
@@ -26,4 +24,11 @@ public class TestMapper {
         Integer integer = userMapper.insertUser(user);
         System.out.println(integer);
     }
+    @Test
+    public void testSelect(){
+        User user = userMapper.selectByUsername("test02");
+        System.out.println(user);
+
+    }
+
 }

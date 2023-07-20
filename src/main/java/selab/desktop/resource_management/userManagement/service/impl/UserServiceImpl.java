@@ -1,15 +1,15 @@
-package selab.desktop.resource_management.cloudresourceManagement.service.impl;
+package selab.desktop.resource_management.userManagement.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
-import selab.desktop.resource_management.cloudresourceManagement.domain.User;
-import selab.desktop.resource_management.cloudresourceManagement.domain.vo.UserVo;
-import selab.desktop.resource_management.cloudresourceManagement.exception.InsertException;
-import selab.desktop.resource_management.cloudresourceManagement.exception.PasswordNotMatchException;
-import selab.desktop.resource_management.cloudresourceManagement.exception.UsernameDuplicatedException;
-import selab.desktop.resource_management.cloudresourceManagement.mapper.UserMapper;
-import selab.desktop.resource_management.cloudresourceManagement.service.IUserservice;
+import selab.desktop.resource_management.userManagement.domain.User;
+import selab.desktop.resource_management.userManagement.domain.vo.UserVo;
+import selab.desktop.resource_management.userManagement.exception.InsertException;
+import selab.desktop.resource_management.userManagement.exception.PasswordNotMatchException;
+import selab.desktop.resource_management.userManagement.exception.UsernameDuplicatedException;
+import selab.desktop.resource_management.userManagement.mapper.UserMapper;
+import selab.desktop.resource_management.userManagement.service.IUserservice;
 
 import java.util.Date;
 import java.util.UUID;

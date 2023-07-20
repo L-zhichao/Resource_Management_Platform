@@ -1,15 +1,14 @@
-package selab.desktop.resource_management.cloudresourceManagement.controller;
+package selab.desktop.resource_management.userManagement.controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import selab.desktop.resource_management.cloudresourceManagement.domain.User;
-import selab.desktop.resource_management.cloudresourceManagement.domain.vo.UserVo;
-import selab.desktop.resource_management.cloudresourceManagement.service.IUserservice;
-import selab.desktop.resource_management.cloudresourceManagement.service.impl.UserServiceImpl;
+import selab.desktop.resource_management.userManagement.domain.vo.UserVo;
+import selab.desktop.resource_management.userManagement.service.impl.UserServiceImpl;
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -21,9 +20,9 @@ public class UserController {
      * @param userVo
      */
     @PostMapping("/register")
-    void register( UserVo userVo){
+    void register(@Validated @RequestBody UserVo userVo){
 
-        userServiceImpl.register(userVo);
+        userServiceImpl.register( userVo);
     }
 
 

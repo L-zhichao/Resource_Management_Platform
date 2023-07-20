@@ -1,4 +1,4 @@
-package selab.desktop.resource_management.cloudresourceManagement.exception;
+package selab.desktop.resource_management.userManagement.exception;
 
 public class PasswordNotMatchException extends ServiceException{
     public PasswordNotMatchException() {
