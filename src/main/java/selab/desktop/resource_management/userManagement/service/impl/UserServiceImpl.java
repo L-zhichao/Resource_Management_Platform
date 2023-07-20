@@ -7,6 +7,7 @@ import selab.desktop.resource_management.userManagement.domain.User;
 import selab.desktop.resource_management.userManagement.domain.vo.UserVo;
 import selab.desktop.resource_management.userManagement.exception.InsertException;
 import selab.desktop.resource_management.userManagement.exception.PasswordNotMatchException;
+import selab.desktop.resource_management.userManagement.exception.UserNotFundException;
 import selab.desktop.resource_management.userManagement.exception.UsernameDuplicatedException;
 import selab.desktop.resource_management.userManagement.mapper.UserMapper;
 import selab.desktop.resource_management.userManagement.service.IUserservice;
@@ -43,8 +44,12 @@ public class UserServiceImpl implements IUserservice {
     @Override
     public UserVo login(String username, String password) {
         User user = userMapper.selectByUsername(username);
+        if(user == null){
+            throw new UserNotFundException("当前用户不存在");
+        }
         String loginPassword = getMD5Password(password,user.getSalt());
-        if(!password.equals(loginPassword)){
+        String reallyPassword = user.getPassword();
+        if(!reallyPassword.equals(loginPassword)){
             throw new PasswordNotMatchException("密码错误");
         }
         UserVo userVo = userToUserVo(user);

@@ -3,12 +3,11 @@ package selab.desktop.resource_management.userManagement.controller;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import selab.desktop.resource_management.userManagement.domain.vo.UserVo;
 import selab.desktop.resource_management.userManagement.service.impl.UserServiceImpl;
+import selab.desktop.resource_management.userManagement.utils.JsonResult;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -20,9 +19,10 @@ public class UserController {
      * @param userVo
      */
     @PostMapping("/register")
-    void register(@Validated @RequestBody UserVo userVo){
+    JsonResult<Object> register(@Validated @RequestBody UserVo userVo){
 
         userServiceImpl.register( userVo);
+        return new JsonResult<>(JsonResult.SUCCESS,null,null);
     }
 
 
@@ -34,12 +34,14 @@ public class UserController {
      * @return    userVo对象
      */
     @PostMapping("/login")
- UserVo login(String username, String password, HttpSession httpSession){
+ JsonResult<UserVo> login(@RequestParam String username, String password, HttpSession httpSession){
+        System.out.println(password);
         UserVo userVo = userServiceImpl.login(username, password);
         httpSession.setAttribute("name",userVo.getName());
         httpSession.setAttribute("username",userVo.getUsername());
         httpSession.setAttribute("userStatus",userVo.getUserStatus());
-        return userVo;
+        JsonResult<UserVo> jsonResult = new JsonResult<>(JsonResult.SUCCESS,null,userVo);
+        return jsonResult;
     }
 
 

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class JsonResult<T>{
 
     public final static Integer SUCCESS = 200;
