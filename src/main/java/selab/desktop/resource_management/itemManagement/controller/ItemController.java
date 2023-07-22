@@ -14,18 +14,19 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-   @GetMapping("/all")
+   @GetMapping()
     public Result<Page<Item>> selectAllItem(@RequestParam(defaultValue = "1")int page,
-                                            @RequestParam(defaultValue = "5")int size){
-       Page<Item> itemPage = itemService.selectAllItem(page, size);
+                                            @RequestParam(defaultValue = "5")int size,
+                                            @RequestParam(defaultValue = "") String search){
+       Page<Item> itemPage = itemService.selectAllItem(page, size,search);
        return new Result<>(20000,null,itemPage);
    }
-   @PostMapping("/add")
+   @PostMapping()
    public Result<?> addItem(@RequestBody Item item){
        itemService.addItem(item);
        return new Result<>();
    }
-   @PutMapping("/update")
+   @PutMapping()
     public Result<?> updateItem(Item item){
        itemService.updateItem(item);
        return new Result<>();
@@ -35,7 +36,7 @@ public class ItemController {
        Item item = itemService.getItemById(id);
        return new Result<>(2000,null,item);
    }
-   @DeleteMapping("/delete")
+   @DeleteMapping()
     public Result<?> deleteItemById(Long id){
      itemService.deleteItemById(id);
      return new Result<>();

@@ -5,7 +5,7 @@ import selab.desktop.resource_management.itemManagement.domain.Item;
 
 public interface ItemService {
 
-     Page<Item> selectAllItem(int page, int size);
+     Page<Item> selectAllItem(int page, int size,String search);
 
      void addItem(Item item);
 
