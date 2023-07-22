@@ -1,5 +1,6 @@
 package selab.desktop.resource_management.fundManagement.domain;
 
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
