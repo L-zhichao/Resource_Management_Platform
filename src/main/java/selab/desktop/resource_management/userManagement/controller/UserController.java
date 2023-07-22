@@ -1,5 +1,6 @@
 package selab.desktop.resource_management.userManagement.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,9 @@ public class UserController {
      * 注册用户
      * @param userVo
      */
+    @Operation(summary = "注册模块")
     @PostMapping("/register")
-    JsonResult<Object> register(@Validated @RequestBody UserVo userVo){
+    JsonResult<Void> register(@Validated @RequestBody UserVo userVo){
 
         userServiceImpl.register( userVo);
         return new JsonResult<>(JsonResult.SUCCESS,null,null);
@@ -34,6 +36,7 @@ public class UserController {
      * @param password  密码
      * @return    userVo对象
      */
+    @Operation(summary = "登录模块")
     @PostMapping("/login")
  JsonResult<UserVo> login(@RequestParam String username, String password, HttpSession httpSession){
         System.out.println(password);

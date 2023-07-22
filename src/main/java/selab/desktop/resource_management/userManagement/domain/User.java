@@ -11,7 +11,7 @@ public class User {
     private Long userId;
     private String  username;
     private String password;
-    private String salt;
+    private String salt;//盐值
     private String name;
     private Integer userStatus;
     private String email;
