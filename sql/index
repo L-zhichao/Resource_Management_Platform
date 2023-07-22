@@ -1,0 +1,9 @@
+CREATE TABLE `fundsmgm`
+(
+    `id`          bigint(30) NOT NULL COMMENT '主键ID',
+    `asset`       varchar(20) default NULL COMMENT '资产名称',
+    `asset_value` varchar(20) default NULL COMMENT '资产价值',
+    `judge`       int(5)      default null comment '资产是否可支配（1/0）',#可支配为1，不可支配为0
+    `update_time` datetime    default null comment '更新时间'
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
