@@ -1,66 +1,45 @@
 package selab.desktop.resource_management.itemManagement.controller;
 
+
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 import selab.desktop.resource_management.itemManagement.domain.Item;
 import selab.desktop.resource_management.itemManagement.service.ItemService;
+import selab.desktop.resource_management.itemManagement.utils.Result;
 
-
-@Controller
+@RestController
 @RequestMapping("/item")
 public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    //查询所有
-    @RequestMapping("/all")
-    public ModelAndView all(@RequestParam(defaultValue = "1") int page,
-                            @RequestParam(defaultValue = "5") int size){
-        ModelAndView modelAndView = new ModelAndView();
-        Page<Item> itemPage = itemService.findPage(page, size);
-        modelAndView.addObject("itemPage",itemPage);
-        modelAndView.setViewName("/item_all");
-        return modelAndView;
-    }
-
-    //新增物品
-    @RequestMapping("/add")
-    public String add(Item item){
-        itemService.add(item);
-        return "redirect:/item/all";
-    }
-
-    //查询物品，跳转到修改页面
-    @RequestMapping("/edit")
-    public ModelAndView edit(Long id){
-        ModelAndView modelAndView = new ModelAndView();
-        Item item = itemService.findById(id);
-        modelAndView.addObject("item",item);
-        modelAndView.setViewName("item_update");
-        return modelAndView;
-    }
-
-    //修改物品
-    @RequestMapping("/update")
-    public String update(Item item){
-        itemService.update(item);
-        return "redirect:item/all";
-    }
-
-
-    //删除物品
-    @RequestMapping("/delete")
-    public String delete(Long id){
-        itemService.delete(id);
-        return "redirect:item/all";
-    }
-
+   @GetMapping("/all")
+    public Result<Page<Item>> selectAllItem(@RequestParam(defaultValue = "1")int page,
+                                            @RequestParam(defaultValue = "5")int size){
+       Page<Item> itemPage = itemService.selectAllItem(page, size);
+       return new Result<>(20000,null,itemPage);
+   }
+   @PostMapping("/add")
+   public Result<?> addItem(@RequestBody Item item){
+       itemService.addItem(item);
+       return new Result<>();
+   }
+   @PutMapping("/update")
+    public Result<?> updateItem(Item item){
+       itemService.updateItem(item);
+       return new Result<>();
+   }
+   @GetMapping("/{id}")
+    public Result<Item> getItemById(Long id){
+       Item item = itemService.getItemById(id);
+       return new Result<>(2000,null,item);
+   }
+   @DeleteMapping("/delete")
+    public Result<?> deleteItemById(Long id){
+     itemService.deleteItemById(id);
+     return new Result<>();
+   }
 
 
 }
