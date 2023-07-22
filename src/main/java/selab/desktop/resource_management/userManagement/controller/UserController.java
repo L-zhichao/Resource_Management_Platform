@@ -20,7 +20,7 @@ public class UserController {
      * @param userVo
      */
     @PostMapping("/register")
-    JsonResult<Object> register(@Validated @RequestBody UserVo userVo){
+    JsonResult<Void> register(@Validated @RequestBody UserVo userVo){
 
         userServiceImpl.register( userVo);
         return new JsonResult<>(JsonResult.SUCCESS,null,null);
