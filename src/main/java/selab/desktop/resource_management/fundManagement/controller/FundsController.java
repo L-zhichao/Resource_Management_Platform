@@ -14,9 +14,9 @@ import java.util.Date;
 import java.util.List;
 
 @Slf4j
-@RestController
 @Tag(name = "资金管理controller")
 @RequestMapping("/fundsVo")
+@RestController
 public class FundsController {
     @Autowired
     private FundsService fundsService;
