@@ -10,7 +10,7 @@ import java.math.BigInteger;
 @Data
 public class Item {
     @TableId
-    private Long id;
+    private Long itemId;
     @TableField("item_name")
     private String itemname;
     private Integer number;
