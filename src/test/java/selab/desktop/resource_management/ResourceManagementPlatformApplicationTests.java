@@ -12,14 +12,14 @@ import selab.desktop.resource_management.userManagement.service.impl.UserService
 class ResourceManagementPlatformApplicationTests {
 
     @Autowired
-    private UserMapper userMapper;
+    private UserServiceImpl userService;
 
     @Test
     public void register001(){
-        UserController userController = new UserController();
-        UserVo userVo = new UserVo();
+        UserVo domain = userService.login("test02", "123456Aa");
+        System.out.println(domain);
 
-        userController.register(userVo);
+
     }
 
 

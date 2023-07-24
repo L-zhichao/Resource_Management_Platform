@@ -15,8 +15,7 @@ import selab.desktop.resource_management.userManagement.utils.JsonResult;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private  UserServiceImpl userServiceImpl;
+    private final  UserServiceImpl userServiceImpl;
     /**
      * 注册用户
      * @param userVo
@@ -39,7 +38,7 @@ public class UserController {
      */
     @Operation(summary = "登录模块")
     @PostMapping("/login")
- JsonResult<UserVo> login(@RequestParam String username, String password, HttpSession httpSession){
+ public JsonResult<UserVo> login(@RequestParam String username, String password, HttpSession httpSession){
         System.out.println(password);
         UserVo userVo = userServiceImpl.login(username, password);
         httpSession.setAttribute("name",userVo.getName());
