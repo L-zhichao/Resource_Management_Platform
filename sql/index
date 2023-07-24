@@ -13,16 +13,18 @@ create table item
 
 
 
--- 物品损坏记录
+ -- 物品损坏记录
 -- auto-generated definition
 create table damage_record
 (
-    damage_record_id     bigint auto_increment
+    damage_record_id       bigint auto_increment
         primary key,
-    damage_record_desc   varchar(200)         null comment '损坏描述',
-    damage_record_time   datetime             null comment '物品损坏时间',
-    item_id              int                  null comment '物品id',
-    user_id              int                  null comment '用户id',
-    damage_record_isread tinyint(1) default 0 null comment '管理员是否已读'
+    damage_record_desc     varchar(200)         null comment '损坏描述',
+    damage_record_time     datetime             null comment '物品损坏时间',
+    item_id                bigint               null comment '物品id',
+    user_id                bigint               null comment '用户id',
+    damage_record_isread   tinyint(1) default 0 null comment '管理员是否已读',
+    damage_record_img      varchar(200)         null comment '物品损坏图片',
+    damage_record_ishandle tinyint(1) default 0 null comment '是否处理'
 )
-    comment '物品损坏记录';
+    comment '物品损坏记录
