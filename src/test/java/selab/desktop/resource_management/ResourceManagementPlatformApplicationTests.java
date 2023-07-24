@@ -29,7 +29,7 @@ class ResourceManagementPlatformApplicationTests {
         fundsVo.setJudge(1);
         fundsVo.setAssetValue("10000");
         fundsVo.setUpdateTime(null);
-        fundsController.add(fundsVo);
+        System.out.println(fundsService.list());
     }
 
 }
