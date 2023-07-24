@@ -53,9 +53,5 @@ public class ItemServiceImpl implements ItemService {
         itemMapper.deleteById(id);
     }
 
-//    public Item findItemByName(String name){
-//        itemMapper.select
-//    }
-
 
 }

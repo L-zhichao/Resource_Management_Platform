@@ -15,6 +15,8 @@ public class DamageRecord {
     private Long itemId;
     private Long UserId;
     private Boolean damageRecordIsRead;
+    private String damageRecordImg;
+    private Boolean damageRecordIsHandle;
 
 
 }
