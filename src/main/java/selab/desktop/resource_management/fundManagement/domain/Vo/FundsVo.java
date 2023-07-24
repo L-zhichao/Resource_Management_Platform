@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 @Data
 public class FundsVo {
-    @Schema(description = "主键ID")
+    @Schema(description = "自增主键ID")
     private Long id;
 
     @Pattern(regexp = "^[a-zA-Z0-9]$",message = "资产名称为包含数字，字母，下划线的字符")
@@ -24,6 +24,6 @@ public class FundsVo {
     private Integer judge;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Schema(description = "最后更新时间")
+    @Schema(description = "最后更新时间,为当前值，填null就行")
     private Date updateTime;
 }
