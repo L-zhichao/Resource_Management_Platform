@@ -6,6 +6,8 @@ import selab.desktop.resource_management.userManagement.domain.vo.UserVo;
 @Service
 public interface IUserservice {
 
+    void verifyUsername(String username);
+
 
     /**
      *  注册用户

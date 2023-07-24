@@ -28,6 +28,17 @@ public class UserController {
         return new JsonResult<>(JsonResult.SUCCESS,null,null);
     }
 
+    /**
+     * 验证用户名是否已经存在
+     * @param username  用户名
+     * @return
+     */
+    @Operation(summary = "用户名验证")
+    @PostMapping("/user/verify")
+   public JsonResult<Void> verifyUsername(String username){
+        userServiceImpl.verifyUsername(username);
+        return new JsonResult<>(JsonResult.SUCCESS,null,null);
+   }
 
     /**
      *

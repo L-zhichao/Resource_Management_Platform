@@ -26,6 +26,14 @@ public class UserServiceImpl implements IUserservice {
 
 
     @Override
+    public void verifyUsername(String username) {
+        User user = userMapper.selectByUsername(username);
+        if(user != null){
+            throw new UsernameDuplicatedException("当前用户名已存在");
+        }
+    }
+
+    @Override
     public void register(UserVo userVo) {
         String username = userVo.getUsername();
         User user = userMapper.selectByUsername(username);
