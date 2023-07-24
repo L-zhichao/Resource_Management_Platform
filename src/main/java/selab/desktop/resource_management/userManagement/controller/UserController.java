@@ -15,14 +15,15 @@ import selab.desktop.resource_management.userManagement.utils.JsonResult;
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserServiceImpl userServiceImpl;
+    @Autowired
+    private  UserServiceImpl userServiceImpl;
     /**
      * 注册用户
      * @param userVo
      */
     @Operation(summary = "注册模块")
     @PostMapping("/register")
-    JsonResult<Void> register(@Validated @RequestBody UserVo userVo){
+    public JsonResult<Void> register(@Validated @RequestBody UserVo userVo){
 
         userServiceImpl.register( userVo);
         return new JsonResult<>(JsonResult.SUCCESS,null,null);
