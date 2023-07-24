@@ -11,7 +11,7 @@ import java.math.BigInteger;
 public class Item {
     @TableId
     private Long itemId;
-    @TableField("item_name")
+
     private String itemname;
     private Integer number;
     private Integer status;

@@ -19,28 +19,26 @@ public class ItemController {
                                             @RequestParam(defaultValue = "5")int size,
                                             @RequestParam(defaultValue = "") String search){
        Page<Item> itemPage = itemService.selectAllItem(page, size,search);
-       return new Result<>(20000,null,itemPage);
+       return new Result<>(20000,"查询成功",itemPage);
    }
    @PostMapping()
-   public Result<?> addItem(@RequestBody Item item){
-       itemService.addItem(item);
-       return new Result<>();
+   public Result<Long> addItem(@RequestBody Item item){
+       return itemService.addItem(item);
+
    }
    @PutMapping()
     public Result<?> updateItem(Item item){
        itemService.updateItem(item);
-       return new Result<>();
+       return new Result<>(20000,"修改成功",null);
    }
    @GetMapping("/{id}")
     public Result<Item> getItemById(Long id){
        Item item = itemService.getItemById(id);
-       return new Result<>(2000,null,item);
+       return new Result<>(20000,null,item);
    }
    @DeleteMapping()
     public Result<?> deleteItemById(Long id){
      itemService.deleteItemById(id);
-     return new Result<>();
+     return new Result<>(20000,"删除成功",null);
    }
-
-
 }

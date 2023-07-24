@@ -1,6 +1,7 @@
 package selab.desktop.resource_management.itemManagement.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -9,8 +10,10 @@ import org.springframework.stereotype.Service;
 import selab.desktop.resource_management.itemManagement.domain.Item;
 import selab.desktop.resource_management.itemManagement.mapper.ItemMapper;
 import selab.desktop.resource_management.itemManagement.service.ItemService;
+import selab.desktop.resource_management.itemManagement.utils.Result;
 
 import java.awt.print.Book;
+import java.util.List;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -26,8 +29,16 @@ public class ItemServiceImpl implements ItemService {
     return selectPage;
     }
 
-    public void addItem(Item item){
-        itemMapper.insert(item);
+    public Result<Long> addItem(Item item){
+        QueryWrapper<Item> queryWrapper = new QueryWrapper();
+        queryWrapper.eq("itemname", item.getItemname());
+        List<Item> items = itemMapper.selectList(queryWrapper);
+        if (items.size() > 0) {
+            return new Result(30000, "增加失败",null);
+        }
+         itemMapper.insert(item);
+
+        return new Result<>(20000,"增加成功",item.getItemId());
     }
 
     public Item getItemById(Long id){
@@ -41,6 +52,10 @@ public class ItemServiceImpl implements ItemService {
     public void deleteItemById(Long id){
         itemMapper.deleteById(id);
     }
+
+//    public Item findItemByName(String name){
+//        itemMapper.select
+//    }
 
 
 }
