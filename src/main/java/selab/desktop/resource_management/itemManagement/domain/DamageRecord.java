@@ -1,11 +1,17 @@
 package selab.desktop.resource_management.itemManagement.domain;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
 @Data
+@TableName("damage_record")
+@AllArgsConstructor
+@NoArgsConstructor
 public class DamageRecord {
     @TableId
     private Long damageRecordId;
@@ -13,10 +19,10 @@ public class DamageRecord {
 
     private Date damageRecordTime;
     private Long itemId;
-    private Long UserId;
-    private Boolean damageRecordIsRead;
+    private Long userId;
+    private Boolean damageRecordIsread;
     private String damageRecordImg;
-    private Boolean damageRecordIsHandle;
+    private Boolean damageRecordIshandle;
 
 
 }

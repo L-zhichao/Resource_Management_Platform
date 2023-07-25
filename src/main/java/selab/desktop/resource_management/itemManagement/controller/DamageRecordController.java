@@ -24,7 +24,7 @@ public class DamageRecordController {
         for (DamageRecord damageRecord:allDamageRecord){
             damageRecordService.updateIsRead(damageRecord.getDamageRecordId());
             DamageRecord newDamageRecord = new DamageRecord();
-            BeanUtils.copyProperties(newDamageRecord,damageRecord);
+            BeanUtils.copyProperties(damageRecord,newDamageRecord);
             damageRecords.add(newDamageRecord);
         }
         return new Result<>(20000,"查询成功",damageRecords);

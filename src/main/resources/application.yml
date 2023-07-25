@@ -7,7 +7,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql:///travel?serverTimezone=UTC
+    url: jdbc:mysql:///resource?serverTimezone=UTC
     username: root
     password: abc123
 
@@ -20,7 +20,7 @@ mybatis-plus:
       id-type: auto
   configuration:
     # 关闭列名自动驼峰命名规则映射
-    map-underscore-to-camel-case: false
+    map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
 
 

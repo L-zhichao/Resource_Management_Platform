@@ -28,7 +28,7 @@ public class DamageRecordServiceImpl implements DamageRecordService {
     @Override
     public void updateIsRead(Long damageRecordId) {
         DamageRecord damageRecord = damageRecordMapper.selectById(damageRecordId);
-        damageRecord.setDamageRecordIsRead(true);
+        damageRecord.setDamageRecordIsread(true);
         damageRecordMapper.updateById(damageRecord);
     }
 
@@ -48,7 +48,7 @@ public class DamageRecordServiceImpl implements DamageRecordService {
     @Override
     public void updateIsHandle(Long damageRecordId) {
         DamageRecord damageRecord = damageRecordMapper.selectById(damageRecordId);
-        damageRecord.setDamageRecordIsHandle(true);
+        damageRecord.setDamageRecordIshandle(true);
         damageRecordMapper.updateById(damageRecord);
     }
 }

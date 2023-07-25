@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import selab.desktop.resource_management.itemManagement.domain.Item;
 import selab.desktop.resource_management.itemManagement.service.ItemService;
+import selab.desktop.resource_management.itemManagement.utils.ItemPage;
 import selab.desktop.resource_management.itemManagement.utils.Result;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/item")
@@ -15,11 +18,15 @@ public class ItemController {
     private ItemService itemService;
 
    @GetMapping()
-    public Result<Page<Item>> selectAllItem(@RequestParam(defaultValue = "1")int page,
+    public Result<ItemPage> selectAllItem(@RequestParam(defaultValue = "1")int page,
                                             @RequestParam(defaultValue = "5")int size,
                                             @RequestParam(defaultValue = "") String search){
        Page<Item> itemPage = itemService.selectAllItem(page, size,search);
-       return new Result<>(20000,"查询成功",itemPage);
+       long total = itemPage.getTotal();
+       long pages = itemPage.getPages();
+       List<Item> records = itemPage.getRecords();
+       ItemPage itemPage1 = new ItemPage(total,pages,records);
+       return new Result<>(20000,"查询成功",itemPage1);
    }
    @PostMapping()
    public Result<Long> addItem(@RequestBody Item item){
