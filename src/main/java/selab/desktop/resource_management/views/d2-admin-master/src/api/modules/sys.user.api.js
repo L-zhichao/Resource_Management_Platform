@@ -22,7 +22,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
           : tools.responseError({}, '账号或密码不正确')
       })
     // 接口请求
-    return requestForMock({
+    return request({
       url: 'user/login',
       method: 'post',
       data

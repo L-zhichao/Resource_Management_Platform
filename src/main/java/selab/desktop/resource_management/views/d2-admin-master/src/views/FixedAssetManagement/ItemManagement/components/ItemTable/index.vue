@@ -5,34 +5,23 @@
     :data="tableData"
     style="width: 100%">
     <el-table-column
-      fixed
-      prop="date"
-      label="日期"
-      width="100">
-    </el-table-column>
-    <el-table-column
       prop="itemName"
       label="物品"
       width="120">
     </el-table-column>
     <el-table-column
-      prop="province"
-      label="省份"
+      prop="itemNumber"
+      label="数量"
       width="120">
     </el-table-column>
     <el-table-column
-      prop="city"
-      label="市区"
+      prop="itemUnitPrice"
+      label="单价"
       width="120">
     </el-table-column>
     <el-table-column
-      prop="address"
-      label="地址"
-      width="300">
-    </el-table-column>
-    <el-table-column
-      prop="zip"
-      label="邮编"
+      prop="itemDescription"
+      label="描述"
       width="120">
     </el-table-column>
     <el-table-column
@@ -40,22 +29,24 @@
       label="操作"
       width="100">
       <template slot-scope="scope">
-        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-        <el-button type="text" size="small">编辑</el-button>
+        <el-button @click="handleClick(scope.row)" type="text" size="small" v-if="userAdministratorPermissions">修改</el-button>
+        <el-button type="text" size="small" v-if="userAdministratorPermissions">删除</el-button>
+        <el-button @click="handleClick(scope.row)" type="text" size="small" v-if="!userAdministratorPermissions">问题上报</el-button>
       </template>
     </el-table-column>
   </el-table>
 </template>
 
 <script>
+import util from '@/libs/util'
 export default {
   name: 'ItemTable',
   methods: {
     handleClick (row) {
       console.log(row)
+      console.log(this.userAdministratorPermissions)
     }
   },
-
   data () {
     return {
       tableData: [{
@@ -86,8 +77,13 @@ export default {
         city: '普陀区',
         address: '上海市普陀区金沙江路 1516 弄',
         zip: 200333
-      }]
+      }],
+      // 0 为 true 是管理员
+      // 1 为 false 非管理员
+      userAdministratorPermissions: util.cookies.get('userStatus') === '0' || false
     }
+  },
+  mounted () {
   }
 }
 </script>
