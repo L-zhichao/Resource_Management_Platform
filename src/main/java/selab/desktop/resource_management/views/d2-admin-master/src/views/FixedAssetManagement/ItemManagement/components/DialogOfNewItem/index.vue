@@ -2,8 +2,8 @@
   <el-dialog
     title="新物品购置资金申请"
     :visible.sync="dialogVisible"
-    width="40%"
-    :before-close="handleClose">
+    :before-close="handleClose"
+    width="40%">
     <span>这是一段New信息</span>
     <span slot="footer" class="dialog-footer">
       <el-button @click="dialogVisible = false">取 消</el-button>

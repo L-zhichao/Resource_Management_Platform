@@ -356,14 +356,7 @@ export default {
      * @param {*} param0
      */
     async register ({ name, username, email, password, userStatue }) {
-      const apiData = await api.SYS_USER_REGISTER({
-        name: name,
-        username: username,
-        email: email,
-        password: password,
-        userStatue: userStatue
-      })
-      return apiData
+      return await api.SYS_USER_REGISTER({ name, username, email, password, userStatue })
     },
     /**
      * @description 注册用户重复验证

@@ -26,8 +26,13 @@ function createService () {
       const dataAxios = response.data
       // 这个状态码是和后端约定的
       // code 是原生框架模拟的返回值，status是实际返回的
-      // const { code } = dataAxios
-      const code = dataAxios.status
+      let { code } = dataAxios
+      if (dataAxios.status) {
+        code = dataAxios.status
+      }
+      // else {
+      //   { code } = dataAxios
+      // }
       // 根据 code 进行判断
       if (code === undefined) {
         // 如果没有 code 代表这不是项目后端开发的接口 比如可能是 D2Admin 请求最新版本
@@ -40,6 +45,12 @@ function createService () {
             return dataAxios.data
           case 200:
             // code === 200 代表 ok
+            return dataAxios.data
+          case 500:
+            // code === 500 代表 失败
+            return dataAxios.data
+          case 20000:
+            // code ==== 20000 是 白泽容 的 OK
             return dataAxios.data
           case 40002:
             // code === 40002 代表 当前用户名已存在

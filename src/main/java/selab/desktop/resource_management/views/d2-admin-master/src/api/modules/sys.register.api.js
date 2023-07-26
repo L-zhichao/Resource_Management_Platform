@@ -8,8 +8,8 @@ const users = [
 
 export default ({ service, request, serviceForMock, requestForMock, mock, faker, tools }) => ({
   /**
-   * @description 登录
-   * @param {Object} data 登录携带的信息
+   * @description 注册
+   * @param {Object} data 注册携带的信息
    */
   SYS_USER_REGISTER (data = {}) {
     // 模拟数据
