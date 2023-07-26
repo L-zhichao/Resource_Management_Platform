@@ -33,7 +33,7 @@ public class UserController {
      * @param username  用户名
      * @return
      */
-    @Operation(summary = "用户名验证")
+    @Operation(summary = "用户名验证模块")
     @PostMapping("/user/verify")
    public JsonResult<Void> verifyUsername(String username){
         userServiceImpl.verifyUsername(username);

@@ -1,5 +1,6 @@
 package selab.desktop.resource_management.userManagement.exception;
 
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -17,15 +18,18 @@ public class ExceptionHandle {
      * @return
      */
     @ExceptionHandler(BindException.class)
-    public JsonResult<Object> validExceptionHandle(BindException e){
-       JsonResult<Object> jsonResult = new JsonResult<>();
+    public JsonResult<String> validExceptionHandle(BindException e){
+       JsonResult<String> jsonResult = new JsonResult<>();
        jsonResult.setStatus(40001);
-       jsonResult.setMessage(e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
+        FieldError fieldError = e.getBindingResult().getFieldErrors().get(0);
+        // e.getBindingResult().getAllErrors().get(0).getDefaultMessage()
+        jsonResult.setMessage(fieldError.getDefaultMessage());
+       jsonResult.setData(fieldError.getField());
         return jsonResult;
     }
 
    @ExceptionHandler(ServiceException.class)
-    public JsonResult<Object> serviceExceptionHandle(ServiceException e){
+    public JsonResult<Void> serviceExceptionHandle(ServiceException e){
        if(e instanceof UsernameDuplicatedException){
            return new JsonResult<>(40002,"当前用户名已存在",null);
        } else if (e instanceof UserNotFundException) {
