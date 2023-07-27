@@ -2,13 +2,13 @@
 
 export default ({ service, request, serviceForMock, requestForMock, mock, faker, tools }) => ({
   /**
-   * @description 损坏物品上报
-   * @param {Object} data 损坏物品上报的信息
+   * @description 修改物品
+   * @param {Object} data 修改物品的信息
    */
-  ITEM_REPORT_DAMAGED_API (data) {
+  ITEM_CHANGE_API (data) {
     // 模拟数据
     mock
-      .onAny('/damage/record')
+      .onAny('/item')
       .reply(config => {
         // const configData = JSON.parse(config.data)
         return [
@@ -19,8 +19,8 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
       })
     // 接口请求
     return request({
-      url: 'damage/record',
-      method: 'post',
+      url: 'item',
+      method: 'put',
       data
     })
   }

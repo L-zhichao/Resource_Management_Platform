@@ -1,40 +1,54 @@
 <template>
   <el-dialog
-    title="物品损坏上报"
+    title="新物品添加"
     :visible.sync="dialogVisible"
     :before-close="handleClose"
     width="40%">
-    <span><b>{{ oldItemId_Name.itemname }}</b></span>
-    <br/><br/>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="损坏数量" prop="number">
+      <el-form-item label="名称" prop="itemname">
+        <el-input
+          type="text"
+          :controls="false"
+          v-model.number="ruleForm.itemname">
+        </el-input>
+      </el-form-item>
+      <el-form-item label="数量" prop="number">
         <el-input
           type="number"
           :controls="false"
           size="mini"
           min="1"
-          :max="oldItemId_Name.number"
           v-model.number="ruleForm.number">
         </el-input>
       </el-form-item>
-      <el-form-item label="损坏详情" prop="inputText">
-        <el-input type="textarea" v-model="ruleForm.inputText"></el-input>
+      <el-form-item label="单价金额" prop="price">
+        <el-input
+          type="number"
+          :controls="false"
+          size="mini"
+          :min="0.01"
+          :step="0.01"
+          precision="2"
+          v-model.number="ruleForm.price">
+        </el-input>
       </el-form-item>
-      <el-form-item label="上传图片" prop="imgBase64">
+      <el-form-item label="详情" prop="damageRecordDesc">
+        <el-input type="textarea" v-model="ruleForm.damageRecordDesc"></el-input>
+      </el-form-item>
+      <el-form-item label="上传图片" prop="img">
         <el-upload
-          ref="imgLoad"
+          ref="img"
           drag
           action
-          multiple
           accept=".png, .jpg, jpeg"
-          :limit="5"
+          :limit="1"
           list-type="picture"
           :on-change="change"
           :on-exceed="handleExceed"
           :auto-upload="false">
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-          <div class="el-upload__tip" slot="tip">只能上传5张jpg/png文件</div>
+          <div class="el-upload__tip" slot="tip">只能上传1张jpg/png文件</div>
         </el-upload>
       </el-form-item>
     </el-form>
@@ -45,44 +59,66 @@
 </template>
 
 <script>
-import util from '@/libs/util'
+// import util from '@/libs/util'
 import api from '@/api'
-import * as dayjs from 'dayjs'
 export default {
-  name: 'DialogOfOldItem',
+  name: 'DialogAddNewItem',
   props: {
     // 检测 dialog 被唤起
     dialogArouse: {
       type: Number,
       // 限制为必传
       required: true
-    },
-    oldItemId_Name: {
-      type: Object,
-      required: true
     }
   },
   data () {
     return {
       ruleForm: {
-        // 损坏物品数量
+        itemname: '',
         number: 1,
-        // 描述
-        inputText: '',
-        // 上传后的文件列表
-        imgBase64: []
+        price: null,
+        damageRecordDesc: '',
+        img: ''
       },
-      // 表单验证规则
       rules: {
+        itemname: [
+          { required: true, message: '请输入物品名', trigger: 'blur' },
+          {
+            required: true,
+            pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9\s*.·-]+$/,
+            message: '不支持特殊字符',
+            trigger: 'blur'
+          }
+        ],
         number: [
-          { required: true, message: '请输入损坏数量', trigger: 'blur' },
-          { required: true, type: 'number', min: 1, max: this.oldItemId_Name.number, message: '请输入正确损坏数量', trigger: 'blur' }
+          { required: true, message: '请输入数量', trigger: 'blur' },
+          {
+            required: true,
+            pattern: /^[0-9|^\\.]/,
+            message: '不能为负',
+            trigger: 'blur'
+          }
         ],
-        inputText: [
-          { required: true, message: '请输入损坏详情', trigger: 'blur' }
+        price: [
+          { required: true, message: '请输入单价金额', trigger: 'blur' },
+          {
+            required: true,
+            pattern: /^[0-9|^\\.]/,
+            message: '不能为负',
+            trigger: 'blur'
+          },
+          {
+            required: true,
+            pattern: /(^[1-9](\d+)?(\.\d{1,2})?$)|(^0$)|(^\d\.\d{1,2}$)/,
+            message: '请输入正确格式',
+            trigger: 'blur'
+          }
         ],
-        imgBase64: [
-          { required: true, message: '上传损坏图片', trigger: 'blur' }
+        damageRecordDesc: [
+          { required: true, message: '说明一下', trigger: 'blur' }
+        ],
+        img: [
+          { required: true, message: '上传图片', trigger: 'blur' }
         ]
       },
       dialogVisible: false
@@ -90,17 +126,10 @@ export default {
   },
   watch: {
     dialogArouse () {
-      if ('itemId' in this.oldItemId_Name) {
-        this.dialogVisible = true
-      } else {
-        this.$message.error('当前未选中任何物品')
-      }
+      this.dialogVisible = true
     }
   },
   methods: {
-    dialogArouseOperate () {
-      this.dialogVisible = true
-    },
     /**
      * @description dialog关闭时触发
      * @param {*} done
@@ -109,30 +138,31 @@ export default {
       this.$confirm('确认关闭？')
         .then(_ => {
           this.ruleForm = {
+            itemname: '',
             number: 1,
-            inputText: '',
-            // 上传后的文件列表
-            imgBase64: []
+            price: null,
+            damageRecordDesc: '',
+            img: ''
           }
           this.$refs.ruleForm.clearValidate()
-          this.$refs.imgLoad.clearFiles()
+          this.$refs.img.clearFiles()
           done()
         })
         .catch(_ => {})
     },
     /**
-     * @description 上传文件超过5张时触发
+     * @description 上传文件超过1张时触发
      * @param {*} files
      * @param {*} fileList
      */
     handleExceed (files, fileList) {
-      this.$message.error('最多上传5张图片')
+      this.$message.error('最多上传1张图片')
     },
     /**
      * @description file Img转base64
      * @param {*} file 读取的文件
      */
-    async previewFile (file, arr) {
+    async previewFile (file) {
       const fileBlob = new Blob([file], { type: file.type })
       let reader = null
       if (file) {
@@ -144,12 +174,13 @@ export default {
       reader.onload = async () => {
         // 转换后的base64就在reader.result里面,直接放到img标签的src属性即可
         const data = this.imageCompression(reader.result)
+        let base64 = ''
         await data
           .then(v => {
-            arr.push(v)
+            base64 = v
             return Promise.resolve(v)
           })
-        this.ruleForm.imgBase64 = arr
+        this.ruleForm.img = base64
       }
     },
     /**
@@ -194,32 +225,42 @@ export default {
       return await this.pCanvas(img, 500 * imgProportion, canvas, context)
     },
     /**
-     * @description 损坏物品请求
-     * @param {String} username   用户名
-     * @param {Number} itemId  损坏物品Id
-     * @param {Number} inputText  损坏描述
-     * @param {object} imgBase64  List 图片
+     * @description 添加物品请求api
+     * @param {String} itemname  物品名
+     * @param {Number} number  物品数量
+     * @param {Number} price  单价
+     * @param {String} damageRecordDesc  描述
+     * @param {String} img  图片base64
      */
-    async itemReportDamagedAPI ({ username, itemId, inputText, imgBase64, damageRecordTime }) {
-      return await api.ITEM_REPORT_DAMAGED_API({ username, itemId, damageRecordDesc: inputText, damageRecordImg: imgBase64, damageRecordTime })
+    async itemAddAPI ({ itemname, number, price, damageRecordDesc, img }) {
+      return await api.ITEM_ADD_API({ itemname, number, price, damageRecordDesc, img })
     },
     /**
-     * @description 损坏物品请求
-     * @param {Number} itemId  损坏物品Id
-     * @param {Number} inputText  损坏描述
-     * @param {String} imgBase64  图片 base64 多个图片由//////////拼接
+     * @description 添加物品请求api
+     * @param {String} itemname  物品名
+     * @param {Number} number  物品数量
+     * @param {Number} price  单价
+     * @param {String} damageRecordDesc  描述
+     * @param {String} img  图片base64
      */
-    itemReportDamaged ({ itemId, inputText, number, imgBase64 }) {
-      const username = util.cookies.get('username')
-      const damageRecordTime = dayjs().format('YYYY-MM-DD')
-      inputText = inputText + '//////////' + number
-      this.itemReportDamagedAPI({ username, itemId, inputText, imgBase64, damageRecordTime })
+    itemAdd ({ itemname, number, price, damageRecordDesc, img }) {
+      this.itemAddAPI({ itemname, number, price, damageRecordDesc, img })
         .then(v => {
-          if (v === null) {
+          if ('itemid' in v || 'itemId' in v) {
             this.$message({
               message: '上传成功',
               type: 'success'
             })
+            this.ruleForm = {
+              itemname: '',
+              number: 1,
+              price: null,
+              damageRecordDesc: '',
+              img: ''
+            }
+            this.$refs.ruleForm.clearValidate()
+            this.$refs.img.clearFiles()
+            this.dialogVisible = false
           } else if (v === 'fail') {
             this.$message.error('上传失败')
           }
@@ -232,9 +273,8 @@ export default {
      */
     change (file, fileList) {
       // 将每次图片数组变化的时候，实时的进行监听，更改数组里面的图片数据
-      const arr = []
       fileList.forEach((item) => {
-        this.previewFile(item.raw, arr)
+        this.previewFile(item.raw)
       })
     },
     /**
@@ -242,25 +282,14 @@ export default {
      */
     submit () {
       this.$refs.ruleForm.validate((valid) => {
-        console.log(valid)
         if (valid) {
-          this.ruleForm.imgBase64 = this.ruleForm.imgBase64.join('//////////')
-          console.log(this.ruleForm.imgBase64)
-          this.itemReportDamaged({
-            itemId: this.oldItemId_Name,
-            inputText: this.ruleForm.inputText,
-            imgBase64: this.ruleForm.imgBase64,
-            number: this.ruleForm.number
+          this.itemAdd({
+            itemname: this.ruleForm.itemname,
+            number: this.ruleForm.number,
+            price: this.ruleForm.price,
+            damageRecordDesc: this.ruleForm.damageRecordDesc,
+            img: this.ruleForm.img
           })
-          this.ruleForm = {
-            number: 1,
-            inputText: '',
-            // 上传后的文件列表
-            imgBase64: []
-          }
-          this.$refs.ruleForm.clearValidate()
-          this.$refs.imgLoad.clearFiles()
-          this.dialogVisible = false
         } else {
           this.$message.error('表单校验失败，请检查')
         }

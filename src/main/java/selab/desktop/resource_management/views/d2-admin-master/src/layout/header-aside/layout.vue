@@ -89,6 +89,8 @@ import d2HeaderLog from './components/header-log'
 import d2HeaderColor from './components/header-color'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import mixinSearch from './mixins/search'
+import util from '@/libs/util'
+import api from '@/api'
 export default {
   name: 'd2-layout-header-aside',
   mixins: [
@@ -112,7 +114,10 @@ export default {
       // [侧边栏宽度] 正常状态
       asideWidth: '200px',
       // [侧边栏宽度] 折叠状态
-      asideWidthCollapse: '65px'
+      asideWidthCollapse: '65px',
+      // 0 为 true 是管理员
+      // 1 为 false 非管理员
+      userAdministratorPermissions: util.cookies.get('userStatus') === '0' || false
     }
   },
   computed: {
@@ -153,7 +158,37 @@ export default {
      */
     handleToggleAside () {
       this.asideCollapseToggle()
+    },
+    /**
+     * @description 损坏物品查询请求api
+     */
+    async itemSearchDamageAPI () {
+      return await api.ITEM_SEARCH_DAMAGED_API()
+    },
+    /**
+     * @description 损坏物品查询请求
+     */
+    itemSearchDamage () {
+      this.itemSearchDamageAPI()
+        .then(v => {
+          const data = v.filter((item, index) => {
+            if (item.damageRecordIsHandle === 'false') {
+              return item
+            }
+          })
+          if (data.length !== 0) {
+            this.$notify({
+              title: '有' + data.length + '个未处理物品损坏请求',
+              // message: '就很想点一下,也不知道有什么用',
+              position: 'bottom-left',
+              type: 'warning'
+            })
+          }
+        })
     }
+  },
+  mounted () {
+    if (this.userAdministratorPermissions) this.itemSearchDamage()
   }
 }
 </script>

@@ -48,7 +48,7 @@ function createService () {
             return dataAxios.data
           case 500:
             // code === 500 代表 失败
-            return dataAxios.data
+            return 'fail'
           case 20000:
             // code ==== 20000 是 白泽容 的 OK
             return dataAxios.data

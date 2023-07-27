@@ -2,8 +2,8 @@
   <el-drawer
     title="新物品购置资金请求"
     :visible.sync="drawerVisible"
-    size="50%"
-    direction="rtl">
+    size="80%"
+    direction="btt">
     <span>我来啦!</span>
   </el-drawer>
 </template>

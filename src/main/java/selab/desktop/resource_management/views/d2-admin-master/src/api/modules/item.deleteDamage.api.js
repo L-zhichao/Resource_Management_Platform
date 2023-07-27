@@ -2,10 +2,10 @@
 
 export default ({ service, request, serviceForMock, requestForMock, mock, faker, tools }) => ({
   /**
-   * @description 损坏物品上报
-   * @param {Object} data 损坏物品上报的信息
+   * @description 删除损坏物品
+   * @param {Object} Id 唯一参数 物品Id
    */
-  ITEM_REPORT_DAMAGED_API (data) {
+  ITEM_DELETE_DAMAGED_API (params) {
     // 模拟数据
     mock
       .onAny('/damage/record')
@@ -20,8 +20,8 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
     // 接口请求
     return request({
       url: 'damage/record',
-      method: 'post',
-      data
+      method: 'delete',
+      params
     })
   }
 })

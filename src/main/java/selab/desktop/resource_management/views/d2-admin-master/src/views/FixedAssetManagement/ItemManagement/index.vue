@@ -7,7 +7,7 @@
           <el-button-group v-if="userAdministratorPermissions">
             <!-- 顶部两个按钮-其一 -->
             <el-tooltip
-              content="新物品购置资金请求"
+              content="查看新物品购置资金请求"
               placement="bottom">
               <el-button
                 size="medium"
@@ -18,7 +18,7 @@
             </el-tooltip>
             <!-- 顶部两个按钮-其二 -->
             <el-tooltip
-              content="物品损坏上报"
+              content="查看物品损坏信息"
               placement="bottom">
               <el-button
                 size="medium"
@@ -66,12 +66,25 @@
         </el-col>
         <el-col :span="2.5">
           <el-tooltip
-            content="新物品购置资金请求"
+            v-if="userAdministratorPermissions"
+            content="添加物品 | 很简单对吧?"
             placement="bottom">
             <el-button
               type="primary"
-              size="medium">
-              请求历史
+              size="medium"
+              @click="dialogAddNewItemArouseChangesNumber++">
+              添加新物品
+            </el-button>
+          </el-tooltip>
+          <el-tooltip
+            v-if="!userAdministratorPermissions"
+            content="看看你以前上报了什么??"
+            placement="bottom">
+            <el-button
+              type="primary"
+              size="medium"
+              @click="drawerOldItemArouseChangesNumber++">
+              损坏上报历史
             </el-button>
           </el-tooltip>
         </el-col>
@@ -79,7 +92,12 @@
     </template>
 
     <!-- 表格 -->
-    <ItemTable :tableData="tableData" @dialogOldItem="dialogOldItem"/>
+    <ItemTable
+      :tableData="tableData"
+      :randomKey="randomKey"
+      @dialogOldItem="dialogOldItem"
+      @deleteInformation="deleteInformation"
+      @dialogChangeItem="dialogChangeItem"/>
 
     <!-- 底部分页 -->
     <template slot="footer">
@@ -109,6 +127,10 @@
     <DialogOfNewItem :dialogArouse="dialogNewItemArouseChangesNumber"/>
     <!-- 顶部两个按钮其二换出的 dialog -->
     <DialogOfOldItem :dialogArouse="dialogOldItemArouseChangesNumber" :oldItemId_Name="oldItemId_Name"/>
+    <!-- 右侧管理员按钮 -->
+    <DialogAddNewItem :dialogArouse="dialogAddNewItemArouseChangesNumber"/>
+    <!-- 列表管理员编辑按钮 -->
+    <DialogChangeNewItem :dialogArouse="dialogChangeItemArouseChangesNumber" :changeItemInformation="changeItemInformation" @changeItemSuccess="changeItemSuccess"/>
   </d2-container>
 </template>
 
@@ -119,6 +141,8 @@ import DrawerOfNewItem from './components/DrawerOfNewItem'
 import DrawerOfOldItem from './components/DrawerOfOldItem'
 import DialogOfNewItem from './components/DialogOfNewItem'
 import DialogOfOldItem from './components/DialogOfOldItem'
+import DialogAddNewItem from './components/DialogAddNewItem'
+import DialogChangeNewItem from './components/DialogChangeNewItem'
 import ItemTable from './components/ItemTable'
 export default {
   name: 'FixedAssetManagement-ItemManagement',
@@ -127,16 +151,23 @@ export default {
     DrawerOfOldItem,
     DialogOfNewItem,
     DialogOfOldItem,
+    DialogAddNewItem,
+    DialogChangeNewItem,
     ItemTable
   },
   data () {
     return {
       tableData: [],
+      // 随机key,用于表格强制刷新
+      randomKey: 0,
       drawerNewItemArouseChangesNumber: 0,
       drawerOldItemArouseChangesNumber: 0,
       dialogNewItemArouseChangesNumber: 0,
       dialogOldItemArouseChangesNumber: 0,
       oldItemId_Name: {},
+      dialogAddNewItemArouseChangesNumber: 0,
+      dialogChangeItemArouseChangesNumber: 0,
+      changeItemInformation: {},
       // 搜索栏的值
       inputSearch: '',
       // 分页数据
@@ -158,7 +189,7 @@ export default {
   methods: {
     /**
      * @description 分页每页数量改变时触发
-     * @param {*} val 当前pageSize
+     * @param {Number} val 当前pageSize
      */
     handleSizeChange (val) {
       console.log(`每页 ${val} 条`)
@@ -172,7 +203,7 @@ export default {
     },
     /**
      * @description 分页页码改变时触发
-     * @param {*} val 当前页
+     * @param {Number} val 当前page
      */
     handleCurrentChange (val) {
       console.log(`当前页: ${val}`)
@@ -227,11 +258,48 @@ export default {
         })
     },
     /**
-     *  @description 唤起 dialog 旧物品损坏上报
+     * @description 唤起 dialog 旧物品损坏上报
      */
     dialogOldItem ({ itemId, itemname, number }, arouse) {
       this.oldItemId_Name = { itemId, itemname, number }
       if (arouse) this.dialogOldItemArouseChangesNumber++
+    },
+    /**
+     * @description 唤起 dialog 修改物品
+     * @param {Object} row
+     */
+    dialogChangeItem (row) {
+      this.changeItemInformation = row
+      this.dialogChangeItemArouseChangesNumber++
+    },
+    /**
+     * @description 修改成功,返回修改表格
+     * @param {Object} row
+     */
+    changeItemSuccess (row) {
+      const data = this.tableData
+      this.tableData.map((item, index) => {
+        if (item.itemId === row.itemId) {
+          data[index] = row
+        }
+      })
+      this.tableData = data
+      this.randomKey = Math.random()
+    },
+    /**
+     * @description 删除成功事件
+     * @param {Boolean} state 是否删除成功
+     */
+    deleteInformation (state) {
+      if (!state) return 0
+      clearTimeout(this.timeout)
+      this.timeout = setTimeout(() => {
+        this.itemSearch({
+          page: this.pagination.currentPage,
+          pageSize: this.pagination.pageSize,
+          search: this.inputSearch
+        })
+      }, 10)
     }
   },
   mounted () {

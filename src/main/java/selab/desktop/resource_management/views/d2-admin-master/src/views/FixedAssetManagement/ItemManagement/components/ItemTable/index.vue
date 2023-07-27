@@ -4,6 +4,7 @@
     @current-change="handleCurrentChange"
     height="100%"
     :data="tableData"
+    :key="randomKey"
     style="width: 100%">
     <el-table-column
       prop="itemname"
@@ -37,7 +38,7 @@
       width="120">
     </el-table-column>
     <el-table-column
-      prop="itemDescription"
+      prop="damageRecordDesc"
       label="描述">
     </el-table-column>
     <el-table-column
@@ -45,7 +46,7 @@
       width="110">
       <template slot-scope="scope">
         <el-button @click="handleClick(scope.row)" type="text" size="small" v-if="userAdministratorPermissions">修改</el-button>
-        <el-button type="text" size="small" v-if="userAdministratorPermissions">删除</el-button>
+        <el-button type="text" size="small" @click="deleteOperation(scope.row)" v-if="userAdministratorPermissions">删除</el-button>
         <el-button @click="dialogOldItemArouse(scope.row)" type="text" size="small" v-if="!userAdministratorPermissions">问题上报</el-button>
       </template>
     </el-table-column>
@@ -54,25 +55,17 @@
 
 <script>
 import util from '@/libs/util'
-// import api from '@/api'
+import api from '@/api'
+
 export default {
   name: 'ItemTable',
   props: {
     tableData: {
       required: true
-    }
-  },
-  methods: {
-    handleClick (row) {
-      console.log(row)
-      console.log(this.userAdministratorPermissions)
     },
-    handleCurrentChange (row) {
-      this.currentlySelected = row
-      this.$emit('dialogOldItem', { itemId: row.itemId, itemname: row.itemname, number: row.number }, false)
-    },
-    dialogOldItemArouse (row) {
-      this.$emit('dialogOldItem', { itemId: row.itemId, itemname: row.itemname, number: row.number }, true)
+    // 随机key,用于表格强制刷新
+    randomKey: {
+      required: true
     }
   },
   data () {
@@ -83,8 +76,50 @@ export default {
       userAdministratorPermissions: util.cookies.get('userStatus') === '0' || false
     }
   },
-  mounted () {
-
+  methods: {
+    handleClick (row) {
+      this.$emit('dialogChangeItem', row)
+    },
+    handleCurrentChange (row) {
+      if (row === null) return
+      this.currentlySelected = row
+      this.$emit('dialogOldItem', { itemId: row.itemId, itemname: row.itemname, number: row.number }, false)
+    },
+    dialogOldItemArouse (row) {
+      this.$emit('dialogOldItem', { itemId: row.itemId, itemname: row.itemname, number: row.number }, true)
+    },
+    /**
+     * @description 物品删除请求api
+     * @param {Number} id 物品id
+     */
+    async itemDeleteAPI ({ id }) {
+      return await api.ITEM_DELETE_API({ id })
+    },
+    /**
+     * @description 物品删除请求
+     * @param {Number} id 物品id
+     */
+    itemDelete ({ id }) {
+      this.itemDeleteAPI({ id })
+        .then(v => {
+          if (v === null) {
+            this.$message({
+              message: '删除成功',
+              type: 'success'
+            })
+          } else if (v === 'fail') {
+            this.$message.error('删除失败')
+          }
+        })
+    },
+    /**
+     * @description 删除物品触发
+     * @param {Object} row
+     */
+    deleteOperation (row) {
+      this.itemDelete({ id: row.itemId })
+      this.$emit('deleteInformation', true)
+    }
   }
 }
 </script>
