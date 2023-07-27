@@ -1,6 +1,7 @@
 package selab.desktop.resource_management.fundManagement.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -21,25 +22,33 @@ public class FundsController {
     @Autowired
     private FundsService fundsService;
 
-    @GetMapping("/fundsVo")
+    @GetMapping
     @Operation(summary = "展示目前总资产")
     public R<List<FundsVo>> getAllFunds(){
         log.info("展示目前总资产");
         return R.success(fundsService.list());
     }
 
-    @GetMapping
+    @GetMapping("/page")
+    @Operation(summary = "分页查询用户")
+    public R<Page<FundsVo>> page(int page, int pageSize){
+        Page <FundsVo> mPage = new Page<>(page,pageSize);
+        fundsService.page(mPage);
+        return R.success(mPage);
+    }
+
+    @GetMapping("/getCanBeUsed")
     @Operation(summary = "展示所有可支配资产")
     public R<List<FundsVo>> getCanBeUsedAsset() {
         QueryWrapper<FundsVo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("judge", 1);
+        queryWrapper.eq("judge", "是");
         List<FundsVo> list = fundsService.list(queryWrapper);
         log.info("展示所有可支配资产");
         return R.success(list);
     }
 
 
-    @PostMapping
+    @PostMapping("/update")
     @Operation(summary = "新增和修改资金")
     public R<String> add(@RequestBody FundsVo fundsVo) {
         if (fundsVo.getId() == null) {

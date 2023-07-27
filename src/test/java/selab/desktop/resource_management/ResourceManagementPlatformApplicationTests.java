@@ -10,6 +10,7 @@ import selab.desktop.resource_management.fundManagement.service.FundsService;
 import selab.desktop.resource_management.fundManagement.utils.R;
 
 import java.util.Date;
+import java.util.List;
 
 @SpringBootTest
 class ResourceManagementPlatformApplicationTests {
@@ -17,19 +18,9 @@ class ResourceManagementPlatformApplicationTests {
     private FundsService fundsService;
 
     @Test
-    public void add01() {
-        FundsController fundsController = new FundsController();
-        FundsVo fundsVo = new FundsVo();
-        Integer integer = 1;
-        long l = integer.longValue();
-
-
-        fundsVo.setId(null);
-        fundsVo.setAsset("股票");
-        fundsVo.setJudge(1);
-        fundsVo.setAssetValue("10000");
-        fundsVo.setUpdateTime(null);
-        System.out.println(fundsService.list());
+    public void testAll() {
+        List<FundsVo> list = fundsService.list();
+        System.out.println(list);
     }
 
 }

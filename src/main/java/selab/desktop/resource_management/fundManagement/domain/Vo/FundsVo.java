@@ -19,9 +19,9 @@ public class FundsVo {
     @Schema(description = "资产价值")
     private String assetValue;
 
-    @Pattern(regexp = "^[01]$", message = "判断资产只能是 1 或 0")
-    @Schema(description = "判断资产是否可支配（1/0）")
-    private Integer judge;
+
+    @Schema(description = "判断资产是否可支配（是/否）")
+    private String judge;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Schema(description = "最后更新时间,为当前值，填null就行")
