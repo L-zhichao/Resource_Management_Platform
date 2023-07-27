@@ -2,6 +2,8 @@ package selab.desktop.resource_management.itemManagement.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import selab.desktop.resource_management.itemManagement.domain.Item;
@@ -14,10 +16,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/item")
+
 public class ItemController {
     @Autowired
     private ItemService itemService;
 
+    @Operation(description = "分页查询所有的物品")
    @GetMapping()
     public Result<ItemPage> selectAllItem(@RequestParam(defaultValue = "1")int page,
                                             @RequestParam(defaultValue = "5")int size,
@@ -30,6 +34,7 @@ public class ItemController {
        ItemPage itemPage1 = new ItemPage(total,pages,records);
        return new Result<>(20000,"查询成功",itemPage1);
    }
+
    @PostMapping()
    public Result<Long> addItem(@RequestBody Item item){
        return itemService.addItem(item);
