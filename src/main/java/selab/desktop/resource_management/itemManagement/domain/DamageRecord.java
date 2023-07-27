@@ -18,8 +18,8 @@ public class DamageRecord {
     private String damageRecordDesc;
 
     private Date damageRecordTime;
-    private Long itemId;
-    private Long userId;
+    private String itemName;
+    private String  userName;
     private Boolean damageRecordIsread;
     private String damageRecordImg;
     private Boolean damageRecordIshandle;

@@ -27,22 +27,27 @@ public class DamageRecordController {
             BeanUtils.copyProperties(damageRecord,newDamageRecord);
             damageRecords.add(newDamageRecord);
         }
-        return new Result<>(20000,"查询成功",damageRecords);
+        return new Result<>(200,"success",damageRecords);
     }
     @PostMapping
     public Result<?> addDamageRecord(DamageRecord damageRecord){
         damageRecordService.addDamageRecord(damageRecord);
-        return new Result<>(20000,"上报成功",null);
+        return new Result<>(200,"success",null);
     }
 
-    @DeleteMapping()
-    public Result<?> deleteDamageRecord(Long damageRecordId){
-        damageRecordService.deleteDamageRecord(damageRecordId);
-        return new Result<>(20000,"删除成功",null);
+    @DeleteMapping("/{id}")
+    public Result<?> deleteDamageRecord(@PathVariable Long id){
+        damageRecordService.deleteDamageRecord(id);
+        return new Result<>(200,"success",null);
     }
     @PutMapping()
     public Result<?> updateDamageRecord(Long damageRecordId){
         damageRecordService.updateIsHandle(damageRecordId);
-        return new Result<>(20000,"修改成功",null);
+        return new Result<>(200,"success",null);
+    }
+    @GetMapping()
+    public Result<List<DamageRecord>> getDamageRecordByUsername(String username){
+        List<DamageRecord> damageRecordByUserName = damageRecordService.getDamageRecordByUserName(username);
+        return new Result<>(200,"success",damageRecordByUserName);
     }
 }

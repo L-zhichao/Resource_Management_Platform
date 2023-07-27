@@ -9,6 +9,7 @@ import selab.desktop.resource_management.itemManagement.service.ItemService;
 import selab.desktop.resource_management.itemManagement.utils.ItemPage;
 import selab.desktop.resource_management.itemManagement.utils.Result;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @RestController
@@ -20,7 +21,8 @@ public class ItemController {
    @GetMapping()
     public Result<ItemPage> selectAllItem(@RequestParam(defaultValue = "1")int page,
                                             @RequestParam(defaultValue = "5")int size,
-                                            @RequestParam(defaultValue = "") String search){
+                                            @RequestParam(defaultValue = "") String search) throws UnsupportedEncodingException {
+       search = new String(search.getBytes("ISO-8859-1"), "UTF-8");
        Page<Item> itemPage = itemService.selectAllItem(page, size,search);
        long total = itemPage.getTotal();
        long pages = itemPage.getPages();
@@ -39,13 +41,13 @@ public class ItemController {
        return new Result<>(20000,"修改成功",null);
    }
    @GetMapping("/{id}")
-    public Result<Item> getItemById(Long id){
+    public Result<Item> getItemById(@PathVariable Long id){
        Item item = itemService.getItemById(id);
        return new Result<>(20000,null,item);
    }
-   @DeleteMapping()
-    public Result<?> deleteItemById(Long id){
+   @DeleteMapping("/{id}")
+    public Result<?> deleteItemById(@PathVariable Long id){
      itemService.deleteItemById(id);
-     return new Result<>(20000,"删除成功",null);
+     return new Result<>(200,"删除成功",null);
    }
 }

@@ -51,4 +51,12 @@ public class DamageRecordServiceImpl implements DamageRecordService {
         damageRecord.setDamageRecordIshandle(true);
         damageRecordMapper.updateById(damageRecord);
     }
+
+    @Override
+    public List<DamageRecord> getDamageRecordByUserName(String username) {
+        QueryWrapper queryWrapper=new QueryWrapper();
+        queryWrapper.eq("username",username);
+        List<DamageRecord> damageRecords = damageRecordMapper.selectList(queryWrapper);
+        return damageRecords;
+    }
 }

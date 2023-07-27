@@ -34,11 +34,11 @@ public class ItemServiceImpl implements ItemService {
         queryWrapper.eq("itemname", item.getItemname());
         List<Item> items = itemMapper.selectList(queryWrapper);
         if (items.size() > 0) {
-            return new Result(30000, "增加失败",null);
+            return new Result(500, "fail",null);
         }
          itemMapper.insert(item);
 
-        return new Result<>(20000,"增加成功",item.getItemId());
+        return new Result<>(200,"success",item.getItemId());
     }
 
     public Item getItemById(Long id){

@@ -15,6 +15,7 @@ public interface DamageRecordService {
 
     void deleteDamageRecord(Long damageRecordId);
     void updateIsHandle(Long damageRecordId);
+    List<DamageRecord> getDamageRecordByUserName(String username);
 
 
 }
