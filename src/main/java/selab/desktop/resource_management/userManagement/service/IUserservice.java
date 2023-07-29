@@ -1,10 +1,13 @@
 package selab.desktop.resource_management.userManagement.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.stereotype.Service;
+import selab.desktop.resource_management.userManagement.domain.User;
+import selab.desktop.resource_management.userManagement.domain.vo.UserReturn;
 import selab.desktop.resource_management.userManagement.domain.vo.UserVo;
 
 @Service
-public interface IUserservice {
+public interface IUserservice extends IService<User> {
 
     void verifyUsername(String username);
 
@@ -23,6 +26,6 @@ public interface IUserservice {
      * @return   当前用户
      */
 
-   UserVo login(String username,String password);
+    UserReturn login(String username, String password);
 
 }

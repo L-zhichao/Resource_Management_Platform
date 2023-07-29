@@ -28,9 +28,16 @@ springdoc:
     api-docs:
       path: /v3/api-docs
     group-configs:
-      - group: 'default'
+      - group: 'userManagement'
         paths-to-match: '/**'
         packages-to-scan: selab.desktop.resource_management.userManagement
       - group: 'item Management'
         paths-to-match: '/**'
         packages-to-scan: selab.desktop.resource_management.itemManagement
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+selab:
+  handle:
+    # 配置username的管理员负责处理申请
+    apply: admain

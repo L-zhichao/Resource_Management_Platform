@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import selab.desktop.resource_management.userManagement.domain.vo.UserReturn;
 import selab.desktop.resource_management.userManagement.domain.vo.UserVo;
 import selab.desktop.resource_management.userManagement.service.impl.UserServiceImpl;
 import selab.desktop.resource_management.userManagement.utils.JsonResult;
@@ -49,13 +50,14 @@ public class UserController {
      */
     @Operation(summary = "登录模块")
     @PostMapping("/login")
- public JsonResult<UserVo> login(@RequestParam String username, String password, HttpSession httpSession){
+ public JsonResult<UserReturn> login(@RequestParam String username, String password, HttpSession httpSession){
         System.out.println(password);
-        UserVo userVo = userServiceImpl.login(username, password);
-        httpSession.setAttribute("name",userVo.getName());
-        httpSession.setAttribute("username",userVo.getUsername());
-        httpSession.setAttribute("userStatus",userVo.getUserStatus());
-        JsonResult<UserVo> jsonResult = new JsonResult<>(JsonResult.SUCCESS,null,userVo);
+       UserReturn userReturn = userServiceImpl.login(username, password);
+        httpSession.setAttribute("name",userReturn.getName());
+        httpSession.setAttribute("username",userReturn.getUsername());
+        httpSession.setAttribute("userStatus",userReturn.getUserStatus());
+        httpSession.setAttribute("token",userReturn.getToken());
+        JsonResult<UserReturn> jsonResult = new JsonResult<>(JsonResult.SUCCESS,null,userReturn);
         return jsonResult;
     }
 

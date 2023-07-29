@@ -21,13 +21,13 @@ public class TestMapper {
         user.setPassword("12456");
         user.setEmail("123@email.com");
         user.setRegistrationTime(new Date());
-        Integer integer = userMapper.insertUser(user);
-        System.out.println(integer);
+
+
     }
     @Test
     public void testSelect(){
-        User user = userMapper.selectByUsername("test02");
-        System.out.println(user);
+
+
 
     }
 

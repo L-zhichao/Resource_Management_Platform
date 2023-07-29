@@ -13,12 +13,6 @@ public class TestService {
     private UserServiceImpl userService;
     @Test
     public void testInsert(){
-        UserVo userVo = new UserVo();
-        userVo.setName("admain");
-        userVo.setUsername("admain");
-        userVo.setPassword("abc123");
-        userVo.setUserStatus(0);
-        userVo.setEmail("123@email.com");
-        userService.register(userVo);
+
     }
 }

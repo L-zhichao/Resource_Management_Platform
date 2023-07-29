@@ -1,23 +1,13 @@
 package selab.desktop.resource_management.userManagement.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 import selab.desktop.resource_management.userManagement.domain.User;
 
 @Mapper
-public interface UserMapper{
+public interface UserMapper extends BaseMapper<User> {
 
 
-    @Insert("""
-            insert into user (username,password,salt,name,email,registration_time) VALUES (#{username},#{password},#{salt},#{name},#{email},#{registrationTime});
-            """)
-    Integer insertUser(User user);
-
-
-    @Select("""
-            SELECT user_id,username,password,salt,name,user_status,email,registration_time FROM user WHERE username = #{username};
-            """)
-    User selectByUsername(String username);
 
 }

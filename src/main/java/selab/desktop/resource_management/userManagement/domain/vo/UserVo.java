@@ -1,10 +1,14 @@
 package selab.desktop.resource_management.userManagement.domain.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 
 @Data
@@ -22,11 +26,12 @@ public class UserVo {
 //    @NotBlank(message = "姓名不能为空")
     @Length(min = 2,max = 4,message = "姓名格式错误")
     private String name;
-    @Schema(description = "用户状态")
-    @Null
-    private Integer userStatus;
+
     @Schema(description = "邮件")
     @NotEmpty(message = "邮箱不能为空")
     @Email(message = "邮箱格式不正确")
     private String email;
+    @Schema(description = "注册时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date registrationTime;
 }
