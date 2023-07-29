@@ -18,8 +18,9 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
+    //分页查询所有的物品
    @GetMapping()
-    public Result<ItemPage> selectAllItem(@RequestParam(defaultValue = "1")int page,
+    public Result<ItemPage> all(@RequestParam(defaultValue = "1")int page,
                                             @RequestParam(defaultValue = "5")int size,
                                             @RequestParam(defaultValue = "") String search) throws UnsupportedEncodingException {
        search = new String(search.getBytes("ISO-8859-1"), "UTF-8");
@@ -28,26 +29,30 @@ public class ItemController {
        long pages = itemPage.getPages();
        List<Item> records = itemPage.getRecords();
        ItemPage itemPage1 = new ItemPage(total,pages,records);
-       return new Result<>(20000,"查询成功",itemPage1);
+       return new Result<>(200,"success",itemPage1);
    }
+   //添加物品
    @PostMapping()
-   public Result<Long> addItem(@RequestBody Item item){
+   public Result<Long> add(@RequestBody Item item){
        return itemService.addItem(item);
 
    }
+   //修改物品
    @PutMapping()
-    public Result<?> updateItem(Item item){
+    public Result<?> update(Item item){
        itemService.updateItem(item);
-       return new Result<>(20000,"修改成功",null);
+       return new Result<>(200,"success",null);
    }
+   //通过id查询物品
    @GetMapping("/{id}")
-    public Result<Item> getItemById(@PathVariable Long id){
+    public Result<Item> select(@PathVariable Long id){
        Item item = itemService.getItemById(id);
-       return new Result<>(20000,null,item);
+       return new Result<>(200,null,item);
    }
+   //通过id删除物品
    @DeleteMapping("/{id}")
-    public Result<?> deleteItemById(@PathVariable Long id){
+    public Result<?> delete(@PathVariable Long id){
      itemService.deleteItemById(id);
-     return new Result<>(200,"删除成功",null);
+     return new Result<>(200,"success",null);
    }
 }

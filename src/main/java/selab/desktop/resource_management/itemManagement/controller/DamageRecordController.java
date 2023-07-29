@@ -17,8 +17,9 @@ public class DamageRecordController {
     @Autowired
     private DamageRecordService damageRecordService;
 
+    //查询所有物品损坏上报记录
     @GetMapping()
-    public Result<List<DamageRecord>> findAllDamageRecord(){
+    public Result<List<DamageRecord>> all(){
         List<DamageRecord> allDamageRecord = damageRecordService.findAllDamageRecord();
         List<DamageRecord> damageRecords =new ArrayList<>();
         for (DamageRecord damageRecord:allDamageRecord){
@@ -29,24 +30,28 @@ public class DamageRecordController {
         }
         return new Result<>(200,"success",damageRecords);
     }
+    //添加物品上报记录
     @PostMapping
-    public Result<?> addDamageRecord(DamageRecord damageRecord){
+    public Result<?> add(DamageRecord damageRecord){
         damageRecordService.addDamageRecord(damageRecord);
         return new Result<>(200,"success",null);
     }
 
+    //
     @DeleteMapping("/{id}")
-    public Result<?> deleteDamageRecord(@PathVariable Long id){
+    public Result<?> delete(@PathVariable Long id){
         damageRecordService.deleteDamageRecord(id);
         return new Result<>(200,"success",null);
     }
+    //将物品上报记录处理的是否处理改为已处理
     @PutMapping()
-    public Result<?> updateDamageRecord(Long damageRecordId){
+    public Result<?> update(Long damageRecordId){
         damageRecordService.updateIsHandle(damageRecordId);
         return new Result<>(200,"success",null);
     }
-    @GetMapping()
-    public Result<List<DamageRecord>> getDamageRecordByUsername(String username){
+    //通过用户姓名查询所有的上报记录
+    @RequestMapping("/all")
+    public Result<List<DamageRecord>> select(String username){
         List<DamageRecord> damageRecordByUserName = damageRecordService.getDamageRecordByUserName(username);
         return new Result<>(200,"success",damageRecordByUserName);
     }
