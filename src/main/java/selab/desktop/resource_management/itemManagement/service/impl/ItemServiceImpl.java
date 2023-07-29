@@ -10,9 +10,8 @@ import org.springframework.stereotype.Service;
 import selab.desktop.resource_management.itemManagement.domain.Item;
 import selab.desktop.resource_management.itemManagement.mapper.ItemMapper;
 import selab.desktop.resource_management.itemManagement.service.ItemService;
-import selab.desktop.resource_management.itemManagement.utils.Result;
+import selab.desktop.resource_management.itemManagement.utils.JsonResult;
 
-import java.awt.print.Book;
 import java.util.List;
 
 @Service
@@ -29,16 +28,16 @@ public class ItemServiceImpl implements ItemService {
     return selectPage;
     }
 
-    public Result<Long> addItem(Item item){
+    public JsonResult<?> addItem(Item item){
         QueryWrapper<Item> queryWrapper = new QueryWrapper();
         queryWrapper.eq("itemname", item.getItemname());
         List<Item> items = itemMapper.selectList(queryWrapper);
         if (items.size() > 0) {
-            return new Result(500, "fail",null);
+            return new JsonResult(500, "该物品已存在",null);
         }
          itemMapper.insert(item);
 
-        return new Result<>(200,"success",item.getItemId());
+        return new JsonResult<>(200,"success",null);
     }
 
     public Item getItemById(Long id){
