@@ -24,10 +24,6 @@ import java.util.Map;
  * @author <a href="mailto:xiaoymin@foxmail.com">xiaoymin@foxmail.com</a> 
  * 2020/03/15 20:40
  */
-
-
-//访问地址
-
 @Configuration
 public class SwaggerConfig {
     /**
