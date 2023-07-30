@@ -41,3 +41,7 @@ selab:
   handle:
     # 配置username的管理员负责处理申请
     apply: admain
+# 日志格式
+logging:
+  pattern:
+    console: '%d{HH:mm:ss.SSS} %clr(%-5level) ---  [%-15thread] %cyan(%-50logger{50}):%msg%n'
