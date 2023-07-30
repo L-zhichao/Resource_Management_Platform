@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import selab.desktop.resource_management.model.utils.R;
+import selab.desktop.resource_management.utils.R;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 
