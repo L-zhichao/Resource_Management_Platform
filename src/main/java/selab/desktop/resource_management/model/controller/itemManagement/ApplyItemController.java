@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import selab.desktop.resource_management.model.domain.itemManagement.Vo.ApplyItemUpload;
-import selab.desktop.resource_management.model.domain.itemManagement.Vo.ApplyItemVo;
+import selab.desktop.resource_management.model.domain.itemManagement.applynews.Vo.ApplyItemUpload;
+import selab.desktop.resource_management.model.domain.itemManagement.applynews.Vo.ApplyItemVo;
 import selab.desktop.resource_management.model.service.itemManagement.ApplyItemService;
 import selab.desktop.resource_management.model.utils.JsonResult;
 

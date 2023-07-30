@@ -1,4 +1,4 @@
-package selab.desktop.resource_management.itemManagement.domain;
+package selab.desktop.resource_management.model.domain.itemManagement;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;

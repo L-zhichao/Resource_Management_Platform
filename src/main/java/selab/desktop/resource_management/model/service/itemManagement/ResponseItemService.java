@@ -1,9 +1,9 @@
 package selab.desktop.resource_management.model.service.itemManagement;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import selab.desktop.resource_management.model.domain.itemManagement.ResponseItem;
-import selab.desktop.resource_management.model.domain.itemManagement.Vo.ResponseItemUpload;
-import selab.desktop.resource_management.model.domain.itemManagement.Vo.ResponseItemVo;
+import selab.desktop.resource_management.model.domain.itemManagement.applynews.ResponseItem;
+import selab.desktop.resource_management.model.domain.itemManagement.applynews.Vo.ResponseItemUpload;
+import selab.desktop.resource_management.model.domain.itemManagement.applynews.Vo.ResponseItemVo;
 
 import java.util.List;
 

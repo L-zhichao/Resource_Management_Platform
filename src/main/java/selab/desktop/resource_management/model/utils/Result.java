@@ -1,4 +1,4 @@
-package selab.desktop.resource_management.itemManagement.utils;
+package selab.desktop.resource_management.model.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

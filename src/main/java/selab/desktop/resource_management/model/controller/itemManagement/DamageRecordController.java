@@ -1,12 +1,11 @@
-package selab.desktop.resource_management.itemManagement.controller;
+package selab.desktop.resource_management.model.controller.itemManagement;
 
-import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import selab.desktop.resource_management.itemManagement.domain.DamageRecord;
-import selab.desktop.resource_management.itemManagement.service.DamageRecordService;
-import selab.desktop.resource_management.itemManagement.utils.Result;
+import selab.desktop.resource_management.model.domain.itemManagement.DamageRecord;
+import selab.desktop.resource_management.model.service.itemManagement.DamageRecordService;
+import selab.desktop.resource_management.model.utils.Result;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,9 @@
-package selab.desktop.resource_management.itemManagement.utils;
+package selab.desktop.resource_management.model.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import selab.desktop.resource_management.itemManagement.domain.Item;
+import selab.desktop.resource_management.model.domain.itemManagement.Item;
 
 import java.util.List;
 

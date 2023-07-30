@@ -2,9 +2,9 @@ package selab.desktop.resource_management.model.service.itemManagement;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.stereotype.Service;
-import selab.desktop.resource_management.model.domain.itemManagement.ApplyItem;
-import selab.desktop.resource_management.model.domain.itemManagement.Vo.ApplyItemUpload;
-import selab.desktop.resource_management.model.domain.itemManagement.Vo.ApplyItemVo;
+import selab.desktop.resource_management.model.domain.itemManagement.applynews.ApplyItem;
+import selab.desktop.resource_management.model.domain.itemManagement.applynews.Vo.ApplyItemUpload;
+import selab.desktop.resource_management.model.domain.itemManagement.applynews.Vo.ApplyItemVo;
 
 import java.util.List;
 

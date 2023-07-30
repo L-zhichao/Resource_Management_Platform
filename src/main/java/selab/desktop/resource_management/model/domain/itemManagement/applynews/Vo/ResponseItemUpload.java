@@ -1,4 +1,4 @@
-package selab.desktop.resource_management.model.domain.itemManagement.Vo;
+package selab.desktop.resource_management.model.domain.itemManagement.applynews.Vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -1,4 +1,4 @@
-package selab.desktop.resource_management.itemManagement.service.impl;
+package selab.desktop.resource_management.model.service.itemManagement.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -7,12 +7,11 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import selab.desktop.resource_management.itemManagement.domain.Item;
-import selab.desktop.resource_management.itemManagement.mapper.ItemMapper;
-import selab.desktop.resource_management.itemManagement.service.ItemService;
-import selab.desktop.resource_management.itemManagement.utils.Result;
+import selab.desktop.resource_management.model.domain.itemManagement.Item;
+import selab.desktop.resource_management.model.mapper.itemManagement.ItemMapper;
+import selab.desktop.resource_management.model.service.itemManagement.ItemService;
+import selab.desktop.resource_management.model.utils.Result;
 
-import java.awt.print.Book;
 import java.util.List;
 
 @Service
