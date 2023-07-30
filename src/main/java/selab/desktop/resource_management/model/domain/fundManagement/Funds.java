@@ -1,4 +1,4 @@
-package selab.desktop.resource_management.fundManagement.domain;
+package selab.desktop.resource_management.model.domain.fundManagement;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;

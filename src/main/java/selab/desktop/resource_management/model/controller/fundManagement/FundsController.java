@@ -1,4 +1,4 @@
-package selab.desktop.resource_management.fundManagement.controller;
+package selab.desktop.resource_management.model.controller.fundManagement;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -7,9 +7,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import selab.desktop.resource_management.fundManagement.domain.Vo.FundsVo;
-import selab.desktop.resource_management.fundManagement.service.FundsService;
-import selab.desktop.resource_management.fundManagement.utils.R;
+import selab.desktop.resource_management.model.domain.fundManagement.Vo.FundsVo;
+import selab.desktop.resource_management.model.service.fundManagement.FundsService;
+import selab.desktop.resource_management.model.utils.R;
 
 import java.util.Date;
 import java.util.List;

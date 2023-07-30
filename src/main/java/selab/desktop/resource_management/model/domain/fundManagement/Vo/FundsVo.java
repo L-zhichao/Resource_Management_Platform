@@ -1,4 +1,4 @@
-package selab.desktop.resource_management.fundManagement.domain.Vo;
+package selab.desktop.resource_management.model.domain.fundManagement.Vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Pattern;

@@ -1,4 +1,4 @@
-package selab.desktop.resource_management.fundManagement.utils;
+package selab.desktop.resource_management.model.utils;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
