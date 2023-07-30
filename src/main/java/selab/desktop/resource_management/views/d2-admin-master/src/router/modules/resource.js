@@ -6,38 +6,29 @@ const _import = require('@/libs/util.import.' + process.env.NODE_ENV)
 const meta = { auth: true }
 
 export default {
-  path: 'demo',
-  name: 'demo',
+  path: 'resource',
+  name: 'resource',
   meta,
   cache: true,
-  redirect: { name: 'demo' },
+  redirect: { name: 'resource' },
   component: layoutHeaderAside,
   children: [{
-    path: '/page1',
-    name: 'page1',
+    path: '/ResourceTest',
+    name: 'ResourceTest',
     meta: {
+      title: '云',
       ...meta,
-      title: '页面 1',
       cache: true
     },
-    component: _import('demo/page1')
+    component: _import('resource/ResourceTest')
   }, {
-    path: '/page2',
-    name: 'page2',
+    path: '/UpLoad',
+    name: 'UpLoad',
     meta: {
+      title: '云上传',
       ...meta,
-      title: '页面 2',
       cache: true
     },
-    component: _import('demo/page2')
-  }, {
-    path: '/page3',
-    name: 'page3',
-    meta: {
-      ...meta,
-      title: '页面 3',
-      cache: true
-    },
-    component: _import('demo/page3')
+    component: _import('resource/UpLoad')
   }]
 }

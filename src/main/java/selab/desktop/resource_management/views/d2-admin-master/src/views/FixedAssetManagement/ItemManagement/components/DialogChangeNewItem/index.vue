@@ -37,7 +37,7 @@
       </el-form-item>
       <el-row type="flex" class="row-bg" justify="space-between" v-if="oldImgView">
         <el-col :span="24">
-          <span class="spanText">原图</span>
+          <span class="spanText">原文件</span>
           <!-- 这个popover组件用于生成悬浮图片 -->
           <el-popover placement="bottom" title="" trigger="hover" width="175">
             <!-- <img :src="ruleForm.imgs" alt="" style="height: 300px"> -->
@@ -52,12 +52,12 @@
           </el-popover>
         </el-col>
       </el-row>
-      <el-form-item label="上传图片" prop="imgs" v-if="!oldImgView">
+      <el-form-item label="视频图片" prop="imgs" v-if="!oldImgView">
         <el-upload
           ref="img"
           drag
           action
-          accept=".png, .jpg, jpeg"
+          accept=".png, .jpg, .jpeg, .mp4, .flv"
           :limit="1"
           list-type="picture"
           :on-change="change"
@@ -141,7 +141,7 @@ export default {
           { required: true, message: '说明一下', trigger: 'blur' }
         ],
         imgs: [
-          { required: true, message: '上传图片', trigger: 'blur' }
+          { required: true, message: '上传视频或图片', trigger: 'blur' }
         ]
       },
       oldImgView: true,
@@ -219,6 +219,34 @@ export default {
       this.$message.error('最多上传1张图片')
     },
     /**
+     * @description 文件大小 格式 校验
+     * @param {*} file
+     * @return {Boolean} 是否通过校验
+     */
+    beforeUpload (file) {
+      console.log('文件：', file)
+      const FileExt = file.name.replace(/.+\./, '')
+      const isLt30M = file.size / 1024 / 1024 <= 30
+      const extension = ['png', 'jpg', 'jpeg', 'mp4', 'flv'].indexOf(FileExt.toLowerCase()) === -1
+      if (extension) {
+        this.$message({
+          type: 'warning',
+          message: '只能上传 .png, .jpg, .jpeg, .mp4, .flv 文件！'
+        })
+        this.$refs.img.clearFiles()
+        return false
+      }
+      if (!isLt30M) {
+        this.$message({
+          type: 'warning',
+          message: '附件大小超限，文件不能超过 30M'
+        })
+        this.$refs.img.clearFiles()
+        return false
+      }
+      return true
+    },
+    /**
      * @description 用于删除旧的图片,显示新图片添加
      */
     deleteOldImg () {
@@ -240,14 +268,15 @@ export default {
       // 捕获 转换完毕
       reader.onload = async () => {
         // 转换后的base64就在reader.result里面,直接放到img标签的src属性即可
-        const data = this.imageCompression(reader.result)
-        let base64 = ''
-        await data
-          .then(v => {
-            base64 = v
-            return Promise.resolve(v)
-          })
-        this.ruleForm.imgs = base64
+        // 压缩? 压缩个屁!
+        // const data = this.imageCompression(reader.result)
+        // let base64 = ''
+        // await data
+        //   .then(v => {
+        //     base64 = v
+        //     return Promise.resolve(v)
+        //   })
+        this.ruleForm.imgs = reader.result
       }
     },
     /**
@@ -346,6 +375,7 @@ export default {
      * @param {*} fileList
      */
     change (file, fileList) {
+      if (!this.beforeUpload(file, fileList)) return
       // 将每次图片数组变化的时候，实时的进行监听，更改数组里面的图片数据
       fileList.forEach((item) => {
         this.previewFile(item.raw)

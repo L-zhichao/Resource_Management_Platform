@@ -95,9 +95,11 @@
     <ItemTable
       :tableData="tableData"
       :randomKey="randomKey"
+      :loadAnimation="loadAnimation"
       @dialogOldItem="dialogOldItem"
       @deleteInformation="deleteInformation"
-      @dialogChangeItem="dialogChangeItem"/>
+      @dialogChangeItem="dialogChangeItem"
+      @dialogVideoPlayerArouse="dialogVideoPlayerArouse"/>
 
     <!-- 底部分页 -->
     <template slot="footer">
@@ -131,6 +133,8 @@
     <DialogAddNewItem :dialogArouse="dialogAddNewItemArouseChangesNumber"/>
     <!-- 列表管理员编辑按钮 -->
     <DialogChangeNewItem :dialogArouse="dialogChangeItemArouseChangesNumber" :changeItemInformation="changeItemInformation" @changeItemSuccess="changeItemSuccess"/>
+    <!-- 视频播放器 -->
+    <videoPlayer :dialogVideoPlayer="dialogVideoPlayer" :videoUrl="videoUrl"/>
   </d2-container>
 </template>
 
@@ -144,6 +148,7 @@ import DialogOfOldItem from './components/DialogOfOldItem'
 import DialogAddNewItem from './components/DialogAddNewItem'
 import DialogChangeNewItem from './components/DialogChangeNewItem'
 import ItemTable from './components/ItemTable'
+import videoPlayer from './components/videoPlayer'
 export default {
   name: 'FixedAssetManagement-ItemManagement',
   components: {
@@ -153,7 +158,8 @@ export default {
     DialogOfOldItem,
     DialogAddNewItem,
     DialogChangeNewItem,
-    ItemTable
+    ItemTable,
+    videoPlayer
   },
   data () {
     return {
@@ -167,6 +173,8 @@ export default {
       oldItemId_Name: {},
       dialogAddNewItemArouseChangesNumber: 0,
       dialogChangeItemArouseChangesNumber: 0,
+      dialogVideoPlayer: 0,
+      videoUrl: '',
       changeItemInformation: {},
       // 搜索栏的值
       inputSearch: '',
@@ -181,6 +189,8 @@ export default {
         // 总数据量
         allData: 1
       },
+      // 用于启动表格加载动画
+      loadAnimation: true,
       // 0 为 true 是管理员
       // 1 为 false 非管理员
       userAdministratorPermissions: util.cookies.get('userStatus') === '0' || false
@@ -252,9 +262,14 @@ export default {
     itemSearch ({ page = 1, pageSize = 10, search }) {
       this.itemSearchAPI({ page, pageSize, search })
         .then(v => {
+          if (v === 'fail') {
+            this.loadAnimation = false
+            return this.$message.error('获取失败')
+          }
           this.tableData = v.rows
           this.pagination.allPage = v.totalPage
           this.pagination.allData = v.total
+          this.loadAnimation = false
         })
     },
     /**
@@ -292,6 +307,7 @@ export default {
      */
     deleteInformation (state) {
       if (!state) return 0
+      this.loadAnimation = true
       clearTimeout(this.timeout)
       this.timeout = setTimeout(() => {
         this.itemSearch({
@@ -300,6 +316,14 @@ export default {
           search: this.inputSearch
         })
       }, 10)
+    },
+    /**
+     * @description 启动视频播放器
+     * @param {String} url 视频链接
+     */
+    dialogVideoPlayerArouse (url) {
+      this.videoUrl = url
+      this.dialogVideoPlayer++
     }
   },
   mounted () {

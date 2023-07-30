@@ -11,7 +11,8 @@
     <el-table
       :data="tableData"
       :key="randomKey"
-      style="width: 100%">
+      style="width: 100%"
+      v-loading="loadAnimation">
       <el-table-column
         prop="damageRecordTime"
         label="损坏日期"
@@ -42,7 +43,7 @@
           <el-row :gutter="20">
             <el-col :span="4" v-for="(img, index) in scope.row.imgs" :key="index">
               <el-popover class="images" placement="top" title="" trigger="hover">
-                <img :src="img" alt="" style="height: 200px">
+                <img :src="img" alt="" style="height: 400px">
                 <!-- image -->
                 <el-image slot="reference" style="height: 40px" :src="img" :preview-src-list="[img]">
                   <div slot="error" class="image-slot">
@@ -106,6 +107,8 @@ export default {
       radio: '待处理',
       // 随机Key,用于刷新表格
       randomKey: Math.random(),
+      // 用于启动表格加载动画
+      loadAnimation: false,
       drawerVisible: false,
       // 0 为 true 是管理员
       // 1 为 false 非管理员
@@ -114,7 +117,8 @@ export default {
   },
   watch: {
     drawerArouse () {
-      if (this.userAdministratorPermissions) this.itemSearchDamage()
+      this.loadAnimation = true
+      if (this.userAdministratorPermissions) this.itemSearchDamage({ username: null })
       if (!this.userAdministratorPermissions) this.itemSearchDamage({ username: util.cookies.get('username') })
       this.drawerVisible = true
     },
@@ -130,12 +134,23 @@ export default {
       this.$emit('dialogChangeItem', row)
     },
     radioChange (row) {
+      clearTimeout(this.radioChange_timeout)
       this.radio = row
-      if (this.radio === '待处理') {
-        this.tableData = this.allTableData.tableDataFinish
-      } else {
-        this.tableData = this.allTableData.tableDataWait
-      }
+      this.loadAnimation = true
+      this.radioChange_timeout = setTimeout(() => {
+        if (this.radio === '待处理') {
+          this.tableData = this.allTableData.tableDataFinish
+        } else {
+          this.tableData = this.allTableData.tableDataWait
+        }
+        this.loadAnimation = false
+      }, 300)
+      // if (this.radio === '待处理') {
+      //   this.tableData = this.allTableData.tableDataFinish
+      // } else {
+      //   this.tableData = this.allTableData.tableDataWait
+      // }
+      // this.loadAnimation = false
     },
     /**
      * @description 损坏物品查询请求api
@@ -150,9 +165,14 @@ export default {
     itemSearchDamage ({ username = null }) {
       this.itemSearchDamageAPI({ username })
         .then(v => {
+          if (v === 'fail') {
+            this.loadAnimation = false
+            return this.$message.error('信息获取失败')
+          }
           this.allTableData.tableDataWait = v.filter((item, index) => {
             if (item.damageRecordIsHandle === 'false') {
-              item.imgs = item.damageRecordImg.split('//////////')
+              // item.imgs = item.damageRecordImg.split('//////////')
+              item.imgs = item.damageRecordImg
               item.number = item.damageRecordDesc.split('//////////')[1]
               item.damageRecordDesc = item.damageRecordDesc.split('//////////')[0]
               return item
@@ -160,7 +180,8 @@ export default {
           })
           this.allTableData.tableDataFinish = v.filter((item, index) => {
             if (item.damageRecordIsHandle === 'true') {
-              item.imgs = item.damageRecordImg.split('//////////')
+              // item.imgs = item.damageRecordImg.split('//////////')
+              item.imgs = item.damageRecordImg
               item.number = item.damageRecordDesc.split('//////////')[1]
               item.damageRecordDesc = item.damageRecordDesc.split('//////////')[0]
               return item
@@ -171,6 +192,7 @@ export default {
           } else {
             this.tableData = this.allTableData.tableDataWait
           }
+          this.loadAnimation = false
         })
     },
     /**

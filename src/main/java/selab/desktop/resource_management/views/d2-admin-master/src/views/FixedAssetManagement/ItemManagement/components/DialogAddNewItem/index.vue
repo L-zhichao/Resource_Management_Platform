@@ -35,20 +35,20 @@
       <el-form-item label="详情" prop="damageRecordDesc">
         <el-input type="textarea" v-model="ruleForm.damageRecordDesc"></el-input>
       </el-form-item>
-      <el-form-item label="上传图片" prop="img">
+      <el-form-item label="视频图片" prop="img">
         <el-upload
           ref="img"
           drag
           action
-          accept=".png, .jpg, jpeg"
+          accept=".png, .jpg, .jpeg, .mp4, .flv"
           :limit="1"
-          list-type="picture"
+          list-type="text"
           :on-change="change"
           :on-exceed="handleExceed"
           :auto-upload="false">
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-          <div class="el-upload__tip" slot="tip">只能上传1张jpg/png文件</div>
+          <div class="el-upload__tip" slot="tip">只能上传一个图片或视频文件</div>
         </el-upload>
       </el-form-item>
     </el-form>
@@ -118,7 +118,7 @@ export default {
           { required: true, message: '说明一下', trigger: 'blur' }
         ],
         img: [
-          { required: true, message: '上传图片', trigger: 'blur' }
+          { required: true, message: '上传视频或图片', trigger: 'blur' }
         ]
       },
       dialogVisible: false
@@ -159,6 +159,34 @@ export default {
       this.$message.error('最多上传1张图片')
     },
     /**
+     * @description 文件大小 格式 校验
+     * @param {*} file
+     * @return {Boolean} 是否通过校验
+     */
+    beforeUpload (file) {
+      console.log('文件：', file)
+      const FileExt = file.name.replace(/.+\./, '')
+      const isLt30M = file.size / 1024 / 1024 <= 30
+      const extension = ['png', 'jpg', 'jpeg', 'mp4', 'flv'].indexOf(FileExt.toLowerCase()) === -1
+      if (extension) {
+        this.$message({
+          type: 'warning',
+          message: '只能上传 .png, .jpg, .jpeg, .mp4, .flv 文件！'
+        })
+        this.$refs.img.clearFiles()
+        return false
+      }
+      if (!isLt30M) {
+        this.$message({
+          type: 'warning',
+          message: '附件大小超限，文件不能超过 30M'
+        })
+        this.$refs.img.clearFiles()
+        return false
+      }
+      return true
+    },
+    /**
      * @description file Img转base64
      * @param {*} file 读取的文件
      */
@@ -173,14 +201,20 @@ export default {
       // 捕获 转换完毕
       reader.onload = async () => {
         // 转换后的base64就在reader.result里面,直接放到img标签的src属性即可
-        const data = this.imageCompression(reader.result)
-        let base64 = ''
-        await data
-          .then(v => {
-            base64 = v
-            return Promise.resolve(v)
-          })
-        this.ruleForm.img = base64
+        // 压缩? 压缩个屁!
+        // const data = this.imageCompression(reader.result)
+        // if (file.type.split('/')[0] === 'video') {
+        //   (reader.result)
+        //   this.ruleForm.img = reader.result
+        //   return
+        // }
+        // let base64 = ''
+        // await data
+        //   .then(v => {
+        //     base64 = v
+        //     return Promise.resolve(v)
+        //   })
+        this.ruleForm.img = reader.result
       }
     },
     /**
@@ -272,6 +306,7 @@ export default {
      * @param {*} fileList
      */
     change (file, fileList) {
+      if (!this.beforeUpload(file, fileList)) return
       // 将每次图片数组变化的时候，实时的进行监听，更改数组里面的图片数据
       fileList.forEach((item) => {
         this.previewFile(item.raw)

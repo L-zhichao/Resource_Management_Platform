@@ -1,6 +1,7 @@
 // 路由导入
 import itemManagement from './modules/ItemManagement'
 import demo from './modules/demo'
+import resource from './modules/resource'
 
 import layoutHeaderAside from '@/layout/header-aside'
 
@@ -55,6 +56,8 @@ const frameIn = [
   },
   // 物品管理
   itemManagement,
+  // 哪来的云啊
+  resource,
   // 演示页面
   demo
 ]

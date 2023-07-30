@@ -5,6 +5,7 @@
     height="100%"
     :data="tableData"
     :key="randomKey"
+    v-loading="loadAnimation"
     style="width: 100%">
     <el-table-column
       prop="itemname"
@@ -12,11 +13,11 @@
       width="300">
     </el-table-column>
     <el-table-column
-      label="图片"
+      label="视频图片"
       width="100">
       <template slot-scope="scope">
         <!-- 这个popover组件用于生成悬浮图片 -->
-        <el-popover placement="right" title="" trigger="hover">
+        <el-popover placement="right" title="" trigger="hover" v-if="scope.row.imgs !== ''">
           <img :src="scope.row.imgs" alt="" style="height: 200px">
           <!-- image -->
           <el-image slot="reference" style="height: 35px" :src="scope.row.imgs" :preview-src-list="[scope.row.imgs]">
@@ -25,6 +26,7 @@
             </div>
           </el-image>
         </el-popover>
+        <el-button type="text" size="small" v-if="scope.row.videos !== ''" @click="dialogVideoPlayer(scope.row.videos)">查看视频</el-button>
       </template>
     </el-table-column>
     <el-table-column
@@ -46,7 +48,21 @@
       width="110">
       <template slot-scope="scope">
         <el-button @click="handleClick(scope.row)" type="text" size="small" v-if="userAdministratorPermissions">修改</el-button>
-        <el-button type="text" size="small" @click="deleteOperation(scope.row)" v-if="userAdministratorPermissions">删除</el-button>
+        <el-popover
+          style="margin-left: 5px;"
+          placement="top"
+          title="确认删除?"
+          width="160"
+          :ref="`popover-${scope.$index}`"
+          v-if="userAdministratorPermissions"
+          trigger="click">
+          <div style="text-align: right; margin: 0">
+            <el-button type="text" size="small" @click="deleteOperation(scope.row, false)">取消</el-button>
+            <el-button type="danger" size="small" @click="deleteOperation(scope.row, true)">删除</el-button>
+          </div>
+          <el-button slot="reference" type="text" size="small">删除</el-button>
+        </el-popover>
+        <!-- <el-button type="text" size="small" @click="deleteOperation(scope.row)" v-if="userAdministratorPermissions">删除</el-button> -->
         <el-button @click="dialogOldItemArouse(scope.row)" type="text" size="small" v-if="!userAdministratorPermissions">问题上报</el-button>
       </template>
     </el-table-column>
@@ -56,7 +72,6 @@
 <script>
 import util from '@/libs/util'
 import api from '@/api'
-
 export default {
   name: 'ItemTable',
   props: {
@@ -65,6 +80,9 @@ export default {
     },
     // 随机key,用于表格强制刷新
     randomKey: {
+      required: true
+    },
+    loadAnimation: {
       required: true
     }
   },
@@ -115,10 +133,16 @@ export default {
     /**
      * @description 删除物品触发
      * @param {Object} row
+     * @param {Boolean} confirm 是否删除
      */
-    deleteOperation (row) {
+    deleteOperation (row, confirm) {
+      document.body.click()
+      if (!confirm) return
       this.itemDelete({ id: row.itemId })
       this.$emit('deleteInformation', true)
+    },
+    dialogVideoPlayer (url) {
+      this.$emit('dialogVideoPlayerArouse', url)
     }
   }
 }

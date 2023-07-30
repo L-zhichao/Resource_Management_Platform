@@ -129,6 +129,34 @@ export default {
       this.$message.error('最多上传5张图片')
     },
     /**
+     * @description 文件大小 格式 校验
+     * @param {*} file
+     * @return {Boolean} 是否通过校验
+     */
+    beforeUpload (file) {
+      console.log('文件：', file)
+      var FileExt = file.name.replace(/.+\./, '')
+      const isLt30M = file.size / 1024 / 1024 <= 10
+      var extension = ['png', 'jpg', 'jpeg'].indexOf(FileExt.toLowerCase()) === -1
+      if (extension) {
+        this.$message({
+          type: 'warning',
+          message: '只能上传 .png, .jpg, .jpeg 文件！'
+        })
+        this.$refs.img.clearFiles()
+        return false
+      }
+      if (!isLt30M) {
+        this.$message({
+          type: 'warning',
+          message: '附件大小超限，文件不能超过 10M'
+        })
+        this.$refs.img.clearFiles()
+        return false
+      }
+      return true
+    },
+    /**
      * @description file Img转base64
      * @param {*} file 读取的文件
      */
@@ -207,7 +235,8 @@ export default {
      * @description 损坏物品请求
      * @param {Number} itemId  损坏物品Id
      * @param {Number} inputText  损坏描述
-     * @param {String} imgBase64  图片 base64 多个图片由//////////拼接
+     * @param {String} imgBase64  // 图片 base64 多个图片由//////////拼接
+     *                            // 暂时更新 改为base64 的列表
      */
     itemReportDamaged ({ itemId, inputText, number, imgBase64 }) {
       const username = util.cookies.get('username')
@@ -231,6 +260,7 @@ export default {
      * @param {*} fileList
      */
     change (file, fileList) {
+      if (!this.beforeUpload(file, fileList)) return
       // 将每次图片数组变化的时候，实时的进行监听，更改数组里面的图片数据
       const arr = []
       fileList.forEach((item) => {
@@ -244,7 +274,7 @@ export default {
       this.$refs.ruleForm.validate((valid) => {
         console.log(valid)
         if (valid) {
-          this.ruleForm.imgBase64 = this.ruleForm.imgBase64.join('//////////')
+          // this.ruleForm.imgBase64 = this.ruleForm.imgBase64.join('//////////')
           console.log(this.ruleForm.imgBase64)
           this.itemReportDamaged({
             itemId: this.oldItemId_Name,

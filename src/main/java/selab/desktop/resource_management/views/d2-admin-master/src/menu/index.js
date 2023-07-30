@@ -3,6 +3,7 @@ import { uniqueId } from 'lodash'
 // 菜单导入
 import demo from './modules/demo'
 import itemManagement from './modules/ItemManagement'
+import resource from './modules/resource'
 
 /**
  * @description 给菜单数据补充上 path 字段
@@ -22,11 +23,13 @@ function supplementPath (menu) {
 export const menuHeader = supplementPath([
   { path: '/index', title: '首页', icon: 'home' },
   itemManagement,
+  resource,
   demo
 ])
 
 export const menuAside = supplementPath([
   { path: '/index', title: '首页', icon: 'home' },
   itemManagement,
+  resource,
   demo
 ])

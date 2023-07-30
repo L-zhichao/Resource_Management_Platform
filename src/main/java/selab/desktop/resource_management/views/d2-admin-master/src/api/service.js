@@ -50,8 +50,11 @@ function createService () {
             // code === 500 代表 失败
             return 'fail'
           case 20000:
-            // code ==== 20000 是 白泽容 的 OK
+            // code === 20000 是 白泽容 的 OK
             return dataAxios.data
+          case 40001:
+            // code === 40001 代表 注册输入有误
+            return { status: 40001, message: dataAxios.message, data: dataAxios.data }
           case 40002:
             // code === 40002 代表 当前用户名已存在
             return { status: 40002, message: '当前用户名已存在' }
