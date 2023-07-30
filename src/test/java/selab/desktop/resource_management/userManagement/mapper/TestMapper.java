@@ -3,7 +3,8 @@ package selab.desktop.resource_management.userManagement.mapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import selab.desktop.resource_management.userManagement.domain.User;
+import selab.desktop.resource_management.model.domain.userManagement.User;
+import selab.desktop.resource_management.model.mapper.userManagement.UserMapper;
 
 import java.util.Date;
 
