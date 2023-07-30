@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import selab.desktop.resource_management.model.domain.itemManagement.Item;
 import selab.desktop.resource_management.model.mapper.itemManagement.ItemMapper;
 import selab.desktop.resource_management.model.service.itemManagement.ItemService;
-import selab.desktop.resource_management.utils.Result;
+import selab.desktop.resource_management.model.utils.Result;
 
 import java.util.List;
 

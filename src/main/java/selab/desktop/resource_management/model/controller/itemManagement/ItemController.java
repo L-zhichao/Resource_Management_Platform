@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import selab.desktop.resource_management.model.domain.itemManagement.Item;
 import selab.desktop.resource_management.model.service.itemManagement.ItemService;
-import selab.desktop.resource_management.utils.ItemPage;
-import selab.desktop.resource_management.utils.Result;
+import selab.desktop.resource_management.model.utils.ItemPage;
+import selab.desktop.resource_management.model.utils.Result;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;

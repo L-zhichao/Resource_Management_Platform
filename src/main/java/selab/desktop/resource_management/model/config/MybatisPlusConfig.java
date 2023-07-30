@@ -1,4 +1,4 @@
-package selab.desktop.resource_management.config;
+package selab.desktop.resource_management.model.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;

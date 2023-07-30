@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import selab.desktop.resource_management.itemManagement.domain.Vo.ResponseItemUpload;
 import selab.desktop.resource_management.itemManagement.domain.Vo.ResponseItemVo;
 import selab.desktop.resource_management.itemManagement.service.ResponseItemService;
-import selab.desktop.resource_management.utils.JsonResult;
+import selab.desktop.resource_management.model.utils.JsonResult;
 
 import java.util.List;
 @RestController

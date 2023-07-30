@@ -3,7 +3,7 @@ package selab.desktop.resource_management.model.exception;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import selab.desktop.resource_management.utils.JsonResult;
+import selab.desktop.resource_management.model.utils.JsonResult;
 
 import org.springframework.validation.BindException;
 

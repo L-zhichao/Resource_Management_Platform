@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import selab.desktop.resource_management.model.domain.fundManagement.Vo.FundsVo;
 import selab.desktop.resource_management.model.service.fundManagement.FundsService;
-import selab.desktop.resource_management.utils.R;
+import selab.desktop.resource_management.model.utils.R;
 
 import java.util.Date;
 import java.util.List;

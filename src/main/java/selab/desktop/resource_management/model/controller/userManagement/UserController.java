@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import selab.desktop.resource_management.model.domain.userManagement.vo.UserReturn;
 import selab.desktop.resource_management.model.domain.userManagement.vo.UserVo;
 import selab.desktop.resource_management.model.service.userManagement.impl.UserServiceImpl;
-import selab.desktop.resource_management.utils.JsonResult;
+import selab.desktop.resource_management.model.utils.JsonResult;
 
 @RequiredArgsConstructor
 @RestController

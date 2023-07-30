@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import selab.desktop.resource_management.model.domain.itemManagement.DamageRecord;
 import selab.desktop.resource_management.model.service.itemManagement.DamageRecordService;
-import selab.desktop.resource_management.utils.Result;
+import selab.desktop.resource_management.model.utils.Result;
 
 import java.util.ArrayList;
 import java.util.List;
