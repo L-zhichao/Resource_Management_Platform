@@ -1,5 +1,13 @@
+logging:
+  pattern:
+    dateformat: yyyy-MM-dd HH:mm:ss.SSS
+  level:
+    selab.desktop.resource_management.fundManagement.controller.FundsController: debug
+    selab.desktop.resource_management.ResourceManagementPlatformApplication: warn
+
 server:
   port: 9090
+  server-header: Access-Control-Allow-Origin:*
 
 spring:
   application:
