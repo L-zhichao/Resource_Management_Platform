@@ -22,11 +22,53 @@ function supplementPath (menu) {
 export const menuHeader = supplementPath([
   { path: '/index', title: '首页', icon: 'home' },
   itemManagement,
-  demo
+  demo，
+    {
+    title: '资金管理',
+    icon: 'folder-o',
+    children: [
+      { path: '/page1', title: '资金管理' },
+      { path: '/page2', title: '资产分配' },
+      { path: '/page3', title: '日志记录' },
+      { path: '/page4', title: '物品申请·' },
+
+    ]
+  },
+
+  {
+    title: '考试资源',
+    icon: '	fa fa-file-text',
+    children: [
+      { path: '/ResourceTest', title: '考试资源' },
+      { path: '/UpLoad', title: '上传资源' },
+    ]
+  }
+
 ])
 
 export const menuAside = supplementPath([
   { path: '/index', title: '首页', icon: 'home' },
   itemManagement,
-  demo
+  demo，
+  {
+    title: '资金管理',
+    icon: 'folder-o',
+    children: [
+      { path: '/page1', title: '资金管理' },
+      { path: '/page2', title: '资产分配' },
+      { path: '/page3', title: '日志记录' },
+      { path: '/page4', title: '物品申请·' },
+
+    ]
+  },
+
+  {
+    title: '考试资源',
+    icon: '	fa fa-file-text',
+    children: [
+      { path: '/ResourceTest', title: '考试资源' },
+      { path: '/UpLoad', title: '上传资源' },
+    ]
+   
+  }
 ])
