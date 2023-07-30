@@ -34,7 +34,7 @@
         fit
         highlight-current-row
       >
-        <el-table-column align="center" label="ID" width="200px" prop="id">
+        <el-table-column align="center" label="id"  prop="id">
         </el-table-column>
         <el-table-column align="center" label="资产" prop="asset">
         </el-table-column>
@@ -185,6 +185,7 @@
 <script>
 
 import axios from "axios";
+import {id} from "../../../../echarts-5.4.3/test/lib/ecSimpleTransform";
 
 export default {
   name: "Page1",
@@ -198,9 +199,9 @@ export default {
       listQuery: {
         page: 1,
         pageSize: 10,
-       
+
       },
-     
+
       dialogFormVisible: false,
       dialogStatus: "create",
       textMap: {
@@ -235,7 +236,6 @@ export default {
     };
   },
   methods: {
-    
     formatDateTime(time) {
       const datetime = new Date(time);
       const year = datetime.getFullYear();
@@ -246,7 +246,7 @@ export default {
       const seconds = ("0" + datetime.getSeconds()).slice(-2);
       return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     },
-    
+
     handleSizeChange(val) {
       this.listQuery.pageSize = val;
       this.axiosdata();
@@ -262,7 +262,7 @@ export default {
     },
     axiosdata() {
       this.listLoading = true;
-     
+      
 
       axios
         .get("/fundsVo/page", {
@@ -281,11 +281,12 @@ export default {
           console.log(error);
         });
     },
-    
+
     TJCollectionForm() {
       Object.assign(this.$data.ruleForm, this.$options.data().ruleForm);
       this.dialogStatus = "create";
       this.dialogFormVisible = true;
+      // this.resetCollectionForm();
     },
      BJCollectionForm(row) {
         this.dialogStatus = "update"
@@ -300,7 +301,7 @@ export default {
       },
 
 
-   
+
 submitCollectionForm(formName) {
   this.$refs[formName].validate((valid) => {
     if (valid) {
@@ -367,20 +368,21 @@ updateCollectionForm(formName) {
   });
 },
 deleteVisible(scope) {
-      this.$confirm('确定要删除【' + scope.row.asset + '】吗？', '提示', {
+      this.$confirm('确定要删除' + scope.row.asset + '吗？', '提示', {
 
     confirmButtonText: "确定",
     cancelButtonText: "取消",
     type: "warning",
   })
     .then(() => {
+      const id = scope.row.id
       axios
-        .delete('/fundsVo/{id}')
+        .delete(`/fundsVo/`+id)
         .then((response) => {
           if (response.data.code === 1) {
             this.axiosdata();
             this.dialogFormVisible = false;
-            this.$message.error("删除完毕");
+            this.$message.success("删除完毕");
           } else {
             this.$message.error("删除数据失败！");
           }
@@ -396,7 +398,6 @@ deleteVisible(scope) {
 
   }
 }
-
 </script>
 <style>
 </style>
