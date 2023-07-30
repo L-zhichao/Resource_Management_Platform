@@ -262,10 +262,7 @@ export default {
     },
     axiosdata() {
       this.listLoading = true;
-      //  const params = { ...this.listQuery };
-      // if (this.idQuery) { // 如果idQuery不为空，则添加id查询参数
-      //   params.id = this.idQuery;
-      // }
+     
 
       axios
         .get("/fundsVo/page", {
@@ -289,7 +286,6 @@ export default {
       Object.assign(this.$data.ruleForm, this.$options.data().ruleForm);
       this.dialogStatus = "create";
       this.dialogFormVisible = true;
-      // this.resetCollectionForm();
     },
      BJCollectionForm(row) {
         this.dialogStatus = "update"
