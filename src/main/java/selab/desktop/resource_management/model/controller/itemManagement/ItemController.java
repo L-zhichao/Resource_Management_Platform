@@ -31,7 +31,7 @@ public class ItemController {
 
 
 
-    @Operation(description = "查询所有物品")
+    @Operation(summary = "查询所有物品")
     @GetMapping("/all")
     public JsonResult<ItemPage> selectAllItem(@RequestParam(defaultValue = "1") int page,
                                               @RequestParam(defaultValue = "5") int size,
@@ -45,13 +45,13 @@ public class ItemController {
         return new JsonResult<>(20000, "查询成功", itemPage1);
     }
 
-    @Operation(description = "新增物品")
+    @Operation(summary = "新增物品")
     @PostMapping("/save")
     public JsonResult<Void> addItem(@RequestBody Item item) {
         return new JsonResult<>(JsonResult.SUCCESS, null, null);
     }
 
-    @Operation(description = "更新物品")
+    @Operation(summary = "更新物品")
     @PutMapping("/updata")
     public JsonResult<?> updateItem(Item item) {
         itemService.updateItem(item);
@@ -59,14 +59,14 @@ public class ItemController {
 
     }
 
-    @Operation(description = "根据id查询物品")
+    @Operation(summary = "根据id查询物品")
     @GetMapping("/select/{id}")
     public JsonResult<Item> select(@PathVariable Long id) {
         Item item = itemService.getItemById(id);
         return new JsonResult<>(200, null, item);
     }
 
-    @Operation(description = "通过id删除物品")
+    @Operation(summary = "通过id删除物品")
     @DeleteMapping("/delete/{id}")
     public JsonResult<?> delete(@PathVariable Long id) {
         itemService.deleteItemById(id);

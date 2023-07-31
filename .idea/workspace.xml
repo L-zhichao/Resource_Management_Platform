@@ -6,22 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="796bb036-605e-4f99-b126-2a7033b8c82e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/selab/desktop/resource_management/model/controller/itemManagement/DamageRecordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/selab/desktop/resource_management/model/controller/itemManagement/DamageRecordController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/selab/desktop/resource_management/model/controller/itemManagement/ItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/selab/desktop/resource_management/model/controller/itemManagement/ItemController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/controller/itemManagement/DamageRecordController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/controller/itemManagement/DamageRecordController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/controller/itemManagement/ItemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/controller/itemManagement/ItemController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/fundManagement/Funds.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/fundManagement/Funds.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/fundManagement/Vo/FundsVo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/fundManagement/Vo/FundsVo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/itemManagement/applynews/ApplyItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/itemManagement/applynews/ApplyItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/itemManagement/applynews/ResponseItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/itemManagement/applynews/ResponseItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/itemManagement/applynews/Vo/ApplyItemUpload.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/itemManagement/applynews/Vo/ApplyItemUpload.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/itemManagement/applynews/Vo/ApplyItemVo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/itemManagement/applynews/Vo/ApplyItemVo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/itemManagement/applynews/Vo/ResponseItemUpload.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/itemManagement/applynews/Vo/ResponseItemUpload.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/itemManagement/applynews/Vo/ResponseItemVo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/itemManagement/applynews/Vo/ResponseItemVo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/itemManagement/item/DamageRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/itemManagement/item/DamageRecord.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/userManagement/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/userManagement/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/userManagement/vo/UserVo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/domain/userManagement/vo/UserVo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/utils/ItemPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/utils/ItemPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/utils/JsonResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/model/utils/JsonResult.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -281,6 +269,7 @@
       <workItem from="1690795297377" duration="11000" />
       <workItem from="1690811785891" duration="1231000" />
       <workItem from="1690813611109" duration="114000" />
+      <workItem from="1690816673194" duration="1091000" />
     </task>
     <servers />
   </component>

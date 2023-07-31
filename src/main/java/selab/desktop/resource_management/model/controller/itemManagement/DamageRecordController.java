@@ -19,7 +19,7 @@ public class DamageRecordController {
     @Autowired
     private DamageRecordService damageRecordService;
 
-    @Operation(description = "查询所有的上报记录")
+    @Operation(summary = "查询所有的上报记录")
     @GetMapping("/all")
     public JsonResult<List<DamageRecord>> findAllDamageRecord(){
         List<DamageRecord> allDamageRecord = damageRecordService.findAllDamageRecord();
@@ -32,28 +32,28 @@ public class DamageRecordController {
         }
         return new JsonResult<>(JsonResult.SUCCESS,"success",damageRecords);
     }
-    @Operation(description = "新增损坏记录")
+    @Operation(summary = "新增损坏记录")
     @PostMapping("/save")
     public JsonResult<?> addDamageRecord(@RequestParam DamageRecord damageRecord){
         damageRecordService.addDamageRecord(damageRecord);
         return new JsonResult<>(JsonResult.SUCCESS,"success",null);
     }
 
-    @Operation(description = "删除一项损坏记录")
+    @Operation(summary = "删除一项损坏记录")
     @DeleteMapping("/delete/{id}")
     public JsonResult<?> deleteDamageRecord(@PathVariable Long id){
         damageRecordService.deleteDamageRecord(id);
         return new JsonResult<>(JsonResult.SUCCESS,"success",null);
     }
 
-    @Operation(description = "更新损坏记录")
+    @Operation(summary = "更新损坏记录")
     @PutMapping("/update")
     public JsonResult<?> updateDamageRecord(@RequestParam Long damageRecordId){
         damageRecordService.updateIsHandle(damageRecordId);
         return new JsonResult<>(JsonResult.SUCCESS,"success",null);
     }
 
-    @Operation(description = "通过用户名查询损毁记录")
+    @Operation(summary = "通过用户名查询损毁记录")
     @GetMapping("/select")
     public JsonResult<List<DamageRecord>> getDamageRecordByUsername(@RequestParam String username){
         List<DamageRecord> damageRecordByUserName = damageRecordService.getDamageRecordByUserName(username);
