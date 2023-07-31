@@ -22,7 +22,7 @@ function supplementPath (menu) {
 export const menuHeader = supplementPath([
   { path: '/index', title: '首页', icon: 'home' },
   itemManagement,
-  demo，
+  demo,
     {
     title: '资金管理',
     icon: 'folder-o',
@@ -49,7 +49,7 @@ export const menuHeader = supplementPath([
 export const menuAside = supplementPath([
   { path: '/index', title: '首页', icon: 'home' },
   itemManagement,
-  demo，
+  demo,
   {
     title: '资金管理',
     icon: 'folder-o',
