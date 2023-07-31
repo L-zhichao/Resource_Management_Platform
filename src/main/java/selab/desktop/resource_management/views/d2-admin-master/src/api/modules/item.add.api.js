@@ -8,7 +8,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
   ITEM_ADD_API (data) {
     // 模拟数据
     mock
-      .onAny('/item')
+      .onAny('/item/save')
       .reply(config => {
         // const configData = JSON.parse(config.data)
         return [
@@ -19,7 +19,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
       })
     // 接口请求
     return request({
-      url: 'item',
+      url: 'item/save',
       method: 'post',
       data
     })

@@ -44,10 +44,11 @@
         <template slot-scope="scope">
           <el-button size="small" disabled v-if="scope.row.state === 0 && !userAdministratorPermissions">未处理</el-button>
           <el-popover
+            @show="ruleFormData(scope)"
             @hide="ruleFormClear"
             v-if="scope.row.state === 0 && userAdministratorPermissions"
             placement="left"
-            width="500"
+            width="550"
             trigger="hover">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px">
               <el-form-item>
@@ -56,12 +57,12 @@
                   <el-radio v-model="radioDispose" :label="2">不批准</el-radio>
                 </template>
               </el-form-item>
-              <el-form-item label="说明" prop="desc">
-                <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+              <el-form-item label="说明" prop="reason">
+                <el-input type="textarea" v-model="ruleForm.reason"></el-input>
               </el-form-item>
             </el-form>
             <div style="text-align: right; margin: 0">
-              <el-button type="primary" size="small">{{ radioDispose === 1 ? '批准' : '不批准' }}</el-button>
+              <el-button type="primary" size="small" @click="submit">{{ radioDispose === 1 ? '批准' : '不批准' }}</el-button>
             </div>
             <el-button slot="reference" size="small">待处理</el-button>
           </el-popover>
@@ -105,6 +106,7 @@
 <script>
 import util from '@/libs/util'
 import api from '@/api'
+import dayjs from 'dayjs'
 // import dayjs from 'dayjs'
 export default {
   name: 'DrawerOfNewItem',
@@ -143,10 +145,13 @@ export default {
         ordinary: '我的'
       },
       ruleForm: {
-        desc: ''
+        applyId: null,
+        name: '',
+        result: 2,
+        reason: ''
       },
       rules: {
-        desc: [
+        reason: [
           { required: true, message: '人家超级期待管理员大人的回应的说!你不回复人家会很伤心的嘛!', trigger: 'blur' }
         ]
       },
@@ -167,6 +172,13 @@ export default {
     drawerArouse () {
       this.itemShowApply()
       this.drawerVisible = true
+    },
+    radioDispose (v) {
+      if (v === 1) {
+        this.ruleForm.result = 2
+      } else if (v === 2) {
+        this.ruleForm.result = 0
+      }
     }
   },
   methods: {
@@ -210,28 +222,40 @@ export default {
      * @description 物品回应上传api
      * @param {Object} param0
      * @param {Number} applyId
-     * @param {String} username
+     * @param {String} name
      * @param {Number} result 回应结果(同意与否 2为同意，0为否)
      * @param {String} reason 回应结果原因
      * @param {String} responseTime 回应时间
      */
-    async itemResponseAPI ({ applyId, username, result, reason, responseTime }) {
-      return await api.ITEM_RESPONSE_API({ applyId, username, result, reason, responseTime })
+    async itemResponseAPI ({ applyId, name, result, reason, responseTime }) {
+      return await api.ITEM_RESPONSE_API({ applyId, name, result, reason, responseTime })
     },
     /**
      * @description 物品回应上传
      * @param {Object} param0
      * @param {Number} applyId
-     * @param {String} username
+     * @param {String} name
      * @param {Number} result 回应结果(同意与否 2为同意，0为否)
      * @param {String} reason 回应结果原因
-     * @param {String} responseTime 回应时间
      */
-    itemResponse ({ applyId, username, result, reason, responseTime }) {
-      this.itemResponseAPI({ applyId, username, result, reason, responseTime })
+    itemResponse ({ applyId, name, result, reason }) {
+      const responseTime = dayjs().format('YYYY-MM-DD HH:mm:ss')
+      this.itemResponseAPI({ applyId, name, result, reason, responseTime })
         .then(v => {
-          if (v.split('/')[0] === 'http:') {
-
+          if (typeof v === 'object') {
+            this.ruleForm = {
+              applyId: null,
+              name: '',
+              result: 2,
+              reason: ''
+            }
+            this.$refs.ruleForm.clearValidate()
+            this.$message({
+              message: '回应上传成功',
+              type: 'success'
+            })
+            this.loadAnimation = true
+            this.itemShowApply()
           } else if (v === 'fail') {
             this.$message.error('上传失败')
           }
@@ -247,6 +271,13 @@ export default {
      * @description 所有物品申请信息展示
      */
     itemShowApply () {
+      this.tableData = []
+      this.tableDataResponse = []
+      this.allTableData = [[[], []], [[], []]]
+      this.radio = {
+        admin: '未处理',
+        ordinary: '我的'
+      }
       this.itemShowApplyAPI()
         .then(v => {
           if ('applyId' in v[0]) {
@@ -312,17 +343,55 @@ export default {
                 this.tableData = this.allTableData[1][1]
               }
             }
+            setTimeout(() => {
+              this.loadAnimation = false
+            }, 300)
           } else {
             this.$message.error('物品回应信息请求失败')
           }
         })
     },
+    /**
+     * @description popover 消失时触发
+     */
     ruleFormClear () {
-      this.$refs.ruleForm.clearValidate()
       this.ruleForm = {
-        desc: ''
+        applyId: null,
+        name: '',
+        result: 2,
+        reason: ''
       }
       this.radioDispose = 1
+      this.$refs.ruleForm.clearValidate()
+    },
+    /**
+     * @description popover 出现时触发
+     * @param {Object} scope
+     */
+    ruleFormData (scope) {
+      this.ruleForm = {
+        applyId: scope.row.applyId,
+        name: util.cookies.get('name'),
+        result: 2,
+        reason: ''
+      }
+    },
+    /**
+     * @description 提交表单
+     */
+    submit () {
+      this.$refs.ruleForm.validate((valid) => {
+        if (valid) {
+          this.itemResponse({
+            applyId: this.ruleForm.applyId,
+            name: this.ruleForm.name,
+            result: this.ruleForm.result,
+            reason: this.ruleForm.reason
+          })
+        } else {
+          this.$message.error('表单校验失败，请检查')
+        }
+      })
     }
   }
 }

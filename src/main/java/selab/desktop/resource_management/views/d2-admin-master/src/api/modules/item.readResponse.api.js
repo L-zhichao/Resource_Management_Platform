@@ -2,26 +2,28 @@
 
 export default ({ service, request, serviceForMock, requestForMock, mock, faker, tools }) => ({
   /**
-   * @description 完成损坏物品
-   * @param {Object} Id 唯一参数 物品Id
+   * @description 本人所有未读申请回应信息
    */
-  ITEM_FINISH_DAMAGED_API (params) {
+  ITEM_READ_RESPONSE_API () {
     // 模拟数据
     mock
-      .onAny('/damage/record/update')
+      .onAny('/item/readResponse')
       .reply(config => {
         // const configData = JSON.parse(config.data)
         return [
           200,
-          null,
+          {
+            status: 200,
+            message: '',
+            data: {}
+          },
           '损坏物品上报'
         ]
       })
     // 接口请求
     return request({
-      url: 'damage/record/update',
-      method: 'put',
-      params
+      url: 'item/readResponse',
+      method: 'post'
     })
   }
 })

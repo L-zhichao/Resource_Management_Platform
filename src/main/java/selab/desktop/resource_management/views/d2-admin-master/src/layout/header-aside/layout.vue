@@ -179,6 +179,54 @@ export default {
           if (data.length !== 0) {
             this.$notify({
               title: '有' + data.length + '个未处理物品损坏请求',
+              position: 'bottom-left',
+              type: 'warning'
+            })
+          }
+        })
+    },
+    /**
+     * @description 所有未处理申请信息提醒api
+     */
+    async itemReadApplyAPI () {
+      return await api.ITEM_READ_APPLY_API()
+    },
+    /**
+     * @description 所有未处理申请信息提醒
+     */
+    itemReadApply () {
+      this.itemReadApplyAPI()
+        .then(v => {
+          const data = v.filter((item, index) => {
+            if (item.status === -1) {
+              return item
+            }
+          })
+          if (data.length !== 0) {
+            this.$notify({
+              title: '有' + data.length + '个未处理申请信息',
+              // message: '就很想点一下,也不知道有什么用',
+              position: 'bottom-left',
+              type: 'warning'
+            })
+          }
+        })
+    },
+    /**
+     * @description 本人所有未读申请回应信息api
+     */
+    async itemReadResponseAPI () {
+      return await api.ITEM_READ_RESPONSE_API()
+    },
+    /**
+     * @description 本人所有未读申请回应信息
+     */
+    itemReadResponse () {
+      this.itemReadResponseAPI()
+        .then(v => {
+          if (v.length !== 0) {
+            this.$notify({
+              title: '有' + v.length + '个未读申请回应信息',
               // message: '就很想点一下,也不知道有什么用',
               position: 'bottom-left',
               type: 'warning'
@@ -189,6 +237,8 @@ export default {
   },
   mounted () {
     if (this.userAdministratorPermissions) this.itemSearchDamage()
+    if (this.userAdministratorPermissions) this.itemReadApply()
+    if (!this.userAdministratorPermissions) this.itemReadResponse()
   }
 }
 </script>
