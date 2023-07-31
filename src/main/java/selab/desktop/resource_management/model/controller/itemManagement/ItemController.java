@@ -26,8 +26,8 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @Value("${file.upload-path}")
-    private String uploadPath;
+//    @Value("${file.upload-path}")
+//    private String uploadPath;
 
 
 
@@ -73,25 +73,25 @@ public class ItemController {
         return new JsonResult<>(200, "success", null);
     }
 
-    @Operation(description = "图片上传")
-    @RequestMapping("/img-upload")
-    public JsonResult uploadImg(MultipartFile file) {
-
-        try {
-            //拿到图片上传到的目录(类路径classes下的static/img/upload)的File对象
-            File uploadDirFile = ResourceUtils.getFile(uploadPath);
-            //拿到图片上传到的目录的磁盘路径
-            String uploadDirPath = uploadDirFile.getAbsolutePath();
-            //拿到图片保存到的磁盘路径
-            String fileUploadPath = uploadDirPath + "\\" + file.getOriginalFilename();
-            //保存图片
-            file.transferTo(new File(fileUploadPath));
-//            String imageUrl = "http://192.168.1.3:8080/img/upload/" + file.getOriginalFilename();
-            //成功响应
-            return new JsonResult(200, "success", null);
-        } catch (IOException e) {
-            //失败响应
-            return new JsonResult<>(500, "图片上传失败", null);
-        }
-    }
+//    @Operation(description = "图片上传")
+//    @RequestMapping("/img-upload")
+//    public JsonResult uploadImg(MultipartFile file) {
+//
+//        try {
+//            //拿到图片上传到的目录(类路径classes下的static/img/upload)的File对象
+//            File uploadDirFile = ResourceUtils.getFile(uploadPath);
+//            //拿到图片上传到的目录的磁盘路径
+//            String uploadDirPath = uploadDirFile.getAbsolutePath();
+//            //拿到图片保存到的磁盘路径
+//            String fileUploadPath = uploadDirPath + "\\" + file.getOriginalFilename();
+//            //保存图片
+//            file.transferTo(new File(fileUploadPath));
+////            String imageUrl = "http://192.168.1.3:8080/img/upload/" + file.getOriginalFilename();
+//            //成功响应
+//            return new JsonResult(200, "success", null);
+//        } catch (IOException e) {
+//            //失败响应
+//            return new JsonResult<>(500, "图片上传失败", null);
+//        }
+//    }
 }

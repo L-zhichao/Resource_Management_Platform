@@ -37,17 +37,3 @@ mybatis-plus:
       db-config:
         # 启用全局配置主键采用雪花算法
         id-type: ASSIGN_ID
-springdoc:
-    swagger-ui:
-      path: /swagger-ui.html
-      tags-sorter: alpha
-      #operations-sorter: order
-    api-docs:
-      path: /v3/api-docs
-    group-configs:
-      - group: 'userManagement'
-        paths-to-match: '/**'
-        packages-to-scan: selab.desktop.resource_management.userManagement
-      - group: 'item Management'
-        paths-to-match: '/**'
-        packages-to-scan: selab.desktop.resource_management.itemManagement
