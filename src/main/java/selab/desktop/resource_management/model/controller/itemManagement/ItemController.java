@@ -26,7 +26,7 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-   @GetMapping()
+   @GetMapping("/all")
     public JsonResult<ItemPage> selectAllItem(@RequestParam(defaultValue = "1")int page,
                                               @RequestParam(defaultValue = "5")int size,
                                               @RequestParam(defaultValue = "") String search) throws UnsupportedEncodingException {
@@ -38,12 +38,12 @@ public class ItemController {
        ItemPage itemPage1 = new ItemPage(total,pages,records);
        return new JsonResult<>(20000,"查询成功",itemPage1);
    }
-   @PostMapping()
+   @PostMapping("/save")
    public JsonResult<Void> addItem(@RequestBody Item item){
        return new JsonResult<>(JsonResult.SUCCESS,null,null);
 
    }
-   @PutMapping()
+   @PutMapping("/updata")
     public JsonResult<?> updateItem(Item item){
        itemService.updateItem(item);
        return new JsonResult<>(20000,"修改成功",null);
@@ -72,6 +72,7 @@ public class ItemController {
             String fileUploadPath = uploadDirPath + "\\" + file.getOriginalFilename();
             //保存图片
             file.transferTo(new File(fileUploadPath));
+//            String imageUrl = "http://192.168.1.3:8080/img/upload/" + file.getOriginalFilename();
             //成功响应
             return new JsonResult(200,"success",null);
         } catch (IOException e) {
