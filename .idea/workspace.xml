@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="796bb036-605e-4f99-b126-2a7033b8c82e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/ResourceManagementPlatformApplication.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/cloudresourceManagement/config/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/cloudresourceManagement/controller/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/cloudresourceManagement/domain/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/cloudresourceManagement/exception/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/cloudresourceManagement/filter/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/cloudresourceManagement/mapper/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/cloudresourceManagement/service/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/cloudresourceManagement/utils/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/cloudresourceManagement/views/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/config/SwaggerConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/config/JacksonConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/config/MybatisPlusConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/controller/FundsController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/domain/Funds.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/domain/Log.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/domain/Vo/FundsVo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/domain/Vo/LogVo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/exception/ExceptionHandle.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/exception/IDNotFundException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/exception/InsertException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/exception/ServiceException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/filter/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/mapper/FundsMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/mapper/LogMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/service/FundsService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/service/LogService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/service/ServiceImpl/FundsServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/service/ServiceImpl/LogServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/utils/JsonResult.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/fundManagement/views/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/itemManagement/config/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/itemManagement/controller/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/itemManagement/domain/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/itemManagement/exception/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/itemManagement/filter/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/itemManagement/mapper/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/itemManagement/service/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/itemManagement/utils/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/itemManagement/views/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/userManagement/config/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/userManagement/controller/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/userManagement/domain/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/userManagement/exception/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/userManagement/filter/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/userManagement/mapper/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/userManagement/service/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/userManagement/utils/JsonResult.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/userManagement/utils/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/selab/desktop/resource_management/userManagement/views/index.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/static/index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/templates/index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/surefire-reports/2023-07-24T09-16-47_394.dumpstream" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-selab.desktop.resource_management.ResourceManagementPlatformApplicationTests.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/surefire-reports/selab.desktop.resource_management.ResourceManagementPlatformApplicationTests.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/selab/desktop/resource_management/ResourceManagementPlatformApplicationTests.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://E:/Program File/wechat/WeChat Files/wxid_udexlywdzi7f22/FileStorage/File/2023-07/index.vue" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+        <option name="userSettingsFile" value="D:\Work\workMaven\apache-maven-3.9.1\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="corretto-17 (7)" />
+  </component>
+  <component name="ProjectId" id="2SkNECRuM6s1ANMUwaRDQ9bdQid" />
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "fund__zhaoyiqiang",
+    "last_opened_file_path": "D:/Work/Work2 (JAVA)/resource_management_platform/vue/src/views/demo/page1",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Problems",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.11299435",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "spring.configuration.checksum": "66f2535e86b835a41495a34eb1d39bbf",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Work\Work2 (JAVA)\resource_management_platform\vue\src\views\demo\page1" />
+      <recent name="D:\Work\Work2 (JAVA)\resource_management_platform" />
+      <recent name="D:\Work\Work2 (JAVA)\resource_management_platform\src\main\java\selab\desktop\resource_management\fundManagement\utils" />
+      <recent name="D:\Work\Work2 (JAVA)\resource_management_platform\src\main\java\selab\desktop\resource_management\fundManagement\controller" />
+      <recent name="D:\Work\Work2 (JAVA)\resource_management_platform\vue" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Work\Work2 (JAVA)\resource_management_platform\src\main\java\selab\desktop\resource_management\fundManagement\controller" />
+      <recent name="D:\Work\Work2 (JAVA)\resource_management_platform\src\main\java\selab\desktop\resource_management\fundManagement\utils" />
+      <recent name="D:\Work\Work2 (JAVA)\resource_management_platform\src\main\java\selab\desktop\resource_management\fundManagement\exception" />
+      <recent name="D:\Work\Work2 (JAVA)\resource_management_platform" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.serve">
+    <configuration name="ResourceManagementPlatformApplicationTests.add01" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="resource_management" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="selab.desktop.resource_management.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="corretto-17" />
+      <option name="PACKAGE_NAME" value="selab.desktop.resource_management" />
+      <option name="MAIN_CLASS_NAME" value="selab.desktop.resource_management.ResourceManagementPlatformApplicationTests" />
+      <option name="METHOD_NAME" value="add01" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ResourceManagementPlatformApplicationTests.register001" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="resource_management" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="selab.desktop.resource_management.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="corretto-17 (2)" />
+      <option name="PACKAGE_NAME" value="selab.desktop.resource_management" />
+      <option name="MAIN_CLASS_NAME" value="selab.desktop.resource_management.ResourceManagementPlatformApplicationTests" />
+      <option name="METHOD_NAME" value="register001" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ResourceManagementPlatformApplicationTests.testAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="resource_management" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="selab.desktop.resource_management.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="selab.desktop.resource_management" />
+      <option name="MAIN_CLASS_NAME" value="selab.desktop.resource_management.ResourceManagementPlatformApplicationTests" />
+      <option name="METHOD_NAME" value="testAll" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="resource_management_platform" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="resource_management_platform" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ResourceManagementPlatformApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="resource_management" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="selab.desktop.resource_management.ResourceManagementPlatformApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="serve" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/vue/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="serve" />
+      </scripts>
+      <node-interpreter value="$PROJECT_DIR$/../../workNode/node-v16.20.1-win-x64/node" />
+      <package-manager value="npm" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.ResourceManagementPlatformApplicationTests.testAll" />
+      <item itemvalue="JUnit.ResourceManagementPlatformApplicationTests.register001" />
+      <item itemvalue="JUnit.ResourceManagementPlatformApplicationTests.add01" />
+      <item itemvalue="npm.serve" />
+      <item itemvalue="Spring Boot.ResourceManagementPlatformApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ResourceManagementPlatformApplicationTests.testAll" />
+        <item itemvalue="JUnit.ResourceManagementPlatformApplicationTests.add01" />
+        <item itemvalue="JUnit.ResourceManagementPlatformApplicationTests.register001" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="796bb036-605e-4f99-b126-2a7033b8c82e" name="Changes" comment="" />
+      <created>1689686505832</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1689686505832</updated>
+      <workItem from="1689686507615" duration="2885000" />
+      <workItem from="1689689433923" duration="2530000" />
+      <workItem from="1689725061343" duration="1086000" />
+      <workItem from="1689736245967" duration="321000" />
+      <workItem from="1689736585296" duration="1044000" />
+      <workItem from="1689813889224" duration="3426000" />
+      <workItem from="1689819510242" duration="2894000" />
+      <workItem from="1689828737639" duration="488000" />
+      <workItem from="1689829271428" duration="53000" />
+      <workItem from="1689829330237" duration="32000" />
+      <workItem from="1689829382973" duration="335000" />
+      <workItem from="1689829734390" duration="975000" />
+      <workItem from="1689838488656" duration="252000" />
+      <workItem from="1689838759725" duration="2150000" />
+      <workItem from="1689840931569" duration="2308000" />
+      <workItem from="1689852029576" duration="1515000" />
+      <workItem from="1689854340959" duration="387000" />
+      <workItem from="1689854738612" duration="2183000" />
+      <workItem from="1689912247711" duration="1156000" />
+      <workItem from="1689949091272" duration="1081000" />
+      <workItem from="1690001027700" duration="565000" />
+      <workItem from="1690018557643" duration="1351000" />
+      <workItem from="1690019924283" duration="9580000" />
+      <workItem from="1690072632146" duration="1988000" />
+      <workItem from="1690075360118" duration="3457000" />
+      <workItem from="1690107230182" duration="1128000" />
+      <workItem from="1690108625100" duration="188000" />
+      <workItem from="1690109114816" duration="16000" />
+      <workItem from="1690109587906" duration="1185000" />
+      <workItem from="1690110930521" duration="1719000" />
+      <workItem from="1690120577552" duration="1683000" />
+      <workItem from="1690159162713" duration="8422000" />
+      <workItem from="1690194244522" duration="14000" />
+      <workItem from="1690194992108" duration="76000" />
+      <workItem from="1690195693045" duration="449000" />
+      <workItem from="1690196159289" duration="539000" />
+      <workItem from="1690374655276" duration="1231000" />
+      <workItem from="1690418067148" duration="236000" />
+      <workItem from="1690420791594" duration="511000" />
+      <workItem from="1690421399476" duration="774000" />
+      <workItem from="1690422195093" duration="2245000" />
+      <workItem from="1690424571423" duration="4136000" />
+      <workItem from="1690443368636" duration="1140000" />
+      <workItem from="1690445836888" duration="1111000" />
+      <workItem from="1690446968134" duration="306000" />
+      <workItem from="1690447286761" duration="1415000" />
+      <workItem from="1690448717943" duration="247000" />
+      <workItem from="1690449883692" duration="85000" />
+      <workItem from="1690450012635" duration="1102000" />
+      <workItem from="1690451148848" duration="1062000" />
+      <workItem from="1690464217610" duration="1687000" />
+      <workItem from="1690504102261" duration="9489000" />
+      <workItem from="1690541944047" duration="5374000" />
+      <workItem from="1690551676357" duration="900000" />
+      <workItem from="1690591189679" duration="3631000" />
+      <workItem from="1690613411003" duration="663000" />
+      <workItem from="1690677214366" duration="10221000" />
+      <workItem from="1690771863446" duration="727000" />
+      <workItem from="1690772606295" duration="9826000" />
+      <workItem from="1690790736039" duration="1695000" />
+      <workItem from="1690792797973" duration="303000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="selab.desktop.resource_management.fundManagement.controller.FundsController" memberName="fundsService" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
