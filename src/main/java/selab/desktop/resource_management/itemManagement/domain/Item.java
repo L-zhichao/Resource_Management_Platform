@@ -43,4 +43,7 @@ public class Item {
     @Schema(description = "物品图片")
 
     private String imgs;
+
+    @Schema(description = "物品视频")
+    private String video;
 }

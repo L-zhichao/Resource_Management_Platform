@@ -1,6 +1,6 @@
 # 端口
 server:
-  port: 80
+  port: 8080
 
 
 # 数据源
@@ -28,3 +28,6 @@ mybatis-plus:
 logging:
   pattern:
     console: '%d{HH:mm:ss.SSS} %clr(%-5level) ---  [%-15thread] %cyan(%-50logger{50}):%msg%n'
+file:
+  upload-path: classpath:static/img/upload
+  access-path: /img/upload/

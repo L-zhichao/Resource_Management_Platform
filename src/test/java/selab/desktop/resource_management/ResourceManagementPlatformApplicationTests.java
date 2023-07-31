@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import selab.desktop.resource_management.itemManagement.controller.DamageRecordController;
 import selab.desktop.resource_management.itemManagement.controller.ItemController;
+import selab.desktop.resource_management.itemManagement.utils.JsonResult;
 
 @SpringBootTest
 class ResourceManagementPlatformApplicationTests {
@@ -29,7 +30,9 @@ class ResourceManagementPlatformApplicationTests {
 //        damageRecordController.deleteDamageRecord(4L);
 //        damageRecordController.updateDamageRecord(3L);
 //        Result<List<DamageRecord>> allDamageRecord = damageRecordController.findAllDamageRecord();
-//        System.out.println(allDamageRecord);
+////        System.out.println(allDamageRecord);
+//        JsonResult<StringBuffer> stringBufferJsonResult = itemController.fingImg("http://192.168.1.3:8080/static/img/upload/img.png");
+//        System.out.println(stringBufferJsonResult);
     }
 
 }
