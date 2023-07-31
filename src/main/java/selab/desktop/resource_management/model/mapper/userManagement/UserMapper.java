@@ -6,7 +6,4 @@ import selab.desktop.resource_management.model.domain.userManagement.User;
 
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
-
-
-
 }

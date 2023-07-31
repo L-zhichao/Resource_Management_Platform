@@ -23,11 +23,13 @@ import java.util.List;
 @RequestMapping("/item")
 @Tag(name = "物品管理controller层")
 public class ItemController {
+    @Autowired
+    private ItemService itemService;
+
     @Value("${file.upload-path}")
     private String uploadPath;
 
-    @Autowired
-    private ItemService itemService;
+
 
     @Operation(description = "查询所有物品")
     @GetMapping("/all")
