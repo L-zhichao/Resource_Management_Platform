@@ -51,3 +51,6 @@ springdoc:
       - group: 'item Management'
         paths-to-match: '/**'
         packages-to-scan: selab.desktop.resource_management.itemManagement
+file:
+  upload-path: classpath:static/img/upload
+  access-path: /img/upload/
