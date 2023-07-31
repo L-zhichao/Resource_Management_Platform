@@ -13,14 +13,14 @@ public interface ResponseItemService extends IService<ResponseItem> {
      * 查询所有未读回应
      * @return
      */
-    List<ResponseItemVo> selectAllUnreadResonse(String username);
+    List<ResponseItemVo> selectAllUnreadResonse(String name);
 
     /**
      *   回应上传
      * @param responseItemUpload  回应上传类
-     * @param username  回应人
+     * @param name  回应人
      */
-    void saveResonse(ResponseItemUpload responseItemUpload, String username);
+    void saveResonse(ResponseItemUpload responseItemUpload, String name);
 
     /**
      *  查询所有回应

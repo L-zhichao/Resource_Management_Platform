@@ -11,8 +11,8 @@ public class ResponseItemUpload {
     @Schema(description = "物品申请信息id")
     private Long applyId;
 
-    @Schema(description = "物品申请人")
-    private String username;
+    @Schema(description = "物品申请人名字")
+    private String name;
 
     @Schema(description = "回应结果(同意与否 2为同意，0为否)")
     private Integer result;

@@ -22,10 +22,10 @@ public class ResponseItemServiceImpl extends ServiceImpl<ResponseItemMapper, Res
     private final ResponseItemMapper responseItemMapper;
     private final ApplyItemMapper applyItemMapper;
     @Override
-    public List<ResponseItemVo> selectAllUnreadResonse(String username) {
+    public List<ResponseItemVo> selectAllUnreadResonse(String name) {
 
         LambdaQueryWrapper<ResponseItem> responseItemLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        responseItemLambdaQueryWrapper.eq(ResponseItem::getStatus,ResponseItem.Response_UNREAD).eq(ResponseItem::getApplyUser,username);
+        responseItemLambdaQueryWrapper.eq(ResponseItem::getStatus,ResponseItem.Response_UNREAD).eq(ResponseItem::getApplyUser,name);
         List<ResponseItem> responseItems = responseItemMapper.selectList(responseItemLambdaQueryWrapper);
         List<ResponseItemVo> responseItemVos = new ArrayList<>();
         responseItems.forEach(responseItem -> {
@@ -36,9 +36,9 @@ public class ResponseItemServiceImpl extends ServiceImpl<ResponseItemMapper, Res
     }
 
     @Override
-    public void saveResonse(ResponseItemUpload responseItemUpload, String username) {
+    public void saveResonse(ResponseItemUpload responseItemUpload, String name) {
 
-        ResponseItem responseItem = responseItemUploadToResponseItem(responseItemUpload, username);
+        ResponseItem responseItem = responseItemUploadToResponseItem(responseItemUpload, name);
         int rows = responseItemMapper.insert(responseItem);
         if(rows != 1){
             throw new InsertException("回应上传未知异常");
@@ -63,7 +63,7 @@ public class ResponseItemServiceImpl extends ServiceImpl<ResponseItemMapper, Res
         responseItem.setResponseUser(username);
         responseItem.setReason(responseItem.getReason());
         responseItem.setResponseTime(responseItemUpload.getResponseTime());
-        responseItem.setApplyUser(responseItemUpload.getUsername());
+        responseItem.setApplyUser(responseItemUpload.getName());
         return responseItem;
     }
     private ResponseItemVo responseItemToresponseItemVo(ResponseItem responseItem){

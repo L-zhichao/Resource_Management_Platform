@@ -14,9 +14,9 @@ public interface ApplyItemService extends IService<ApplyItem> {
      /**
       *  申请上传
       * @param applyItemUpload 申请上传实体类
-      * @param username   申请人
+      * @param name   申请人名字
       */
-     void saveApply(ApplyItemUpload applyItemUpload,String username);
+     void saveApply(ApplyItemUpload applyItemUpload,String name);
 
 
 
@@ -24,13 +24,13 @@ public interface ApplyItemService extends IService<ApplyItem> {
       *  查询所有申请信息
       *  @return 所有申请集合
       */
-     List<ApplyItemVo> selectAllApply();
+     List<ApplyItem> selectAllApply();
 
      /**
       *  查询所有未读申请
       * @return
       */
-     List<ApplyItemVo> selectAllUnreadApply();
+     List<ApplyItem> selectAllUnreadApply();
 
 
 }

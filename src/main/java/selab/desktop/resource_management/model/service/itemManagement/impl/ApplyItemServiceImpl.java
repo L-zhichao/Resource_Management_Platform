@@ -30,19 +30,9 @@ public class ApplyItemServiceImpl extends ServiceImpl<ApplyItemMapper, ApplyItem
         applyItem.setApplyTime(new Date());
         return applyItem;
     }
-    private ApplyItemVo applyIyemToApplyItemVo(ApplyItem applyItem){
-        ApplyItemVo applyItemVo = new ApplyItemVo();
-        applyItemVo.setApplyUser(applyItem.getApplyUser());
-        applyItemVo.setStatus(applyItem.getStatus());
-        applyItemVo.setMoney(applyItem.getMoney());
-        applyItemVo.setContent(applyItem.getContent());
-        applyItemVo.setApplyTime(applyItem.getApplyTime());
-        return applyItemVo;
-    }
-
     @Override
-    public void saveApply(ApplyItemUpload applyItemUpload, String username) {
-        ApplyItem applyItem = applyIyemUploadToApplyItem(applyItemUpload, username);
+    public void saveApply(ApplyItemUpload applyItemUpload, String name) {
+        ApplyItem applyItem = applyIyemUploadToApplyItem(applyItemUpload, name);
         int rows = applyItemMapper.insert(applyItem);
         if(rows != 1){
             throw new InsertException("申请上传未知异常");
@@ -50,27 +40,17 @@ public class ApplyItemServiceImpl extends ServiceImpl<ApplyItemMapper, ApplyItem
     }
 
     @Override
-    public List<ApplyItemVo> selectAllApply() {
+    public List<ApplyItem> selectAllApply() {
         QueryWrapper<ApplyItem> applyItemQueryWrapper = new QueryWrapper<>();
         List<ApplyItem> applyItems = applyItemMapper.selectList(applyItemQueryWrapper);
-        List<ApplyItemVo> applyItemVos = new ArrayList<>();
-        applyItems.forEach(applyItem -> {
-            ApplyItemVo applyItemVo = applyIyemToApplyItemVo(applyItem);
-            applyItemVos.add(applyItemVo);
-        });
-        return applyItemVos;
+        return applyItems;
     }
 
     @Override
-    public List<ApplyItemVo> selectAllUnreadApply() {
+    public List<ApplyItem> selectAllUnreadApply() {
         LambdaQueryWrapper<ApplyItem> applyItemLambdaQueryWrapper = new LambdaQueryWrapper<>();
         applyItemLambdaQueryWrapper.eq(ApplyItem::getStatus,ApplyItem.Status_UNREAD);
         List<ApplyItem> applyItems = applyItemMapper.selectList(applyItemLambdaQueryWrapper);
-        List<ApplyItemVo> applyItemVos = new ArrayList<>();
-        applyItems.forEach(applyItem -> {
-            ApplyItemVo applyItemVo = applyIyemToApplyItemVo(applyItem);
-            applyItemVos.add(applyItemVo);
-        });
-        return applyItemVos;
+        return applyItems;
     }
 }
