@@ -355,8 +355,8 @@ export default {
      * @description 注册验证api
      * @param {*} param0
      */
-    async register ({ name, username, email, password, userStatue }) {
-      return await api.SYS_USER_REGISTER({ name, username, email, password, userStatue })
+    async register ({ name, username, email, password, userStatue, responseTime }) {
+      return await api.SYS_USER_REGISTER({ name, username, email, password, userStatue, responseTime })
     },
     /**
      * @description 注册用户重复验证
@@ -409,7 +409,8 @@ export default {
               username: this.formLogin.username,
               email: this.formLogin.email,
               password: this.formLogin.password,
-              userStatue: this.formLogin.userStatue
+              userStatue: this.formLogin.userStatue,
+              responseTime: dayjs().format('YYYY-MM-DD HH:mm:ss')
             })
               .then(v => {
                 if (v === null) {

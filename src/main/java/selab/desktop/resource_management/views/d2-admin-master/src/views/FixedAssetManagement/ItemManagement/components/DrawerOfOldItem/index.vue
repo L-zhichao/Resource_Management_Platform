@@ -38,7 +38,7 @@
         prop="damageRecordImgs"
         label="图片"
         width="360">
-        <template  slot-scope="scope">
+        <template slot-scope="scope">
           <!-- 这个popover组件用于生成悬浮图片 -->
           <el-row :gutter="20">
             <el-col :span="4" v-for="(img, index) in scope.row.imgs" :key="index">
@@ -216,7 +216,7 @@ export default {
               message: '删除成功',
               type: 'success'
             })
-            this.itemSearchDamage()
+            this.itemSearchDamage({ username: null })
           } else if (v === 'fail') {
             this.$message.error('删除失败')
           }
@@ -243,7 +243,7 @@ export default {
               message: '处理成功',
               type: 'success'
             })
-            this.itemSearchDamage()
+            this.itemSearchDamage({ username: null })
           } else if (v === 'fail') {
             this.$message.error('处理失败')
           }

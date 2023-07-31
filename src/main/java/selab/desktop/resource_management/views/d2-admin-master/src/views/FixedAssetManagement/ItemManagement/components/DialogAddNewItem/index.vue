@@ -270,7 +270,7 @@ export default {
       return await api.ITEM_ADD_API({ itemname, number, price, damageRecordDesc, img })
     },
     /**
-     * @description 添加物品请求api
+     * @description 添加物品请求
      * @param {String} itemname  物品名
      * @param {Number} number  物品数量
      * @param {Number} price  单价

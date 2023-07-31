@@ -201,7 +201,7 @@ export default {
      */
     async pCanvas (img, imgWidth, canvas, context) {
       return new Promise(function (resolve, reject) {
-        context.drawImage(img, 0, 0, imgWidth, 500)
+        context.drawImage(img, 0, 0, imgWidth, 1000)
         const base64Data = canvas.toDataURL()
         resolve(base64Data)
       })
@@ -217,9 +217,9 @@ export default {
       const context = canvas.getContext('2d')
       img.src = base64
       const imgProportion = await this.pImg(img)
-      canvas.width = 500 * imgProportion
-      canvas.height = 500
-      return await this.pCanvas(img, 500 * imgProportion, canvas, context)
+      canvas.width = 1000 * imgProportion
+      canvas.height = 1000
+      return await this.pCanvas(img, 1000 * imgProportion, canvas, context)
     },
     /**
      * @description 损坏物品请求

@@ -1,9 +1,10 @@
 <template>
 <el-dialog
   :visible.sync="dialogVisible"
-  width="80%">
+  width="80%"
+  :before-close="handleClose">
   <video
-    :src="videoUrl"
+    :src="playerVideoUrl"
     controls
     class="video"
     width="100%">
@@ -24,13 +25,20 @@ export default {
   },
   data () {
     return {
+      playerVideoUrl: '',
       dialogVisible: false
     }
   },
   watch: {
     dialogVideoPlayer () {
+      this.playerVideoUrl = this.videoUrl
       this.dialogVisible = true
-      console.log(this.videoUrl)
+    }
+  },
+  methods: {
+    handleClose (done) {
+      this.playerVideoUrl = ''
+      done()
     }
   }
 }

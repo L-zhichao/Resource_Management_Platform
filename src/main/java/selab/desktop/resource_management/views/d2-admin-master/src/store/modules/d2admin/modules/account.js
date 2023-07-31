@@ -21,8 +21,8 @@ export default {
       if (res.status === 40004) {
         return res
       }
-      res.uuid = res.username + '-' + res.name + '-' + res.email + '-' + res.userStatus + '-UUID'
-      res.token = res.username + '-' + res.name + '-' + res.email + '-' + res.userStatus + '-TOKEN'
+      // res.uuid = res.username + '-' + res.name + '-' + res.email + '-' + res.userStatus + '-UUID'
+      // res.token = res.username + '-' + res.name + '-' + res.email + '-' + res.userStatus + '-TOKEN'
       // 设置 cookie 一定要存 uuid 和 token 两个 cookie
       // 整个系统依赖这两个数据进行校验和存储
       // uuid 是用户身份唯一标识 用户注册的时候确定 并且不可改变 不可重复

@@ -17,8 +17,8 @@
       width="100">
       <template slot-scope="scope">
         <!-- 这个popover组件用于生成悬浮图片 -->
-        <el-popover placement="right" title="" trigger="hover" v-if="scope.row.imgs !== ''">
-          <img :src="scope.row.imgs" alt="" style="height: 200px">
+        <el-popover placement="right" trigger="hover" v-if="scope.row.imgs !== ''">
+          <img :src="scope.row.imgs" alt="" style="height: 300px">
           <!-- image -->
           <el-image slot="reference" style="height: 35px" :src="scope.row.imgs" :preview-src-list="[scope.row.imgs]">
             <div slot="error" class="image-slot">

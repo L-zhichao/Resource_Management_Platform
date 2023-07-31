@@ -80,12 +80,20 @@
             v-if="!userAdministratorPermissions"
             content="看看你以前上报了什么??"
             placement="bottom">
-            <el-button
-              type="primary"
-              size="medium"
-              @click="drawerOldItemArouseChangesNumber++">
-              损坏上报历史
-            </el-button>
+            <el-button-group>
+              <el-button
+                type="primary"
+                size="medium"
+                @click="drawerNewItemArouseChangesNumber++">
+                物品申请历史
+              </el-button>
+              <el-button
+                type="primary"
+                size="medium"
+                @click="drawerOldItemArouseChangesNumber++">
+                损坏上报历史
+              </el-button>
+            </el-button-group>
           </el-tooltip>
         </el-col>
       </el-row>
@@ -183,7 +191,7 @@ export default {
         // 当前页
         currentPage: 1,
         // 每页数量
-        pageSize: 5,
+        pageSize: 10,
         // 总页
         allPage: 1,
         // 总数据量

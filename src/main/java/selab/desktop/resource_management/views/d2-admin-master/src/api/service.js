@@ -67,6 +67,7 @@ function createService () {
             break
           default:
             // 不是正确的 code
+            console.warn(`没有设置状态码${code}的相应数据`)
             errorCreate(`${dataAxios.msg}: ${response.config.url}`)
             break
         }
@@ -108,6 +109,7 @@ function createRequestFunction (service) {
         'Content-Type': get(config, 'headers.Content-Type', 'application/json')
       },
       timeout: 5000,
+      withCredentials: true,
       baseURL: process.env.VUE_APP_API,
       data: {}
     }
