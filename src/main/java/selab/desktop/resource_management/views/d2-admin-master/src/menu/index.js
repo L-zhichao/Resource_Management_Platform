@@ -1,9 +1,9 @@
 import { uniqueId } from 'lodash'
 
 // 菜单导入
-import demo from './modules/demo'
+// import demo from './modules/demo'
 import itemManagement from './modules/ItemManagement'
-import resource from './modules/resource'
+// import resource from './modules/resource'
 
 /**
  * @description 给菜单数据补充上 path 字段
@@ -23,63 +23,52 @@ function supplementPath (menu) {
 export const menuHeader = supplementPath([
   { path: '/index', title: '首页', icon: 'home' },
   itemManagement,
-<<<<<<< HEAD
-  resource,
-  demo
-=======
-  demo,
-    {
+  // resource,
+  // demo,
+  {
     title: '资金管理',
     icon: 'folder-o',
     children: [
       { path: '/page1', title: '资金管理' },
       { path: '/page2', title: '资产分配' },
       { path: '/page3', title: '日志记录' },
-      { path: '/page4', title: '物品申请·' },
+      { path: '/page4', title: '物品申请' }
 
     ]
   },
-
   {
     title: '考试资源',
-    icon: '	fa fa-file-text',
+    icon: 'fa fa-file-text',
     children: [
       { path: '/ResourceTest', title: '考试资源' },
-      { path: '/UpLoad', title: '上传资源' },
+      { path: '/UpLoad', title: '上传资源' }
     ]
   }
 
->>>>>>> user_item_Changjiahao
 ])
 
 export const menuAside = supplementPath([
   { path: '/index', title: '首页', icon: 'home' },
   itemManagement,
-<<<<<<< HEAD
-  resource,
-  demo
-=======
-  demo,
+  // resource,
+  // demo,
   {
     title: '资金管理',
     icon: 'folder-o',
     children: [
       { path: '/page1', title: '资金管理' },
       { path: '/page2', title: '资产分配' },
-      { path: '/page3', title: '日志记录' },
-      { path: '/page4', title: '物品申请·' },
+      { path: '/page3', title: '日志记录' }
+      // { path: '/page4', title: '物品申请' }
 
     ]
   },
-
   {
     title: '考试资源',
-    icon: '	fa fa-file-text',
+    icon: 'fa fa-file-text',
     children: [
       { path: '/ResourceTest', title: '考试资源' },
-      { path: '/UpLoad', title: '上传资源' },
+      { path: '/UpLoad', title: '上传资源' }
     ]
-   
   }
->>>>>>> user_item_Changjiahao
 ])

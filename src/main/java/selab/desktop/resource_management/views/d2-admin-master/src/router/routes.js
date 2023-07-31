@@ -1,7 +1,7 @@
 // 路由导入
 import itemManagement from './modules/ItemManagement'
 import demo from './modules/demo'
-import resource from './modules/resource'
+// import resource from './modules/resource'
 
 import layoutHeaderAside from '@/layout/header-aside'
 
@@ -28,7 +28,7 @@ const frameIn = [
         },
         component: _import('system/index')
       },
-       // 演示页面
+      // 演示页面
       {
         path: 'page1',
         name: 'page1',
@@ -57,15 +57,15 @@ const frameIn = [
         component: _import('demo/page3')
       },
 
-      {
-        path: 'page4',
-        name: 'page4',
-        meta: {
-          title: '物品申请',
-          auth: true
-        },
-        component: _import('demo/page4')
-      },
+      // {
+      //   path: 'page4',
+      //   name: 'page4',
+      //   meta: {
+      //     title: '物品申请',
+      //     auth: true
+      //   },
+      //   component: _import('demo/page4')
+      // },
 
       {
         path: 'ResourceTest',
@@ -115,7 +115,7 @@ const frameIn = [
   // 物品管理
   itemManagement,
   // 哪来的云啊
-  resource,
+  // resource,
   // 演示页面
   demo
 ]

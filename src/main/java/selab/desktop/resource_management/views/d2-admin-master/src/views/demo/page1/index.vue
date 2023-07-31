@@ -185,7 +185,7 @@
 <script>
 
 import axios from "axios";
-import {id} from "../../../../echarts-5.4.3/test/lib/ecSimpleTransform";
+// import {id} from "../../../../echarts-5.4.3/test/lib/ecSimpleTransform";
 
 export default {
   name: "Page1",
