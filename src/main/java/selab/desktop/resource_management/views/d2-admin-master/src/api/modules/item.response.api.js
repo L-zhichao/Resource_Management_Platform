@@ -7,7 +7,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
   ITEM_RESPONSE_API (data) {
     // 模拟数据
     mock
-      .onAny('/item/readApply')
+      .onAny('/item/response')
       .reply(config => {
         // const configData = JSON.parse(config.data)
         return [
@@ -22,7 +22,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
       })
     // 接口请求
     return request({
-      url: 'item/readApply',
+      url: 'item/response',
       method: 'post',
       data
     })

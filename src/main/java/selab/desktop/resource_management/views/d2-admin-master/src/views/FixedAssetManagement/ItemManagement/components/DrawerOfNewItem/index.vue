@@ -207,6 +207,37 @@ export default {
       })
     },
     /**
+     * @description 物品回应上传api
+     * @param {Object} param0
+     * @param {Number} applyId
+     * @param {String} username
+     * @param {Number} result 回应结果(同意与否 2为同意，0为否)
+     * @param {String} reason 回应结果原因
+     * @param {String} responseTime 回应时间
+     */
+    async itemResponseAPI ({ applyId, username, result, reason, responseTime }) {
+      return await api.ITEM_RESPONSE_API({ applyId, username, result, reason, responseTime })
+    },
+    /**
+     * @description 物品回应上传
+     * @param {Object} param0
+     * @param {Number} applyId
+     * @param {String} username
+     * @param {Number} result 回应结果(同意与否 2为同意，0为否)
+     * @param {String} reason 回应结果原因
+     * @param {String} responseTime 回应时间
+     */
+    itemResponse ({ applyId, username, result, reason, responseTime }) {
+      this.itemResponseAPI({ applyId, username, result, reason, responseTime })
+        .then(v => {
+          if (v.split('/')[0] === 'http:') {
+
+          } else if (v === 'fail') {
+            this.$message.error('上传失败')
+          }
+        })
+    },
+    /**
      * @description 所有物品申请信息展示api
      */
     async itemShowApplyAPI () {

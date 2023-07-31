@@ -306,7 +306,7 @@ export default {
         })
     },
     /**
-     * @description 上传图片/视频
+     * @description 上传图片/视频api
      * @param {form} data form文件
      */
     async imgUploadAPI (data) {
