@@ -14,9 +14,7 @@ import selab.desktop.resource_management.model.service.itemManagement.ItemServic
 import selab.desktop.resource_management.model.utils.ItemPage;
 import selab.desktop.resource_management.model.utils.JsonResult;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.List;
 
 @RestController
@@ -84,12 +82,30 @@ public class ItemController {
             String fileUploadPath = uploadDirPath + "\\" + file.getOriginalFilename();
             //保存图片
             file.transferTo(new File(fileUploadPath));
-//            String imageUrl = "http://192.168.1.3:8080/img/upload/" + file.getOriginalFilename();
+            String imageUrl = "http://192.168.1.3:8080/img/upload/" + file.getOriginalFilename();
             //成功响应
             return new JsonResult(200, "success", null);
         } catch (IOException e) {
             //失败响应
             return new JsonResult<>(500, "图片上传失败", null);
+        }
+    }
+    @Operation(description = "图片查询")
+    @GetMapping("/img-find")
+    public JsonResult<StringBuffer> fingImg(String url) {
+        try {
+            String substring = url.substring(url.indexOf('/', 8));
+            substring="D://resource_management_platform/src/main/resources"+substring;
+            File file = new  File(substring);
+            System.out.println(substring);
+            FileInputStream fis = new FileInputStream(file);
+            StringBuffer stringBuffer=new StringBuffer();
+            stringBuffer.append(fis);
+            fis.close();
+            return new JsonResult<>(200, "success", stringBuffer);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new JsonResult<>(500, "图片读取失败", null);
         }
     }
 }

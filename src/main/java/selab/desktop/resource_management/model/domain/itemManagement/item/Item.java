@@ -25,4 +25,6 @@ public class Item {
     private Integer price;
 @Schema(description = "照片")
     private String imgs;
+@Schema(description = "视频")
+private  String video;
 }
