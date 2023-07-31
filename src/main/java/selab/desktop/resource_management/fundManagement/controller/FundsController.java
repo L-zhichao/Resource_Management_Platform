@@ -87,5 +87,11 @@ public class FundsController {
 
     }
 
+    @PostMapping("/fundsVo/batch")
+    public JsonResult<String> deleteBatch(@RequestBody List<Long>ids){
+        fundsService.removeBatchByIds(ids);
+        return new JsonResult<>(JsonResult.SUCCESS,null,"删除成功");
+    }
+
 }
 
