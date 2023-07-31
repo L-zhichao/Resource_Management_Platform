@@ -1,17 +1,10 @@
 package selab.desktop.resource_management;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import selab.desktop.resource_management.itemManagement.controller.DamageRecordController;
 import selab.desktop.resource_management.itemManagement.controller.ItemController;
-import selab.desktop.resource_management.itemManagement.domain.DamageRecord;
-import selab.desktop.resource_management.itemManagement.domain.Item;
-import selab.desktop.resource_management.itemManagement.utils.ItemPage;
-import selab.desktop.resource_management.itemManagement.utils.Result;
-
-import java.util.List;
 
 @SpringBootTest
 class ResourceManagementPlatformApplicationTests {
