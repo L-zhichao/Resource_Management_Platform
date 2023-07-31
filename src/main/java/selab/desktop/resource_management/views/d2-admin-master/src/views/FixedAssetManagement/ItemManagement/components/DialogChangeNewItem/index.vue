@@ -44,28 +44,33 @@
             <el-button class="buttonDeleteImg" size="medium" type="danger" icon="el-icon-delete" circle @click="deleteOldImg"></el-button>
             <el-button size="medium" type="success" plain @click="whatButton">这是什么按钮</el-button>
             <!-- image -->
-            <el-image slot="reference" style="height: 100px" :src="ruleForm.imgs" :preview-src-list="[ruleForm.imgs]">
-              <div slot="error" class="image-slot">
-                <i class="el-icon-picture-outline"></i>
+            <template slot="reference">
+              <div>
+                <el-image v-if="ruleForm.imgs !== ''" style="height: 100px" :src="ruleForm.imgs" :preview-src-list="[ruleForm.imgs]">
+                  <div slot="error" class="image-slot">
+                    <i class="el-icon-picture-outline"></i>
+                  </div>
+                </el-image>
+                <el-button type="text" size="small" v-if="ruleForm.videos !== ''" @click="dialogVideoPlayer(ruleForm.videos)">查看视频</el-button>
               </div>
-            </el-image>
+            </template>
           </el-popover>
         </el-col>
       </el-row>
-      <el-form-item label="视频图片" prop="imgs" v-if="!oldImgView">
+      <el-form-item label="视频图片" prop="img" v-if="!oldImgView">
         <el-upload
           ref="img"
           drag
           action
           accept=".png, .jpg, .jpeg, .mp4, .flv"
           :limit="1"
-          list-type="picture"
+          list-type="text"
           :on-change="change"
           :on-exceed="handleExceed"
           :auto-upload="false">
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-          <div class="el-upload__tip" slot="tip">只能上传1张jpg/png文件</div>
+          <div class="el-upload__tip" slot="tip">只能上传1一个图片或视频</div>
         </el-upload>
       </el-form-item>
     </el-form>
@@ -101,8 +106,11 @@ export default {
         number: 1,
         price: null,
         damageRecordDesc: '',
-        imgs: ''
+        img: '',
+        imgs: '',
+        videos: ''
       },
+      imgType: null,
       rules: {
         itemname: [
           { required: true, message: '请输入物品名', trigger: 'blur' },
@@ -140,7 +148,7 @@ export default {
         damageRecordDesc: [
           { required: true, message: '说明一下', trigger: 'blur' }
         ],
-        imgs: [
+        img: [
           { required: true, message: '上传视频或图片', trigger: 'blur' }
         ]
       },
@@ -159,7 +167,7 @@ export default {
      * @description 一个不知道什么的按钮触发了这个函数!
      */
     whatButton () {
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 15; i++) {
         setTimeout(() => {
           this.$notify({
             title: '这是一个绿色按钮',
@@ -186,6 +194,9 @@ export default {
           })
         }, i * 50)
       }
+      this.$log.push({
+        message: '你点了一个绿色的、不知道有什么用的按钮!这将会发生什么?'
+      })
     },
     /**
      * @description dialog关闭时触发
@@ -195,11 +206,14 @@ export default {
       this.$confirm('确认关闭？')
         .then(_ => {
           this.ruleForm = {
+            itemId: 0,
             itemname: '',
             number: 1,
             price: null,
             damageRecordDesc: '',
-            img: ''
+            img: '',
+            imgs: '',
+            videos: ''
           }
           this.$refs.ruleForm.clearValidate()
           if (this.oldImgView === false) {
@@ -224,7 +238,6 @@ export default {
      * @return {Boolean} 是否通过校验
      */
     beforeUpload (file) {
-      console.log('文件：', file)
       const FileExt = file.name.replace(/.+\./, '')
       const isLt30M = file.size / 1024 / 1024 <= 30
       const extension = ['png', 'jpg', 'jpeg', 'mp4', 'flv'].indexOf(FileExt.toLowerCase()) === -1
@@ -251,6 +264,7 @@ export default {
      */
     deleteOldImg () {
       this.ruleForm.imgs = ''
+      this.ruleForm.videos = ''
       this.oldImgView = false
     },
     /**
@@ -327,10 +341,11 @@ export default {
      * @param {Number} number  物品数量
      * @param {Number} price  单价
      * @param {String} damageRecordDesc  描述
-     * @param {String} imgs  图片base64
+     * @param {String} imgs  图片Url
+     * @param {String} videos  视频Url
      */
-    async itemChangeAPI ({ itemId, itemname, number, price, damageRecordDesc, imgs }) {
-      return await api.ITEM_CHANGE_API({ itemId, itemname, number, price, damageRecordDesc, imgs })
+    async itemChangeAPI ({ itemId, itemname, number, price, damageRecordDesc, imgs, videos }) {
+      return await api.ITEM_CHANGE_API({ itemId, itemname, number, price, damageRecordDesc, imgs, videos })
     },
     /**
      * @description 添加物品请求api
@@ -339,10 +354,11 @@ export default {
      * @param {Number} number  物品数量
      * @param {Number} price  单价
      * @param {String} damageRecordDesc  描述
-     * @param {String} img  图片base64
+     * @param {String} imgs  图片Url
+     * @param {String} videos  视频Url
      */
-    itemChange ({ itemId, itemname, number, price, damageRecordDesc, imgs }) {
-      this.itemChangeAPI({ itemId, itemname, number, price, damageRecordDesc, imgs })
+    itemChange ({ itemId, itemname, number, price, damageRecordDesc, imgs, videos }) {
+      this.itemChangeAPI({ itemId, itemname, number, price, damageRecordDesc, imgs, videos })
         .then(v => {
           if (v === null) {
             this.$message({
@@ -356,7 +372,9 @@ export default {
               number: 1,
               price: null,
               damageRecordDesc: '',
-              imgs: ''
+              img: '',
+              imgs: '',
+              videos: ''
             }
             this.$refs.ruleForm.clearValidate()
             if (this.oldImgView === false) {
@@ -370,6 +388,44 @@ export default {
         })
     },
     /**
+     * @description 上传图片/视频
+     * @param {form} data form文件
+     */
+    async imgUploadAPI (data) {
+      return await api.IMG_UPLOAD_API(data)
+    },
+    /**
+     * @description 上传图片/视频
+     * @param {formData} file file文件
+     */
+    imgUpload (file) {
+      const formData = new FormData()
+      formData.append('file', file)
+      this.imgUploadAPI(formData)
+        .then(v => {
+          if (v.split('/')[0] === 'http:') {
+            console.log()
+            if (this.imgType === 'image') {
+              this.ruleForm.imgs = v
+              this.ruleForm.videos = ''
+            } else if (this.imgType === 'video') {
+              this.ruleForm.imgs = ''
+              this.ruleForm.videos = v
+            }
+            this.itemChange({
+              itemname: this.ruleForm.itemname,
+              number: this.ruleForm.number,
+              price: this.ruleForm.price,
+              damageRecordDesc: this.ruleForm.damageRecordDesc,
+              imgs: this.ruleForm.imgs,
+              videos: this.ruleForm.videos
+            })
+          } else if (v === 'fail') {
+            this.$message.error('上传失败')
+          }
+        })
+    },
+    /**
      * @description 更新上传的图片
      * @param {*} file
      * @param {*} fileList
@@ -377,9 +433,15 @@ export default {
     change (file, fileList) {
       if (!this.beforeUpload(file, fileList)) return
       // 将每次图片数组变化的时候，实时的进行监听，更改数组里面的图片数据
-      fileList.forEach((item) => {
-        this.previewFile(item.raw)
-      })
+      // fileList.forEach((item) => {
+      //   this.previewFile(item.raw)
+      // })
+      this.ruleForm.img = file
+      if (file.raw.type.split('/')[0] === 'image') {
+        this.imgType = 'image'
+      } else if (file.raw.type.split('/')[0] === 'video') {
+        this.imgType = 'video'
+      }
     },
     /**
      * @description 提交表单
@@ -393,7 +455,9 @@ export default {
           number: 1,
           price: null,
           damageRecordDesc: '',
-          imgs: ''
+          img: '',
+          imgs: '',
+          videos: ''
         }
         this.$refs.ruleForm.clearValidate()
         if (this.oldImgView === false) {
@@ -405,18 +469,26 @@ export default {
       }
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          this.itemChange({
-            itemId: this.ruleForm.itemId,
-            itemname: this.ruleForm.itemname,
-            number: this.ruleForm.number,
-            price: this.ruleForm.price,
-            damageRecordDesc: this.ruleForm.damageRecordDesc,
-            imgs: this.ruleForm.imgs
-          })
+          if (this.oldImgView === true) {
+            this.itemChange({
+              itemId: this.ruleForm.itemId,
+              itemname: this.ruleForm.itemname,
+              number: this.ruleForm.number,
+              price: this.ruleForm.price,
+              damageRecordDesc: this.ruleForm.damageRecordDesc,
+              imgs: this.ruleForm.imgs,
+              videos: this.ruleForm.videos
+            })
+          } else {
+            this.imgUpload(this.ruleForm.img)
+          }
         } else {
           this.$message.error('表单校验失败，请检查')
         }
       })
+    },
+    dialogVideoPlayer (url) {
+      this.$emit('dialogVideoPlayerArouse', url)
     }
   }
 }

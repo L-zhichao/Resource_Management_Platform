@@ -20,7 +20,7 @@
       <el-form-item label="损坏详情" prop="inputText">
         <el-input type="textarea" v-model="ruleForm.inputText"></el-input>
       </el-form-item>
-      <el-form-item label="上传图片" prop="imgBase64">
+      <el-form-item label="上传图片" prop="img">
         <el-upload
           ref="imgLoad"
           drag
@@ -70,7 +70,8 @@ export default {
         // 描述
         inputText: '',
         // 上传后的文件列表
-        imgBase64: []
+        imgUrls: '',
+        img: []
       },
       // 表单验证规则
       rules: {
@@ -81,7 +82,7 @@ export default {
         inputText: [
           { required: true, message: '请输入损坏详情', trigger: 'blur' }
         ],
-        imgBase64: [
+        img: [
           { required: true, message: '上传损坏图片', trigger: 'blur' }
         ]
       },
@@ -112,7 +113,8 @@ export default {
             number: 1,
             inputText: '',
             // 上传后的文件列表
-            imgBase64: []
+            imgUrls: '',
+            img: []
           }
           this.$refs.ruleForm.clearValidate()
           this.$refs.imgLoad.clearFiles()
@@ -134,7 +136,6 @@ export default {
      * @return {Boolean} 是否通过校验
      */
     beforeUpload (file) {
-      console.log('文件：', file)
       var FileExt = file.name.replace(/.+\./, '')
       const isLt30M = file.size / 1024 / 1024 <= 10
       var extension = ['png', 'jpg', 'jpeg'].indexOf(FileExt.toLowerCase()) === -1
@@ -226,29 +227,71 @@ export default {
      * @param {String} username   用户名
      * @param {Number} itemId  损坏物品Id
      * @param {Number} inputText  损坏描述
-     * @param {object} imgBase64  List 图片
+     * @param {object} imgUrls  图片Url ///////// 连接
      */
-    async itemReportDamagedAPI ({ username, itemId, inputText, imgBase64, damageRecordTime }) {
-      return await api.ITEM_REPORT_DAMAGED_API({ username, itemId, damageRecordDesc: inputText, damageRecordImg: imgBase64, damageRecordTime })
+    async itemReportDamagedAPI ({ username, itemId, inputText, imgUrls, damageRecordTime }) {
+      return await api.ITEM_REPORT_DAMAGED_API({ username, itemId, damageRecordDesc: inputText, damageRecordImg: imgUrls, damageRecordTime })
     },
     /**
      * @description 损坏物品请求
      * @param {Number} itemId  损坏物品Id
      * @param {Number} inputText  损坏描述
-     * @param {String} imgBase64  // 图片 base64 多个图片由//////////拼接
-     *                            // 暂时更新 改为base64 的列表
+     * @param {String} imgUrls  图片Url ///////// 连接
      */
-    itemReportDamaged ({ itemId, inputText, number, imgBase64 }) {
+    itemReportDamaged ({ itemId, inputText, number, imgUrls }) {
       const username = util.cookies.get('username')
       const damageRecordTime = dayjs().format('YYYY-MM-DD')
       inputText = inputText + '//////////' + number
-      this.itemReportDamagedAPI({ username, itemId, inputText, imgBase64, damageRecordTime })
+      this.itemReportDamagedAPI({ username, itemId, inputText, imgUrls, damageRecordTime })
         .then(v => {
           if (v === null) {
             this.$message({
               message: '上传成功',
               type: 'success'
             })
+          } else if (v === 'fail') {
+            this.$message.error('上传失败')
+          }
+        })
+    },
+    /**
+     * @description 上传图片/视频
+     * @param {form} data form文件
+     */
+    async imgUploadAPI (data) {
+      return await api.IMG_UPLOAD_API(data)
+    },
+    /**
+     * @description 上传图片/视频
+     * @param {file} file file文件
+     */
+    imgUpload (file, index) {
+      const formData = new FormData()
+      formData.append('file', file)
+      this.imgUploadAPI(formData)
+        .then(v => {
+          if (v.split('/')[0] === 'http:') {
+            if (index === this.ruleForm.img.length - 1) {
+              this.ruleForm.imgUrls = this.ruleForm.imgUrls + v
+              this.itemReportDamaged({
+                itemId: this.oldItemId_Name.itemId,
+                inputText: this.ruleForm.inputText,
+                imgUrls: this.ruleForm.imgUrls,
+                number: this.ruleForm.number
+              })
+              this.ruleForm = {
+                number: 1,
+                inputText: '',
+                // 上传后的文件列表
+                imgUrls: '',
+                img: []
+              }
+              this.$refs.ruleForm.clearValidate()
+              this.$refs.imgLoad.clearFiles()
+              this.dialogVisible = false
+            } else {
+              this.ruleForm.imgUrls = this.ruleForm.imgUrls + v + '//////////'
+            }
           } else if (v === 'fail') {
             this.$message.error('上传失败')
           }
@@ -262,35 +305,23 @@ export default {
     change (file, fileList) {
       if (!this.beforeUpload(file, fileList)) return
       // 将每次图片数组变化的时候，实时的进行监听，更改数组里面的图片数据
-      const arr = []
-      fileList.forEach((item) => {
-        this.previewFile(item.raw, arr)
-      })
+      // const arr = []
+      // fileList.forEach((item) => {
+      //   this.previewFile(item.raw, arr)
+      // })
+      this.ruleForm.img = fileList
     },
     /**
      * @description 提交表单
      */
     submit () {
       this.$refs.ruleForm.validate((valid) => {
-        console.log(valid)
         if (valid) {
-          // this.ruleForm.imgBase64 = this.ruleForm.imgBase64.join('//////////')
-          console.log(this.ruleForm.imgBase64)
-          this.itemReportDamaged({
-            itemId: this.oldItemId_Name,
-            inputText: this.ruleForm.inputText,
-            imgBase64: this.ruleForm.imgBase64,
-            number: this.ruleForm.number
+          this.ruleForm.imgUrls = ''
+          this.ruleForm.img.forEach((item, index) => {
+            this.imgUpload(item, index)
           })
-          this.ruleForm = {
-            number: 1,
-            inputText: '',
-            // 上传后的文件列表
-            imgBase64: []
-          }
-          this.$refs.ruleForm.clearValidate()
-          this.$refs.imgLoad.clearFiles()
-          this.dialogVisible = false
+          // this.ruleForm.imgBase64 = this.ruleForm.imgBase64.join('//////////')
         } else {
           this.$message.error('表单校验失败，请检查')
         }

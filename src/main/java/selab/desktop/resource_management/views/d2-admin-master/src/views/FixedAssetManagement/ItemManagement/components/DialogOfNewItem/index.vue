@@ -143,6 +143,10 @@ export default {
               price: null,
               damageRecordDesc: ''
             }
+            this.$message({
+              message: '上传成功',
+              type: 'success'
+            })
             this.dialogVisible = false
           } else {
             this.$message.error('请求发送失败')
@@ -155,7 +159,7 @@ export default {
           const text = this.ruleForm.itemname + '//////////' + this.ruleForm.number + '//////////' + this.ruleForm.damageRecordDesc
           this.itemApply({
             content: text,
-            money: 23.12
+            money: this.ruleForm.price
           })
         } else {
           this.$message.error('表单校验失败，请检查')

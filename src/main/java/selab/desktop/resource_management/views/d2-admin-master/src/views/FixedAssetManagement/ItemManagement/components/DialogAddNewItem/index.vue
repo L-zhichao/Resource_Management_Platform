@@ -78,8 +78,11 @@ export default {
         number: 1,
         price: null,
         damageRecordDesc: '',
-        img: ''
+        img: '',
+        imgs: '',
+        videos: ''
       },
+      imgType: null,
       rules: {
         itemname: [
           { required: true, message: '请输入物品名', trigger: 'blur' },
@@ -164,7 +167,6 @@ export default {
      * @return {Boolean} 是否通过校验
      */
     beforeUpload (file) {
-      console.log('文件：', file)
       const FileExt = file.name.replace(/.+\./, '')
       const isLt30M = file.size / 1024 / 1024 <= 30
       const extension = ['png', 'jpg', 'jpeg', 'mp4', 'flv'].indexOf(FileExt.toLowerCase()) === -1
@@ -264,10 +266,11 @@ export default {
      * @param {Number} number  物品数量
      * @param {Number} price  单价
      * @param {String} damageRecordDesc  描述
-     * @param {String} img  图片base64
+     * @param {String} imgs  图片Url
+     * @param {String} videos  视频Url
      */
-    async itemAddAPI ({ itemname, number, price, damageRecordDesc, img }) {
-      return await api.ITEM_ADD_API({ itemname, number, price, damageRecordDesc, img })
+    async itemAddAPI ({ itemname, number, price, damageRecordDesc, imgs, videos }) {
+      return await api.ITEM_ADD_API({ itemname, number, price, damageRecordDesc, imgs, videos })
     },
     /**
      * @description 添加物品请求
@@ -275,10 +278,11 @@ export default {
      * @param {Number} number  物品数量
      * @param {Number} price  单价
      * @param {String} damageRecordDesc  描述
-     * @param {String} img  图片base64
+     * @param {String} imgs  图片Url
+     * @param {String} videos  视频Url
      */
-    itemAdd ({ itemname, number, price, damageRecordDesc, img }) {
-      this.itemAddAPI({ itemname, number, price, damageRecordDesc, img })
+    itemAdd ({ itemname, number, price, damageRecordDesc, imgs, videos }) {
+      this.itemAddAPI({ itemname, number, price, damageRecordDesc, imgs, videos })
         .then(v => {
           if ('itemid' in v || 'itemId' in v) {
             this.$message({
@@ -290,11 +294,49 @@ export default {
               number: 1,
               price: null,
               damageRecordDesc: '',
-              img: ''
+              imgs: '',
+              videos: ''
             }
             this.$refs.ruleForm.clearValidate()
             this.$refs.img.clearFiles()
             this.dialogVisible = false
+          } else if (v === 'fail') {
+            this.$message.error('上传失败')
+          }
+        })
+    },
+    /**
+     * @description 上传图片/视频
+     * @param {form} data form文件
+     */
+    async imgUploadAPI (data) {
+      return await api.IMG_UPLOAD_API(data)
+    },
+    /**
+     * @description 上传图片/视频
+     * @param {file} file file文件
+     */
+    imgUpload (file) {
+      const formData = new FormData()
+      formData.append('file', file)
+      this.imgUploadAPI(formData)
+        .then(v => {
+          if (v.split('/')[0] === 'http:') {
+            if (this.imgType === 'image') {
+              this.ruleForm.imgs = v
+              this.ruleForm.videos = ''
+            } else if (this.imgType === 'video') {
+              this.ruleForm.imgs = ''
+              this.ruleForm.videos = v
+            }
+            this.itemAdd({
+              itemname: this.ruleForm.itemname,
+              number: this.ruleForm.number,
+              price: this.ruleForm.price,
+              damageRecordDesc: this.ruleForm.damageRecordDesc,
+              imgs: this.ruleForm.imgs,
+              videos: this.ruleForm.videos
+            })
           } else if (v === 'fail') {
             this.$message.error('上传失败')
           }
@@ -308,9 +350,15 @@ export default {
     change (file, fileList) {
       if (!this.beforeUpload(file, fileList)) return
       // 将每次图片数组变化的时候，实时的进行监听，更改数组里面的图片数据
-      fileList.forEach((item) => {
-        this.previewFile(item.raw)
-      })
+      // fileList.forEach((item) => {
+      //   this.previewFile(item.raw)
+      // })
+      this.ruleForm.img = file
+      if (file.raw.type.split('/')[0] === 'image') {
+        this.imgType = 'image'
+      } else if (file.raw.type.split('/')[0] === 'video') {
+        this.imgType = 'video'
+      }
     },
     /**
      * @description 提交表单
@@ -318,13 +366,7 @@ export default {
     submit () {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          this.itemAdd({
-            itemname: this.ruleForm.itemname,
-            number: this.ruleForm.number,
-            price: this.ruleForm.price,
-            damageRecordDesc: this.ruleForm.damageRecordDesc,
-            img: this.ruleForm.img
-          })
+          this.imgUpload(this.ruleForm.img)
         } else {
           this.$message.error('表单校验失败，请检查')
         }

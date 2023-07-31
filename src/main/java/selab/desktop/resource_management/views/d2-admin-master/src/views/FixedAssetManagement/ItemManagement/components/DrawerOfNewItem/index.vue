@@ -43,7 +43,28 @@
         width="140">
         <template slot-scope="scope">
           <el-button size="small" disabled v-if="scope.row.state === 0 && !userAdministratorPermissions">未处理</el-button>
-          <el-button size="small" v-if="scope.row.state === 0 && userAdministratorPermissions">待处理</el-button>
+          <el-popover
+            @hide="ruleFormClear"
+            v-if="scope.row.state === 0 && userAdministratorPermissions"
+            placement="left"
+            width="500"
+            trigger="hover">
+            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px">
+              <el-form-item>
+                <template>
+                  <el-radio v-model="radioDispose" :label="1">批准</el-radio>
+                  <el-radio v-model="radioDispose" :label="2">不批准</el-radio>
+                </template>
+              </el-form-item>
+              <el-form-item label="说明" prop="desc">
+                <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+              </el-form-item>
+            </el-form>
+            <div style="text-align: right; margin: 0">
+              <el-button type="primary" size="small">{{ radioDispose === 1 ? '批准' : '不批准' }}</el-button>
+            </div>
+            <el-button slot="reference" size="small">待处理</el-button>
+          </el-popover>
           <el-popover
             placement="left"
             width="800"
@@ -121,6 +142,15 @@ export default {
         admin: '未处理',
         ordinary: '我的'
       },
+      ruleForm: {
+        desc: ''
+      },
+      rules: {
+        desc: [
+          { required: true, message: '人家超级期待管理员大人的回应的说!你不回复人家会很伤心的嘛!', trigger: 'blur' }
+        ]
+      },
+      radioDispose: 1,
       // 随机Key,用于刷新表格
       randomKey: Math.random(),
       randomKeyResponse: Math.random(),
@@ -255,6 +285,13 @@ export default {
             this.$message.error('物品回应信息请求失败')
           }
         })
+    },
+    ruleFormClear () {
+      this.$refs.ruleForm.clearValidate()
+      this.ruleForm = {
+        desc: ''
+      }
+      this.radioDispose = 1
     }
   }
 }

@@ -171,8 +171,8 @@ export default {
           }
           this.allTableData.tableDataWait = v.filter((item, index) => {
             if (item.damageRecordIsHandle === 'false') {
-              // item.imgs = item.damageRecordImg.split('//////////')
-              item.imgs = item.damageRecordImg
+              item.imgs = item.damageRecordImg.split('//////////')
+              // item.imgs = item.damageRecordImg
               item.number = item.damageRecordDesc.split('//////////')[1]
               item.damageRecordDesc = item.damageRecordDesc.split('//////////')[0]
               return item
@@ -180,8 +180,8 @@ export default {
           })
           this.allTableData.tableDataFinish = v.filter((item, index) => {
             if (item.damageRecordIsHandle === 'true') {
-              // item.imgs = item.damageRecordImg.split('//////////')
-              item.imgs = item.damageRecordImg
+              item.imgs = item.damageRecordImg.split('//////////')
+              // item.imgs = item.damageRecordImg
               item.number = item.damageRecordDesc.split('//////////')[1]
               item.damageRecordDesc = item.damageRecordDesc.split('//////////')[0]
               return item

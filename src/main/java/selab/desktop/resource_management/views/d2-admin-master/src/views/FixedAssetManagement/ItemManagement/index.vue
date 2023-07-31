@@ -140,7 +140,7 @@
     <!-- 右侧管理员按钮 -->
     <DialogAddNewItem :dialogArouse="dialogAddNewItemArouseChangesNumber"/>
     <!-- 列表管理员编辑按钮 -->
-    <DialogChangeNewItem :dialogArouse="dialogChangeItemArouseChangesNumber" :changeItemInformation="changeItemInformation" @changeItemSuccess="changeItemSuccess"/>
+    <DialogChangeNewItem :dialogArouse="dialogChangeItemArouseChangesNumber" :changeItemInformation="changeItemInformation" @changeItemSuccess="changeItemSuccess" @dialogVideoPlayerArouse="dialogVideoPlayerArouse"/>
     <!-- 视频播放器 -->
     <videoPlayer :dialogVideoPlayer="dialogVideoPlayer" :videoUrl="videoUrl"/>
   </d2-container>
@@ -274,7 +274,10 @@ export default {
             this.loadAnimation = false
             return this.$message.error('获取失败')
           }
-          this.tableData = v.rows
+          this.tableData = JSON.parse(JSON.stringify(v.rows))
+          for (let i = 0; i < this.tableData.length; i++) {
+            this.tableData[i].img = ''
+          }
           this.pagination.allPage = v.totalPage
           this.pagination.allData = v.total
           this.loadAnimation = false
