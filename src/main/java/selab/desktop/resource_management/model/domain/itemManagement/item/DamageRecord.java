@@ -1,4 +1,4 @@
-package selab.desktop.resource_management.model.domain.itemManagement;
+package selab.desktop.resource_management.model.domain.itemManagement.item;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -20,9 +20,9 @@ public class DamageRecord {
     private Date damageRecordTime;
     private String itemName;
     private String  userName;
-    private Boolean damageRecordIsread;
+    private Boolean damageRecordIsread;//管理员是否已读
     private String damageRecordImg;
-    private Boolean damageRecordIshandle;
+    private Boolean damageRecordIshandle;//管理员是否已处理
 
 
 }

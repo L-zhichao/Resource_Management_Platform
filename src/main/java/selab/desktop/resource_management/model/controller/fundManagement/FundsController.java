@@ -6,11 +6,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import selab.desktop.resource_management.model.domain.fundManagement.Vo.FundsVo;
 import selab.desktop.resource_management.model.service.fundManagement.FundsService;
-import selab.desktop.resource_management.model.utils.R;
-
+import selab.desktop.resource_management.model.utils.JsonResult;
 import java.util.Date;
 import java.util.List;
 
@@ -18,58 +18,72 @@ import java.util.List;
 @Tag(name = "资金管理controller")
 @RequestMapping("/fundsVo")
 @RestController
+@CrossOrigin
 public class FundsController {
     @Autowired
     private FundsService fundsService;
 
     @GetMapping
     @Operation(summary = "展示目前总资产")
-    public R<List<FundsVo>> getAllFunds(){
+    @Transactional
+    public JsonResult<List<FundsVo>> getAllFunds() {
         log.info("展示目前总资产");
-        return R.success(fundsService.list());
+        return new JsonResult<>(JsonResult.SUCCESS, null, fundsService.list());
+    }
+
+    @GetMapping("/fundsVo/{id}")
+    @Operation(summary = "根据ID查询")
+    @Transactional
+    public JsonResult<FundsVo> getFundsById(@PathVariable Long id) {
+        return new JsonResult<>(JsonResult.SUCCESS, null, fundsService.getById(id));
     }
 
     @GetMapping("/page")
-    @Operation(summary = "分页查询用户")
-    public R<Page<FundsVo>> page(int page, int pageSize){
-        Page <FundsVo> mPage = new Page<>(page,pageSize);
+    @Operation(summary = "分页查询资金")
+    @Transactional
+    public JsonResult<Page<FundsVo>> page(int page, int pageSize) {
+        Page<FundsVo> mPage = new Page<>(page, pageSize);
         fundsService.page(mPage);
-        return R.success(mPage);
+        return new JsonResult<>(JsonResult.SUCCESS, null, mPage);
     }
 
     @GetMapping("/getCanBeUsed")
     @Operation(summary = "展示所有可支配资产")
-    public R<List<FundsVo>> getCanBeUsedAsset() {
+    @Transactional
+    public JsonResult<List<FundsVo>> getCanBeUsedAsset() {
         QueryWrapper<FundsVo> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("judge", "是");
         List<FundsVo> list = fundsService.list(queryWrapper);
         log.info("展示所有可支配资产");
-        return R.success(list);
+        return new JsonResult<>(JsonResult.SUCCESS, null, list);
     }
 
 
     @PostMapping("/update")
     @Operation(summary = "新增和修改资金")
-    public R<String> add(@RequestBody FundsVo fundsVo) {
+    @Transactional
+    public JsonResult<String> add(@RequestBody FundsVo fundsVo) {
         if (fundsVo.getId() == null) {
             fundsVo.setUpdateTime(new Date());
-            fundsService.save(fundsVo);
             log.info("增加资金");
-            return R.success("增加成功");
+            fundsService.save(fundsVo);
+            return new JsonResult<>(JsonResult.SUCCESS, null, "增加成功");
         } else {
             fundsVo.setUpdateTime(new Date());
-            fundsService.updateById(fundsVo);
             log.info("更新资金");
-            return R.success("更新成功");
+            fundsService.updateById(fundsVo);
+            return new JsonResult<>(JsonResult.SUCCESS, null, "更新成功");
         }
     }
+
     @DeleteMapping("/{id}")
     @Operation(summary = "根据主键ID删除某项资金")
-    public R<String> delete(@PathVariable Long id) {
-        fundsService.removeById(id);
+    @Transactional
+    public JsonResult<String> delete(@PathVariable Long id) {
         log.info("根据主键ID删除某项资金");
-        return R.success("删除成功");
+        log.info("删除成功");
+        return new JsonResult<>(JsonResult.SUCCESS, null, "删除成功");
+
     }
 
 }
-

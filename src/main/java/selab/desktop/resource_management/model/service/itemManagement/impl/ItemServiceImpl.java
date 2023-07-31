@@ -7,10 +7,10 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import selab.desktop.resource_management.model.domain.itemManagement.Item;
+import selab.desktop.resource_management.model.domain.itemManagement.item.Item;
+import selab.desktop.resource_management.model.exception.itemManagement.ItemExistsException;
 import selab.desktop.resource_management.model.mapper.itemManagement.ItemMapper;
 import selab.desktop.resource_management.model.service.itemManagement.ItemService;
-import selab.desktop.resource_management.model.utils.Result;
 
 import java.util.List;
 
@@ -28,16 +28,14 @@ public class ItemServiceImpl implements ItemService {
     return selectPage;
     }
 
-    public Result<Long> addItem(Item item){
+    public void addItem(Item item){
         QueryWrapper<Item> queryWrapper = new QueryWrapper();
         queryWrapper.eq("itemname", item.getItemname());
         List<Item> items = itemMapper.selectList(queryWrapper);
         if (items.size() > 0) {
-            return new Result(500, "fail",null);
+            throw new ItemExistsException("物品已经存在");
         }
          itemMapper.insert(item);
-
-        return new Result<>(200,"success",item.getItemId());
     }
 
     public Item getItemById(Long id){

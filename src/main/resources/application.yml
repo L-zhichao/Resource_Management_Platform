@@ -1,6 +1,17 @@
+# 日志格式
+logging:
+  pattern:
+    dateformat: yyyy-MM-dd HH:mm:ss.SSS
+  level:
+    selab.desktop.resource_management.fundManagement.controller.FundsController: debug
+    selab.desktop.resource_management.ResourceManagementPlatformApplication: warn
+
 server:
-  port: 8080
+  port: 9090
+  server-header: Access-Control-Allow-Origin:*
 spring:
+  application:
+    name: resource_management_platform
   datasource:
     url: jdbc:mysql://localhost:3306/resource_management_platform?useUnicode=true&characterEncoding=utf-8&useSSL=false&serviceTimezone=UTC&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -16,10 +27,16 @@ spring:
       min-idle: 1
       # 最大等待时间
       max-wait: 6000
-mybatis:
+mybatis-plus:
   configuration:
     # 开启驼峰命名映射
     map-underscore-to-camel-case: true
+    # 开启日志 可查看sql语句
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    global-config:
+      db-config:
+        # 启用全局配置主键采用雪花算法
+        id-type: ASSIGN_ID
 springdoc:
     swagger-ui:
       path: /swagger-ui.html
@@ -34,17 +51,3 @@ springdoc:
       - group: 'item Management'
         paths-to-match: '/**'
         packages-to-scan: selab.desktop.resource_management.itemManagement
-mybatis-plus:
-  configuration:
-    map-underscore-to-camel-case: true
-selab:
-  handle:
-    # 配置username的管理员负责处理申请
-    apply: admain
-# 日志格式
-logging:
-  pattern:
-    console: '%d{HH:mm:ss.SSS} %clr(%-5level) ---  [%-15thread] %cyan(%-50logger{50}):%msg%n'
-  global-config:
-    db-config:
-      id-type: ASSIGN_ID

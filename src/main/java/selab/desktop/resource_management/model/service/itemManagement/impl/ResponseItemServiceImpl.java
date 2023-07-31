@@ -11,7 +11,7 @@ import selab.desktop.resource_management.model.domain.itemManagement.applynews.V
 import selab.desktop.resource_management.model.mapper.itemManagement.ApplyItemMapper;
 import selab.desktop.resource_management.model.mapper.itemManagement.ResponseItemMapper;
 import selab.desktop.resource_management.model.service.itemManagement.ResponseItemService;
-import selab.desktop.resource_management.model.exception.InsertException;
+import selab.desktop.resource_management.model.exception.userManagment.UserInsertException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ public class ResponseItemServiceImpl extends ServiceImpl<ResponseItemMapper, Res
         ResponseItem responseItem = responseItemUploadToResponseItem(responseItemUpload, name);
         int rows = responseItemMapper.insert(responseItem);
         if(rows != 1){
-            throw new InsertException("回应上传未知异常");
+            throw new UserInsertException("回应上传未知异常");
         }
     }
 

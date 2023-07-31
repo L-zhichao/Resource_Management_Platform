@@ -8,10 +8,10 @@ import org.springframework.util.DigestUtils;
 import selab.desktop.resource_management.model.domain.userManagement.User;
 import selab.desktop.resource_management.model.domain.userManagement.vo.UserReturn;
 import selab.desktop.resource_management.model.domain.userManagement.vo.UserVo;
-import selab.desktop.resource_management.model.exception.InsertException;
-import selab.desktop.resource_management.model.exception.PasswordNotMatchException;
-import selab.desktop.resource_management.model.exception.UserNotFundException;
-import selab.desktop.resource_management.model.exception.UsernameDuplicatedException;
+import selab.desktop.resource_management.model.exception.userManagment.UserInsertException;
+import selab.desktop.resource_management.model.exception.userManagment.PasswordNotMatchException;
+import selab.desktop.resource_management.model.exception.userManagment.UserNotFundException;
+import selab.desktop.resource_management.model.exception.userManagment.UsernameDuplicatedException;
 import selab.desktop.resource_management.model.mapper.userManagement.UserMapper;
 import selab.desktop.resource_management.model.service.userManagement.IUserservice;
 
@@ -51,7 +51,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements IUs
         User newUser = userVoToUser(userVo,password,salt);
         Integer rows = userMapper.insert(newUser);
         if(rows != 1){
-            throw new InsertException("增加用户未知异常");
+            throw new UserInsertException("增加用户未知异常");
         }
     }
 

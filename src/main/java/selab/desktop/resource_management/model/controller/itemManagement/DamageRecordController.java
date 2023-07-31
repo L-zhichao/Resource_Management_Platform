@@ -3,9 +3,9 @@ package selab.desktop.resource_management.model.controller.itemManagement;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import selab.desktop.resource_management.model.domain.itemManagement.DamageRecord;
+import selab.desktop.resource_management.model.domain.itemManagement.item.DamageRecord;
 import selab.desktop.resource_management.model.service.itemManagement.DamageRecordService;
-import selab.desktop.resource_management.model.utils.Result;
+import selab.desktop.resource_management.model.utils.JsonResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class DamageRecordController {
     private DamageRecordService damageRecordService;
 
     @GetMapping()
-    public Result<List<DamageRecord>> findAllDamageRecord(){
+    public JsonResult<List<DamageRecord>> findAllDamageRecord(){
         List<DamageRecord> allDamageRecord = damageRecordService.findAllDamageRecord();
         List<DamageRecord> damageRecords =new ArrayList<>();
         for (DamageRecord damageRecord:allDamageRecord){
@@ -26,27 +26,27 @@ public class DamageRecordController {
             BeanUtils.copyProperties(damageRecord,newDamageRecord);
             damageRecords.add(newDamageRecord);
         }
-        return new Result<>(200,"success",damageRecords);
+        return new JsonResult<>(JsonResult.SUCCESS,"success",damageRecords);
     }
     @PostMapping
-    public Result<?> addDamageRecord(DamageRecord damageRecord){
+    public JsonResult<?> addDamageRecord(DamageRecord damageRecord){
         damageRecordService.addDamageRecord(damageRecord);
-        return new Result<>(200,"success",null);
+        return new JsonResult<>(JsonResult.SUCCESS,"success",null);
     }
 
     @DeleteMapping("/{id}")
-    public Result<?> deleteDamageRecord(@PathVariable Long id){
+    public JsonResult<?> deleteDamageRecord(@PathVariable Long id){
         damageRecordService.deleteDamageRecord(id);
-        return new Result<>(200,"success",null);
+        return new JsonResult<>(JsonResult.SUCCESS,"success",null);
     }
     @PutMapping()
-    public Result<?> updateDamageRecord(Long damageRecordId){
+    public JsonResult<?> updateDamageRecord(Long damageRecordId){
         damageRecordService.updateIsHandle(damageRecordId);
-        return new Result<>(200,"success",null);
+        return new JsonResult<>(JsonResult.SUCCESS,"success",null);
     }
     @GetMapping()
-    public Result<List<DamageRecord>> getDamageRecordByUsername(String username){
+    public JsonResult<List<DamageRecord>> getDamageRecordByUsername(String username){
         List<DamageRecord> damageRecordByUserName = damageRecordService.getDamageRecordByUserName(username);
-        return new Result<>(200,"success",damageRecordByUserName);
+        return new JsonResult<>(JsonResult.SUCCESS,"success",damageRecordByUserName);
     }
 }

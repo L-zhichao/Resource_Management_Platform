@@ -1,6 +1,8 @@
-package selab.desktop.resource_management.model.exception;
+package selab.desktop.resource_management.model.exception.userManagment;
 
-public class PasswordNotMatchException extends ServiceException{
+import selab.desktop.resource_management.model.exception.ServiceException;
+
+public class PasswordNotMatchException extends ServiceException {
     public PasswordNotMatchException() {
         super();
     }

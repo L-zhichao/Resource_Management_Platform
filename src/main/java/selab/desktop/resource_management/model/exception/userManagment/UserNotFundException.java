@@ -1,6 +1,8 @@
-package selab.desktop.resource_management.model.exception;
+package selab.desktop.resource_management.model.exception.userManagment;
 
-public class UserNotFundException extends ServiceException{
+import selab.desktop.resource_management.model.exception.ServiceException;
+
+public class UserNotFundException extends ServiceException {
     public UserNotFundException() {
         super();
     }

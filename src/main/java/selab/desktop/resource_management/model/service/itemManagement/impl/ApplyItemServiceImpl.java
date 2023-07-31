@@ -7,12 +7,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import selab.desktop.resource_management.model.domain.itemManagement.applynews.ApplyItem;
 import selab.desktop.resource_management.model.domain.itemManagement.applynews.Vo.ApplyItemUpload;
-import selab.desktop.resource_management.model.domain.itemManagement.applynews.Vo.ApplyItemVo;
 import selab.desktop.resource_management.model.mapper.itemManagement.ApplyItemMapper;
 import selab.desktop.resource_management.model.service.itemManagement.ApplyItemService;
-import selab.desktop.resource_management.model.exception.InsertException;
+import selab.desktop.resource_management.model.exception.userManagment.UserInsertException;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +33,7 @@ public class ApplyItemServiceImpl extends ServiceImpl<ApplyItemMapper, ApplyItem
         ApplyItem applyItem = applyIyemUploadToApplyItem(applyItemUpload, name);
         int rows = applyItemMapper.insert(applyItem);
         if(rows != 1){
-            throw new InsertException("申请上传未知异常");
+            throw new UserInsertException("申请上传未知异常");
         }
     }
 
