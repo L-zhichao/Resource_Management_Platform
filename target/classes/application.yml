@@ -2,8 +2,8 @@ logging:
   pattern:
     dateformat: yyyy-MM-dd HH:mm:ss.SSS
   level:
-    selab.desktop.resource_management.fundManagement.controller.FundsController: info
-    selab.desktop.resource_management.ResourceManagementPlatformApplication: info
+    selab.desktop.resource_management.fundManagement.controller.FundsController: debug
+    selab.desktop.resource_management.ResourceManagementPlatformApplication: warn
 
 server:
   port: 9090
