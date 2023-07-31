@@ -1,6 +1,7 @@
 package selab.desktop.resource_management.model.controller.userManagement;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -13,6 +14,7 @@ import selab.desktop.resource_management.model.utils.JsonResult;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/user")
+@Tag(name = "用户管理controller层")
 public class UserController {
 
     private final  UserServiceImpl userServiceImpl;

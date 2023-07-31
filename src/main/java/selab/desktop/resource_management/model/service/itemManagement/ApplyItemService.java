@@ -8,7 +8,7 @@ import selab.desktop.resource_management.model.domain.itemManagement.applynews.V
 
 import java.util.List;
 
-@Service
+
 public interface ApplyItemService extends IService<ApplyItem> {
 
      /**

@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import java.util.Date;
+@Schema(description = "资金管理模型")
 @Data
 public class FundsVo {
     @TableId

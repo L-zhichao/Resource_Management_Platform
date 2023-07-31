@@ -1,8 +1,10 @@
 package selab.desktop.resource_management.model.controller.itemManagement;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +21,10 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/item")
+@Tag(name = "物品申请controller层")
 public class ApplyItemController {
+
+    @Autowired
     private final ApplyItemService applyItemService;
 
 
