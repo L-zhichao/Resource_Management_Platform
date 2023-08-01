@@ -359,11 +359,27 @@ export default {
       return await api.SYS_USER_REGISTER({ name, username, email, password, userStatue, responseTime })
     },
     /**
+     * @description 注册验证api
+     * @param {*} param0
+     */
+    async verify ({ username }) {
+      return await api.SYS_VERIFY_API({ username })
+    },
+    /**
      * @description 注册用户重复验证
      */
     usernameReply () {
       if (!this.registerRules) return
-      this.register({
+      let usernameOk = null
+      this.$refs.loginForm.validateField('username', errMsg => {
+        if (errMsg) {
+          usernameOk = false
+        } else {
+          usernameOk = true
+        }
+      })
+      if (!usernameOk) return
+      this.verify({
         username: this.formLogin.username
       })
         .then(v => {
