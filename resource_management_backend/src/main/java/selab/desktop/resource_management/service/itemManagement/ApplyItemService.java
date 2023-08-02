@@ -13,9 +13,8 @@ public interface ApplyItemService extends IService<ApplyItem> {
      /**
       *  申请上传
       * @param applyItemUpload 申请上传实体类
-      * @param name   申请人名字
       */
-     void saveApply(ApplyItemUpload applyItemUpload, String name);
+     void saveApply(ApplyItemUpload applyItemUpload);
 
 
 

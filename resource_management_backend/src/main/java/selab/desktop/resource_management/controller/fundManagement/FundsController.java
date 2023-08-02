@@ -16,9 +16,9 @@ import java.util.List;
 
 @Slf4j
 @Tag(name = "资金管理controller")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RequestMapping("/fundsVo")
 @RestController
-@CrossOrigin
 public class FundsController {
     @Autowired
     private FundsService fundsService;

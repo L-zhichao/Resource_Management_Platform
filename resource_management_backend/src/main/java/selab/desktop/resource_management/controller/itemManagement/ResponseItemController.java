@@ -3,16 +3,14 @@ package selab.desktop.resource_management.controller.itemManagement;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ResponseItemVo;
 import selab.desktop.resource_management.service.itemManagement.ResponseItemService;
 import selab.desktop.resource_management.utils.JsonResult;
 
 
 import java.util.List;
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/item")
@@ -22,9 +20,8 @@ public class ResponseItemController {
 
     @Operation(summary = "物品回应上传模块")
     @PostMapping("/response")
-    public JsonResult<Void> response(@RequestBody selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ResponseItemUpload responseItemUpload, HttpServletRequest request){
-        String name = (String)request.getSession().getAttribute("name");
-        responseItemService.saveResonse(responseItemUpload,name);
+    public JsonResult<Void> response(@RequestBody selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ResponseItemUpload responseItemUpload){
+        responseItemService.saveResonse(responseItemUpload);
         return new JsonResult<>(JsonResult.SUCCESS,null,null);
     }
 

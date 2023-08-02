@@ -3,10 +3,7 @@ package selab.desktop.resource_management.controller.itemManagement;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import selab.desktop.resource_management.domain.itemManagement.applynews.ApplyItem;
 import selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ApplyItemUpload;
 import selab.desktop.resource_management.service.itemManagement.ApplyItemService;
@@ -17,15 +14,15 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/item")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class ApplyItemController {
     private final ApplyItemService applyItemService;
 
 
     @Operation(summary = "物品申请上传模块")
     @PostMapping("/apply")
-    public JsonResult<Void> apply(@RequestBody ApplyItemUpload applyItemUpload, HttpServletRequest request){
-        String name = (String)request.getSession().getAttribute("name");
-         applyItemService.saveApply(applyItemUpload,name);
+    public JsonResult<Void> apply(@RequestBody ApplyItemUpload applyItemUpload){
+         applyItemService.saveApply(applyItemUpload);
          return new JsonResult<>(JsonResult.SUCCESS,null,null);
     }
 

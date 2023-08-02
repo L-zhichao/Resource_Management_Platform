@@ -20,17 +20,17 @@ public class ApplyItemServiceImpl extends ServiceImpl<ApplyItemMapper, ApplyItem
 
     private final ApplyItemMapper applyItemMapper;
 
-    private ApplyItem applyIyemUploadToApplyItem(ApplyItemUpload applyItemUpload, String username){
+    private ApplyItem applyIyemUploadToApplyItem(ApplyItemUpload applyItemUpload){
         ApplyItem applyItem = new ApplyItem();
-        applyItem.setApplyUser(username);
+        applyItem.setApplyUser(applyItemUpload.getName());
         applyItem.setContent(applyItemUpload.getContent());
         applyItem.setMoney(applyItemUpload.getMoney());
         applyItem.setApplyTime(new Date());
         return applyItem;
     }
     @Override
-    public void saveApply(ApplyItemUpload applyItemUpload, String name) {
-        ApplyItem applyItem = applyIyemUploadToApplyItem(applyItemUpload, name);
+    public void saveApply(ApplyItemUpload applyItemUpload) {
+        ApplyItem applyItem = applyIyemUploadToApplyItem(applyItemUpload);
         int rows = applyItemMapper.insert(applyItem);
         if(rows != 1){
             throw new UserInsertException("申请上传未知异常");

@@ -10,6 +10,9 @@ import java.util.Date;
 @Data
 @Schema(description = "申请上传模板")
 public class ApplyItemUpload {
+    @Schema(description = "申请人名字")
+    @NotEmpty
+    private String name;
 
     @Schema(description = "申请内容")
     @NotEmpty

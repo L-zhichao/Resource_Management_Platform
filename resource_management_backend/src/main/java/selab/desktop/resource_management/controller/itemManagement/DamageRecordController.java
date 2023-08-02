@@ -10,14 +10,14 @@ import selab.desktop.resource_management.utils.JsonResult;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 @RequestMapping("/damage/record")
 public class DamageRecordController {
     @Autowired
     private DamageRecordService damageRecordService;
 
-    @GetMapping("/FINF")
+    @GetMapping("/find")
     public JsonResult<List<DamageRecord>> findAllDamageRecord(){
         List<DamageRecord> allDamageRecord = damageRecordService.findAllDamageRecord();
         List<DamageRecord> damageRecords =new ArrayList<>();

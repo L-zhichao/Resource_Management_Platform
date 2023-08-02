@@ -7,8 +7,7 @@ logging:
 #    selab.desktop.resource_management.ResourceManagementPlatformApplication: warn
 
 server:
-  port: 8080
-  server-header: Access-Control-Allow-Origin:*
+  port: 9090
 spring:
   application:
     name: resource_management_platform_project

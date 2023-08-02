@@ -11,7 +11,7 @@ import java.util.Date;
 
 
 @Data
-@TableName("item_resonse")
+@TableName("item_response")
 public class ResponseItem {
     public static final Integer Response_READED = 1;
     public static final Integer Response_UNREAD = -1;
@@ -19,13 +19,13 @@ public class ResponseItem {
     public static final Integer Response_DISAGREE = 0;
     @TableId(type = IdType.ASSIGN_ID)
 
-    private Long resonseId;
+    private Long responseId;
     private Long applyId;
     private String applyUser;
     private String responseUser;
     @TableField("response_status")
     private Integer status;
-    @TableField("resonse_result")
+    @TableField("response_result")
     private Integer result;
     @TableField("result_reason")
     private String reason;

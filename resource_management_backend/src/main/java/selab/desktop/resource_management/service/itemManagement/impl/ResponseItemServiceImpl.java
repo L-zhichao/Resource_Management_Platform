@@ -1,4 +1,4 @@
-package selab.desktop.resource_management.model.service.itemManagement.impl;
+package selab.desktop.resource_management.service.itemManagement.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -36,9 +36,9 @@ public class ResponseItemServiceImpl extends ServiceImpl<ResponseItemMapper, Res
     }
 
     @Override
-    public void saveResonse(ResponseItemUpload responseItemUpload, String name) {
+    public void saveResonse(ResponseItemUpload responseItemUpload) {
 
-        ResponseItem responseItem = responseItemUploadToResponseItem(responseItemUpload, name);
+        ResponseItem responseItem = responseItemUploadToResponseItem(responseItemUpload);
         int rows = responseItemMapper.insert(responseItem);
         if(rows != 1){
             throw new UserInsertException("回应上传未知异常");
@@ -56,14 +56,14 @@ public class ResponseItemServiceImpl extends ServiceImpl<ResponseItemMapper, Res
         });
         return responseItemVos;
     }
-    private ResponseItem responseItemUploadToResponseItem(ResponseItemUpload responseItemUpload,String username){
+    private ResponseItem responseItemUploadToResponseItem(ResponseItemUpload responseItemUpload){
         ResponseItem responseItem = new ResponseItem();
         responseItem.setApplyId(responseItemUpload.getApplyId());
         responseItem.setResult(responseItemUpload.getResult());
-        responseItem.setResponseUser(username);
+        responseItem.setResponseUser(responseItem.getResponseUser());
         responseItem.setReason(responseItem.getReason());
         responseItem.setResponseTime(responseItemUpload.getResponseTime());
-        responseItem.setApplyUser(responseItemUpload.getName());
+        responseItem.setApplyUser(responseItemUpload.getApplyName());
         return responseItem;
     }
     private ResponseItemVo responseItemToresponseItemVo(ResponseItem responseItem){

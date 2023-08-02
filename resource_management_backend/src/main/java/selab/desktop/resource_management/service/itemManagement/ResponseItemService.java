@@ -18,9 +18,8 @@ public interface ResponseItemService extends IService<ResponseItem> {
     /**
      *   回应上传
      * @param responseItemUpload  回应上传类
-     * @param name  回应人
      */
-    void saveResonse(ResponseItemUpload responseItemUpload, String name);
+    void saveResonse(ResponseItemUpload responseItemUpload);
 
     /**
      *  查询所有回应

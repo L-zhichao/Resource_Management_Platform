@@ -5,11 +5,14 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import selab.desktop.resource_management.domain.userManagement.vo.UserLogin;
 import selab.desktop.resource_management.domain.userManagement.vo.UserReturn;
 import selab.desktop.resource_management.domain.userManagement.vo.UserVo;
 import selab.desktop.resource_management.service.userManagement.impl.UserServiceImpl;
 import selab.desktop.resource_management.utils.JsonResult;
 
+
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/user")
@@ -35,7 +38,7 @@ public class UserController {
      */
     @Operation(summary = "用户名验证模块")
     @PostMapping("/user/verify")
-   public JsonResult<Void> verifyUsername(String username){
+   public JsonResult<Void> verifyUsername(@RequestParam String username){
         userServiceImpl.verifyUsername(username);
         return new JsonResult<>(JsonResult.SUCCESS,null,null);
    }
@@ -43,19 +46,17 @@ public class UserController {
     /**
      *
      * 做登录操作
-     * @param username 用户名
-     * @param password  密码
+
+     * @param userLogin
      * @return    userVo对象
      */
     @Operation(summary = "登录模块")
     @PostMapping("/login")
- public JsonResult<UserReturn> login(@RequestParam String username, String password, HttpSession httpSession){
-        System.out.println(password);
-       UserReturn userReturn = userServiceImpl.login(username, password);
+ public JsonResult<UserReturn> login(@RequestBody UserLogin userLogin, HttpSession httpSession){
+       UserReturn userReturn = userServiceImpl.login(userLogin.getUsername(), userLogin.getPassword());
         httpSession.setAttribute("name",userReturn.getName());
         httpSession.setAttribute("username",userReturn.getUsername());
         httpSession.setAttribute("userStatus",userReturn.getUserStatus());
-        httpSession.setAttribute("token",userReturn.getToken());
         JsonResult<UserReturn> jsonResult = new JsonResult<>(JsonResult.SUCCESS,null,userReturn);
         return jsonResult;
     }
