@@ -355,15 +355,31 @@ export default {
      * @description 注册验证api
      * @param {*} param0
      */
-    async register ({ name, username, email, password, userStatue }) {
-      return await api.SYS_USER_REGISTER({ name, username, email, password, userStatue })
+    async register ({ name, username, email, password, userStatue, responseTime }) {
+      return await api.SYS_USER_REGISTER({ name, username, email, password, userStatue, responseTime })
+    },
+    /**
+     * @description 注册验证api
+     * @param {*} param0
+     */
+    async verify ({ username }) {
+      return await api.SYS_VERIFY_API({ username })
     },
     /**
      * @description 注册用户重复验证
      */
     usernameReply () {
       if (!this.registerRules) return
-      this.register({
+      let usernameOk = null
+      this.$refs.loginForm.validateField('username', errMsg => {
+        if (errMsg) {
+          usernameOk = false
+        } else {
+          usernameOk = true
+        }
+      })
+      if (!usernameOk) return
+      this.verify({
         username: this.formLogin.username
       })
         .then(v => {
@@ -371,6 +387,9 @@ export default {
           if (v.status === 40002) {
             this.$message.error(v.message)
             this.formLogin.username = ''
+          } else if (v.status === 40001) {
+            this.$message.error(v.data + '信息格式有误')
+            this.$notify.error(v.message)
           }
         })
     },
@@ -406,7 +425,8 @@ export default {
               username: this.formLogin.username,
               email: this.formLogin.email,
               password: this.formLogin.password,
-              userStatue: this.formLogin.userStatue
+              userStatue: this.formLogin.userStatue,
+              responseTime: dayjs().format('YYYY-MM-DD HH:mm:ss')
             })
               .then(v => {
                 if (v === null) {
@@ -444,30 +464,6 @@ export default {
           this.$message.error('表单校验失败，请检查')
         }
       })
-      // const xhr = new XMLHttpRequest()
-      // // 2. 初始化  设置类型和 URL
-      // xhr.open('POST', 'http://127.0.0.1:8000/login')
-      // // 3. 发送
-      // const sendData = 'username=' + this.formLogin.username + '&password=' + this.formLogin.password
-      // xhr.send(sendData)
-      // // 4. 事件绑定
-      // xhr.onreadystatechange = function () {
-      //   // 判断
-      //   if (xhr.readyState === 4) {
-      //     if (xhr.status >= 200 && xhr.status < 300) {
-      //       const responseData = JSON.parse(xhr.response)
-      //       if (responseData.code === 200) {
-      //         console.log(responseData)
-      //         util.cookies.set('name', responseData.data.name)
-      //         util.cookies.set('token', responseData.data.token)
-      //         console.log(util.cookies.get('name'))
-      //         this.$router.replace(this.$route.query.redirect || '/')
-      //       } else if (responseData.code === 401) {
-      //         this.$message.error('表单校验失败，请检查')
-      //       }
-      //     }
-      //   }
-      // }
     }
   }
 }

@@ -12,36 +12,44 @@ export default {
   cache: true,
   redirect: { name: 'demo' },
   component: layoutHeaderAside,
-  children: [
-    {
-      path: '/page1',
-      name: 'page1',
-      meta: {
-        ...meta,
-        title: '页面 1',
-        cache: true
-      },
-      component: _import('demo/page1')
+  children: [{
+    path: '/page1',
+    name: 'page1',
+    meta: {
+      ...meta,
+      title: '资金管理',
+      cache: true
     },
-    {
-      path: '/page2',
-      name: 'page2',
-      meta: {
-        ...meta,
-        title: '页面 2',
-        cache: true
-      },
-      component: _import('demo/page2')
+    component: _import('demo/page1')
+  }, {
+    path: '/page2',
+    name: 'page2',
+    meta: {
+      ...meta,
+      title: '资产分配',
+      cache: true
     },
-    {
-      path: '/page3',
-      name: 'page3',
-      meta: {
-        ...meta,
-        title: '页面 3',
-        cache: true
-      },
-      component: _import('demo/page3')
-    }
+    component: _import('demo/page2')
+  }, {
+    path: '/page3',
+    name: 'page3',
+    meta: {
+      ...meta,
+      title: '日志记录',
+      cache: true
+    },
+    component: _import('demo/page3')
+  }
+  // ,
+  // {
+  //   path: '/page4',
+  //   name: 'page4',
+  //   meta: {
+  //     ...meta,
+  //     title: '物品申请',
+  //     cache: true
+  //   },
+  //   component: _import('demo/page4')
+  // }
   ]
 }
