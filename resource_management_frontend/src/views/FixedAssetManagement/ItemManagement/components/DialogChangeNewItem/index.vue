@@ -9,7 +9,7 @@
         <el-input
           type="text"
           :controls="false"
-          v-model.number="ruleForm.itemname">
+          v-model="ruleForm.itemname">
         </el-input>
       </el-form-item>
       <el-form-item label="数量" prop="number">

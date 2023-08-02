@@ -8,8 +8,7 @@
       <el-form-item label="名称" prop="itemname">
         <el-input
           type="text"
-          :controls="false"
-          v-model.number="ruleForm.itemname">
+          v-model="ruleForm.itemname">
         </el-input>
       </el-form-item>
       <el-form-item label="数量" prop="number">
@@ -33,7 +32,7 @@
         </el-input>
       </el-form-item>
       <el-form-item label="详情" prop="damageRecordDesc">
-        <el-input type="textarea" v-model="ruleForm.damageRecordDesc"></el-input>
+        <el-input type="textarea" v-model="ruleForm.damageRecordDesc" @blur="textProcessing"></el-input>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -118,6 +117,14 @@ export default {
         .catch(_ => {})
     },
     /**
+     * @description 申请说明处理
+     */
+    textProcessing () {
+      const reg1 = new RegExp('/', 'g')
+      const data = this.ruleForm.damageRecordDesc.replace(reg1, '')
+      this.ruleForm.damageRecordDesc = data
+    },
+    /**
      * @description 请求新物品
      * @param {Object} param0
      * @param {String} content 申请内容
@@ -153,7 +160,11 @@ export default {
           }
         })
     },
+    /**
+     * @description 发送表单
+     */
     submit () {
+      this.textProcessing()
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
           const text = this.ruleForm.itemname + '//////////' + this.ruleForm.number + '//////////' + this.ruleForm.damageRecordDesc

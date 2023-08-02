@@ -131,6 +131,9 @@ export default {
     ...mapGetters('d2admin', {
       themeActiveSetting: 'theme/activeSetting'
     }),
+    ...mapState('d2admin/user', [
+      'info'
+    ]),
     /**
      * @description 用来实现带参路由的缓存
      */
@@ -240,6 +243,7 @@ export default {
     if (this.userAdministratorPermissions) this.itemSearchDamage()
     if (this.userAdministratorPermissions) this.itemReadApply()
     if (!this.userAdministratorPermissions) this.itemReadResponse()
+    if (!this.info.name) this.logout()
   }
 }
 </script>

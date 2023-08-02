@@ -54,8 +54,8 @@
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px">
               <el-form-item>
                 <template>
-                  <el-radio v-model="radioDispose" border :label="1">批准</el-radio>
-                  <el-radio v-model="radioDispose" border :label="2">不批准</el-radio>
+                  <el-radio size="small" v-model="radioDispose" border :label="1">批准</el-radio>
+                  <el-radio size="small" v-model="radioDispose" border :label="2">不批准</el-radio>
                 </template>
               </el-form-item>
               <el-form-item label="说明" prop="reason">
@@ -65,7 +65,7 @@
             <div style="text-align: right; margin: 0">
               <el-button type="primary" size="small" @click="submit">{{ radioDispose === 1 ? '批准' : '不批准' }}</el-button>
             </div>
-            <el-button slot="reference" size="small">待处理</el-button>
+            <el-button type="primary" slot="reference" size="small">待处理</el-button>
           </el-popover>
           <el-popover
             placement="left"
@@ -251,6 +251,7 @@ export default {
               result: 2,
               reason: ''
             }
+            this.radioDispose = 1
             this.randomKeyPopover = Math.random()
             this.$refs.ruleForm.clearValidate()
             this.$message({
@@ -283,6 +284,11 @@ export default {
       }
       this.itemShowApplyAPI()
         .then(v => {
+          if (typeof v[0] === 'undefined') {
+            return this.$message({
+              message: '没有任何物品申请'
+            })
+          }
           if ('applyId' in v[0]) {
             v.forEach((item, index) => {
               this.allTableData[1][1].push(JSON.parse(JSON.stringify(item)))
@@ -309,6 +315,37 @@ export default {
     itemShowResponse () {
       this.itemShowResponseAPI()
         .then(v => {
+          if (typeof v[0] === 'undefined') {
+            this.allTableData[1][0] = this.allTableData[1][1].filter((item, index) => {
+              if (item.applyUser === util.cookies.get('name')) {
+                return item
+              }
+            })
+            this.allTableData[0][0] = this.allTableData[1][1].filter((item, index) => {
+              if (item.status === -1) return item
+            })
+            this.allTableData[0][1] = this.allTableData[1][1].filter((item, index) => {
+              if (item.status !== -1) return item
+            })
+
+            if (this.userAdministratorPermissions) {
+              if (this.radio.admin === '未处理') {
+                this.tableData = this.allTableData[0][0]
+              } else {
+                this.tableData = this.allTableData[0][1]
+              }
+            } else {
+              if (this.radio.ordinary === '我的') {
+                this.tableData = this.allTableData[1][0]
+              } else {
+                this.tableData = this.allTableData[1][1]
+              }
+            }
+            setTimeout(() => {
+              this.loadAnimation = false
+            }, 300)
+            return
+          }
           if ('applyId' in v[0]) {
             const applyData = JSON.parse(JSON.stringify(this.allTableData[1][1]))
             v.forEach((item, index) => {

@@ -1,31 +1,53 @@
 <template>
-  <div
-    :style="{ 'max-height': this.timeLineHeight + 'px' }"
-    style="overflow-y: scroll"
-  >
+  <div :style="{ 'max-height': this.timeLineHeight + 'px' }" style="overflow-y: scroll">
+   <div v-if="!showResultPage">
     <div style="padding: 5px 20px">
-      <br/>
+      <br />
       <el-form :inline="true" :model="listQuery" class="demo-form-inline">
-         <el-form-item label="ID查询">
-          <el-input v-model="idQuery" placeholder="ID"></el-input>
-         </el-form-item>
+        <el-radio-group
+          v-model="searchType"
+          fill="#c0bce9"
+          style="margin-bottom: 10px"
+        >
+          <el-radio-button label="id">根据ID查询</el-radio-button>
+        </el-radio-group>
+
+        <el-input
+          v-model="searchValue"
+          placeholder="请输入查询内容"
+          style="margin-bottom: 10px"
+        ></el-input>
+
+        <el-button
+          @click="search"
+          icon="el-icon-search"
+          style="margin-bottom: 10px"
+          type="primary"
+        >
+          查询
+        </el-button>
+
         <el-form-item>
           <el-button
-            type="primary"
-            @click="onSubmitSelect"
-            icon="el-icon-search"
-            >查询</el-button
-          >
-        </el-form-item>
-        <el-form-item>
-          <el-button
-            type="success"
             @click="TJCollectionForm"
             icon="el-icon-edit"
+            style="margin-left: 50px"
+            type="success"
             >添加</el-button
           >
+
+           <el-button
+            @click="getCanBeUsed"
+            icon="el-icon-edit"
+            style="margin-left: 50px"
+            type="warning"
+            >查看所有可支配资产</el-button
+          >
+
+         
         </el-form-item>
       </el-form>
+
       <!-- 表格-->
       <el-table
         :data="list"
@@ -33,9 +55,11 @@
         border
         fit
         highlight-current-row
+        @selection-change="handleSelectionChange"
       >
-        <el-table-column align="center" label="id"  prop="id">
-        </el-table-column>
+        <el-table-column type="selection" width="55px"></el-table-column>
+
+        <el-table-column align="center" label="id" prop="id"> </el-table-column>
         <el-table-column align="center" label="资产" prop="asset">
         </el-table-column>
         <el-table-column align="center" label="资产价值" prop="assetValue">
@@ -81,6 +105,16 @@
             </el-tooltip>
           </template>
         </el-table-column>
+
+        <el-button
+          type="danger"
+          icon="el-icon-delete"
+          style="margin-left: 20px"
+          @click="batchDelete"
+          v-if="selection.length &gt; 0"
+        >
+          批量删除
+        </el-button>
       </el-table>
 
       <el-pagination
@@ -179,27 +213,78 @@
         </div>
       </el-dialog>
     </div>
+   </div>
+
+<div v-else>
+  <el-card>
+      <h3 slot="header">查询结果：</h3>
+      <div class="result-content">
+        <el-row>
+          <el-col :span="24">
+            <el-form label-position="top">
+              <el-form-item label="结果信息">
+                <el-table
+                  :data="result"
+                  element-loading-text="Loading"
+                  border
+                  :key="randomKey"
+                  fit
+                  highlight-current-row
+                >
+                  <el-table-column align="center" label="ID" prop="id"></el-table-column>
+                  <el-table-column align="center" label="资产" prop="asset"></el-table-column>
+                  <el-table-column align="center" label="资产价值" prop="assetValue"></el-table-column>
+                  <el-table-column align="center" label="是否可支配(是/否)" prop="judge"></el-table-column>
+                  <el-table-column align="center" label="创建时间" prop="updateTime">
+                    <template slot-scope="scope">
+                      <i class="el-icon-time"></i>&nbsp;
+                      <span
+                        style="margin-left: 5px"
+                        v-text="formatDateTime(scope.row.updateTime)"
+                      ></span>
+                    </template>
+                  </el-table-column>
+                </el-table>
+              </el-form-item>
+            </el-form>
+          </el-col>
+        </el-row>
+      </div>
+        </el-card>
+         <el-button
+        @click="goBack"
+        icon="el-icon-arrow-left"
+        style="margin-top: 10px"
+        type="primary"
+      >
+        返回
+      </el-button>
+</div>
   </div>
+
 </template>
 
 <script>
-
 import axios from "axios";
-// import {id} from "../../../../echarts-5.4.3/test/lib/ecSimpleTransform";
 
 export default {
   name: "Page1",
   data() {
     return {
+      randomKey: Math.random(),
+      searchType: "id", // 查询类型
+      searchValue: "", // 查询内容
+      result: [], // 查询结果
+      showResultPage: false, // 控制是否显示结果页面
+      selection: [],
       timeLineHeight: "",
       listLoading: true,
-      idQuery: '',
+      idQuery: "",
       list: [],
       total: 0,
       listQuery: {
         page: 1,
         pageSize: 10,
-
       },
 
       dialogFormVisible: false,
@@ -209,7 +294,7 @@ export default {
         create: "添加资产",
       },
       ruleForm: {
-        id: null,
+        id: "",
         asset: "",
         assetValue: "",
         judge: "",
@@ -262,10 +347,8 @@ export default {
     },
     axiosdata() {
       this.listLoading = true;
-      
-
       axios
-        .get("/fundsVo/page", {
+        .get("http://localhost:9090/fundsVo/page", {
           params: this.listQuery,
           headers: {
             "Content-Type": "application/json",
@@ -288,116 +371,183 @@ export default {
       this.dialogFormVisible = true;
       // this.resetCollectionForm();
     },
-     BJCollectionForm(row) {
-        this.dialogStatus = "update"
-        this.dialogFormVisible = true
-        this.ruleForm = {
+    BJCollectionForm(row) {
+      this.dialogStatus = "update";
+      this.dialogFormVisible = true;
+      this.ruleForm = {
         id: row.id,
         asset: row.asset,
         assetValue: row.assetValue,
         judge: row.judge,
         updateTime: row.updateTime,
       };
-      },
+    },
 
+    submitCollectionForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          const url = "/fundsVo/update";
+          axios
+            .post(url, this.ruleForm)
+            .then((response) => {
+              if (response.data.status === 200) {
+                this.axiosdata();
+                this.dialogFormVisible = false;
+                this.$message.success(
+                  this.dialogStatus === "create"
+                    ? "添加数据成功！"
+                    : "修改数据成功！"
+                );
+              } else {
+                this.$message.error(
+                  this.dialogStatus === "create"
+                    ? "添加数据失败！"
+                    : "修改数据失败！"
+                );
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
 
+    updateCollectionForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          const url = "/fundsVo/update";
+          axios
+            .post(url, this.ruleForm)
+            .then((response) => {
+              if (response.data.status === 200) {
+                this.axiosdata();
+                this.dialogFormVisible = false;
+                this.$message.success(
+                  this.dialogStatus === "update"
+                    ? "添加数据成功！"
+                    : "修改数据成功！"
+                );
+              } else {
+                this.$message.error(
+                  this.dialogStatus === "update"
+                    ? "添加数据失败！"
+                    : "修改数据失败！"
+                );
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
 
-submitCollectionForm(formName) {
-  this.$refs[formName].validate((valid) => {
-    if (valid) {
-      const url = '/fundsVo/update';
+    handleSelectionChange(selection) {
+      this.selection = selection;
+    },
+
+    deleteVisible(scope) {
+      this.$confirm("确定要删除" + scope.row.asset + "吗？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          const id = scope.row.id;
+          axios
+            .delete(`/fundsVo/` + id)
+            .then((response) => {
+              if (response.data.status === 200) {
+                this.axiosdata();
+                this.dialogFormVisible = false;
+                this.$message.success("删除完毕");
+              } else {
+                this.$message.error("删除数据失败！");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        })
+        .catch(() => {
+          // 取消删除操作
+        });
+    },
+
+    batchDelete() {
+      // 获取选中行的 ID 数组
+      const ids = this.selection.map((item) => item.id);
+
+      // 发送删除请求，调用批量删除的接口
       axios
-        .post(url, this.ruleForm)
+        .post("/fundsVo/batch", ids)
+        .then(() => {
+          // 删除成功后的操作
+          this.$message.success("批量删除成功");
+          // 清空选中行
+          this.selection = [];
+          // 刷新数据
+          this.axiosdata();
+        })
+        .catch((error) => {
+          // 处理错误情况
+          console.error(error);
+          this.$message.error("批量删除失败");
+        });
+    },
+
+     
+    search() {
+      const url = `http://localhost:9090/fundsVo/fundsVo/${this.searchValue}`;
+      axios
+        .get(url)
         .then((response) => {
-          if (response.data.code === 1) {
-            this.axiosdata();
-            this.dialogFormVisible = false;
-            this.$message.success(
-              this.dialogStatus === 'create'
-                ? '添加数据成功！'
-                : '修改数据成功！'
-            );
-          } else {
-            this.$message.error(
-              this.dialogStatus === 'create'
-                ? '添加数据失败！'
-                : '修改数据失败！'
-            );
-          }
+          this.result[0] = response.data.data
+          this.randomKey = Math.random()
+          this.showResultPage = true;
         })
         .catch((error) => {
           console.error(error);
         });
-    } else {
-      console.log('error submit!!');
-      return false;
+    },
+
+    goBack() {
+      this.showResultPage = false; // 返回原页面
+    },
+
+  getCanBeUsed() {
+      this.$router.push('/page2');
     }
-  });
-},
-
-updateCollectionForm(formName) {
-  this.$refs[formName].validate((valid) => {
-    if (valid) {
-      const url = '/fundsVo/update';
-      axios
-        .post(url, this.ruleForm)
-        .then((response) => {
-          if (response.data.code === 1) {
-            this.axiosdata();
-            this.dialogFormVisible = false;
-            this.$message.success(
-              this.dialogStatus === 'update'
-                ? '添加数据成功！'
-                : '修改数据成功！'
-            );
-          } else {
-            this.$message.error(
-              this.dialogStatus === 'update'
-                ? '添加数据失败！'
-                : '修改数据失败！'
-            );
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } else {
-      console.log('error submit!!');
-      return false;
-    }
-  });
-},
-deleteVisible(scope) {
-      this.$confirm('确定要删除' + scope.row.asset + '吗？', '提示', {
-
-    confirmButtonText: "确定",
-    cancelButtonText: "取消",
-    type: "warning",
-  })
-    .then(() => {
-      const id = scope.row.id
-      axios
-        .delete(`/fundsVo/`+id)
-        .then((response) => {
-          if (response.data.code === 1) {
-            this.axiosdata();
-            this.dialogFormVisible = false;
-            this.$message.success("删除完毕");
-          } else {
-            this.$message.error("删除数据失败！");
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    })
-    .catch(() => {
-      // 取消删除操作
-    });
-},
-
-  }
-}
+  },
+};
 </script>
 <style>
+.search-page {
+  padding: 20px;
+}
+
+.search-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.search-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.search-item {
+  margin-bottom: 5px;
+}
+
+.result-content {
+  margin: 20px;
+}
 </style>
