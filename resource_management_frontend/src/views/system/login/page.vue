@@ -16,14 +16,21 @@
         flex="dir:top main:justify cross:stretch box:justify">
         <div class="page-login--content-header">
           <p class="page-login--content-header-motto">
-            时间是一切财富中最宝贵的财富
+            <!-- logo -->
+            <img src="./image/logo@2x.png">
           </p>
         </div>
         <div
           class="page-login--content-main"
           flex="dir:top main:center cross:center">
           <!-- logo -->
-          <img class="page-login--logo" src="./image/logo@2x.png">
+          <!-- <img class="page-login--logo" src="./image/logo@2x.png"> -->
+          <!-- 资源管理系统 -->
+          <p :style="{
+            'color': '#00000099',
+            'fontSize': '36px',
+            'marginTop': '-5em'
+          }">资源管理系统</p>
           <!-- form -->
           <div class="page-login--form">
             <el-card shadow="never">
@@ -319,6 +326,7 @@ export default {
     ]),
     refreshTime () {
       this.time = dayjs().format('HH:mm:ss')
+      // this.time = '资源管理系统'
     },
     /**
      * @description 接收选择一个用户快速登录的事件
@@ -497,15 +505,15 @@ export default {
     height: 100%;
     min-height: 500px;
   }
-  // header
+  // header -> logo
   .page-login--content-header {
-    padding: 1em 0;
+    padding: 4em 90em 1em 0;
     .page-login--content-header-motto {
       margin: 0px;
       padding: 0px;
       color: $color-text-normal;
       text-align: center;
-      font-size: 12px;
+      font-size: 36px;
     }
   }
   // main
