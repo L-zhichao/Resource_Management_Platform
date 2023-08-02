@@ -1,0 +1,215 @@
+2023-08-08 09:25:01.32  INFO 9576 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 09:25:01.41  INFO 9576 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1228 ms
+2023-08-08 09:25:02.71  INFO 9576 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 09:28:46.22  INFO 9576 --- [http-nio-9090-exec-10] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 09:29:00.70  INFO 9576 --- [http-nio-9090-exec-1] s.d.r.c.fundManagement.FundsController   : 展示所有可支配资产
+2023-08-08 09:31:26.80  INFO 12156 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 09:31:26.88  INFO 12156 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1048 ms
+2023-08-08 09:31:28.23  INFO 12156 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 09:32:18.54  INFO 7228 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 09:32:18.62  INFO 7228 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1003 ms
+2023-08-08 09:32:19.78  INFO 7228 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 09:38:18.93  INFO 7228 --- [http-nio-9090-exec-8] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 09:39:25.78  INFO 7228 --- [http-nio-9090-exec-9] s.d.r.c.fundManagement.FundsController   : 展示所有可支配资产
+2023-08-08 09:42:15.38  INFO 19912 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 09:42:15.46  INFO 19912 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1057 ms
+2023-08-08 09:42:16.61  INFO 19912 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 09:45:46.75  INFO 19912 --- [http-nio-9090-exec-5] s.d.r.c.fundManagement.FundsController   : 增加资金
+2023-08-08 09:45:46.83  INFO 19912 --- [http-nio-9090-exec-6] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 10:04:08.21  INFO 7596 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 10:04:08.29  INFO 7596 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1046 ms
+2023-08-08 10:04:09.50  INFO 7596 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 10:06:14.25  INFO 24368 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 10:06:14.32  INFO 24368 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1002 ms
+2023-08-08 10:06:15.40  INFO 24368 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 10:09:19.43  INFO 18580 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 10:09:19.51  INFO 18580 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1015 ms
+2023-08-08 10:09:20.64  INFO 18580 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 10:15:06.33  INFO 26340 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 10:15:06.41  INFO 26340 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1011 ms
+2023-08-08 10:15:07.51  INFO 26340 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 10:18:00.20  INFO 27592 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 10:18:00.29  INFO 27592 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1022 ms
+2023-08-08 10:18:01.59  INFO 27592 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 10:25:29.40  INFO 11704 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 10:25:29.49  INFO 11704 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1127 ms
+2023-08-08 10:25:30.77  INFO 11704 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 10:29:02.74  INFO 27644 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 10:29:02.82  INFO 27644 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1024 ms
+2023-08-08 10:29:04.18  INFO 27644 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 10:31:30.82  INFO 17764 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 10:31:30.90  INFO 17764 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1035 ms
+2023-08-08 10:31:32.02  INFO 17764 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 10:32:36.98  INFO 26964 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 10:32:37.06  INFO 26964 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1129 ms
+2023-08-08 10:32:38.38  INFO 26964 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 10:32:54.07  INFO 9536 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 10:32:54.16  INFO 9536 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1163 ms
+2023-08-08 10:32:55.45  INFO 9536 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 10:40:04.34  INFO 9932 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 10:40:04.43  INFO 9932 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1127 ms
+2023-08-08 10:40:05.87  INFO 9932 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 10:40:41.11  INFO 27556 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 10:40:41.19  INFO 27556 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1128 ms
+2023-08-08 10:40:42.49  INFO 27556 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 10:41:41.93  INFO 22756 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 10:41:42.01  INFO 22756 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1055 ms
+2023-08-08 10:41:43.10  INFO 22756 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 10:44:38.81  INFO 18436 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 10:44:38.89  INFO 18436 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1034 ms
+2023-08-08 10:44:39.99  INFO 18436 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 10:52:21.66  INFO 18436 --- [http-nio-9090-exec-8] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 10:54:10.99  INFO 28516 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 10:54:11.08  INFO 28516 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1116 ms
+2023-08-08 10:54:12.33  INFO 28516 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 11:25:11.26  INFO 29572 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 11:25:11.36  INFO 29572 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1262 ms
+2023-08-08 11:25:12.72  INFO 29572 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 11:31:18.86  INFO 29248 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 11:31:18.96  INFO 29248 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1156 ms
+2023-08-08 11:31:20.26  INFO 29248 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 11:33:26.85  INFO 30252 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 11:33:26.94  INFO 30252 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1177 ms
+2023-08-08 11:33:28.20  INFO 30252 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 11:38:00.74  INFO 28792 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 11:38:00.83  INFO 28792 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1148 ms
+2023-08-08 11:38:02.12  INFO 28792 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 11:40:44.91  INFO 28792 --- [http-nio-9090-exec-6] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 11:42:47.67  INFO 29628 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 11:42:47.77  INFO 29628 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1212 ms
+2023-08-08 11:42:49.04  INFO 29628 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 11:44:53.31  INFO 29628 --- [http-nio-9090-exec-4] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 11:44:54.98  INFO 29628 --- [http-nio-9090-exec-6] s.d.r.c.fundManagement.FundsController   : 展示所有可支配资产
+2023-08-08 11:45:03.01  INFO 29628 --- [http-nio-9090-exec-7] s.d.r.c.fundManagement.FundsController   : 更新资金
+2023-08-08 11:45:03.04  INFO 29628 --- [http-nio-9090-exec-8] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 11:45:11.60  INFO 29628 --- [http-nio-9090-exec-9] s.d.r.c.fundManagement.FundsController   : 展示所有可支配资产
+2023-08-08 11:45:33.41  INFO 29628 --- [http-nio-9090-exec-5] s.d.r.c.fundManagement.FundsController   : 增加资金
+2023-08-08 11:45:33.43  INFO 29628 --- [http-nio-9090-exec-1] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 11:46:12.52  INFO 29628 --- [http-nio-9090-exec-3] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 11:46:14.76  INFO 29628 --- [http-nio-9090-exec-7] s.d.r.c.fundManagement.FundsController   : 展示所有可支配资产
+2023-08-08 11:46:45.69  INFO 29628 --- [http-nio-9090-exec-1] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 11:47:14.84  INFO 29628 --- [http-nio-9090-exec-7] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 11:48:31.74  INFO 29628 --- [http-nio-9090-exec-8] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 11:48:39.95  INFO 29628 --- [http-nio-9090-exec-4] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 11:48:49.90  INFO 29628 --- [http-nio-9090-exec-5] s.d.r.c.fundManagement.FundsController   : 展示所有可支配资产
+2023-08-08 11:49:02.47  INFO 29628 --- [http-nio-9090-exec-1] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 11:49:05.41  INFO 29628 --- [http-nio-9090-exec-6] s.d.r.c.fundManagement.FundsController   : 展示所有可支配资产
+2023-08-08 11:51:08.87  INFO 29628 --- [http-nio-9090-exec-9] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 11:51:14.89  INFO 29628 --- [http-nio-9090-exec-8] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 11:51:45.56  INFO 29628 --- [http-nio-9090-exec-2] s.d.r.c.fundManagement.FundsController   : 展示所有可支配资产
+2023-08-08 11:52:38.13  INFO 29628 --- [http-nio-9090-exec-1] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 12:02:45.14  INFO 27860 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 12:02:45.22  INFO 27860 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1080 ms
+2023-08-08 12:02:46.38  INFO 27860 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 12:03:08.11  INFO 27860 --- [http-nio-9090-exec-2] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 12:12:19.57  INFO 19320 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 12:12:19.65  INFO 19320 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1075 ms
+2023-08-08 12:12:20.84  INFO 19320 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 12:15:51.39  INFO 9524 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 12:15:51.46  INFO 9524 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1036 ms
+2023-08-08 12:15:52.58  INFO 9524 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 12:16:23.18  INFO 22668 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 12:16:23.29  INFO 22668 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1133 ms
+2023-08-08 12:16:24.51  INFO 22668 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 12:17:19.59  INFO 22668 --- [http-nio-9090-exec-6] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 12:17:25.34  INFO 22668 --- [http-nio-9090-exec-7] s.d.r.c.fundManagement.FundsController   : 更新资金
+2023-08-08 12:17:25.36  INFO 22668 --- [http-nio-9090-exec-9] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 12:17:33.12  INFO 22668 --- [http-nio-9090-exec-10] s.d.r.c.fundManagement.FundsController   : 更新资金
+2023-08-08 12:17:33.14  INFO 22668 --- [http-nio-9090-exec-1] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 12:17:40.29  INFO 22668 --- [http-nio-9090-exec-3] s.d.r.c.fundManagement.FundsController   : 更新资金
+2023-08-08 12:17:40.31  INFO 22668 --- [http-nio-9090-exec-2] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 12:21:54.37  INFO 22668 --- [http-nio-9090-exec-8] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 16:54:17.56  INFO 22692 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 16:54:17.65  INFO 22692 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1252 ms
+2023-08-08 16:54:18.92  INFO 22692 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 16:54:59.72  INFO 11112 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 16:54:59.80  INFO 11112 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1067 ms
+2023-08-08 16:55:00.94  INFO 11112 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 16:56:34.03  INFO 28608 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 16:56:34.11  INFO 28608 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1102 ms
+2023-08-08 16:56:35.28  INFO 28608 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 16:59:28.66  INFO 30408 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 16:59:28.74  INFO 30408 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1109 ms
+2023-08-08 16:59:29.92  INFO 30408 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 17:02:00.22  INFO 24752 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 17:02:00.31  INFO 24752 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1146 ms
+2023-08-08 17:02:01.54  INFO 24752 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 17:04:39.75  INFO 23616 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 17:04:39.84  INFO 23616 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1145 ms
+2023-08-08 17:04:41.05  INFO 23616 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 17:09:18.11  INFO 6188 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 17:09:18.19  INFO 6188 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1150 ms
+2023-08-08 17:09:19.42  INFO 6188 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 17:11:46.38  INFO 31828 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 17:11:46.47  INFO 31828 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1351 ms
+2023-08-08 17:11:47.94  INFO 31828 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 17:20:22.31  INFO 26892 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 17:20:22.39  INFO 26892 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1089 ms
+2023-08-08 17:20:23.51  INFO 26892 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 17:22:39.67  INFO 22828 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 17:22:39.75  INFO 22828 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1069 ms
+2023-08-08 17:22:40.91  INFO 22828 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 17:24:11.10  INFO 9192 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 17:24:11.18  INFO 9192 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1127 ms
+2023-08-08 17:24:12.37  INFO 9192 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 17:24:55.90  INFO 8100 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 17:24:55.99  INFO 8100 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1124 ms
+2023-08-08 17:24:57.15  INFO 8100 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 17:26:23.05  INFO 26888 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 17:26:23.13  INFO 26888 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1065 ms
+2023-08-08 17:26:24.30  INFO 26888 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 17:31:03.11  INFO 26888 --- [http-nio-9090-exec-2] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 17:31:09.11  INFO 26888 --- [http-nio-9090-exec-9] s.d.r.c.fundManagement.FundsController   : 根据主键ID删除某项资金
+2023-08-08 17:31:09.11  INFO 26888 --- [http-nio-9090-exec-9] s.d.r.c.fundManagement.FundsController   : 删除成功
+2023-08-08 17:31:09.13  INFO 26888 --- [http-nio-9090-exec-3] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 17:31:11.63  INFO 26888 --- [http-nio-9090-exec-7] s.d.r.c.fundManagement.FundsController   : 展示所有可支配资产
+2023-08-08 17:34:06.64  INFO 25668 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 17:34:06.74  INFO 25668 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1445 ms
+2023-08-08 17:34:08.23  INFO 25668 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 17:34:40.70  INFO 21724 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 17:34:40.78  INFO 21724 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1157 ms
+2023-08-08 17:34:42.03  INFO 21724 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 17:38:44.68  INFO 6172 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 17:38:44.77  INFO 6172 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1058 ms
+2023-08-08 17:38:45.92  INFO 6172 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 17:46:45.52  INFO 9832 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 17:46:45.65  INFO 9832 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1234 ms
+2023-08-08 17:46:46.98  INFO 9832 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 17:46:59.48  INFO 31008 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 17:46:59.56  INFO 31008 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1048 ms
+2023-08-08 17:47:00.77  INFO 31008 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 17:47:08.51  INFO 15688 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 17:47:08.59  INFO 15688 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1074 ms
+2023-08-08 17:47:09.88  INFO 15688 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 17:49:29.53  INFO 14880 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 17:49:29.60  INFO 14880 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1090 ms
+2023-08-08 17:49:30.81  INFO 14880 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 17:50:43.71  INFO 26448 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 17:50:43.79  INFO 26448 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1100 ms
+2023-08-08 17:50:44.97  INFO 26448 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 17:52:36.88  INFO 13612 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 17:52:36.96  INFO 13612 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1046 ms
+2023-08-08 17:52:38.12  INFO 13612 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 18:03:49.85  INFO 25124 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 18:03:49.93  INFO 25124 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1065 ms
+2023-08-08 18:03:51.08  INFO 25124 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 18:13:57.93  INFO 13620 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 18:13:58.01  INFO 13620 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1077 ms
+2023-08-08 18:13:59.19  INFO 13620 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 18:15:00.98  INFO 32784 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 18:15:01.06  INFO 32784 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1061 ms
+2023-08-08 18:15:02.46  INFO 32784 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 18:15:08.88  INFO 28092 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 18:15:08.96  INFO 28092 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1112 ms
+2023-08-08 18:15:10.27  INFO 28092 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 18:16:40.61  INFO 32904 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 18:16:40.68  INFO 32904 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1082 ms
+2023-08-08 18:16:41.80  INFO 32904 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 18:18:30.66  INFO 27184 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 18:18:30.74  INFO 27184 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1052 ms
+2023-08-08 18:18:31.86  INFO 27184 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 18:19:21.37  INFO 27672 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-08 18:19:21.45  INFO 27672 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1081 ms
+2023-08-08 18:19:22.58  INFO 27672 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-08 18:20:26.35  INFO 27672 --- [http-nio-9090-exec-9] s.d.r.c.fundManagement.FundsController   : 查询所有资产
+2023-08-08 18:20:27.88  INFO 27672 --- [http-nio-9090-exec-5] s.d.r.c.fundManagement.FundsController   : 展示所有可支配资产
