@@ -326,7 +326,6 @@ export default {
     ]),
     refreshTime () {
       this.time = dayjs().format('HH:mm:ss')
-      // this.time = '资源管理系统'
     },
     /**
      * @description 接收选择一个用户快速登录的事件
