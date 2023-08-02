@@ -17,13 +17,13 @@ public class Item {
     @Schema(description = "主键物品id")
     @TableId
     private Long itemId;
-@Schema(description = "物品名")
+    @Schema(description = "物品名")
     private String itemname;
-@Schema(description = "数量")
+    @Schema(description = "数量")
     private Integer number;
-@Schema(description = "价格")
+    @Schema(description = "价格")
     private Integer price;
-@Schema(description = "照片")
+    @Schema(description = "照片")
     private String imgs;
 @Schema(description = "视频")
 private  String video;
