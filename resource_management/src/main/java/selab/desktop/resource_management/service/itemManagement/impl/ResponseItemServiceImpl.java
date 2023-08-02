@@ -1,4 +1,4 @@
-package selab.desktop.resource_management.model.service.itemManagement.impl;
+package selab.desktop.resource_management.service.itemManagement.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
