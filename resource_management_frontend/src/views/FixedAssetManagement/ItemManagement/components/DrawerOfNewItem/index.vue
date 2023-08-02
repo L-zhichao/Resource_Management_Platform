@@ -46,15 +46,16 @@
           <el-popover
             @show="ruleFormData(scope)"
             @hide="ruleFormClear"
+            :key="randomKeyPopover"
             v-if="scope.row.state === 0 && userAdministratorPermissions"
             placement="left"
             width="550"
-            trigger="hover">
+            trigger="click">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px">
               <el-form-item>
                 <template>
-                  <el-radio v-model="radioDispose" :label="1">批准</el-radio>
-                  <el-radio v-model="radioDispose" :label="2">不批准</el-radio>
+                  <el-radio v-model="radioDispose" border :label="1">批准</el-radio>
+                  <el-radio v-model="radioDispose" border :label="2">不批准</el-radio>
                 </template>
               </el-form-item>
               <el-form-item label="说明" prop="reason">
@@ -159,6 +160,7 @@ export default {
       // 随机Key,用于刷新表格
       randomKey: Math.random(),
       randomKeyResponse: Math.random(),
+      randomKeyPopover: Math.random(),
       // 用于启动表格加载动画
       loadAnimation: false,
       loadAnimationResponse: false,
@@ -249,6 +251,7 @@ export default {
               result: 2,
               reason: ''
             }
+            this.randomKeyPopover = Math.random()
             this.$refs.ruleForm.clearValidate()
             this.$message({
               message: '回应上传成功',
@@ -369,12 +372,15 @@ export default {
      * @param {Object} scope
      */
     ruleFormData (scope) {
-      this.ruleForm = {
-        applyId: scope.row.applyId,
-        name: util.cookies.get('name'),
-        result: 2,
-        reason: ''
-      }
+      setTimeout(() => {
+        this.radioDispose = 1
+        this.ruleForm = {
+          applyId: scope.row.applyId,
+          name: util.cookies.get('name'),
+          result: 2,
+          reason: ''
+        }
+      }, 30)
     },
     /**
      * @description 提交表单

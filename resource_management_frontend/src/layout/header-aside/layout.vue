@@ -179,6 +179,7 @@ export default {
           if (data.length !== 0) {
             this.$notify({
               title: '有' + data.length + '个未处理物品损坏请求',
+              message: '物品管理 → 损坏信息',
               position: 'bottom-left',
               type: 'warning'
             })
@@ -205,7 +206,7 @@ export default {
           if (data.length !== 0) {
             this.$notify({
               title: '有' + data.length + '个未处理申请信息',
-              // message: '就很想点一下,也不知道有什么用',
+              message: '物品管理 → 申请信息',
               position: 'bottom-left',
               type: 'warning'
             })
@@ -227,7 +228,7 @@ export default {
           if (v.length !== 0) {
             this.$notify({
               title: '有' + v.length + '个未读申请回应信息',
-              // message: '就很想点一下,也不知道有什么用',
+              message: '物品管理 → 物品申请历史',
               position: 'bottom-left',
               type: 'warning'
             })
