@@ -84,12 +84,13 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- auto-generated definition
 create table item
 (
-    item_id   bigint auto_increment comment '物品ID'
+    item_id  bigint auto_increment comment '物品ID'
         primary key,
-    item_name varchar(10)      null comment '物品名称',
-    number    int              null comment '数量',
-    price     double default 1 null comment '价格',
-    imgs      varchar(100)     null comment '图片'
+    itemname varchar(10)  null comment '物品名称',
+    number   int          null comment '数量',
+    price    double       null comment '价格',
+    imgs     varchar(500) null comment '图片',
+    video    varchar(500) null comment '视屏'
 )
     comment '物品';
 
