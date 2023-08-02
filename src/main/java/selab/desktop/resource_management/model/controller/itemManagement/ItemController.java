@@ -15,6 +15,7 @@ import selab.desktop.resource_management.model.utils.ItemPage;
 import selab.desktop.resource_management.model.utils.JsonResult;
 
 import java.io.*;
+import java.util.Base64;
 import java.util.List;
 
 @RestController
@@ -49,7 +50,7 @@ public class ItemController {
 
     @Operation(description = "更新物品")
     @PutMapping("/updata")
-    public JsonResult<?> updateItem(Item item) {
+    public JsonResult<?> updateItem(@RequestBody Item item) {
         itemService.updateItem(item);
         return new JsonResult<>(20000, "修改成功", null);
 
@@ -63,8 +64,8 @@ public class ItemController {
     }
 
     @Operation(description = "通过id删除物品")
-    @DeleteMapping("/delete/{id}")
-    public JsonResult<?> delete(@PathVariable Long id) {
+    @DeleteMapping("/delete")
+    public JsonResult<?> delete(@RequestParam Long id) {
         itemService.deleteItemById(id);
         return new JsonResult<>(200, "success", null);
     }
@@ -92,17 +93,25 @@ public class ItemController {
     }
     @Operation(description = "图片查询")
     @GetMapping("/img-find")
-    public JsonResult<StringBuffer> fingImg(String url) {
+    public JsonResult<byte[]> fingImg(String url) {
         try {
             String substring = url.substring(url.indexOf('/', 8));
             substring="D://resource_management_platform/src/main/resources"+substring;
             File file = new  File(substring);
             System.out.println(substring);
             FileInputStream fis = new FileInputStream(file);
-            StringBuffer stringBuffer=new StringBuffer();
-            stringBuffer.append(fis);
+
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                bos.write(buffer, 0, bytesRead);
+            }
+            byte[] imageBytes = bos.toByteArray();
+//            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+            bos.close();
             fis.close();
-            return new JsonResult<>(200, "success", stringBuffer);
+            return new JsonResult<>(200, "success", imageBytes);
         } catch (IOException e) {
             e.printStackTrace();
             return new JsonResult<>(500, "图片读取失败", null);

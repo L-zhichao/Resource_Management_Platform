@@ -34,21 +34,21 @@ public class DamageRecordController {
     }
     @Operation(description = "新增损坏记录")
     @PostMapping("/save")
-    public JsonResult<?> addDamageRecord(@RequestParam DamageRecord damageRecord){
+    public JsonResult<?> addDamageRecord(@RequestBody DamageRecord damageRecord){
         damageRecordService.addDamageRecord(damageRecord);
         return new JsonResult<>(JsonResult.SUCCESS,"success",null);
     }
 
     @Operation(description = "删除一项损坏记录")
-    @DeleteMapping("/delete/{id}")
-    public JsonResult<?> deleteDamageRecord(@PathVariable Long id){
+    @DeleteMapping("/delete")
+    public JsonResult<?> deleteDamageRecord(@RequestParam Long id){
         damageRecordService.deleteDamageRecord(id);
         return new JsonResult<>(JsonResult.SUCCESS,"success",null);
     }
 
     @Operation(description = "更新损坏记录")
     @PutMapping("/update")
-    public JsonResult<?> updateDamageRecord(@RequestParam Long damageRecordId){
+    public JsonResult<?> updateDamageRecord(@RequestBody Long damageRecordId){
         damageRecordService.updateIsHandle(damageRecordId);
         return new JsonResult<>(JsonResult.SUCCESS,"success",null);
     }
