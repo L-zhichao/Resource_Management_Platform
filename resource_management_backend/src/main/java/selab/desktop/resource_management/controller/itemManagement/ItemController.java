@@ -95,7 +95,7 @@ public class ItemController {
     }
     @Operation(description = "图片查询")
     @GetMapping("/img-find")
-    public JsonResult<byte[]> fingImg(String url) {
+    public JsonResult<String > fingImg(String url) {
         try {
             String substring = url.substring(url.indexOf('/', 8));
             substring="D://"+substring;
@@ -113,7 +113,30 @@ public class ItemController {
 //            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
             bos.close();
             fis.close();
-            return new JsonResult<>(JsonResult.SUCCESS, null, imageBytes);
+
+            String fileName=file.getName();
+            int dotIndex = fileName.lastIndexOf('.');
+            String extension = null;
+            if (dotIndex > 0 && dotIndex < fileName.length() - 1) {
+                extension = fileName.substring(dotIndex + 1).toLowerCase();
+                System.out.println("File Extension: " + extension);
+            } else {
+                System.out.println("File has no extension.");
+            }
+
+            String base64Image;
+            if ("png".equalsIgnoreCase(extension)) {
+                base64Image = "data:image/png;base64," + Base64.getEncoder().encodeToString(imageBytes);
+            } else if ("jpg".equalsIgnoreCase(extension) || "jpeg".equalsIgnoreCase(extension)) {
+                base64Image = "data:image/jpg;base64," + Base64.getEncoder().encodeToString(imageBytes);
+            } else if ("mp4".equalsIgnoreCase(extension) || "avi".equalsIgnoreCase(extension) || "mov".equalsIgnoreCase(extension)) {
+                base64Image = "data:image/video;base64," + Base64.getEncoder().encodeToString(imageBytes);
+            } else {
+                // 默认处理为普通文件类型
+                base64Image = Base64.getEncoder().encodeToString(imageBytes);
+            }
+
+            return new JsonResult<>(JsonResult.SUCCESS, null, base64Image);
         } catch (IOException e) {
             e.printStackTrace();
             return new JsonResult<>(500, "图片读取失败", null);

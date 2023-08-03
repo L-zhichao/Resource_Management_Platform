@@ -9,6 +9,10 @@ logging:
 server:
   port: 9090
 spring:
+  servlet:
+    multipart:
+      max-file-size: 100B
+      max-request-size: 100B
   application:
     name: resource_management_platform_project
   datasource:
