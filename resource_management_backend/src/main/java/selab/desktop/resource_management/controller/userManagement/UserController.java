@@ -81,6 +81,11 @@ public class UserController {
         JsonResult<List<UserLog>> listJsonResult = new JsonResult<>(JsonResult.SUCCESS,null,userLogs);
         return listJsonResult;
     }
-
+    @GetMapping("/count")
+   public JsonResult<Long> queryLogCount(){
+        Long count = userLogService.queryForCount();
+        JsonResult<Long> longJsonResult = new JsonResult<>(JsonResult.SUCCESS, null, count);
+        return longJsonResult;
+    }
 
 }

@@ -10,6 +10,7 @@ import selab.desktop.resource_management.utils.JsonResult;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 @RequestMapping("/damage/record")
 @Tag(name = "物品损坏上报记录controller层")
@@ -18,7 +19,7 @@ public class DamageRecordController {
     private DamageRecordService damageRecordService;
 
     @Operation(description = "查询所有的上报记录")
-    @GetMapping("/all")
+    @GetMapping("/query")
     public JsonResult<List<DamageRecord>> findAllDamageRecord(@RequestParam(defaultValue = "") String username){
         if(username.equals("")){
             List<DamageRecord> allDamageRecord = damageRecordService.findAllDamageRecord();

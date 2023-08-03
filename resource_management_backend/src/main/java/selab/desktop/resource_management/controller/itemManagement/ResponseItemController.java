@@ -4,7 +4,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ResponseItemUpload;
 import selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ResponseItemVo;
+import selab.desktop.resource_management.service.itemManagement.ApplyItemService;
 import selab.desktop.resource_management.service.itemManagement.ResponseItemService;
 import selab.desktop.resource_management.utils.JsonResult;
 
@@ -20,7 +22,7 @@ public class ResponseItemController {
 
     @Operation(summary = "物品回应上传模块")
     @PostMapping("/response")
-    public JsonResult<Void> response(@RequestBody selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ResponseItemUpload responseItemUpload){
+    public JsonResult<Void> response(@RequestBody ResponseItemUpload responseItemUpload){
         responseItemService.saveResonse(responseItemUpload);
         return new JsonResult<>(JsonResult.SUCCESS,null,null);
     }
@@ -40,5 +42,11 @@ public class ResponseItemController {
         List<ResponseItemVo> responseItemVos = responseItemService.selectAllUnreadResonse(name);
         JsonResult<List<ResponseItemVo>> listJsonResult = new JsonResult<>(JsonResult.SUCCESS,null,responseItemVos);
         return listJsonResult;
+    }
+
+    @PostMapping("/readed")
+    public JsonResult<Void> readResponse(@RequestBody Long applyId){
+      responseItemService.updateResponseStatus(applyId);
+      return new JsonResult<>(JsonResult.SUCCESS,null,null);
     }
 }

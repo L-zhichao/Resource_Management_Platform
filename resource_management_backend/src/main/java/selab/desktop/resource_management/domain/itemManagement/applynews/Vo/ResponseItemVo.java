@@ -1,7 +1,9 @@
 package selab.desktop.resource_management.domain.itemManagement.applynews.Vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -20,6 +22,7 @@ public class ResponseItemVo {
     @Schema(description = "说明回应结果原因")
     private String reason;
     @Schema(description = "回应时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date responseTime;
 
 }

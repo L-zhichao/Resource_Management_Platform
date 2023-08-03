@@ -11,8 +11,8 @@ server:
 spring:
   servlet:
     multipart:
-      max-file-size: 100B
-      max-request-size: 100B
+      max-file-size: 1000000B
+      max-request-size: 100000B
   application:
     name: resource_management_platform_project
   datasource:

@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import selab.desktop.resource_management.domain.itemManagement.applynews.ResponseItem;
 import selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ResponseItemUpload;
 import selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ResponseItemVo;
+import selab.desktop.resource_management.exception.itemManagement.UpdateResponseStatusException;
 import selab.desktop.resource_management.exception.userManagment.UserInsertException;
 import selab.desktop.resource_management.mapper.itemManagement.ApplyItemMapper;
 import selab.desktop.resource_management.mapper.itemManagement.ResponseItemMapper;
+import selab.desktop.resource_management.service.itemManagement.ApplyItemService;
 import selab.desktop.resource_management.service.itemManagement.ResponseItemService;
 
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ResponseItemServiceImpl extends ServiceImpl<ResponseItemMapper, ResponseItem> implements ResponseItemService {
     private final ResponseItemMapper responseItemMapper;
-    private final ApplyItemMapper applyItemMapper;
+    private final ApplyItemService applyItemService;
     @Override
     public List<ResponseItemVo> selectAllUnreadResonse(String name) {
 
@@ -37,7 +39,7 @@ public class ResponseItemServiceImpl extends ServiceImpl<ResponseItemMapper, Res
 
     @Override
     public void saveResonse(ResponseItemUpload responseItemUpload) {
-
+        applyItemService.updateApplyStatus(responseItemUpload.getApplyId());
         ResponseItem responseItem = responseItemUploadToResponseItem(responseItemUpload);
         int rows = responseItemMapper.insert(responseItem);
         if(rows != 1){
@@ -56,12 +58,25 @@ public class ResponseItemServiceImpl extends ServiceImpl<ResponseItemMapper, Res
         });
         return responseItemVos;
     }
+
+    @Override
+    public void updateResponseStatus(Long applyId) {
+        LambdaQueryWrapper<ResponseItem> responseItemLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        responseItemLambdaQueryWrapper.eq(ResponseItem::getApplyId,applyId);
+        ResponseItem responseItem = responseItemMapper.selectOne(responseItemLambdaQueryWrapper);
+        responseItem.setStatus(ResponseItem.Response_READED);
+        int rows = responseItemMapper.updateById(responseItem);
+        if(rows != 1){
+            throw new UpdateResponseStatusException("更改回应状态未知异常");
+        }
+    }
+
     private ResponseItem responseItemUploadToResponseItem(ResponseItemUpload responseItemUpload){
         ResponseItem responseItem = new ResponseItem();
         responseItem.setApplyId(responseItemUpload.getApplyId());
         responseItem.setResult(responseItemUpload.getResult());
-        responseItem.setResponseUser(responseItem.getResponseUser());
-        responseItem.setReason(responseItem.getReason());
+        responseItem.setResponseUser(responseItemUpload.getResponseName());
+        responseItem.setReason(responseItemUpload.getReason());
         responseItem.setResponseTime(responseItemUpload.getResponseTime());
         responseItem.setApplyUser(responseItemUpload.getApplyName());
         return responseItem;

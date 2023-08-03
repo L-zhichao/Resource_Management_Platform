@@ -17,6 +17,7 @@ import java.io.*;
 import java.util.Base64;
 import java.util.List;
 
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 @RequestMapping("/item")
 @Tag(name = "物品管理controller层")
@@ -72,7 +73,7 @@ public class ItemController {
 
     @Operation(description = "图片上传")
     @PostMapping("/img-upload")
-    public JsonResult uploadImg(MultipartFile file) {
+    public JsonResult uploadImg( MultipartFile file) {
 
         try {
             //拿到图片上传到的目录(类路径classes下的static/img/upload)的File对象
@@ -83,12 +84,12 @@ public class ItemController {
             String fileUploadPath = uploadDirPath + "\\" + file.getOriginalFilename();
             //保存图片
             file.transferTo(new File(fileUploadPath));
-            String imageUrl = "http://192.168.1.3:8080/img/" + file.getOriginalFilename();
+            String imageUrl = "http://127.0.0.1:9090/img/" + file.getOriginalFilename();
             //成功响应
             return new JsonResult(JsonResult.SUCCESS, null, null);
         } catch (IOException e) {
             //失败响应
-            return new JsonResult<>(500, "图片上传失败", null);
+            return new JsonResult<>(50056, "图片上传失败", null);
         }
     }
     @Operation(description = "图片查询")

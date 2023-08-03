@@ -1,6 +1,7 @@
 package selab.desktop.resource_management.domain.itemManagement.item;
 
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,8 +26,10 @@ public class DamageRecord {
     @Schema(description = "记录时间")
     private Date damageRecordTime;
     @Schema(description = "物品名称")
+    @TableField("itemname")
     private String itemName;
     @Schema(description = "上传者")
+    @TableField("username")
     private String userName;
     @Schema(description = "管理员是否已读")
     private Boolean damageRecordIsread;

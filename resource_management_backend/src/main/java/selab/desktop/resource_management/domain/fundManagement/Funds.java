@@ -1,11 +1,13 @@
 package selab.desktop.resource_management.domain.fundManagement;
 
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.util.Date;
 @Data
+@TableName("fundsmgm")
 public class Funds {
     @Schema(description = "主键ID")
     private Long id;

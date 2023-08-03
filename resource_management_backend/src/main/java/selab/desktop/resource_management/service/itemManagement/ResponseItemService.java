@@ -26,4 +26,10 @@ public interface ResponseItemService extends IService<ResponseItem> {
      * @return
      */
     List<ResponseItemVo> selectAllResponse();
+
+    /**
+     *     更改回应状态 为已读
+     * @param applyId  申请id
+     */
+    void updateResponseStatus(Long applyId);
 }

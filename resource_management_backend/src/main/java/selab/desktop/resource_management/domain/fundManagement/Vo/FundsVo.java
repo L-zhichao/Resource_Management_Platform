@@ -1,10 +1,12 @@
 package selab.desktop.resource_management.domain.fundManagement.Vo;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import java.util.Date;
 @Data
+@TableName("fundsmgm")
 public class FundsVo {
     @TableId
     @Schema(description = "自增主键雪花ID")
