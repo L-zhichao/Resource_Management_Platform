@@ -83,7 +83,7 @@ public class ItemController {
             String fileUploadPath = uploadDirPath + "\\" + file.getOriginalFilename();
             //保存图片
             file.transferTo(new File(fileUploadPath));
-            String imageUrl = "http://192.168.1.3:8080/img/" + file.getOriginalFilename();
+            String imageUrl = "http://192.168.1.3:9090/img/" + file.getOriginalFilename();
             //成功响应
             return new JsonResult(JsonResult.SUCCESS, null, null);
         } catch (IOException e) {
@@ -93,7 +93,7 @@ public class ItemController {
     }
     @Operation(description = "图片查询")
     @GetMapping("/img-find")
-    public JsonResult<String > fingImg(String url) {
+    public String fingImg(String url) {
         try {
             String substring = url.substring(url.indexOf('/', 8));
             substring="D://"+substring;
@@ -134,10 +134,10 @@ public class ItemController {
                 base64Image = Base64.getEncoder().encodeToString(imageBytes);
             }
 
-            return new JsonResult<>(JsonResult.SUCCESS, null, base64Image);
+            return base64Image;
         } catch (IOException e) {
             e.printStackTrace();
-            return new JsonResult<>(500, "图片读取失败", null);
+            return null;
         }
     }
 }
