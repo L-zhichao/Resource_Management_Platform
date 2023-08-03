@@ -9,14 +9,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import selab.desktop.resource_management.model.domain.itemManagement.item.Item;
-import selab.desktop.resource_management.model.service.itemManagement.ItemService;
-import selab.desktop.resource_management.model.utils.ItemPage;
-import selab.desktop.resource_management.model.utils.JsonResult;
-
+import selab.desktop.resource_management.domain.itemManagement.item.Item;
+import selab.desktop.resource_management.service.itemManagement.ItemService;
+import selab.desktop.resource_management.utils.ItemPage;
+import selab.desktop.resource_management.utils.JsonResult;
 import java.io.*;
-import java.util.Base64;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/item")
