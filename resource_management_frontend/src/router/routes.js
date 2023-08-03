@@ -28,64 +28,6 @@ const frameIn = [
         },
         component: _import('system/index')
       },
-      // 演示页面
-      // {
-      //   path: '/page1',
-      //   name: 'page1',
-      //   meta: {
-      //     title: '资金管理',
-      //     auth: true
-      //   },
-      //   component: _import('demo/page1')
-      // },
-      // {
-      //   path: '/page2',
-      //   name: 'page2',
-      //   meta: {
-      //     title: '资产分配',
-      //     auth: true
-      //   },
-      //   component: _import('demo/page2')
-      // },
-      // {
-      //   path: '/page3',
-      //   name: 'page3',
-      //   meta: {
-      //     title: '日志记录',
-      //     auth: true
-      //   },
-      //   component: _import('demo/page3')
-      // },
-
-      // {
-      //   path: '/page4',
-      //   name: 'page4',
-      //   meta: {
-      //     title: '物品申请',
-      //     auth: true
-      //   },
-      //   component: _import('demo/page4')
-      // },
-
-      // {
-      //   path: 'ResourceTest',
-      //   name: 'ResourceTest',
-      //   meta: {
-      //     title: '考试资源',
-      //     auth: true
-      //   },
-      //   component: _import('resource/ResourceTest')
-      // },
-
-      // {
-      //   path: 'UpLoad',
-      //   name: 'Upload',
-      //   meta: {
-      //     title: '上传资源',
-      //     auth: true
-      //   },
-      //   component: _import('resource/UpLoad')
-      // },
       // 系统 前端日志
       {
         path: 'log',
@@ -117,7 +59,25 @@ const frameIn = [
   // 资金管理
   demo,
   // 考试资源
-  resource
+  resource,
+  {
+    path: 'editor-quill',
+    name: 'editor-quill',
+    cache: true,
+    meta: { auth: true },
+    redirect: { name: 'editor-quill' },
+    component: layoutHeaderAside,
+    children: [{
+      path: '/editor-quill',
+      name: 'editor-quill',
+      meta: {
+        title: '文本编辑器',
+        auth: true,
+        cache: true
+      },
+      component: _import('editor-quill')
+    }]
+  }
 ]
 
 /**

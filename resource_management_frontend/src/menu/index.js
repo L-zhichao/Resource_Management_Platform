@@ -27,12 +27,14 @@ export const menuHeader = supplementPath([
   // 资金管理
   demo,
   // 考试资源
-  resource
+  resource,
+  { path: '/editor-quill', title: 'UEditor', icon: 'pencil-square-o' }
 ])
 
 export const menuAside = supplementPath([
   { path: '/index', title: '首页', icon: 'home' },
   itemManagement,
   demo,
-  resource
+  resource,
+  { path: '/editor-quill', title: 'UEditor', icon: 'pencil-square-o' }
 ])

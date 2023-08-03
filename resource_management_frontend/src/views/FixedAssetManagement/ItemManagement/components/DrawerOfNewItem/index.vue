@@ -147,7 +147,7 @@ export default {
       },
       ruleForm: {
         applyId: null,
-        name: '',
+        applyName: '',
         result: 2,
         reason: ''
       },
@@ -224,31 +224,31 @@ export default {
      * @description 物品回应上传api
      * @param {Object} param0
      * @param {Number} applyId
-     * @param {String} name
+     * @param {String} applyName
      * @param {Number} result 回应结果(同意与否 2为同意，0为否)
      * @param {String} reason 回应结果原因
      * @param {String} responseTime 回应时间
      */
-    async itemResponseAPI ({ applyId, name, result, reason, responseTime, responseName }) {
-      return await api.ITEM_RESPONSE_API({ applyId, name, result, reason, responseTime, responseName })
+    async itemResponseAPI ({ applyId, applyName, result, reason, responseTime, responseName }) {
+      return await api.ITEM_RESPONSE_API({ applyId, applyName, result, reason, responseTime, responseName })
     },
     /**
      * @description 物品回应上传
      * @param {Object} param0
      * @param {Number} applyId
-     * @param {String} name
+     * @param {String} applyName
      * @param {Number} result 回应结果(同意与否 2为同意，0为否)
      * @param {String} reason 回应结果原因
      */
-    itemResponse ({ applyId, name, result, reason }) {
+    itemResponse ({ applyId, applyName, result, reason }) {
       const responseTime = dayjs().format('YYYY-MM-DD HH:mm:ss')
       const responseName = util.cookies.get('name')
-      this.itemResponseAPI({ applyId, name, result, reason, responseTime, responseName })
+      this.itemResponseAPI({ applyId, applyName, result, reason, responseTime, responseName })
         .then(v => {
           if (typeof v === 'object') {
             this.ruleForm = {
               applyId: null,
-              name: '',
+              applyName: '',
               result: 2,
               reason: ''
             }
@@ -398,7 +398,7 @@ export default {
     ruleFormClear () {
       this.ruleForm = {
         applyId: null,
-        name: '',
+        applyName: '',
         result: 2,
         reason: ''
       }
@@ -414,7 +414,7 @@ export default {
         this.radioDispose = 1
         this.ruleForm = {
           applyId: scope.row.applyId,
-          name: util.cookies.get('name'),
+          applyName: scope.row.applyUser,
           result: 2,
           reason: ''
         }
@@ -428,7 +428,7 @@ export default {
         if (valid) {
           this.itemResponse({
             applyId: this.ruleForm.applyId,
-            name: this.ruleForm.name,
+            applyName: this.ruleForm.applyName,
             result: this.ruleForm.result,
             reason: this.ruleForm.reason
           })
