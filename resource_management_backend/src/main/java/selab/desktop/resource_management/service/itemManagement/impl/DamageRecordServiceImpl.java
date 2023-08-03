@@ -34,7 +34,7 @@ public class DamageRecordServiceImpl implements DamageRecordService {
     @Override
     public List<DamageRecord> findAllDamageRecord() {
         QueryWrapper queryWrapper=new QueryWrapper();
-        queryWrapper.eq("ishandle",false);
+        queryWrapper.eq("damage_record_ishandle",false);
         List<DamageRecord> damageRecords = damageRecordMapper.selectList(queryWrapper);
         return damageRecords;
     }
