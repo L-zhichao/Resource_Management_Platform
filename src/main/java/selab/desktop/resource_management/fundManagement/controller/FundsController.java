@@ -32,13 +32,18 @@ public class FundsController {
         return new JsonResult<>(JsonResult.SUCCESS, null, fundsService.list());
     }
 
-    @GetMapping("/fundsVo/{id}")
-    @Operation(summary = "根据ID查询")
-    @Transactional
-    public JsonResult<FundsVo> getFundsById(@PathVariable Long id) {
-        return new JsonResult<>(JsonResult.SUCCESS, null, fundsService.getById(id));
-    }
 
+    @GetMapping("/getCanBeUsed")
+    @Operation(summary = "展示所有可支配资产")
+    @Transactional
+    public JsonResult<Page<FundsVo>> getCanBeUsedAsset(int page,int pageSize) {
+        QueryWrapper<FundsVo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("judge", "是");
+        log.info("展示所有可支配资产");
+        Page<FundsVo> fPage = new Page<>(page,pageSize);
+        fundsService.page(fPage,queryWrapper);
+        return new JsonResult<>(JsonResult.SUCCESS, null,fPage);
+    }
     @GetMapping("/page")
     @Operation(summary = "分页查询资金")
     @Transactional
@@ -48,32 +53,31 @@ public class FundsController {
         return new JsonResult<>(JsonResult.SUCCESS, null, mPage);
     }
 
-    @GetMapping("/getCanBeUsed")
-    @Operation(summary = "展示所有可支配资产")
+
+
+    @GetMapping("/fundsVo/{id}")
+    @Operation(summary = "根据ID查询")
     @Transactional
-    public JsonResult<List<FundsVo>> getCanBeUsedAsset() {
-        QueryWrapper<FundsVo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("judge", "是");
-        List<FundsVo> list = fundsService.list(queryWrapper);
-        log.info("展示所有可支配资产");
-        return new JsonResult<>(JsonResult.SUCCESS, null, list);
+    public JsonResult<FundsVo> getFundsById(@PathVariable Long id) {
+        return new JsonResult<>(JsonResult.SUCCESS, null, fundsService.getById(id));
     }
+
 
 
     @PostMapping("/update")
     @Operation(summary = "新增和修改资金")
     @Transactional
-    public JsonResult<String> add(@RequestBody FundsVo fundsVo) {
+    public JsonResult<FundsVo> add(@RequestBody FundsVo fundsVo) {
         if (fundsVo.getId() == null) {
             fundsVo.setUpdateTime(new Date());
             log.info("增加资金");
             fundsService.save(fundsVo);
-            return new JsonResult<>(JsonResult.SUCCESS, null, "增加成功");
+            return new JsonResult<>(JsonResult.SUCCESS, "增加成功",fundsVo);
         } else {
             fundsVo.setUpdateTime(new Date());
             log.info("更新资金");
             fundsService.updateById(fundsVo);
-            return new JsonResult<>(JsonResult.SUCCESS, null, "更新成功");
+            return new JsonResult<>(JsonResult.SUCCESS, "更新成功",fundsVo );
         }
     }
 
@@ -83,11 +87,14 @@ public class FundsController {
     public JsonResult<String> delete(@PathVariable Long id) {
         log.info("根据主键ID删除某项资金");
         log.info("删除成功");
-        return new JsonResult<>(JsonResult.SUCCESS, null, "删除成功");
+        fundsService.removeById(id);
+        return new JsonResult<>(JsonResult.SUCCESS, "删除成功",null );
 
     }
 
     @PostMapping("/fundsVo/batch")
+    @Operation(summary = "批量删除")
+    @Transactional
     public JsonResult<String> deleteBatch(@RequestBody List<Long>ids){
         fundsService.removeBatchByIds(ids);
         return new JsonResult<>(JsonResult.SUCCESS,null,"删除成功");
