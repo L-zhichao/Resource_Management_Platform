@@ -1,6 +1,7 @@
 package selab.desktop.resource_management.controller.itemManagement;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import selab.desktop.resource_management.utils.JsonResult;
 import java.util.List;
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "物品回应Controller层")
 @RequestMapping("/item")
 public class ResponseItemController {
     private final ResponseItemService responseItemService;

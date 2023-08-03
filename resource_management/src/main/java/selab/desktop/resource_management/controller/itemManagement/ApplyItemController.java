@@ -1,6 +1,7 @@
 package selab.desktop.resource_management.controller.itemManagement;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import java.util.List;
 //@Tag(name="物品申请回应",description = "完成物品申请和回应业务")
 @RequiredArgsConstructor
 @RestController
+@Tag(name = "物品申请Controller层")
 @RequestMapping("/item")
 public class ApplyItemController {
     private final ApplyItemService applyItemService;
