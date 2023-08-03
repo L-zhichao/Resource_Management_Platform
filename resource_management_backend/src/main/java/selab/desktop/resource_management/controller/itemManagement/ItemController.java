@@ -14,8 +14,8 @@ import selab.desktop.resource_management.service.itemManagement.ItemService;
 import selab.desktop.resource_management.utils.ItemPage;
 import selab.desktop.resource_management.utils.JsonResult;
 import java.io.*;
+import java.util.Base64;
 import java.util.List;
-
 
 @RestController
 @RequestMapping("/item")
@@ -38,12 +38,13 @@ public class ItemController {
         long pages = itemPage.getPages();
         List<Item> records = itemPage.getRecords();
         ItemPage itemPage1 = new ItemPage(total, pages, records);
-        return new JsonResult<>(20000, "查询成功", itemPage1);
+        return new JsonResult<>(200, null, itemPage1);
     }
 
     @Operation(description = "新增物品")
     @PostMapping("/save")
     public JsonResult<Void> addItem(@RequestBody Item item) {
+        itemService.addItem(item);
         return new JsonResult<>(JsonResult.SUCCESS, null, null);
     }
 
@@ -51,7 +52,7 @@ public class ItemController {
     @PutMapping("/updata")
     public JsonResult<?> updateItem(@RequestBody Item item) {
         itemService.updateItem(item);
-        return new JsonResult<>(20000, "修改成功", null);
+        return new JsonResult<>(JsonResult.SUCCESS, null, null);
 
     }
 
@@ -59,18 +60,18 @@ public class ItemController {
     @GetMapping("/select/{id}")
     public JsonResult<Item> select(@PathVariable Long id) {
         Item item = itemService.getItemById(id);
-        return new JsonResult<>(200, null, item);
+        return new JsonResult<>(JsonResult.SUCCESS, null, item);
     }
 
     @Operation(description = "通过id删除物品")
     @DeleteMapping("/delete")
     public JsonResult<?> delete(@RequestParam Long id) {
         itemService.deleteItemById(id);
-        return new JsonResult<>(200, "success", null);
+        return new JsonResult<>(JsonResult.SUCCESS, null, null);
     }
 
     @Operation(description = "图片上传")
-    @RequestMapping("/img-upload")
+    @PostMapping("/img-upload")
     public JsonResult uploadImg(MultipartFile file) {
 
         try {
@@ -84,7 +85,7 @@ public class ItemController {
             file.transferTo(new File(fileUploadPath));
             String imageUrl = "http://192.168.1.3:8080/img/" + file.getOriginalFilename();
             //成功响应
-            return new JsonResult(200, "success", null);
+            return new JsonResult(JsonResult.SUCCESS, null, null);
         } catch (IOException e) {
             //失败响应
             return new JsonResult<>(500, "图片上传失败", null);
@@ -95,7 +96,7 @@ public class ItemController {
     public JsonResult<byte[]> fingImg(String url) {
         try {
             String substring = url.substring(url.indexOf('/', 8));
-            substring="D://resource_management_platform/resource_management_backend/"+substring;
+            substring="D://"+substring;
             File file = new  File(substring);
             System.out.println(substring);
             FileInputStream fis = new FileInputStream(file);
@@ -110,7 +111,7 @@ public class ItemController {
 //            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
             bos.close();
             fis.close();
-            return new JsonResult<>(200, "success", imageBytes);
+            return new JsonResult<>(JsonResult.SUCCESS, null, imageBytes);
         } catch (IOException e) {
             e.printStackTrace();
             return new JsonResult<>(500, "图片读取失败", null);
