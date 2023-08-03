@@ -217,24 +217,56 @@ export default {
         })
     },
     /**
-     * @description 本人所有未读申请回应信息api
+     * @description 所有物品申请信息展示api
      */
-    async itemReadResponseAPI () {
-      return await api.ITEM_READ_RESPONSE_API()
+    async itemShowApplyAPI () {
+      return await api.ITEM_SHOW_APPLY_API()
     },
     /**
-     * @description 本人所有未读申请回应信息
+     * @description 所有物品申请信息展示
      */
-    itemReadResponse () {
-      this.itemReadResponseAPI()
+    itemShowApply () {
+      this.itemShowApplyAPI()
         .then(v => {
-          if (v.length !== 0) {
+          if (typeof v[0] === 'undefined') return
+
+          if ('applyId' in v[0]) {
+            this.itemShowResponse(v)
+          } else {
+            this.$message.error('物品申请信息请求失败')
+          }
+        })
+    },
+    /**
+     * @description 所有物品回应信息展示api
+     */
+    async itemShowResponseAPI () {
+      return await api.ITEM_SHOW_RESPONSE_API()
+    },
+    /**
+     * @description 所有物品回应信息展示
+     * @param {Object} vApply 所有物品申请信息
+     */
+    itemShowResponse (vApply) {
+      this.itemShowResponseAPI()
+        .then(v => {
+          if (typeof v[0] === 'undefined') return
+
+          if ('applyId' in v[0]) {
+            let responseNumber = 0
+            v.forEach((item, index) => {
+              vApply.forEach((item2, index2) => {
+                if (item2.applyId === item.applyId && item2.status === 1 && item.status === -1) responseNumber++
+              })
+            })
             this.$notify({
-              title: '有' + v.length + '个未读申请回应信息',
+              title: '有' + responseNumber + '个未读申请回应信息',
               message: '物品管理 → 物品申请历史',
               position: 'bottom-left',
               type: 'warning'
             })
+          } else {
+            this.$message.error('物品回应信息请求失败')
           }
         })
     }
@@ -242,7 +274,7 @@ export default {
   mounted () {
     if (this.userAdministratorPermissions) this.itemSearchDamage()
     if (this.userAdministratorPermissions) this.itemReadApply()
-    if (!this.userAdministratorPermissions) this.itemReadResponse()
+    if (!this.userAdministratorPermissions) this.itemShowApply()
     if (!this.info.name) this.logout()
   }
 }

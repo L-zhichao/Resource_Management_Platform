@@ -2,12 +2,12 @@
 
 export default ({ service, request, serviceForMock, requestForMock, mock, faker, tools }) => ({
   /**
-   * @description 本人所有未读申请回应信息
+   * @description 普通用户回复已读
    */
-  ITEM_READ_RESPONSE_API () {
+  ITEM_READ_RESPONSE_API (data) {
     // 模拟数据
     mock
-      .onAny('/item/readResponse')
+      .onAny('/item/readed')
       .reply(config => {
         // const configData = JSON.parse(config.data)
         return [
@@ -22,8 +22,9 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
       })
     // 接口请求
     return request({
-      url: 'item/readResponse',
-      method: 'post'
+      url: 'item/readed',
+      method: 'post',
+      data
     })
   }
 })

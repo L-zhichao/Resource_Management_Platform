@@ -386,7 +386,7 @@ export default {
     submitCollectionForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          const url = "/fundsVo/update";
+          const url = "http://localhost:9090/fundsVo/update";
           axios
             .post(url, this.ruleForm)
             .then((response) => {
@@ -419,7 +419,7 @@ export default {
     updateCollectionForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          const url = "/fundsVo/update";
+          const url = "http://localhost:9090/fundsVo/update";
           axios
             .post(url, this.ruleForm)
             .then((response) => {
@@ -462,7 +462,7 @@ export default {
         .then(() => {
           const id = scope.row.id;
           axios
-            .delete(`/fundsVo/` + id)
+            .delete(`http://localhost:9090/fundsVo/` + id)
             .then((response) => {
               if (response.data.status === 200) {
                 this.axiosdata();
@@ -487,7 +487,7 @@ export default {
 
       // 发送删除请求，调用批量删除的接口
       axios
-        .post("/fundsVo/batch", ids)
+        .post("http://localhost:9090/fundsVo/batch", ids)
         .then(() => {
           // 删除成功后的操作
           this.$message.success("批量删除成功");

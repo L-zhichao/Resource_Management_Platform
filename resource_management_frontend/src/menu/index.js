@@ -4,6 +4,7 @@ import { uniqueId } from 'lodash'
 import demo from './modules/demo'
 import itemManagement from './modules/ItemManagement'
 import resource from './modules/resource'
+import editorQuill from './modules/editorQuill'
 
 /**
  * @description 给菜单数据补充上 path 字段
@@ -28,7 +29,7 @@ export const menuHeader = supplementPath([
   demo,
   // 考试资源
   resource,
-  { path: '/editor-quill', title: 'UEditor', icon: 'pencil-square-o' }
+  editorQuill
 ])
 
 export const menuAside = supplementPath([
@@ -36,5 +37,5 @@ export const menuAside = supplementPath([
   itemManagement,
   demo,
   resource,
-  { path: '/editor-quill', title: 'UEditor', icon: 'pencil-square-o' }
+  editorQuill
 ])

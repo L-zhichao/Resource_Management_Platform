@@ -93,8 +93,8 @@
             </el-table>
             <template slot="reference">
               <div>
-                <el-button size="small" type="success" v-if="scope.row.state === 1" @mouseover.native="tableDataResponseChange(scope.row.applyId)">已通过</el-button>
-                <el-button size="small" type="danger" v-if="scope.row.state === 2" @mouseover.native="tableDataResponseChange(scope.row.applyId)">未通过</el-button>
+                <el-button size="small" type="success" v-if="scope.row.state === 1" @mouseover.native.once="tableDataResponseChange(scope.row.applyId)">已通过</el-button>
+                <el-button size="small" type="danger" v-if="scope.row.state === 2" @mouseover.native.once="tableDataResponseChange(scope.row.applyId)">未通过</el-button>
               </div>
             </template>
           </el-popover>
@@ -212,10 +212,23 @@ export default {
         }
       }
     },
+    /**
+     * @description 鼠标移入 已通过 未通过 按钮时触发
+     * @param {String} id 物品请求id
+     */
     tableDataResponseChange (id) {
-      this.tableData.forEach(item => {
+      this.tableData.forEach((item, index) => {
         if (item.applyId === id) {
           this.tableDataResponse[0] = item
+          if (!this.userAdministratorPermissions && item.status === -1) {
+            this.itemReadResponse({ id })
+            this.allTableData[1][0].forEach((item, index) => {
+              if (item.applyId === id) this.allTableData[1][0][index].status = 1
+            })
+            this.allTableData[1][1].forEach((item, index) => {
+              if (item.applyId === id) this.allTableData[1][1][index].status = 1
+            })
+          }
         }
         this.randomKeyResponse = Math.random()
       })
@@ -267,6 +280,25 @@ export default {
         })
     },
     /**
+     * @description 普通用户回复已读api
+     */
+    async itemReadResponseAPI ({ applyId }) {
+      return await api.ITEM_READ_RESPONSE_API({ applyId })
+    },
+    /**
+     * @description 普通用户回复已读
+     */
+    itemReadResponse ({ id }) {
+      this.itemReadResponseAPI({ applyId: id })
+      // .then(v => {
+      //   if (v.length !== 0) {
+
+      //   } else {
+      //     // this.$message.error('物品申请信息请求失败')
+      //   }
+      // })
+    },
+    /**
      * @description 所有物品申请信息展示api
      */
     async itemShowApplyAPI () {
@@ -296,6 +328,8 @@ export default {
               this.allTableData[1][1][this.allTableData[1][1].length - 1].content = item.content.split('//////////')[0] + ' × ' + item.content.split('//////////')[1] + ': ' + item.content.split('//////////')[2]
               if (item.status === -1) {
                 this.allTableData[1][1][this.allTableData[1][1].length - 1].state = 0
+              } else {
+                this.allTableData[1][1][this.allTableData[1][1].length - 1].state = 3
               }
             })
             this.itemShowResponse()
@@ -351,11 +385,12 @@ export default {
             const applyData = JSON.parse(JSON.stringify(this.allTableData[1][1]))
             v.forEach((item, index) => {
               applyData.forEach((item2, index2) => {
-                if (item.applyId === item2.applyId && item.status === 1) {
+                if (item.applyId === item2.applyId && item2.state === 3) {
                   this.allTableData[1][1][index2].responseTime = item.responseTime
                   this.allTableData[1][1][index2].responseUser = item.responseUser
                   this.allTableData[1][1][index2].reason = item.reason
                   this.allTableData[1][1][index2].state = item.result === 2 ? 1 : 2
+                  this.allTableData[1][1][index2].status = item.status
                 }
               })
             })
@@ -365,10 +400,10 @@ export default {
               }
             })
             this.allTableData[0][0] = this.allTableData[1][1].filter((item, index) => {
-              if (item.status === -1) return item
+              if (item.state === 0) return item
             })
             this.allTableData[0][1] = this.allTableData[1][1].filter((item, index) => {
-              if (item.status !== -1) return item
+              if (item.state !== 0) return item
             })
 
             if (this.userAdministratorPermissions) {

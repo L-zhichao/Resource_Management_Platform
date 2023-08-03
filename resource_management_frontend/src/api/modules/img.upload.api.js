@@ -26,11 +26,14 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
       method: 'post',
       headers: {
         Authorization: token,
-        'Content-Type': get({
-          url: 'item/img-upload',
-          method: 'post',
-          data
-        }, 'headers.Content-Type', 'multipart/form-data')
+        'Content-Type': get(
+          {
+            url: 'item/img-upload',
+            method: 'post',
+            data
+          },
+          'headers.Content-Type', '')
+        // 'headers.Content-Type', 'multipart/form-data')
       },
       data
     })

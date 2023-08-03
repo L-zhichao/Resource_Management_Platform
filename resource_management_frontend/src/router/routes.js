@@ -2,6 +2,7 @@
 import itemManagement from './modules/ItemManagement'
 import demo from './modules/demo'
 import resource from './modules/resource'
+import editorQuill from './modules/editorQuill'
 
 import layoutHeaderAside from '@/layout/header-aside'
 
@@ -60,24 +61,8 @@ const frameIn = [
   demo,
   // 考试资源
   resource,
-  {
-    path: 'editor-quill',
-    name: 'editor-quill',
-    cache: true,
-    meta: { auth: true },
-    redirect: { name: 'editor-quill' },
-    component: layoutHeaderAside,
-    children: [{
-      path: '/editor-quill',
-      name: 'editor-quill',
-      meta: {
-        title: '文本编辑器',
-        auth: true,
-        cache: true
-      },
-      component: _import('editor-quill')
-    }]
-  }
+  // 文本编辑器
+  editorQuill
 ]
 
 /**

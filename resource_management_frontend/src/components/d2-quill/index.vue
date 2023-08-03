@@ -37,11 +37,11 @@ export default {
             [{ color: [] }, { background: [] }],
             // [{ 'font': [] }],
             [{ align: [] }],
-            ['clean'],
-            ['link', 'image']
+            ['clean']
+            // ['link', 'image']
           ]
         },
-        placeholder: '书写你的内容',
+        placeholder: '',
         readOnly: false
       }
     }
