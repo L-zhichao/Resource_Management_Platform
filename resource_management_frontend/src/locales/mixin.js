@@ -2,7 +2,7 @@ export default {
   methods: {
     onChangeLocale (command) {
       this.$i18n.locale = command
-      let message = `当前语言：${this.$t('_name')} [ ${this.$i18n.locale} ]`
+      let message = `当前语言：${this.$t('_name')} [ ${this.$i18n.locale} ] (能换几个词已经很好了呜呜)`
       if (process.env.VUE_APP_BUILD_MODE === 'PREVIEW') {
         message = [
           `当前语言：${this.$t('_name')} [ ${this.$i18n.locale} ]`,

@@ -44,6 +44,7 @@
 <script>
 import api from '@/api'
 import dayjs from 'dayjs'
+import util from '@/libs/util'
 export default {
   name: 'DialogOfNewItem',
   props: {
@@ -131,8 +132,8 @@ export default {
      * @param {Number} money 金额
      * @param {String} applyTime 时间
      */
-    async itemApplyAPI ({ content, money, applyTime }) {
-      return await api.ITEM_APPLY_API({ content, money, applyTime })
+    async itemApplyAPI ({ content, money, applyTime, name }) {
+      return await api.ITEM_APPLY_API({ content, money, applyTime, name })
     },
     /**
      * @description 请求新物品
@@ -141,7 +142,7 @@ export default {
      * @param {Number} money 金额
      */
     itemApply ({ content, money }) {
-      this.itemApplyAPI({ content, money, applyTime: dayjs().format('YYYY-MM-DD HH:mm:ss') })
+      this.itemApplyAPI({ content, money, applyTime: dayjs().format('YYYY-MM-DD HH:mm:ss'), name: util.cookies.get('name') })
         .then(v => {
           if (typeof v === 'object') {
             this.ruleForm = {

@@ -10,7 +10,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
   IMG_UPLOAD_API (data) {
     // 模拟数据
     mock
-      .onAny('/img-upload')
+      .onAny('/item/img-upload')
       .reply(config => {
         // const configData = JSON.parse(config.data)
         return [
@@ -22,12 +22,12 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
     // 接口请求
     const token = util.cookies.get('token')
     return request({
-      url: 'img-upload',
+      url: 'item/img-upload',
       method: 'post',
       headers: {
         Authorization: token,
         'Content-Type': get({
-          url: 'img-upload',
+          url: 'item/img-upload',
           method: 'post',
           data
         }, 'headers.Content-Type', 'multipart/form-data')

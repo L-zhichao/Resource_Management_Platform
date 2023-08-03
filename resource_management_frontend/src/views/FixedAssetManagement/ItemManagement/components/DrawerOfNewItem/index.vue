@@ -229,8 +229,8 @@ export default {
      * @param {String} reason 回应结果原因
      * @param {String} responseTime 回应时间
      */
-    async itemResponseAPI ({ applyId, name, result, reason, responseTime }) {
-      return await api.ITEM_RESPONSE_API({ applyId, name, result, reason, responseTime })
+    async itemResponseAPI ({ applyId, name, result, reason, responseTime, responseName }) {
+      return await api.ITEM_RESPONSE_API({ applyId, name, result, reason, responseTime, responseName })
     },
     /**
      * @description 物品回应上传
@@ -242,7 +242,8 @@ export default {
      */
     itemResponse ({ applyId, name, result, reason }) {
       const responseTime = dayjs().format('YYYY-MM-DD HH:mm:ss')
-      this.itemResponseAPI({ applyId, name, result, reason, responseTime })
+      const responseName = util.cookies.get('name')
+      this.itemResponseAPI({ applyId, name, result, reason, responseTime, responseName })
         .then(v => {
           if (typeof v === 'object') {
             this.ruleForm = {

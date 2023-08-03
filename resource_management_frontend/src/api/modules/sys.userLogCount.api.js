@@ -2,13 +2,12 @@
 
 export default ({ service, request, serviceForMock, requestForMock, mock, faker, tools }) => ({
   /**
-   * @description 查询损坏物品
-   * @param {Object} 唯一参数username 不传为查全部
+   * @description 用户登录log总数
    */
-  ITEM_SEARCH_DAMAGED_API (params) {
+  SYS_USER_COUNT_API () {
     // 模拟数据
     mock
-      .onAny('/damage/record/query')
+      .onAny('/user/count')
       .reply(config => {
         // const configData = JSON.parse(config.data)
         return [
@@ -19,9 +18,8 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
       })
     // 接口请求
     return request({
-      url: 'damage/record/query',
-      method: 'get',
-      params
+      url: 'user/count',
+      method: 'get'
     })
   }
 })

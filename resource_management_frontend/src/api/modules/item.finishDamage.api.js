@@ -20,7 +20,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
     // 接口请求
     return request({
       url: 'damage/record/update',
-      method: 'put',
+      method: 'get',
       params
     })
   }

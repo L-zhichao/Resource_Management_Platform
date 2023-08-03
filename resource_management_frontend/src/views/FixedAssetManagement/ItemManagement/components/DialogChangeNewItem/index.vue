@@ -263,6 +263,7 @@ export default {
      * @description 用于删除旧的图片,显示新图片添加
      */
     deleteOldImg () {
+      this.ruleForm.img = ''
       this.ruleForm.imgs = ''
       this.ruleForm.videos = ''
       this.oldImgView = false
