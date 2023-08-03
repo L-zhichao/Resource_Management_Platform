@@ -73,7 +73,7 @@ public class ItemController {
 
     @Operation(description = "图片上传")
     @PostMapping("/img-upload")
-    public JsonResult uploadImg( MultipartFile file) {
+    public JsonResult uploadImg(MultipartFile file) {
 
         try {
             //拿到图片上传到的目录(类路径classes下的static/img/upload)的File对象
