@@ -1,6 +1,8 @@
 package selab.desktop.resource_management.controller.itemManagement;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +18,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/item")
 @CrossOrigin(origins = "http://127.0.0.1:5500")
+@Tag(name = "物品申请Controller层")
 public class ApplyItemController {
     private final ApplyItemService applyItemService;
 
 
     @Operation(summary = "物品申请上传模块")
     @PostMapping("/apply")
-    public JsonResult<Void> apply(@RequestBody ApplyItemUpload applyItemUpload){
+    public JsonResult<Void> apply(@Parameter @RequestBody ApplyItemUpload applyItemUpload){
          applyItemService.saveApply(applyItemUpload);
          return new JsonResult<>(JsonResult.SUCCESS,null,null);
     }

@@ -2,6 +2,8 @@
 logging:
   pattern:
     dateformat: yyyy-MM-dd HH:mm:ss.SSS
+  file:
+    name: demo.log
 #  level:
 #    selab.desktop.resource_management.fundManagement.controller.FundsController: debug
 #    selab.desktop.resource_management.ResourceManagementPlatformApplication: warn

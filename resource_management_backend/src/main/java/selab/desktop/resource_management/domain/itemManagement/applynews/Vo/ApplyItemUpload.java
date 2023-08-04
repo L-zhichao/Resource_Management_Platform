@@ -17,9 +17,11 @@ public class ApplyItemUpload {
     @Schema(description = "申请内容")
     @NotEmpty
     private String content;
+
     @Schema(description = "申请金额")
     @Min(0)
     private Double money;
+
     @Schema(description = "申请时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date applyTime;

@@ -3,6 +3,7 @@ package selab.desktop.resource_management.controller.fundManagement;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +36,15 @@ public class FundsController {
     @Operation(summary = "根据ID查询")
     @Transactional
     public JsonResult<FundsVo> getFundsById(@PathVariable Long id) {
+        log.info("查询id"+id);
         return new JsonResult<>(JsonResult.SUCCESS, null, fundsService.getById(id));
     }
 
     @GetMapping("/page")
     @Operation(summary = "分页查询资金")
     @Transactional
-    public JsonResult<Page<FundsVo>> page(int page, int pageSize) {
+    public JsonResult<Page<FundsVo>> page(@Parameter(description = "当前页数") int page,
+                                          @Parameter(description = "每页页数") int pageSize) {
         Page<FundsVo> mPage = new Page<>(page, pageSize);
         fundsService.page(mPage);
         return new JsonResult<>(JsonResult.SUCCESS, null, mPage);
@@ -67,12 +70,12 @@ public class FundsController {
             fundsVo.setUpdateTime(new Date());
             log.info("增加资金");
             fundsService.save(fundsVo);
-            return new JsonResult<>(JsonResult.SUCCESS, null, "增加成功");
+            return new JsonResult<>(JsonResult.SUCCESS, null, null);
         } else {
             fundsVo.setUpdateTime(new Date());
             log.info("更新资金");
             fundsService.updateById(fundsVo);
-            return new JsonResult<>(JsonResult.SUCCESS, null, "更新成功");
+            return new JsonResult<>(JsonResult.SUCCESS, null, null);
         }
     }
 
@@ -82,7 +85,8 @@ public class FundsController {
     public JsonResult<String> delete(@PathVariable Long id) {
         log.info("根据主键ID删除某项资金");
         log.info("删除成功");
-        return new JsonResult<>(JsonResult.SUCCESS, null, "删除成功");
+        fundsService.removeById(id);
+        return new JsonResult<>(JsonResult.SUCCESS, null, null);
 
     }
 

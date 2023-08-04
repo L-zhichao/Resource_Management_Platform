@@ -1,0 +1,131 @@
+2023-08-04 10:59:57.043  INFO 11488 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-04 10:59:57.050  INFO 11488 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-04 10:59:57.050  INFO 11488 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.10]
+2023-08-04 10:59:57.105  INFO 11488 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-04 10:59:57.105  INFO 11488 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 781 ms
+2023-08-04 10:59:57.899  INFO 11488 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-04 12:02:21.364  INFO 23996 --- [main] .r.ResourceManagementPlatformApplication : Starting ResourceManagementPlatformApplication using Java 17.0.7 with PID 23996 (D:\Work\Work2 (JAVA)\resource_management_platform\resource_management_backend\target\classes started by 哖輕 涙 in D:\Work\Work2 (JAVA)\resource_management_platform)
+2023-08-04 12:02:21.365  INFO 23996 --- [main] .r.ResourceManagementPlatformApplication : No active profile set, falling back to 1 default profile: "default"
+2023-08-04 12:02:22.131  INFO 23996 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-04 12:02:22.136  INFO 23996 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-04 12:02:22.136  INFO 23996 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.11]
+2023-08-04 12:02:22.193  INFO 23996 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-04 12:02:22.193  INFO 23996 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 800 ms
+2023-08-04 12:02:23.157  INFO 23996 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-04 12:02:23.164  INFO 23996 --- [main] .r.ResourceManagementPlatformApplication : Started ResourceManagementPlatformApplication in 2.091 seconds (process running for 2.505)
+2023-08-04 12:02:26.057  INFO 23996 --- [http-nio-9090-exec-2] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [Hm_lvt_bc38887aa5588add05a38704342ad7e8=1690861175,1690875058,1690949591,1690949704] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2023-08-04 12:02:26.061  INFO 23996 --- [http-nio-9090-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-08-04 12:02:26.061  INFO 23996 --- [http-nio-9090-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-08-04 12:02:26.062  INFO 23996 --- [http-nio-9090-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-08-04 12:02:26.523  INFO 23996 --- [http-nio-9090-exec-3] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 271 ms
+2023-08-04 12:04:34.695  INFO 23996 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-0} closing ...
+2023-08-04 12:04:37.540  INFO 7436 --- [main] .r.ResourceManagementPlatformApplication : Starting ResourceManagementPlatformApplication using Java 17.0.7 with PID 7436 (D:\Work\Work2 (JAVA)\resource_management_platform\resource_management_backend\target\classes started by 哖輕 涙 in D:\Work\Work2 (JAVA)\resource_management_platform)
+2023-08-04 12:04:37.541  INFO 7436 --- [main] .r.ResourceManagementPlatformApplication : No active profile set, falling back to 1 default profile: "default"
+2023-08-04 12:04:38.351  INFO 7436 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-04 12:04:38.358  INFO 7436 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-04 12:04:38.358  INFO 7436 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.11]
+2023-08-04 12:04:38.414  INFO 7436 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-04 12:04:38.414  INFO 7436 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 845 ms
+2023-08-04 12:04:39.392  INFO 7436 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-04 12:04:39.398  INFO 7436 --- [main] .r.ResourceManagementPlatformApplication : Started ResourceManagementPlatformApplication in 2.172 seconds (process running for 2.613)
+2023-08-04 12:04:41.548  INFO 7436 --- [http-nio-9090-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [Hm_lvt_bc38887aa5588add05a38704342ad7e8=1690861175,1690875058,1690949591,1690949704] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2023-08-04 12:04:41.553  INFO 7436 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-08-04 12:04:41.553  INFO 7436 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-08-04 12:04:41.554  INFO 7436 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-08-04 12:04:42.011  INFO 7436 --- [http-nio-9090-exec-3] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 278 ms
+2023-08-04 12:05:14.754  INFO 7436 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-0} closing ...
+2023-08-04 12:05:17.503  INFO 17488 --- [main] .r.ResourceManagementPlatformApplication : Starting ResourceManagementPlatformApplication using Java 17.0.7 with PID 17488 (D:\Work\Work2 (JAVA)\resource_management_platform\resource_management_backend\target\classes started by 哖輕 涙 in D:\Work\Work2 (JAVA)\resource_management_platform)
+2023-08-04 12:05:17.504  INFO 17488 --- [main] .r.ResourceManagementPlatformApplication : No active profile set, falling back to 1 default profile: "default"
+2023-08-04 12:05:18.278  INFO 17488 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-04 12:05:18.284  INFO 17488 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-04 12:05:18.284  INFO 17488 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.11]
+2023-08-04 12:05:18.338  INFO 17488 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-04 12:05:18.339  INFO 17488 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 808 ms
+2023-08-04 12:05:19.346  INFO 17488 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-04 12:05:19.354  INFO 17488 --- [main] .r.ResourceManagementPlatformApplication : Started ResourceManagementPlatformApplication in 2.143 seconds (process running for 2.565)
+2023-08-04 12:05:20.118  INFO 17488 --- [http-nio-9090-exec-2] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [Hm_lvt_bc38887aa5588add05a38704342ad7e8=1690861175,1690875058,1690949591,1690949704] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2023-08-04 12:05:20.124  INFO 17488 --- [http-nio-9090-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-08-04 12:05:20.124  INFO 17488 --- [http-nio-9090-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-08-04 12:05:20.125  INFO 17488 --- [http-nio-9090-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-08-04 12:05:20.565  INFO 17488 --- [http-nio-9090-exec-3] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 289 ms
+2023-08-04 12:05:44.182  INFO 17488 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-0} closing ...
+2023-08-04 12:05:46.898  INFO 24356 --- [main] .r.ResourceManagementPlatformApplication : Starting ResourceManagementPlatformApplication using Java 17.0.7 with PID 24356 (D:\Work\Work2 (JAVA)\resource_management_platform\resource_management_backend\target\classes started by 哖輕 涙 in D:\Work\Work2 (JAVA)\resource_management_platform)
+2023-08-04 12:05:46.899  INFO 24356 --- [main] .r.ResourceManagementPlatformApplication : No active profile set, falling back to 1 default profile: "default"
+2023-08-04 12:05:47.685  INFO 24356 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-04 12:05:47.691  INFO 24356 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-04 12:05:47.691  INFO 24356 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.11]
+2023-08-04 12:05:47.743  INFO 24356 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-04 12:05:47.744  INFO 24356 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 818 ms
+2023-08-04 12:05:48.700  INFO 24356 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-04 12:05:48.706  INFO 24356 --- [main] .r.ResourceManagementPlatformApplication : Started ResourceManagementPlatformApplication in 2.107 seconds (process running for 2.529)
+2023-08-04 12:05:50.783  INFO 24356 --- [http-nio-9090-exec-2] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [Hm_lvt_bc38887aa5588add05a38704342ad7e8=1690861175,1690875058,1690949591,1690949704] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2023-08-04 12:05:50.787  INFO 24356 --- [http-nio-9090-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-08-04 12:05:50.787  INFO 24356 --- [http-nio-9090-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-08-04 12:05:50.789  INFO 24356 --- [http-nio-9090-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2023-08-04 12:05:51.247  INFO 24356 --- [http-nio-9090-exec-3] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 279 ms
+2023-08-04 12:09:05.588  INFO 24356 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-0} closing ...
+2023-08-04 12:09:08.532  INFO 25092 --- [main] .r.ResourceManagementPlatformApplication : Starting ResourceManagementPlatformApplication using Java 17.0.7 with PID 25092 (D:\Work\Work2 (JAVA)\resource_management_platform\resource_management_backend\target\classes started by 哖輕 涙 in D:\Work\Work2 (JAVA)\resource_management_platform)
+2023-08-04 12:09:08.534  INFO 25092 --- [main] .r.ResourceManagementPlatformApplication : No active profile set, falling back to 1 default profile: "default"
+2023-08-04 12:09:09.291  INFO 25092 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-04 12:09:09.298  INFO 25092 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-04 12:09:09.298  INFO 25092 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.11]
+2023-08-04 12:09:09.352  INFO 25092 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-04 12:09:09.352  INFO 25092 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 791 ms
+2023-08-04 12:09:10.264  INFO 25092 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-04 12:09:10.270  INFO 25092 --- [main] .r.ResourceManagementPlatformApplication : Started ResourceManagementPlatformApplication in 2.037 seconds (process running for 2.456)
+2023-08-04 12:09:17.795  INFO 25092 --- [http-nio-9090-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [Hm_lvt_bc38887aa5588add05a38704342ad7e8=1690861175,1690875058,1690949591,1690949704] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2023-08-04 12:09:17.800  INFO 25092 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-08-04 12:09:17.800  INFO 25092 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-08-04 12:09:17.800  INFO 25092 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2023-08-04 12:09:18.275  INFO 25092 --- [http-nio-9090-exec-3] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 289 ms
+2023-08-04 12:27:20.853  INFO 25092 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-0} closing ...
+2023-08-04 12:27:23.872  INFO 384 --- [main] .r.ResourceManagementPlatformApplication : Starting ResourceManagementPlatformApplication using Java 17.0.7 with PID 384 (D:\Work\Work2 (JAVA)\resource_management_platform\resource_management_backend\target\classes started by 哖輕 涙 in D:\Work\Work2 (JAVA)\resource_management_platform)
+2023-08-04 12:27:23.874  INFO 384 --- [main] .r.ResourceManagementPlatformApplication : No active profile set, falling back to 1 default profile: "default"
+2023-08-04 12:27:24.715  INFO 384 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-04 12:27:24.722  INFO 384 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-04 12:27:24.722  INFO 384 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.11]
+2023-08-04 12:27:24.785  INFO 384 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-04 12:27:24.786  INFO 384 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 881 ms
+2023-08-04 12:27:25.703  INFO 384 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-04 12:27:25.710  INFO 384 --- [main] .r.ResourceManagementPlatformApplication : Started ResourceManagementPlatformApplication in 2.154 seconds (process running for 2.588)
+2023-08-04 12:27:28.861  INFO 384 --- [http-nio-9090-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [Hm_lvt_bc38887aa5588add05a38704342ad7e8=1690861175,1690875058,1690949591,1690949704] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2023-08-04 12:27:28.865  INFO 384 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-08-04 12:27:28.865  INFO 384 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-08-04 12:27:28.866  INFO 384 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-08-04 12:27:29.333  INFO 384 --- [http-nio-9090-exec-3] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 277 ms
+2023-08-04 12:29:30.416  INFO 384 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-0} closing ...
+2023-08-04 12:29:33.183  INFO 9636 --- [main] .r.ResourceManagementPlatformApplication : Starting ResourceManagementPlatformApplication using Java 17.0.7 with PID 9636 (D:\Work\Work2 (JAVA)\resource_management_platform\resource_management_backend\target\classes started by 哖輕 涙 in D:\Work\Work2 (JAVA)\resource_management_platform)
+2023-08-04 12:29:33.184  INFO 9636 --- [main] .r.ResourceManagementPlatformApplication : No active profile set, falling back to 1 default profile: "default"
+2023-08-04 12:29:33.995  INFO 9636 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-04 12:29:34.001  INFO 9636 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-04 12:29:34.001  INFO 9636 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.11]
+2023-08-04 12:29:34.061  INFO 9636 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-04 12:29:34.061  INFO 9636 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 849 ms
+2023-08-04 12:29:35.003  INFO 9636 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-04 12:29:35.010  INFO 9636 --- [main] .r.ResourceManagementPlatformApplication : Started ResourceManagementPlatformApplication in 2.143 seconds (process running for 2.563)
+2023-08-04 12:31:22.130  INFO 9636 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-0} closing ...
+2023-08-04 12:31:24.894  INFO 23756 --- [main] .r.ResourceManagementPlatformApplication : Starting ResourceManagementPlatformApplication using Java 17.0.7 with PID 23756 (D:\Work\Work2 (JAVA)\resource_management_platform\resource_management_backend\target\classes started by 哖輕 涙 in D:\Work\Work2 (JAVA)\resource_management_platform)
+2023-08-04 12:31:24.895  INFO 23756 --- [main] .r.ResourceManagementPlatformApplication : No active profile set, falling back to 1 default profile: "default"
+2023-08-04 12:31:25.685  INFO 23756 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-04 12:31:25.691  INFO 23756 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-04 12:31:25.691  INFO 23756 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.11]
+2023-08-04 12:31:25.749  INFO 23756 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-04 12:31:25.749  INFO 23756 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 825 ms
+2023-08-04 12:31:26.693  INFO 23756 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-04 12:31:26.699  INFO 23756 --- [main] .r.ResourceManagementPlatformApplication : Started ResourceManagementPlatformApplication in 2.117 seconds (process running for 2.529)
+2023-08-04 12:32:12.856  INFO 23756 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-0} closing ...
+2023-08-04 12:32:14.519  INFO 23760 --- [main] .r.ResourceManagementPlatformApplication : Starting ResourceManagementPlatformApplication using Java 17.0.7 with PID 23760 (D:\Work\Work2 (JAVA)\resource_management_platform\resource_management_backend\target\classes started by 哖輕 涙 in D:\Work\Work2 (JAVA)\resource_management_platform)
+2023-08-04 12:32:14.521  INFO 23760 --- [main] .r.ResourceManagementPlatformApplication : No active profile set, falling back to 1 default profile: "default"
+2023-08-04 12:32:15.292  INFO 23760 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-08-04 12:32:15.297  INFO 23760 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-08-04 12:32:15.298  INFO 23760 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.11]
+2023-08-04 12:32:15.355  INFO 23760 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-08-04 12:32:15.355  INFO 23760 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 803 ms
+2023-08-04 12:32:16.254  INFO 23760 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-08-04 12:32:16.260  INFO 23760 --- [main] .r.ResourceManagementPlatformApplication : Started ResourceManagementPlatformApplication in 2.06 seconds (process running for 2.479)

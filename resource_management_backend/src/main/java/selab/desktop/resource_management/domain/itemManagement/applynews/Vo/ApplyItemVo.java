@@ -12,20 +12,25 @@ import java.util.Date;
 @Schema(description = "物品申请展示模型")
 @Data
 public class ApplyItemVo {
-
+    @Schema(description = "申请ID'")
     private String applyId;
+
     @Schema(description = "申请人")
-     @NotEmpty
+    @NotEmpty
     private String applyUser;
+
     @Schema(description = "申请内容")
-     @NotEmpty
+    @NotEmpty
     private String content;
+
     @Schema(description = "申请金额")
-     @Min(0)
+    @Min(0)
     private Double money;
+
     @Schema(description = "申请状态(-1为未读，1为已读)")
     private Integer status;
+
     @Schema(description = "申请时间")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date applyTime;
 }

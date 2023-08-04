@@ -1,6 +1,7 @@
 package selab.desktop.resource_management.controller.itemManagement;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/item")
+@Tag(name = "物品回应Controller层")
 public class ResponseItemController {
     private final ResponseItemService responseItemService;
 
@@ -44,6 +46,7 @@ public class ResponseItemController {
         return listJsonResult;
     }
 
+    @Operation(summary = "读取响应")
     @PostMapping("/readed")
     public JsonResult<Void> readResponse(@RequestBody Long applyId){
       responseItemService.updateResponseStatus(applyId);
