@@ -18,6 +18,7 @@ public class Item {
     @Schema(description = "主键物品id")
     @TableId
     private Long itemId;
+    @TableField("item_name")
     @Schema(description = "物品名")
     private String itemname;
     @Schema(description = "数量")

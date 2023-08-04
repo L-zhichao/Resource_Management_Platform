@@ -3,7 +3,7 @@ package selab.desktop.resource_management.service.itemManagement.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import selab.desktop.resource_management.domain.itemManagement.item.DamageRecord;
+import selab.desktop.resource_management.domain.itemManagement.DemageRecord.DamageRecord;
 import selab.desktop.resource_management.mapper.itemManagement.DamageRecordMapper;
 import selab.desktop.resource_management.service.itemManagement.DamageRecordService;
 

@@ -1,4 +1,4 @@
-package selab.desktop.resource_management.domain.itemManagement.applynews.Vo;
+package selab.desktop.resource_management.domain.itemManagement.applynews.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -6,7 +6,7 @@ import lombok.Data;
 
 import java.util.Date;
 @Data
-public class ResponseItemUpload {
+public class ResponseItemDTO {
 
     @Schema(description = "物品申请信息id")
     private Long applyId;

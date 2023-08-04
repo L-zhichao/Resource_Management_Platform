@@ -7,9 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import selab.desktop.resource_management.domain.userManagement.log.UserLog;
-import selab.desktop.resource_management.domain.userManagement.vo.UserLogin;
-import selab.desktop.resource_management.domain.userManagement.vo.UserReturn;
+import selab.desktop.resource_management.domain.userManagement.DTO.UserLogin;
 import selab.desktop.resource_management.domain.userManagement.vo.UserVo;
+import selab.desktop.resource_management.domain.userManagement.DTO.UserDTO;
 import selab.desktop.resource_management.service.userManagement.UserLogService;
 import selab.desktop.resource_management.service.userManagement.impl.UserServiceImpl;
 import selab.desktop.resource_management.utils.JsonResult;
@@ -28,13 +28,13 @@ public class UserController {
     private final UserLogService userLogService;
     /**
      * 注册用户
-     * @param userVo
+     * @param userDTO
      */
     @Operation(summary = "注册模块")
     @PostMapping("/register")
-    public JsonResult<Void> register(@Validated @RequestBody UserVo userVo){
+    public JsonResult<Void> register(@Validated @RequestBody UserDTO userDTO){
 
-        userServiceImpl.register( userVo);
+        userServiceImpl.register(userDTO);
         return new JsonResult<>(JsonResult.SUCCESS,null,null);
     }
 
@@ -59,19 +59,19 @@ public class UserController {
      */
     @Operation(summary = "登录模块")
     @PostMapping("/login")
- public JsonResult<UserReturn> login(@RequestBody UserLogin userLogin, HttpSession httpSession, HttpServletRequest request){
-        UserReturn userReturn = userServiceImpl.login(userLogin.getUsername(), userLogin.getPassword());
-        httpSession.setAttribute("name",userReturn.getName());
-        httpSession.setAttribute("username",userReturn.getUsername());
-        httpSession.setAttribute("userStatus",userReturn.getUserStatus());
+ public JsonResult<UserVo> login(@RequestBody UserLogin userLogin, HttpSession httpSession, HttpServletRequest request){
+        UserVo userVo = userServiceImpl.login(userLogin.getUsername(), userLogin.getPassword());
+        httpSession.setAttribute("name", userVo.getName());
+        httpSession.setAttribute("username", userVo.getUsername());
+        httpSession.setAttribute("userStatus", userVo.getUserStatus());
         UserLog userLog = new UserLog();
-        userLog.setUserId(userReturn.getUuid());
+        userLog.setUserId(userVo.getUuid());
         String origin = request.getHeader("Origin");
         userLog.setIp(origin);
         userLog.setUsername(userLogin.getUsername());
         userLog.setLoginTime(new Date());
         userLogService.insertLog(userLog);
-        JsonResult<UserReturn> jsonResult = new JsonResult<>(JsonResult.SUCCESS,null,userReturn);
+        JsonResult<UserVo> jsonResult = new JsonResult<>(JsonResult.SUCCESS,null, userVo);
         return jsonResult;
     }
 

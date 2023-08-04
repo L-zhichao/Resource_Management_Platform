@@ -6,11 +6,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import selab.desktop.resource_management.domain.itemManagement.applynews.ResponseItem;
-import selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ResponseItemUpload;
+import selab.desktop.resource_management.domain.itemManagement.applynews.DTO.ResponseItemDTO;
 import selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ResponseItemVo;
 import selab.desktop.resource_management.exception.itemManagement.UpdateResponseStatusException;
 import selab.desktop.resource_management.exception.userManagment.UserInsertException;
-import selab.desktop.resource_management.mapper.itemManagement.ApplyItemMapper;
 import selab.desktop.resource_management.mapper.itemManagement.ResponseItemMapper;
 import selab.desktop.resource_management.service.itemManagement.ApplyItemService;
 import selab.desktop.resource_management.service.itemManagement.ResponseItemService;
@@ -38,9 +37,9 @@ public class ResponseItemServiceImpl extends ServiceImpl<ResponseItemMapper, Res
     }
 
     @Override
-    public void saveResonse(ResponseItemUpload responseItemUpload) {
-        applyItemService.updateApplyStatus(responseItemUpload.getApplyId());
-        ResponseItem responseItem = responseItemUploadToResponseItem(responseItemUpload);
+    public void saveResonse(ResponseItemDTO responseItemDTO) {
+        applyItemService.updateApplyStatus(responseItemDTO.getApplyId());
+        ResponseItem responseItem = responseItemUploadToResponseItem(responseItemDTO);
         int rows = responseItemMapper.insert(responseItem);
         if(rows != 1){
             throw new UserInsertException("回应上传未知异常");
@@ -71,14 +70,14 @@ public class ResponseItemServiceImpl extends ServiceImpl<ResponseItemMapper, Res
         }
     }
 
-    private ResponseItem responseItemUploadToResponseItem(ResponseItemUpload responseItemUpload){
+    private ResponseItem responseItemUploadToResponseItem(ResponseItemDTO responseItemDTO){
         ResponseItem responseItem = new ResponseItem();
-        responseItem.setApplyId(responseItemUpload.getApplyId());
-        responseItem.setResult(responseItemUpload.getResult());
-        responseItem.setResponseUser(responseItemUpload.getResponseName());
-        responseItem.setReason(responseItemUpload.getReason());
-        responseItem.setResponseTime(responseItemUpload.getResponseTime());
-        responseItem.setApplyUser(responseItemUpload.getApplyName());
+        responseItem.setApplyId(responseItemDTO.getApplyId());
+        responseItem.setResult(responseItemDTO.getResult());
+        responseItem.setResponseUser(responseItemDTO.getResponseName());
+        responseItem.setReason(responseItemDTO.getReason());
+        responseItem.setResponseTime(responseItemDTO.getResponseTime());
+        responseItem.setApplyUser(responseItemDTO.getApplyName());
         return responseItem;
     }
     private ResponseItemVo responseItemToresponseItemVo(ResponseItem responseItem){

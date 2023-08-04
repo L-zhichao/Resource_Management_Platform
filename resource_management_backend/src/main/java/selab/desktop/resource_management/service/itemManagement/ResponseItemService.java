@@ -2,7 +2,7 @@ package selab.desktop.resource_management.service.itemManagement;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import selab.desktop.resource_management.domain.itemManagement.applynews.ResponseItem;
-import selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ResponseItemUpload;
+import selab.desktop.resource_management.domain.itemManagement.applynews.DTO.ResponseItemDTO;
 import selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ResponseItemVo;
 
 import java.util.List;
@@ -17,9 +17,9 @@ public interface ResponseItemService extends IService<ResponseItem> {
 
     /**
      *   回应上传
-     * @param responseItemUpload  回应上传类
+     * @param responseItemDTO  回应上传类
      */
-    void saveResonse(ResponseItemUpload responseItemUpload);
+    void saveResonse(ResponseItemDTO responseItemDTO);
 
     /**
      *  查询所有回应

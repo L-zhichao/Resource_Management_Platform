@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import selab.desktop.resource_management.domain.itemManagement.item.DamageRecord;
+import selab.desktop.resource_management.domain.itemManagement.DemageRecord.DamageRecord;
 import selab.desktop.resource_management.service.itemManagement.DamageRecordService;
 import selab.desktop.resource_management.utils.JsonResult;
 import java.util.ArrayList;

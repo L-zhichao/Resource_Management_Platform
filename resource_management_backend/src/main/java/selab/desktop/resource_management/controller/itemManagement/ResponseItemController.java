@@ -4,9 +4,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ResponseItemUpload;
+import selab.desktop.resource_management.domain.itemManagement.applynews.DTO.ResponseItemDTO;
 import selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ResponseItemVo;
-import selab.desktop.resource_management.service.itemManagement.ApplyItemService;
 import selab.desktop.resource_management.service.itemManagement.ResponseItemService;
 import selab.desktop.resource_management.utils.JsonResult;
 
@@ -22,8 +21,8 @@ public class ResponseItemController {
 
     @Operation(summary = "物品回应上传模块")
     @PostMapping("/response")
-    public JsonResult<Void> response(@RequestBody ResponseItemUpload responseItemUpload){
-        responseItemService.saveResonse(responseItemUpload);
+    public JsonResult<Void> response(@RequestBody ResponseItemDTO responseItemDTO){
+        responseItemService.saveResonse(responseItemDTO);
         return new JsonResult<>(JsonResult.SUCCESS,null,null);
     }
 

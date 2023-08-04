@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import selab.desktop.resource_management.domain.itemManagement.applynews.ApplyItem;
-import selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ApplyItemUpload;
+import selab.desktop.resource_management.domain.itemManagement.applynews.DTO.ApplyItemDTO;
 import selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ApplyItemVo;
 import selab.desktop.resource_management.exception.itemManagement.ApplyUpdateException;
 import selab.desktop.resource_management.exception.userManagment.UserInsertException;
@@ -23,17 +23,17 @@ public class ApplyItemServiceImpl extends ServiceImpl<ApplyItemMapper, ApplyItem
 
     private final ApplyItemMapper applyItemMapper;
 
-    private ApplyItem applyIyemUploadToApplyItem(ApplyItemUpload applyItemUpload){
+    private ApplyItem applyIyemUploadToApplyItem(ApplyItemDTO applyItemDTO){
         ApplyItem applyItem = new ApplyItem();
-        applyItem.setApplyUser(applyItemUpload.getName());
-        applyItem.setContent(applyItemUpload.getContent());
-        applyItem.setMoney(applyItemUpload.getMoney());
+        applyItem.setApplyUser(applyItemDTO.getName());
+        applyItem.setContent(applyItemDTO.getContent());
+        applyItem.setMoney(applyItemDTO.getMoney());
         applyItem.setApplyTime(new Date());
         return applyItem;
     }
     @Override
-    public void saveApply(ApplyItemUpload applyItemUpload) {
-        ApplyItem applyItem = applyIyemUploadToApplyItem(applyItemUpload);
+    public void saveApply(ApplyItemDTO applyItemDTO) {
+        ApplyItem applyItem = applyIyemUploadToApplyItem(applyItemDTO);
         int rows = applyItemMapper.insert(applyItem);
         if(rows != 1){
             throw new UserInsertException("申请上传未知异常");

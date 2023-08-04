@@ -1,4 +1,4 @@
-package selab.desktop.resource_management.domain.userManagement.vo;
+package selab.desktop.resource_management.domain.userManagement.DTO;
 
 import lombok.Data;
 

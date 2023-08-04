@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 import selab.desktop.resource_management.domain.userManagement.User;
-import selab.desktop.resource_management.domain.userManagement.vo.UserReturn;
 import selab.desktop.resource_management.domain.userManagement.vo.UserVo;
+import selab.desktop.resource_management.domain.userManagement.DTO.UserDTO;
 import selab.desktop.resource_management.exception.userManagment.PasswordNotMatchException;
 import selab.desktop.resource_management.exception.userManagment.UserInsertException;
 import selab.desktop.resource_management.exception.userManagment.UserNotFundException;
@@ -37,8 +37,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements IUs
     }
 
    @Override
-    public void register(UserVo userVo) {
-        String username = userVo.getUsername();
+    public void register(UserDTO userDTO) {
+        String username = userDTO.getUsername();
         LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
         userLambdaQueryWrapper.eq(User::getUsername,username);
         User user = userMapper.selectOne(userLambdaQueryWrapper);
@@ -46,9 +46,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements IUs
             throw new UsernameDuplicatedException("当前用户名已存在");
         }
         String salt = UUID.randomUUID().toString().toUpperCase();
-        String oldPassword = userVo.getPassword();
+        String oldPassword = userDTO.getPassword();
         String password = getMD5Password(oldPassword,salt);
-        User newUser = userVoToUser(userVo,password,salt);
+        User newUser = userVoToUser(userDTO,password,salt);
         Integer rows = userMapper.insert(newUser);
         if(rows != 1){
             throw new UserInsertException("增加用户未知异常");
@@ -56,7 +56,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements IUs
     }
 
     @Override
-    public UserReturn login(String username, String password) {
+    public UserVo login(String username, String password) {
         LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
         userLambdaQueryWrapper.eq(User::getUsername,username);
         User user = userMapper.selectOne(userLambdaQueryWrapper);
@@ -68,8 +68,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements IUs
         if(!reallyPassword.equals(loginPassword)){
             throw new PasswordNotMatchException("密码错误");
         }
-       UserReturn userReturn = userToUserReturn(user);
-        return userReturn;
+       UserVo userVo = userToUserReturn(user);
+        return userVo;
     }
     private String getMD5Password(String password,String salt){
         for (int i = 0; i < 3; i++) {
@@ -78,28 +78,28 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements IUs
 
         return password;
     }
-    private User userVoToUser(UserVo userVo,String password,String salt){
+    private User userVoToUser(UserDTO userDTO, String password, String salt){
 
         User user = new User();
-        user.setName(userVo.getName());
-        user.setUsername(userVo.getUsername());
+        user.setName(userDTO.getName());
+        user.setUsername(userDTO.getUsername());
         user.setPassword(password);
-        user.setEmail(userVo.getEmail());
-        user.setRegistrationTime(userVo.getRegistrationTime());
+        user.setEmail(userDTO.getEmail());
+        user.setRegistrationTime(userDTO.getRegistrationTime());
         user.setUserStatus(User.ORDINARY_USER);
         user.setSalt(salt);
        return user;
     }
-private UserReturn userToUserReturn(User user){
+private UserVo userToUserReturn(User user){
 
-        UserReturn userReturn = new UserReturn();
-        userReturn.setUuid(user.getUserId());
-        userReturn.setName(user.getName());
-        userReturn.setUsername(user.getUsername());
-        userReturn.setUserStatus(user.getUserStatus());
-        userReturn.setEmail(user.getEmail());
-        userReturn.setToken(getToken());
-        return userReturn;
+        UserVo userVo = new UserVo();
+        userVo.setUuid(user.getUserId());
+        userVo.setName(user.getName());
+        userVo.setUsername(user.getUsername());
+        userVo.setUserStatus(user.getUserStatus());
+        userVo.setEmail(user.getEmail());
+        userVo.setToken(getToken());
+        return userVo;
 }
   private String getToken(){
       long timestamp = System.currentTimeMillis();

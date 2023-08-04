@@ -1,4 +1,4 @@
-package selab.desktop.resource_management.domain.itemManagement.item;
+package selab.desktop.resource_management.domain.itemManagement.DemageRecord;
 
 
 import com.baomidou.mybatisplus.annotation.TableField;

@@ -1,4 +1,4 @@
-package selab.desktop.resource_management.domain.itemManagement.applynews.Vo;
+package selab.desktop.resource_management.domain.itemManagement.applynews.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -9,7 +9,7 @@ import lombok.Data;
 import java.util.Date;
 @Data
 @Schema(description = "申请上传模板")
-public class ApplyItemUpload {
+public class ApplyItemDTO {
     @Schema(description = "申请人名字")
     @NotEmpty
     private String name;
