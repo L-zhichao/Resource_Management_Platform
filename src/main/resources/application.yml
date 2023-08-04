@@ -4,6 +4,8 @@ logging:
   level:
     selab.desktop.resource_management.fundManagement.controller.FundsController: debug
     selab.desktop.resource_management.ResourceManagementPlatformApplication: warn
+  file:
+    name: demo.log
 
 server:
   port: 9090
@@ -26,3 +28,4 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: ASSIGN_ID
+
