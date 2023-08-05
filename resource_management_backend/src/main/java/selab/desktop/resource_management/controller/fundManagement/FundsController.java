@@ -64,13 +64,16 @@ public class FundsController {
     @GetMapping("/getCanBeUsed")
     @Operation(summary = "展示所有可支配资产")
     @Transactional
-    public JsonResult<List<FundsVo>> getCanBeUsedAsset() {
+    public JsonResult<Page<FundsVo>> getCanBeUsedAsset(@Parameter(description = "当前页数") int page,
+                                                       @Parameter(description = "每页页数") int pageSize) {
         QueryWrapper<FundsVo> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("judge", "是");
-        List<FundsVo> list = fundsService.list(queryWrapper);
         log.info("展示所有可支配资产");
-        return new JsonResult<>(JsonResult.SUCCESS, null, list);
+        Page<FundsVo> fundsVoPage = new Page<>(page, pageSize);
+        fundsService.page(fundsVoPage,queryWrapper);
+        return new JsonResult<>(JsonResult.SUCCESS, null, fundsVoPage);
     }
+
 
 
     @PostMapping("/update")
