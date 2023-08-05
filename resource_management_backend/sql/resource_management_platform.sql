@@ -120,12 +120,26 @@ create table damage_record
 
 CREATE TABLE `funds_vo`
 (
-    `id`          bigint(30) NOT NULL COMMENT '主键ID',
+    `id`          bigint(30) auto_increment NOT NULL COMMENT '主键ID'
+        primary key,
     `asset`       varchar(20) default NULL COMMENT '资产名称',
     `asset_value` varchar(20) default NULL COMMENT '资产价值',
-    `judge`       varchar(5)  default null comment '资产是否可支配（1/0）',
-    #可支配为1,不可支配为0
-    `update_time` datetime default null comment '更新时间'
+    `judge`       varchar(5)  default null comment '资产是否可支配（是/否）',
+    `update_time` datetime    default null comment '更新时间'
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+
+CREATE TABLE `log_vo`
+(
+    `id`           bigint(30) auto_increment NOT NULL COMMENT '主键ID'
+        primary key,
+    `update_time`  datetime    default null comment '更新时间',
+    `summery`      varchar(10) default null comment '描述',
+    `assert_id`    bigint      default null comment '资产ID',
+    `assert`       varchar(20) default null comment '资产名',
+    `assert_value` bigint      default null comment '资产价值',
+    `judge`        varchar(5)  default null comment '资产是否可支配（是/否）'
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
 

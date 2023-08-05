@@ -1,6 +1,7 @@
 package selab.desktop.resource_management.controller.fundManagement;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,21 +10,27 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 import selab.desktop.resource_management.domain.fundManagement.Vo.FundsVo;
+import selab.desktop.resource_management.domain.fundManagement.Vo.LogVo;
 import selab.desktop.resource_management.service.fundManagement.FundsService;
+import selab.desktop.resource_management.service.fundManagement.LogService;
 import selab.desktop.resource_management.utils.JsonResult;
 import java.util.Date;
 import java.util.List;
 
 @Slf4j
 @Tag(name = "资金管理controller")
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin
 @RequestMapping("/fundsVo")
 @RestController
 public class FundsController {
     @Autowired
     private FundsService fundsService;
+
+    @Autowired
+    private LogService logService;
 
     @GetMapping
     @Operation(summary = "展示目前总资产")
@@ -47,6 +54,7 @@ public class FundsController {
     @Transactional
     public JsonResult<FundsVo> getFundsById(@PathVariable Long id) {
         log.info("查询id"+id);
+
         return new JsonResult<>(JsonResult.SUCCESS, null, fundsService.getById(id));
     }
 
@@ -75,7 +83,6 @@ public class FundsController {
     }
 
 
-
     @PostMapping("/update")
     @Operation(summary = "新增和修改资金")
     @Transactional
@@ -84,11 +91,19 @@ public class FundsController {
             fundsVo.setUpdateTime(new Date());
             log.info("增加资金");
             fundsService.save(fundsVo);
+
+            LogVo logVo = new LogVo(null,new Date(),"增加资金",fundsVo.getId(),fundsVo.getAsset(),fundsVo.getAssetValue(),fundsVo.getJudge());
+            logService.save(logVo);
+
             return new JsonResult<>(JsonResult.SUCCESS, null, null);
         } else {
             fundsVo.setUpdateTime(new Date());
             log.info("更新资金");
             fundsService.updateById(fundsVo);
+
+            LogVo logVo = new LogVo(null,new Date(),"修改资金",fundsVo.getId(),fundsVo.getAsset(),fundsVo.getAssetValue(),fundsVo.getJudge());
+            logService.save(logVo);
+
             return new JsonResult<>(JsonResult.SUCCESS, null, null);
         }
     }
@@ -100,6 +115,11 @@ public class FundsController {
         log.info("根据主键ID删除某项资金");
         log.info("删除成功");
         fundsService.removeById(id);
+
+        FundsVo fundsVo = fundsService.getById(id);
+        LogVo logVo = new LogVo(null,new Date(),"删除资金",fundsVo.getId(),fundsVo.getAsset(),fundsVo.getAssetValue(),fundsVo.getJudge());
+        logService.save(logVo);
+
         return new JsonResult<>(JsonResult.SUCCESS, null, null);
 
     }
