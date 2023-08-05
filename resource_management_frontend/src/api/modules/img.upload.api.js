@@ -32,8 +32,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
             method: 'post',
             data
           },
-          'headers.Content-Type', '')
-        // 'headers.Content-Type', 'multipart/form-data')
+          'headers.Content-Type', 'multipart/form-data')
       },
       data
     })

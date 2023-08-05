@@ -259,6 +259,7 @@ export default {
                 if (item2.applyId === item.applyId && item2.status === 1 && item.status === -1) responseNumber++
               })
             })
+            if (responseNumber === 0) return
             this.$notify({
               title: '有' + responseNumber + '个未读申请回应信息',
               message: '物品管理 → 物品申请历史',

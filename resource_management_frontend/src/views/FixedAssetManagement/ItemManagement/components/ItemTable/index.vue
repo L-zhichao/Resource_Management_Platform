@@ -17,7 +17,7 @@
       width="100">
       <template slot-scope="scope">
         <!-- 这个popover组件用于生成悬浮图片 -->
-        <el-popover placement="right" trigger="hover" v-if="scope.row.imgs !== ''">
+        <el-popover placement="right" trigger="hover" v-if="scope.row.imgs !== null">
           <img :src="scope.row.imgs" alt="" style="height: 300px">
           <!-- image -->
           <el-image slot="reference" style="height: 35px" :src="scope.row.imgs" :preview-src-list="[scope.row.imgs]">
@@ -26,7 +26,7 @@
             </div>
           </el-image>
         </el-popover>
-        <el-button type="text" size="small" v-if="scope.row.videos !== ''" @click="dialogVideoPlayer(scope.row.videos)">查看视频</el-button>
+        <el-button type="text" size="small" v-if="scope.row.videos !== null" @click="dialogVideoPlayer(scope.row.videos)">查看视频</el-button>
       </template>
     </el-table-column>
     <el-table-column

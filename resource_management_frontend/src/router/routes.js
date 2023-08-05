@@ -1,6 +1,6 @@
 // 路由导入
 import itemManagement from './modules/ItemManagement'
-import demo from './modules/demo'
+import fundmanagement from './modules/fundmanagement'
 import resource from './modules/resource'
 import editorQuill from './modules/editorQuill'
 
@@ -58,7 +58,7 @@ const frameIn = [
   // 物品管理
   itemManagement,
   // 资金管理
-  demo,
+  fundmanagement,
   // 考试资源
   resource,
   // 文本编辑器

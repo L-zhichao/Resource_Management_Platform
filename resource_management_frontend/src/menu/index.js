@@ -1,7 +1,7 @@
 import { uniqueId } from 'lodash'
 
 // 菜单导入
-import demo from './modules/demo'
+import fundmanagement from './modules/fundmanagement'
 import itemManagement from './modules/ItemManagement'
 import resource from './modules/resource'
 import editorQuill from './modules/editorQuill'
@@ -26,7 +26,7 @@ export const menuHeader = supplementPath([
   // 物品管理页面菜单
   itemManagement,
   // 资金管理
-  demo,
+  fundmanagement,
   // 考试资源
   resource,
   editorQuill
@@ -35,7 +35,7 @@ export const menuHeader = supplementPath([
 export const menuAside = supplementPath([
   { path: '/index', title: '首页', icon: 'home' },
   itemManagement,
-  demo,
+  fundmanagement,
   resource,
   editorQuill
 ])

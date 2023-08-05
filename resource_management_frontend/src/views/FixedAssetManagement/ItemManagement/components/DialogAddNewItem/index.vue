@@ -43,7 +43,7 @@
           accept=".png, .jpg, .jpeg, .mp4, .flv"
           :limit="1"
           list-type="text"
-          :on-change="change"
+          @change.native="change"
           :on-exceed="handleExceed"
           :auto-upload="false">
           <i class="el-icon-upload"></i>
@@ -53,7 +53,7 @@
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="submit">确 定</el-button>
+      <el-button type="primary" :loading="buttonLoading" @click="submit">确 定</el-button>
     </span>
   </el-dialog>
 </template>
@@ -124,6 +124,7 @@ export default {
           { required: true, message: '上传视频或图片', trigger: 'blur' }
         ]
       },
+      buttonLoading: false,
       dialogVisible: false
     }
   },
@@ -317,9 +318,9 @@ export default {
      * @param {file} file file文件
      */
     imgUpload (file) {
-      // const formData = new FormData()
-      // formData.append('file', file)
-      this.imgUploadAPI([this.ruleForm.img])
+      const formData = new FormData()
+      formData.append('file', file)
+      this.imgUploadAPI(formData)
         .then(v => {
           if (v.split('/')[0] === 'http:') {
             if (this.imgType === 'image') {
@@ -353,6 +354,21 @@ export default {
       // fileList.forEach((item) => {
       //   this.previewFile(item.raw)
       // })
+
+      // this.buttonLoading = true
+      // const fileBlob = new Blob([file], { type: file.type })
+      // const reader = new FileReader()
+      // console.log('开始')
+      // reader.onload = (e) => {
+      //   console.log('ok')
+      //   const binaryData = e.target.result
+      //   console.log(binaryData)
+      //   // 这里的 binaryData 就是文件原始二进制数据
+      //   this.ruleForm.img = binaryData
+      //   this.buttonLoading = false
+      // }
+      // reader.readAsBinaryString(fileBlob)
+
       this.ruleForm.img = file
       if (file.raw.type.split('/')[0] === 'image') {
         this.imgType = 'image'

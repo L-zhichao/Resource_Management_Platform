@@ -266,9 +266,10 @@
 
 <script>
 import axios from "axios";
+import util from '@/libs/util';
 
 export default {
-  name: "Page1",
+  name: "FundManagement",
   data() {
     return {
       randomKey: Math.random(),
@@ -321,6 +322,7 @@ export default {
     };
   },
   methods: {
+   
     formatDateTime(time) {
       const datetime = new Date(time);
       const year = datetime.getFullYear();

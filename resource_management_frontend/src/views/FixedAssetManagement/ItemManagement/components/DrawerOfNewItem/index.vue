@@ -93,8 +93,8 @@
             </el-table>
             <template slot="reference">
               <div>
-                <el-button size="small" type="success" v-if="scope.row.state === 1" @mouseover.native.once="tableDataResponseChange(scope.row.applyId)">已通过</el-button>
-                <el-button size="small" type="danger" v-if="scope.row.state === 2" @mouseover.native.once="tableDataResponseChange(scope.row.applyId)">未通过</el-button>
+                <el-button size="small" type="success" v-if="scope.row.state === 1" @mouseover.native="tableDataResponseChange(scope.row.applyId)">已通过</el-button>
+                <el-button size="small" type="danger" v-if="scope.row.state === 2" @mouseover.native="tableDataResponseChange(scope.row.applyId)">未通过</el-button>
               </div>
             </template>
           </el-popover>

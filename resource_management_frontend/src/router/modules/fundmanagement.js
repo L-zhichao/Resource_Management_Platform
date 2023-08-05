@@ -6,50 +6,38 @@ const _import = require('@/libs/util.import.' + process.env.NODE_ENV)
 const meta = { auth: true }
 
 export default {
-  path: 'demo',
-  name: 'demo',
+  path: 'fundmanagement',
+  name: 'fundmanagement',
   meta,
   cache: true,
-  redirect: { name: 'demo' },
+  redirect: { name: 'fundmanagement' },
   component: layoutHeaderAside,
   children: [{
-    path: '/page1',
-    name: 'page1',
+    path: '/FundManagement',
+    name: 'FundManagement',
     meta: {
       ...meta,
       title: '资金管理',
       cache: true
     },
-    component: _import('demo/page1')
+    component: _import('fundmanagement/FundManagement')
   }, {
-    path: '/page2',
-    name: 'page2',
+    path: '/GetCanBeUsed',
+    name: 'GetCanBeUsed',
     meta: {
       ...meta,
-      title: '资产分配',
+      title: '可支配资产展示',
       cache: true
     },
-    component: _import('demo/page2')
+    component: _import('fundmanagement/GetCanBeUsed')
   }, {
-    path: '/page3',
-    name: 'page3',
+    path: '/Logging',
+    name: 'Logging',
     meta: {
       ...meta,
       title: '日志记录',
       cache: true
     },
-    component: _import('demo/page3')
-  }
-  // ,
-  // {
-  //   path: '/page4',
-  //   name: 'page4',
-  //   meta: {
-  //     ...meta,
-  //     title: '物品申请',
-  //     cache: true
-  //   },
-  //   component: _import('demo/page4')
-  // }
-  ]
+    component: _import('fundmanagement/Logging')
+  }]
 }

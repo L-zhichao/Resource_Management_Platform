@@ -400,9 +400,9 @@ export default {
      * @param {formData} file file文件
      */
     imgUpload (file) {
-      // const formData = new FormData()
-      // formData.append('file', file)
-      this.imgUploadAPI([this.ruleForm.img])
+      const formData = new FormData()
+      formData.append('file', file)
+      this.imgUploadAPI(formData)
         .then(v => {
           if (v.split('/')[0] === 'http:') {
             console.log()
