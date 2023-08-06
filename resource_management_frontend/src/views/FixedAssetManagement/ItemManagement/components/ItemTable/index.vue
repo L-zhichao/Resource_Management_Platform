@@ -73,7 +73,7 @@
 import util from '@/libs/util'
 import api from '@/api'
 export default {
-  name: 'ItemTable',
+  name: 'itemTable',
   props: {
     tableData: {
       required: true

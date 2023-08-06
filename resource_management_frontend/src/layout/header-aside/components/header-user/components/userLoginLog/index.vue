@@ -127,8 +127,12 @@ export default {
           if (v === 0) {
             return this.$message.error('没有任何登录日志。???')
           }
-          if (typeof v === 'number') {
-            this.pagination.allData = v
+          if (typeof v === 'number' || typeof v === 'string') {
+            if (typeof v === 'string') {
+              this.pagination.allData = parseInt(v)
+            } else {
+              this.pagination.allData = v
+            }
           } else {
             this.$message.error('登录日志请求失败')
           }

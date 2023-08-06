@@ -13,31 +13,31 @@ export default {
   redirect: { name: 'fundmanagement' },
   component: layoutHeaderAside,
   children: [{
-    path: '/FundManagement',
-    name: 'FundManagement',
+    path: '/fundManagement',
+    name: 'fundManagement',
     meta: {
       ...meta,
       title: '资金管理',
       cache: true
     },
-    component: _import('fundmanagement/FundManagement')
+    component: _import('fundmanagement/fundManagement')
   }, {
-    path: '/GetCanBeUsed',
-    name: 'GetCanBeUsed',
+    path: '/getCanBeUsed',
+    name: 'getCanBeUsed',
     meta: {
       ...meta,
       title: '可支配资产展示',
       cache: true
     },
-    component: _import('fundmanagement/GetCanBeUsed')
+    component: _import('fundmanagement/getCanBeUsed')
   }, {
-    path: '/Logging',
-    name: 'Logging',
+    path: '/logging',
+    name: 'logging',
     meta: {
       ...meta,
       title: '日志记录',
       cache: true
     },
-    component: _import('fundmanagement/Logging')
+    component: _import('fundmanagement/logging')
   }]
 }

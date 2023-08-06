@@ -1,5 +1,5 @@
 // 路由导入
-import itemManagement from './modules/ItemManagement'
+import itemManagement from './modules/itemManagement'
 import fundmanagement from './modules/fundmanagement'
 import resource from './modules/resource'
 import editorQuill from './modules/editorQuill'

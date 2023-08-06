@@ -6,20 +6,20 @@ const _import = require('@/libs/util.import.' + process.env.NODE_ENV)
 const meta = { auth: true }
 
 export default {
-  path: '/FixedAssetManagement',
-  name: 'FixedAssetManagement',
+  path: '/fixedAssetManagement',
+  name: 'fixedAssetManagement',
   meta,
   cache: true,
-  redirect: { name: 'FixedAssetManagement-ItemManagement' },
+  redirect: { name: 'fixedAssetManagement-itemManagement' },
   component: layoutHeaderAside,
   children: [{
-    path: 'ItemManagement',
-    name: 'FixedAssetManagement-ItemManagement',
+    path: 'itemManagement',
+    name: 'fixedAssetManagement-itemManagement',
     meta: {
       title: '物品管理',
       ...meta,
       cache: true
     },
-    component: _import('FixedAssetManagement/ItemManagement')
+    component: _import('fixedAssetManagement/itemManagement')
   }]
 }

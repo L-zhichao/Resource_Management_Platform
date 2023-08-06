@@ -2,7 +2,7 @@ import { uniqueId } from 'lodash'
 
 // 菜单导入
 import fundmanagement from './modules/fundmanagement'
-import itemManagement from './modules/ItemManagement'
+import itemManagement from './modules/itemManagement'
 import editorQuill from './modules/editorQuill'
 // import resource from './modules/resource'
 

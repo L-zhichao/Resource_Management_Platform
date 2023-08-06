@@ -70,6 +70,9 @@ function createService () {
           case 40006:
             // code === 40006 代表 物品已经存在异常
             return { status: 40006, message: '物品已经存在异常' }
+          case 40009:
+            // code === 40009 代表 后端未知异常
+            return { status: 40009, message: '后端未知异常' }
           case 50001:
             // code === 50001 代表 用户增加未知异常
             return { status: 50001, message: '用户增加未知异常' }
@@ -88,14 +91,20 @@ function createService () {
           case 50006:
             // code === 50006 代表 更改回应状态未知异常
             return { status: 50006, message: '更改回应状态未知异常' }
-          case 'xxx':
-            // [ 示例 ] 其它和后台约定的 code
-            errorCreate(`[ code: xxx ] ${dataAxios.msg}: ${response.config.url}`)
-            break
           default:
-            // 不是正确的 code
+            // 未设置的 code
+            this.$log.push({
+              message: '错误代码' + code + ':' + (dataAxios.message || dataAxios.msg),
+              type: 'warning'
+            })
+            this.$notify({
+              title: `没有设置状态码${code}的相应数据`,
+              message: '错误代码' + code + ':' + (dataAxios.message || dataAxios.msg),
+              position: 'bottom-left',
+              type: 'warning'
+            })
             console.warn(`没有设置状态码${code}的相应数据`)
-            errorCreate(`${dataAxios.msg}: ${response.config.url}`)
+            errorCreate(`${dataAxios.message || dataAxios.msg}: ${response.config.url}`)
             break
         }
       }

@@ -269,7 +269,7 @@ import axios from "axios";
 // import util from '@/libs/util';
 
 export default {
-  name: "FundManagement",
+  name: "fundManagement",
   data() {
     return {
       randomKey: Math.random(),
@@ -351,7 +351,6 @@ export default {
       this.listLoading = true;
       axios
         .get("http://localhost:9090/fundsVo/page", {
-          timeout: 5000,
           params: this.listQuery,
           headers: {
             "Content-Type": "application/json",
@@ -526,9 +525,10 @@ export default {
     },
 
   getCanBeUsed() {
-      this.$router.push('/page2');
-    }
+      this.$router.push('/getCanBeUsed');
+  
   },
+  }
 };
 </script>
 <style>

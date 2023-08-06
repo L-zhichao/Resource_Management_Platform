@@ -38,7 +38,7 @@
 import axios from "axios";
 
 export default {
-  name: "GetCanBeUsed",
+  name: "getCanBeUsed",
   data() {
     return {
       timeLineHeight: "",
@@ -83,8 +83,7 @@ export default {
     fetchData() {
       this.listLoading = true;
       axios
-        .get("http://localhost:9090/fundsVo/page", {
-          timeout: 5000,
+        .get("http://localhost:9090/fundsVo/getCanBeUsed", {
           params: this.listQuery,
           headers: {
             "Content-Type": "application/json"

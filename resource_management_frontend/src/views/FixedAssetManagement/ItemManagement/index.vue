@@ -72,7 +72,7 @@
             <el-button
               type="primary"
               size="medium"
-              @click="dialogAddNewItemArouseChangesNumber++">
+              @click="addNewItemArouseChangesNumber++">
               添加新物品
             </el-button>
           </el-tooltip>
@@ -100,7 +100,7 @@
     </template>
 
     <!-- 表格 -->
-    <ItemTable
+    <itemTable
       :tableData="tableData"
       :randomKey="randomKey"
       :loadAnimation="loadAnimation"
@@ -128,17 +128,17 @@
       </el-row>
     </template>
     <!-- 顶部两个按钮其一换出的 drawer -->
-    <DrawerOfNewItem :drawerArouse="drawerNewItemArouseChangesNumber"/>
+    <showNewItem :drawerArouse="drawerNewItemArouseChangesNumber"/>
     <!-- 顶部两个按钮其二换出的 drawer -->
-    <DrawerOfOldItem :drawerArouse="drawerOldItemArouseChangesNumber"/>
+    <showDamageItem :drawerArouse="drawerOldItemArouseChangesNumber"/>
     <!-- 顶部两个按钮其一换出的 dialog -->
-    <DialogOfNewItem :dialogArouse="dialogNewItemArouseChangesNumber"/>
+    <applyNewItem :dialogArouse="dialogNewItemArouseChangesNumber"/>
     <!-- 顶部两个按钮其二换出的 dialog -->
-    <DialogOfOldItem :dialogArouse="dialogOldItemArouseChangesNumber" :oldItemId_Name="oldItemId_Name"/>
+    <damageItemReport :dialogArouse="dialogOldItemArouseChangesNumber" :oldItemId_Name="oldItemId_Name"/>
     <!-- 右侧管理员按钮 -->
-    <DialogAddNewItem :dialogArouse="dialogAddNewItemArouseChangesNumber"/>
+    <addNewItem :dialogArouse="addNewItemArouseChangesNumber"/>
     <!-- 列表管理员编辑按钮 -->
-    <DialogChangeNewItem :dialogArouse="dialogChangeItemArouseChangesNumber" :changeItemInformation="changeItemInformation" @changeItemSuccess="changeItemSuccess" @dialogVideoPlayerArouse="dialogVideoPlayerArouse"/>
+    <changeItem :dialogArouse="dialogChangeItemArouseChangesNumber" :changeItemInformation="changeItemInformation" @changeItemSuccess="changeItemSuccess" @dialogVideoPlayerArouse="dialogVideoPlayerArouse"/>
     <!-- 视频播放器 -->
     <videoPlayer :dialogVideoPlayer="dialogVideoPlayer" :videoUrl="videoUrl"/>
   </d2-container>
@@ -147,24 +147,24 @@
 <script>
 import util from '@/libs/util'
 import api from '@/api'
-import DrawerOfNewItem from './components/DrawerOfNewItem'
-import DrawerOfOldItem from './components/DrawerOfOldItem'
-import DialogOfNewItem from './components/DialogOfNewItem'
-import DialogOfOldItem from './components/DialogOfOldItem'
-import DialogAddNewItem from './components/DialogAddNewItem'
-import DialogChangeNewItem from './components/DialogChangeNewItem'
-import ItemTable from './components/ItemTable'
+import showNewItem from './components/showNewItem'
+import showDamageItem from './components/showDamageItem'
+import applyNewItem from './components/applyNewItem'
+import damageItemReport from './components/damageItemReport'
+import addNewItem from './components/addNewItem'
+import changeItem from './components/changeItem'
+import itemTable from './components/itemTable'
 import videoPlayer from './components/videoPlayer'
 export default {
-  name: 'FixedAssetManagement-ItemManagement',
+  name: 'fixedAssetManagement-itemManagement',
   components: {
-    DrawerOfNewItem,
-    DrawerOfOldItem,
-    DialogOfNewItem,
-    DialogOfOldItem,
-    DialogAddNewItem,
-    DialogChangeNewItem,
-    ItemTable,
+    showNewItem,
+    showDamageItem,
+    applyNewItem,
+    damageItemReport,
+    addNewItem,
+    changeItem,
+    itemTable,
     videoPlayer
   },
   data () {
@@ -177,7 +177,7 @@ export default {
       dialogNewItemArouseChangesNumber: 0,
       dialogOldItemArouseChangesNumber: 0,
       oldItemId_Name: {},
-      dialogAddNewItemArouseChangesNumber: 0,
+      addNewItemArouseChangesNumber: 0,
       dialogChangeItemArouseChangesNumber: 0,
       dialogVideoPlayer: 0,
       videoUrl: '',
@@ -208,7 +208,6 @@ export default {
      * @param {Number} val 当前pageSize
      */
     handleSizeChange (val) {
-      console.log(`每页 ${val} 条`)
       this.pagination.pageSize = val
       this.pagination.currentPage = 1
       this.itemSearch({
@@ -222,7 +221,6 @@ export default {
      * @param {Number} val 当前page
      */
     handleCurrentChange (val) {
-      console.log(`当前页: ${val}`)
       this.pagination.currentPage = val
       this.itemSearch({
         page: val,

@@ -90,7 +90,7 @@
 import axios from "axios";
 
 export default {
-  name:'Logging',
+  name: 'logging',
   data() {
     return {
       timeLineHeight: "",
@@ -166,7 +166,6 @@ export default {
       this.listLoading = true;
       axios
         .get("http://localhost:9090/logs/page", {
-          timeout: 5000,
           params: this.listQuery,
           headers: {
             "Content-Type": "application/json",
@@ -194,7 +193,6 @@ export default {
 
       axios
         .get(`http://localhost:9090/logs`, {
-          timeout: 5000,
           params: params,
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
