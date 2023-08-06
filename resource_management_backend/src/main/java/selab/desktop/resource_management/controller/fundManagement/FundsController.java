@@ -63,8 +63,10 @@ public class FundsController {
     @Transactional
     public JsonResult<Page<FundsVo>> page(@Parameter(description = "当前页数") int page,
                                           @Parameter(description = "每页页数") int pageSize) {
+        QueryWrapper<FundsVo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("update_time");
         Page<FundsVo> mPage = new Page<>(page, pageSize);
-        fundsService.page(mPage);
+        fundsService.page(mPage,queryWrapper);
         log.info("查询所有资产");
         return new JsonResult<>(JsonResult.SUCCESS, null, mPage);
     }
@@ -75,7 +77,7 @@ public class FundsController {
     public JsonResult<Page<FundsVo>> getCanBeUsedAsset(@Parameter(description = "当前页数") int page,
                                                        @Parameter(description = "每页页数") int pageSize) {
         QueryWrapper<FundsVo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("judge", "是");
+        queryWrapper.eq("judge", "是").orderByDesc("update_time");
         log.info("展示所有可支配资产");
         Page<FundsVo> fundsVoPage = new Page<>(page, pageSize);
         fundsService.page(fundsVoPage,queryWrapper);
@@ -114,9 +116,8 @@ public class FundsController {
     public JsonResult<String> delete(@PathVariable Long id) {
         log.info("根据主键ID删除某项资金");
         log.info("删除成功");
-        fundsService.removeById(id);
-
         FundsVo fundsVo = fundsService.getById(id);
+        fundsService.removeById(id);
         LogVo logVo = new LogVo(null,new Date(),"删除资金",fundsVo.getId(),fundsVo.getAsset(),fundsVo.getAssetValue(),fundsVo.getJudge());
         logService.save(logVo);
 
