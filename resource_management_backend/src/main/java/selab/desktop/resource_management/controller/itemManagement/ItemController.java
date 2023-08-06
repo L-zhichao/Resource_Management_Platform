@@ -1,29 +1,33 @@
 package selab.desktop.resource_management.controller.itemManagement;
 
 
+import cn.hutool.core.util.HexUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.util.ResourceUtils;
+import org.springframework.boot.system.ApplicationHome;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import selab.desktop.resource_management.domain.itemManagement.item.Item;
+import selab.desktop.resource_management.exception.itemManagement.FileIploadException;
 import selab.desktop.resource_management.service.itemManagement.ItemService;
 import selab.desktop.resource_management.utils.ItemPage;
 import selab.desktop.resource_management.utils.JsonResult;
+
+import javax.imageio.stream.FileImageOutputStream;
 import java.io.*;
 import java.util.Base64;
 import java.util.List;
+import java.util.UUID;
 
 @CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 @RequestMapping("/item")
 @Tag(name = "物品管理controller层")
 public class ItemController {
-    @Value("${file.upload-path}")
-    private String uploadPath;
 
     @Autowired
     private ItemService itemService;
@@ -80,7 +84,7 @@ public class ItemController {
                 throw new FileIploadException("文件上传异常");
             }
             byte[] bytes = file.getBytes();
-            // 读取文件的前几个字节来判断图片格式
+            // 读取文件前几个字节来判断图片格式
             byte[] b = new byte[4];
             for (int i = 0; i < b.length; i++) {
                 b[i] = bytes[i];

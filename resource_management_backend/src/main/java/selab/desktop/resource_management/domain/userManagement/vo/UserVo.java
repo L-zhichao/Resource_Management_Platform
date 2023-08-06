@@ -1,6 +1,6 @@
 package selab.desktop.resource_management.domain.userManagement.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -10,7 +10,6 @@ import java.util.Date;
 
 @Schema(description = "登录成功返回对象模板")
 @Data
-@Schema(description = "用户数据模型")
 public class UserVo {
     @Schema(description = "uuid")
     private Long uuid;
