@@ -1,8 +1,8 @@
 package selab.desktop.resource_management.service.itemManagement.impl;
 
+
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class ItemServiceImpl implements ItemService {
 
     public Page<Item> selectAllItem(int page, int size, String search){
     LambdaQueryWrapper<Item> wrapper = Wrappers.lambdaQuery();
-    if (StringUtils.isNotBlank(search)){
+    if (search != null){
             wrapper.like(Item::getItemName,search);
         }
     Page<Item> selectPage=itemMapper.selectPage(new Page(page,size),wrapper);
