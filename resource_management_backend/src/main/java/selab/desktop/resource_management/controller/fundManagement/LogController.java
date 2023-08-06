@@ -22,15 +22,15 @@ import java.util.Date;
 @Slf4j
 @Tag(name = "日志管理Controller")
 @CrossOrigin
-@RequestMapping("/log")
+@RequestMapping("/logs")
 @RestController
 public class LogController {
     @Autowired
     private LogService logService;
 
-    @GetMapping("/{updateTime}")
+    @GetMapping
     @Operation(summary = "日期分页分时间查询")
-    public JsonResult<Page<LogVo>>getAllLogByPageAndDate(@PathVariable("updateTime") String updateTime,
+    public JsonResult<Page<LogVo>>getAllLogByPageAndDate(@RequestParam String updateTime,
                                                          @Parameter(description = "当前页数") int page,
                                                          @Parameter(description = "每页页数") int pageSize
                                                          ){
@@ -40,4 +40,15 @@ public class LogController {
         logService.page(logVoPage,queryWrapper);
         return new JsonResult<>(JsonResult.SUCCESS,null,logVoPage);
     }
+    @GetMapping("/page")
+    @Operation(summary = "查询全部")
+    public JsonResult<Page<LogVo>>getAllLogByPage(@Parameter(description = "当前页数") int page,
+                                                  @Parameter(description = "每页页数") int pageSize){
+        QueryWrapper<LogVo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("update_time");
+        Page<LogVo> logVoPage = new Page<>(page, pageSize);
+        logService.page(logVoPage,queryWrapper);
+        return new JsonResult<>(JsonResult.SUCCESS,null,logVoPage);
+    }
+
 }
