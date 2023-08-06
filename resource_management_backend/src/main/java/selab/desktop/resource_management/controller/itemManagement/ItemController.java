@@ -1,31 +1,21 @@
 package selab.desktop.resource_management.controller.itemManagement;
 
 
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.util.HexUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.json.JSONObject;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.system.ApplicationHome;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import selab.desktop.resource_management.domain.itemManagement.item.Item;
-import selab.desktop.resource_management.exception.itemManagement.FileIploadException;
 import selab.desktop.resource_management.service.itemManagement.ItemService;
 import selab.desktop.resource_management.utils.ItemPage;
 import selab.desktop.resource_management.utils.JsonResult;
-
-import javax.imageio.stream.FileImageOutputStream;
 import java.io.*;
-import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.List;
-import java.util.UUID;
 
 @CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
@@ -38,7 +28,7 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @Operation(description = "查询所有物品")
+    @Operation(summary = "查询所有物品")
     @GetMapping("/all")
     public JsonResult<ItemPage> selectAllItem(@RequestParam(defaultValue = "1") int page,
                                               @RequestParam(defaultValue = "5") int size,
@@ -52,14 +42,14 @@ public class ItemController {
         return new JsonResult<>(200, null, itemPage1);
     }
 
-    @Operation(description = "新增物品")
+    @Operation(summary = "新增物品")
     @PostMapping("/save")
     public JsonResult<Void> addItem(@RequestBody Item item) {
         itemService.addItem(item);
         return new JsonResult<>(JsonResult.SUCCESS, null, null);
     }
 
-    @Operation(description = "更新物品")
+    @Operation(summary = "更新物品")
     @PutMapping("/updata")
     public JsonResult<?> updateItem(@RequestBody Item item) {
         itemService.updateItem(item);
@@ -67,23 +57,23 @@ public class ItemController {
 
     }
 
-    @Operation(description = "根据id查询物品")
+    @Operation(summary = "根据id查询物品")
     @GetMapping("/select/{id}")
     public JsonResult<Item> select(@PathVariable Long id) {
         Item item = itemService.getItemById(id);
         return new JsonResult<>(JsonResult.SUCCESS, null, item);
     }
 
-    @Operation(description = "通过id删除物品")
+    @Operation(summary = "通过id删除物品")
     @DeleteMapping("/delete")
     public JsonResult<?> delete(@RequestParam Long id) {
         itemService.deleteItemById(id);
         return new JsonResult<>(JsonResult.SUCCESS, null, null);
     }
 
-    @Operation(description = "图片上传")
+    @Operation(summary = "图片上传")
     @PostMapping("/img-upload")
-    public JsonResult uploadImg(MultipartFile file) {
+    public JsonResult uploadImg(@RequestParam MultipartFile file) {
 
         try {
             if (file == null) {
@@ -129,10 +119,9 @@ public class ItemController {
             return new JsonResult<>(50056, "图片上传失败", null);
         }
     }
-
-    @Operation(description = "图片查询")
+    @Operation(summary = "图片查询")
     @GetMapping("/img-find")
-    public JsonResult<String> fingImg(String url) {
+    public JsonResult<String > fingImg(String url) {
         try {
             String substring = url.substring(url.indexOf('/', 8));
             substring="D://"+substring;

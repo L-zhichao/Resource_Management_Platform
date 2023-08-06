@@ -28,7 +28,7 @@ public class DamageRecordController {
     @Autowired
     private DamageRecordService damageRecordService;
 
-    @Operation(description = "查询所有的上报记录")
+    @Operation(summary = "查询所有的上报记录")
     @GetMapping("/query")
     public JsonResult<List<DamageRecord>> findAllDamageRecord(@RequestParam(defaultValue = "") String username){
         if(username.equals("")){
@@ -46,21 +46,21 @@ public class DamageRecordController {
             return new JsonResult<>(JsonResult.SUCCESS,"success",damageRecordByUserName);
         }
     }
-    @Operation(description = "新增损坏记录")
+    @Operation(summary = "新增损坏记录")
     @PostMapping("/save")
     public JsonResult<?> addDamageRecord(@RequestBody DamageRecord damageRecord){
         damageRecordService.addDamageRecord(damageRecord);
         return new JsonResult<>(JsonResult.SUCCESS,null,null);
     }
 
-    @Operation(description = "删除一项损坏记录")
+    @Operation(summary = "删除一项损坏记录")
     @DeleteMapping("/delete")
     public JsonResult<?> deleteDamageRecord(@RequestParam Long id){
         damageRecordService.deleteDamageRecord(id);
         return new JsonResult<>(JsonResult.SUCCESS,null,null);
     }
 
-    @Operation(description = "更新损坏记录")
+    @Operation(summary = "更新损坏记录")
     @GetMapping("/update")
     public JsonResult<Void> updateDamageRecord(@RequestParam Long damageRecordId){
         damageRecordService.updateIsHandle(damageRecordId);

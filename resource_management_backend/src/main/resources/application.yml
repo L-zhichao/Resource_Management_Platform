@@ -1,10 +1,32 @@
 # 日志格式
 logging:
   pattern:
-    dateformat: yyyy-MM-dd HH:mm:ss.SSS
-#  level:
-#    selab.desktop.resource_management.fundManagement.controller.FundsController: debug
-#    selab.desktop.resource_management.ResourceManagementPlatformApplication: warn
+#  "defaultValue": "%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss.SS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+    dateformat: yyyy-MM-dd HH:mm:ss.SS
+  file:
+    name: resource_management_backend/log/Logback.log
+    #将没用的信息关掉
+    path:
+  level:
+    selab.desktop.resource_management.ResourceManagementPlatformApplication: error
+    logging.level.org.springframework.boot.autoconfigure: error
+    org.apache.ibatis: error
+    com.baomidou.mybatisplus: error
+    com.alibaba.druid: error
+    web: OFF
+    org.apache.tomcat: OFF
+    org.apache.coyote: OFF
+    org.apache.catalina: OFF
+    org.springdoc: OFF
+    com.github.xiaoymin.knife4j: OFF
+    #    root: OFF
+  logback:
+    rollingpolicy:
+      file-name-pattern: ${LOG_FILE}.%d{yyyy-MM-dd}.%i.log
+      max-history: 7
+      max-file-size: 5MB
+
+
 
 server:
   port: 9090
@@ -19,10 +41,10 @@ spring:
   application:
     name: resource_management_platform_project
   datasource:
-    url: jdbc:mysql://localhost:3306/resource_management_platform?useUnicode=true&characterEncoding=utf-8&useSSL=false&serviceTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/mybatis_plus?useUnicode=true&characterEncoding=utf-8&useSSL=false&serviceTimezone=UTC&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: 123456
+    password: 159753
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       # 链接池初始化大小

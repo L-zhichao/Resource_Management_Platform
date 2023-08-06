@@ -1,6 +1,8 @@
 package selab.desktop.resource_management.controller.itemManagement;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/item")
 @CrossOrigin(origins = "http://127.0.0.1:5500")
+@Tag(name = "物品申请Controller层")
 public class ApplyItemController {
     private final ApplyItemService applyItemService;
 
@@ -28,9 +31,7 @@ public class ApplyItemController {
 
     @Operation(summary = "所有物品申请信息展示模块")
     @PostMapping("/showApply")
-    public JsonResult<List<ApplyItemVo>> showApply(HttpServletRequest request){
-        Object name = request.getSession().getAttribute("name");
-        System.out.println(name);
+    public JsonResult<List<ApplyItemVo>> showApply(){
         List<ApplyItemVo> applyItemVos = applyItemService.selectAllApply();
         JsonResult<List<ApplyItemVo>> applyItemVosJsonResult = new JsonResult<>(JsonResult.SUCCESS,null,applyItemVos);
         return applyItemVosJsonResult;

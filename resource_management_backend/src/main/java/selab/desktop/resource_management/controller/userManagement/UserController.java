@@ -1,6 +1,7 @@
 package selab.desktop.resource_management.controller.userManagement;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/user")
+@Tag(name = "用户管理Controller层")
 public class UserController {
 
     private final UserServiceImpl userServiceImpl;
@@ -75,12 +77,15 @@ public class UserController {
         return jsonResult;
     }
 
+    @Operation(summary = "用户登录")
     @GetMapping("/log")
     public JsonResult<List<UserLog>> log(@RequestParam(defaultValue = "1") Long current,@RequestParam Long size){
         List<UserLog> userLogs = userLogService.queryAll(current, size);
         JsonResult<List<UserLog>> listJsonResult = new JsonResult<>(JsonResult.SUCCESS,null,userLogs);
         return listJsonResult;
     }
+
+    @Operation(summary = "查询登录")
     @GetMapping("/count")
    public JsonResult<Long> queryLogCount(){
         Long count = userLogService.queryForCount();
