@@ -25,7 +25,7 @@
         v-if="userAdministratorPermissions">
       </el-table-column>
       <el-table-column
-        prop="itemname"
+        prop="itemName"
         label="损坏物品"
         width="140">
       </el-table-column>
@@ -91,7 +91,7 @@ export default {
         damageRecordId: 1,
         damageRecordDesc: '桌腿坏了',
         damageRecordTime: '2023-5-5',
-        itemname: '桌子',
+        itemName: '桌子',
         username: '王五',
         damageRecordImg: '',
         imgs: [],
@@ -168,6 +168,17 @@ export default {
           if (v === 'fail') {
             this.loadAnimation = false
             return this.$message.error('信息获取失败')
+          } else if (v.status >= 40000) {
+            this.$log.push({
+              message: '错误代码' + v.status + ',' + v.message,
+              type: 'warning'
+            })
+            return this.$notify({
+              title: v.message,
+              message: '错误代码' + v.status,
+              position: 'bottom-left',
+              type: 'warning'
+            })
           }
           this.allTableData.tableDataWait = v.filter((item, index) => {
             if (item.damageRecordIsHandle === 'false') {
@@ -219,6 +230,17 @@ export default {
             this.itemSearchDamage({ username: null })
           } else if (v === 'fail') {
             this.$message.error('删除失败')
+          } else if (v.status >= 40000) {
+            this.$log.push({
+              message: '错误代码' + v.status + ',' + v.message,
+              type: 'warning'
+            })
+            return this.$notify({
+              title: v.message,
+              message: '错误代码' + v.status,
+              position: 'bottom-left',
+              type: 'warning'
+            })
           }
         })
     },
@@ -246,6 +268,17 @@ export default {
             this.itemSearchDamage({ username: null })
           } else if (v === 'fail') {
             this.$message.error('处理失败')
+          } else if (v.status >= 40000) {
+            this.$log.push({
+              message: '错误代码' + v.status + ',' + v.message,
+              type: 'warning'
+            })
+            return this.$notify({
+              title: v.message,
+              message: '错误代码' + v.status,
+              position: 'bottom-left',
+              type: 'warning'
+            })
           }
         })
     },

@@ -8,7 +8,7 @@
     v-loading="loadAnimation"
     style="width: 100%">
     <el-table-column
-      prop="itemname"
+      prop="itemName"
       label="物品"
       width="300">
     </el-table-column>
@@ -17,7 +17,7 @@
       width="100">
       <template slot-scope="scope">
         <!-- 这个popover组件用于生成悬浮图片 -->
-        <el-popover placement="right" trigger="hover" v-if="scope.row.imgs !== null">
+        <el-popover placement="right" trigger="hover" v-if="scope.row.imgs !== null && scope.row.imgs !== ''">
           <img :src="scope.row.imgs" alt="" style="height: 300px">
           <!-- image -->
           <el-image slot="reference" style="height: 35px" :src="scope.row.imgs" :preview-src-list="[scope.row.imgs]">
@@ -26,7 +26,7 @@
             </div>
           </el-image>
         </el-popover>
-        <el-button type="text" size="small" v-if="scope.row.videos !== null" @click="dialogVideoPlayer(scope.row.videos)">查看视频</el-button>
+        <el-button type="text" size="small" v-if="scope.row.videos !== null && scope.row.videos !== ''" @click="dialogVideoPlayer(scope.row.videos)">查看视频</el-button>
       </template>
     </el-table-column>
     <el-table-column
@@ -40,7 +40,7 @@
       width="120">
     </el-table-column>
     <el-table-column
-      prop="damageRecordDesc"
+      prop="description"
       label="描述">
     </el-table-column>
     <el-table-column
@@ -101,10 +101,10 @@ export default {
     handleCurrentChange (row) {
       if (row === null) return
       this.currentlySelected = row
-      this.$emit('dialogOldItem', { itemId: row.itemId, itemname: row.itemname, number: row.number }, false)
+      this.$emit('dialogOldItem', { itemId: row.itemId, itemName: row.itemName, number: row.number }, false)
     },
     dialogOldItemArouse (row) {
-      this.$emit('dialogOldItem', { itemId: row.itemId, itemname: row.itemname, number: row.number }, true)
+      this.$emit('dialogOldItem', { itemId: row.itemId, itemName: row.itemName, number: row.number }, true)
     },
     /**
      * @description 物品删除请求api
@@ -127,6 +127,17 @@ export default {
             })
           } else if (v === 'fail') {
             this.$message.error('删除失败')
+          } else if (v.status >= 40000) {
+            this.$log.push({
+              message: '错误代码' + v.status + ',' + v.message,
+              type: 'warning'
+            })
+            return this.$notify({
+              title: v.message,
+              message: '错误代码' + v.status,
+              position: 'bottom-left',
+              type: 'warning'
+            })
           }
         })
     },

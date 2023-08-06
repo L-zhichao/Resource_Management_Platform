@@ -5,10 +5,10 @@
     :before-close="handleClose"
     width="40%">
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="名称" prop="itemname">
+      <el-form-item label="名称" prop="itemName">
         <el-input
           type="text"
-          v-model="ruleForm.itemname">
+          v-model="ruleForm.itemName">
         </el-input>
       </el-form-item>
       <el-form-item label="数量" prop="number">
@@ -31,8 +31,8 @@
           v-model.number="ruleForm.price">
         </el-input>
       </el-form-item>
-      <el-form-item label="详情" prop="damageRecordDesc">
-        <el-input type="textarea" v-model="ruleForm.damageRecordDesc" @blur="textProcessing"></el-input>
+      <el-form-item label="详情" prop="description">
+        <el-input type="textarea" v-model="ruleForm.description" @blur="textProcessing"></el-input>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -58,13 +58,13 @@ export default {
   data () {
     return {
       ruleForm: {
-        itemname: '',
+        itemName: '',
         number: 1,
         price: null,
-        damageRecordDesc: ''
+        description: ''
       },
       rules: {
-        itemname: [
+        itemName: [
           { required: true, message: '请输入物品名', trigger: 'blur' },
           {
             required: true,
@@ -97,7 +97,7 @@ export default {
             trigger: 'blur'
           }
         ],
-        damageRecordDesc: [
+        description: [
           { required: true, message: '说明一下', trigger: 'blur' }
         ]
       },
@@ -122,8 +122,8 @@ export default {
      */
     textProcessing () {
       const reg1 = new RegExp('/', 'g')
-      const data = this.ruleForm.damageRecordDesc.replace(reg1, '')
-      this.ruleForm.damageRecordDesc = data
+      const data = this.ruleForm.description.replace(reg1, '')
+      this.ruleForm.description = data
     },
     /**
      * @description 请求新物品
@@ -146,10 +146,10 @@ export default {
         .then(v => {
           if (typeof v === 'object') {
             this.ruleForm = {
-              itemname: '',
+              itemName: '',
               number: 1,
               price: null,
-              damageRecordDesc: ''
+              description: ''
             }
             this.$message({
               message: '上传成功',
@@ -168,7 +168,7 @@ export default {
       this.textProcessing()
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          const text = this.ruleForm.itemname + '//////////' + this.ruleForm.number + '//////////' + this.ruleForm.damageRecordDesc
+          const text = this.ruleForm.itemName + '//////////' + this.ruleForm.number + '//////////' + this.ruleForm.description
           this.itemApply({
             content: text,
             money: this.ruleForm.price

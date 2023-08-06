@@ -48,15 +48,22 @@ export default {
     window.addEventListener('keyup', this.ctrlS)
     const localStorageName = util.cookies.get('username') + 'Value'
     const localStorageNameValue = localStorage.getItem(localStorageName)
-    if (localStorageNameValue !== null) {
+    if (localStorageNameValue !== null && localStorageNameValue !== '"<p><br></p>"') {
       this.value = JSON.parse(localStorageNameValue)
+      this.$notify({
+        title: '成功载入缓存',
+        message: 'ctrl+s可以缓存编辑内容哦',
+        position: 'bottom-left',
+        type: 'success'
+      })
+    } else {
+      this.$notify({
+        title: '小贴士',
+        message: 'ctrl+s可以缓存编辑内容哦',
+        position: 'bottom-left',
+        type: 'warning'
+      })
     }
-    this.$notify({
-      title: '小贴士',
-      message: 'ctrl+s可以缓存编辑内容哦',
-      position: 'bottom-left',
-      type: 'warning'
-    })
   },
   beforeDestroy () {
     window.removeEventListener('keydown', this.preventBrowserDefault)

@@ -271,8 +271,19 @@ export default {
           if (v === 'fail') {
             this.loadAnimation = false
             return this.$message.error('获取失败')
+          } else if (v.status >= 40000) {
+            this.$log.push({
+              message: '错误代码' + v.status + ',' + v.message,
+              type: 'warning'
+            })
+            return this.$notify({
+              title: v.message,
+              message: '错误代码' + v.status,
+              position: 'bottom-left',
+              type: 'warning'
+            })
           }
-          this.tableData = JSON.parse(JSON.stringify(v.rows))
+          this.tableData = JSON.parse(JSON.stringify(v.items))
           for (let i = 0; i < this.tableData.length; i++) {
             this.tableData[i].img = ''
           }
@@ -284,8 +295,8 @@ export default {
     /**
      * @description 唤起 dialog 旧物品损坏上报
      */
-    dialogOldItem ({ itemId, itemname, number }, arouse) {
-      this.oldItemId_Name = { itemId, itemname, number }
+    dialogOldItem ({ itemId, itemName, number }, arouse) {
+      this.oldItemId_Name = { itemId, itemName, number }
       if (arouse) this.dialogOldItemArouseChangesNumber++
     },
     /**

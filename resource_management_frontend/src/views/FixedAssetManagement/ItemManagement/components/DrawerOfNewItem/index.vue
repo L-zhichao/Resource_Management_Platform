@@ -220,7 +220,7 @@ export default {
       this.tableData.forEach((item, index) => {
         if (item.applyId === id) {
           this.tableDataResponse[0] = item
-          if (!this.userAdministratorPermissions && item.status === -1) {
+          if (!this.userAdministratorPermissions && item.status === -1 && item.applyUser === util.cookies.get('name')) {
             this.itemReadResponse({ id })
             this.allTableData[1][0].forEach((item, index) => {
               if (item.applyId === id) this.allTableData[1][0][index].status = 1
@@ -276,6 +276,17 @@ export default {
             this.itemShowApply()
           } else if (v === 'fail') {
             this.$message.error('上传失败')
+          } else if (v.status >= 40000) {
+            this.$log.push({
+              message: '错误代码' + v.status + ',' + v.message,
+              type: 'warning'
+            })
+            return this.$notify({
+              title: v.message,
+              message: '错误代码' + v.status,
+              position: 'bottom-left',
+              type: 'warning'
+            })
           }
         })
     },

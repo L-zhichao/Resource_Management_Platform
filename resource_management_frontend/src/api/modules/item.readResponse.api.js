@@ -4,7 +4,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
   /**
    * @description 普通用户回复已读
    */
-  ITEM_READ_RESPONSE_API (data) {
+  ITEM_READ_RESPONSE_API (params) {
     // 模拟数据
     mock
       .onAny('/item/readed')
@@ -23,8 +23,8 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
     // 接口请求
     return request({
       url: 'item/readed',
-      method: 'post',
-      data
+      method: 'get',
+      params
     })
   }
 })

@@ -5,11 +5,11 @@
     :before-close="handleClose"
     width="40%">
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="名称" prop="itemname">
+      <el-form-item label="名称" prop="itemName">
         <el-input
           type="text"
           :controls="false"
-          v-model="ruleForm.itemname">
+          v-model="ruleForm.itemName">
         </el-input>
       </el-form-item>
       <el-form-item label="数量" prop="number">
@@ -32,8 +32,8 @@
           v-model.number="ruleForm.price">
         </el-input>
       </el-form-item>
-      <el-form-item label="详情" prop="damageRecordDesc">
-        <el-input type="textarea" v-model="ruleForm.damageRecordDesc"></el-input>
+      <el-form-item label="详情" prop="description">
+        <el-input type="textarea" v-model="ruleForm.description"></el-input>
       </el-form-item>
       <el-row type="flex" class="row-bg" justify="space-between" v-if="oldImgView">
         <el-col :span="24">
@@ -46,12 +46,12 @@
             <!-- image -->
             <template slot="reference">
               <div>
-                <el-image v-if="ruleForm.imgs !== ''" style="height: 100px" :src="ruleForm.imgs" :preview-src-list="[ruleForm.imgs]">
+                <el-image v-if="ruleForm.imgs !== '' && ruleForm.imgs !== null" style="height: 100px" :src="ruleForm.imgs" :preview-src-list="[ruleForm.imgs]">
                   <div slot="error" class="image-slot">
                     <i class="el-icon-picture-outline"></i>
                   </div>
                 </el-image>
-                <el-button type="text" size="small" v-if="ruleForm.videos !== ''" @click="dialogVideoPlayer(ruleForm.videos)">查看视频</el-button>
+                <el-button type="text" size="small" v-if="ruleForm.videos !== '' && ruleForm.videos !== null" @click="dialogVideoPlayer(ruleForm.videos)">查看视频</el-button>
               </div>
             </template>
           </el-popover>
@@ -75,7 +75,7 @@
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="submit">确 定</el-button>
+      <el-button type="primary" :loading="buttonLoading" @click="submit">确 定</el-button>
     </span>
   </el-dialog>
 </template>
@@ -102,17 +102,17 @@ export default {
     return {
       ruleForm: {
         itemId: 0,
-        itemname: '',
+        itemName: '',
         number: 1,
         price: null,
-        damageRecordDesc: '',
+        description: '',
         img: '',
         imgs: '',
         videos: ''
       },
       imgType: null,
       rules: {
-        itemname: [
+        itemName: [
           { required: true, message: '请输入物品名', trigger: 'blur' },
           {
             required: true,
@@ -145,13 +145,14 @@ export default {
             trigger: 'blur'
           }
         ],
-        damageRecordDesc: [
+        description: [
           { required: true, message: '说明一下', trigger: 'blur' }
         ],
         img: [
           { required: true, message: '上传视频或图片', trigger: 'blur' }
         ]
       },
+      buttonLoading: false,
       oldImgView: true,
       dialogVisible: false
     }
@@ -207,10 +208,10 @@ export default {
         .then(_ => {
           this.ruleForm = {
             itemId: 0,
-            itemname: '',
+            itemName: '',
             number: 1,
             price: null,
-            damageRecordDesc: '',
+            description: '',
             img: '',
             imgs: '',
             videos: ''
@@ -338,28 +339,28 @@ export default {
     /**
      * @description 添加物品请求api
      * @param {Number} itemId  物品Id
-     * @param {String} itemname  物品名
+     * @param {String} itemName  物品名
      * @param {Number} number  物品数量
      * @param {Number} price  单价
-     * @param {String} damageRecordDesc  描述
+     * @param {String} description  描述
      * @param {String} imgs  图片Url
      * @param {String} videos  视频Url
      */
-    async itemChangeAPI ({ itemId, itemname, number, price, damageRecordDesc, imgs, videos }) {
-      return await api.ITEM_CHANGE_API({ itemId, itemname, number, price, damageRecordDesc, imgs, videos })
+    async itemChangeAPI ({ itemId, itemName, number, price, description, imgs, videos }) {
+      return await api.ITEM_CHANGE_API({ itemId, itemName, number, price, description, imgs, videos })
     },
     /**
      * @description 添加物品请求api
      * @param {Number} itemId  物品Id
-     * @param {String} itemname  物品名
+     * @param {String} itemName  物品名
      * @param {Number} number  物品数量
      * @param {Number} price  单价
-     * @param {String} damageRecordDesc  描述
+     * @param {String} description  描述
      * @param {String} imgs  图片Url
      * @param {String} videos  视频Url
      */
-    itemChange ({ itemId, itemname, number, price, damageRecordDesc, imgs, videos }) {
-      this.itemChangeAPI({ itemId, itemname, number, price, damageRecordDesc, imgs, videos })
+    itemChange ({ itemId, itemName, number, price, description, imgs, videos }) {
+      this.itemChangeAPI({ itemId, itemName, number, price, description, imgs, videos })
         .then(v => {
           if (v === null) {
             this.$message({
@@ -369,10 +370,10 @@ export default {
             this.$emit('changeItemSuccess', this.ruleForm)
             this.ruleForm = {
               itemId: 0,
-              itemname: '',
+              itemName: '',
               number: 1,
               price: null,
-              damageRecordDesc: '',
+              description: '',
               img: '',
               imgs: '',
               videos: ''
@@ -382,9 +383,22 @@ export default {
               this.oldImgView = true
               this.$refs.img.clearFiles()
             }
+            this.buttonLoading = false
             this.dialogVisible = false
           } else if (v === 'fail') {
             this.$message.error('上传失败')
+            this.buttonLoading = false
+          } else if (v.status >= 40000) {
+            this.$log.push({
+              message: '错误代码' + v.status + ',' + v.message,
+              type: 'warning'
+            })
+            return this.$notify({
+              title: v.message,
+              message: '错误代码' + v.status,
+              position: 'bottom-left',
+              type: 'warning'
+            })
           }
         })
     },
@@ -401,10 +415,11 @@ export default {
      */
     imgUpload (file) {
       const formData = new FormData()
-      formData.append('file', file)
+      formData.append('file', new Blob([file.raw], { type: file.raw.type }))
+      this.buttonLoading = true
       this.imgUploadAPI(formData)
         .then(v => {
-          if (v.split('/')[0] === 'http:') {
+          if (v.split('/')[0] === 'http:' || v.split('/')[0] === 'https:') {
             console.log()
             if (this.imgType === 'image') {
               this.ruleForm.imgs = v
@@ -414,15 +429,27 @@ export default {
               this.ruleForm.videos = v
             }
             this.itemChange({
-              itemname: this.ruleForm.itemname,
+              itemName: this.ruleForm.itemName,
               number: this.ruleForm.number,
               price: this.ruleForm.price,
-              damageRecordDesc: this.ruleForm.damageRecordDesc,
+              description: this.ruleForm.description,
               imgs: this.ruleForm.imgs,
               videos: this.ruleForm.videos
             })
           } else if (v === 'fail') {
             this.$message.error('上传失败')
+            this.buttonLoading = false
+          } else if (v.status >= 40000) {
+            this.$log.push({
+              message: '错误代码' + v.status + ',' + v.message,
+              type: 'warning'
+            })
+            return this.$notify({
+              title: v.message,
+              message: '错误代码' + v.status,
+              position: 'bottom-left',
+              type: 'warning'
+            })
           }
         })
     },
@@ -452,14 +479,15 @@ export default {
         // 没有修改走这里
         this.ruleForm = {
           itemId: 0,
-          itemname: '',
+          itemName: '',
           number: 1,
           price: null,
-          damageRecordDesc: '',
+          description: '',
           img: '',
           imgs: '',
           videos: ''
         }
+        this.buttonLoading = false
         this.$refs.ruleForm.clearValidate()
         if (this.oldImgView === false) {
           this.oldImgView = true
@@ -473,10 +501,10 @@ export default {
           if (this.oldImgView === true) {
             this.itemChange({
               itemId: this.ruleForm.itemId,
-              itemname: this.ruleForm.itemname,
+              itemName: this.ruleForm.itemName,
               number: this.ruleForm.number,
               price: this.ruleForm.price,
-              damageRecordDesc: this.ruleForm.damageRecordDesc,
+              description: this.ruleForm.description,
               imgs: this.ruleForm.imgs,
               videos: this.ruleForm.videos
             })

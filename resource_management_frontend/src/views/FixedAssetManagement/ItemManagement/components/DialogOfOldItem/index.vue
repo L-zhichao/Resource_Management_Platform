@@ -4,7 +4,7 @@
     :visible.sync="dialogVisible"
     :before-close="handleClose"
     width="40%">
-    <span><b>{{ oldItemId_Name.itemname }}</b></span>
+    <span><b>{{ oldItemId_Name.itemName }}</b></span>
     <br/><br/>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
       <el-form-item label="损坏数量" prop="number">
@@ -39,7 +39,7 @@
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="submit">确 定</el-button>
+      <el-button type="primary" :loading="buttonLoading" @click="submit">确 定</el-button>
     </span>
   </el-dialog>
 </template>
@@ -86,6 +86,7 @@ export default {
           { required: true, message: '上传损坏图片', trigger: 'blur' }
         ]
       },
+      buttonLoading: false,
       dialogVisible: false
     }
   },
@@ -249,8 +250,31 @@ export default {
               message: '上传成功',
               type: 'success'
             })
+            this.ruleForm = {
+              number: 1,
+              inputText: '',
+              // 上传后的文件列表
+              imgUrls: '',
+              img: []
+            }
+            this.$refs.ruleForm.clearValidate()
+            this.$refs.imgLoad.clearFiles()
+            this.dialogVisible = false
+            this.buttonLoading = false
           } else if (v === 'fail') {
             this.$message.error('上传失败')
+            this.buttonLoading = false
+          } else if (v.status >= 40000) {
+            this.$log.push({
+              message: '错误代码' + v.status + ',' + v.message,
+              type: 'warning'
+            })
+            return this.$notify({
+              title: v.message,
+              message: '错误代码' + v.status,
+              position: 'bottom-left',
+              type: 'warning'
+            })
           }
         })
     },
@@ -267,10 +291,11 @@ export default {
      */
     imgUpload (file, index) {
       const formData = new FormData()
-      formData.append('file', file)
+      formData.append('file', new Blob([file.raw], { type: file.raw.type }))
+      this.buttonLoading = true
       this.imgUploadAPI(formData)
         .then(v => {
-          if (v.split('/')[0] === 'http:') {
+          if (v.split('/')[0] === 'http:' || v.split('/')[0] === 'https:') {
             if (index === this.ruleForm.img.length - 1) {
               this.ruleForm.imgUrls = this.ruleForm.imgUrls + v
               this.itemReportDamaged({
@@ -279,21 +304,23 @@ export default {
                 imgUrls: this.ruleForm.imgUrls,
                 number: this.ruleForm.number
               })
-              this.ruleForm = {
-                number: 1,
-                inputText: '',
-                // 上传后的文件列表
-                imgUrls: '',
-                img: []
-              }
-              this.$refs.ruleForm.clearValidate()
-              this.$refs.imgLoad.clearFiles()
-              this.dialogVisible = false
             } else {
               this.ruleForm.imgUrls = this.ruleForm.imgUrls + v + '//////////'
             }
           } else if (v === 'fail') {
             this.$message.error('上传失败')
+            this.buttonLoading = false
+          } else if (v.status >= 40000) {
+            this.$log.push({
+              message: '错误代码' + v.status + ',' + v.message,
+              type: 'warning'
+            })
+            return this.$notify({
+              title: v.message,
+              message: '错误代码' + v.status,
+              position: 'bottom-left',
+              type: 'warning'
+            })
           }
         })
     },

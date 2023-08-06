@@ -58,9 +58,36 @@ function createService () {
           case 40002:
             // code === 40002 代表 当前用户名已存在
             return { status: 40002, message: '当前用户名已存在' }
+          case 40003:
+            // code === 40003 代表 密码错误或用户不存在
+            return { status: 40003, message: '密码错误或用户不存在' }
           case 40004:
-            // code === 40004 代表 密码错误
+            // code === 40004 代表 密码错误或用户不存在
             return { status: 40004, message: '密码错误或用户不存在' }
+          case 40005:
+            // code === 40005 代表 未找到以下ID
+            return { status: 40005, message: '未找到以下ID' }
+          case 40006:
+            // code === 40006 代表 物品已经存在异常
+            return { status: 40006, message: '物品已经存在异常' }
+          case 50001:
+            // code === 50001 代表 用户增加未知异常
+            return { status: 50001, message: '用户增加未知异常' }
+          case 50002:
+            // code === 50002 代表 增加资金异常
+            return { status: 50002, message: '增加资金异常' }
+          case 50003:
+            // code === 50003 代表 用户日志记录异常
+            return { status: 50003, message: '用户日志记录异常' }
+          case 50004:
+            // code === 50004 代表 申请状态更改未知异常
+            return { status: 50004, message: '申请状态更改未知异常' }
+          case 50005:
+            // code === 50005 代表 未知异常
+            return { status: 50005, message: '未知异常' }
+          case 50006:
+            // code === 50006 代表 更改回应状态未知异常
+            return { status: 50006, message: '更改回应状态未知异常' }
           case 'xxx':
             // [ 示例 ] 其它和后台约定的 code
             errorCreate(`[ code: xxx ] ${dataAxios.msg}: ${response.config.url}`)

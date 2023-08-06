@@ -5,11 +5,11 @@
     :before-close="handleClose"
     width="40%">
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="名称" prop="itemname">
+      <el-form-item label="名称" prop="itemName">
         <el-input
           type="text"
           :controls="false"
-          v-model="ruleForm.itemname">
+          v-model="ruleForm.itemName">
         </el-input>
       </el-form-item>
       <el-form-item label="数量" prop="number">
@@ -32,8 +32,8 @@
           v-model.number="ruleForm.price">
         </el-input>
       </el-form-item>
-      <el-form-item label="详情" prop="damageRecordDesc">
-        <el-input type="textarea" v-model="ruleForm.damageRecordDesc"></el-input>
+      <el-form-item label="详情" prop="description">
+        <el-input type="textarea" v-model="ruleForm.description"></el-input>
       </el-form-item>
       <el-form-item label="视频图片" prop="img">
         <el-upload
@@ -43,7 +43,7 @@
           accept=".png, .jpg, .jpeg, .mp4, .flv"
           :limit="1"
           list-type="text"
-          @change.native="change"
+          :on-change="change"
           :on-exceed="handleExceed"
           :auto-upload="false">
           <i class="el-icon-upload"></i>
@@ -74,17 +74,17 @@ export default {
   data () {
     return {
       ruleForm: {
-        itemname: '',
+        itemName: '',
         number: 1,
         price: null,
-        damageRecordDesc: '',
+        description: '',
         img: '',
         imgs: '',
         videos: ''
       },
       imgType: null,
       rules: {
-        itemname: [
+        itemName: [
           { required: true, message: '请输入物品名', trigger: 'blur' },
           {
             required: true,
@@ -117,7 +117,7 @@ export default {
             trigger: 'blur'
           }
         ],
-        damageRecordDesc: [
+        description: [
           { required: true, message: '说明一下', trigger: 'blur' }
         ],
         img: [
@@ -142,10 +142,10 @@ export default {
       this.$confirm('确认关闭？')
         .then(_ => {
           this.ruleForm = {
-            itemname: '',
+            itemName: '',
             number: 1,
             price: null,
-            damageRecordDesc: '',
+            description: '',
             img: ''
           }
           this.$refs.ruleForm.clearValidate()
@@ -263,46 +263,59 @@ export default {
     },
     /**
      * @description 添加物品请求api
-     * @param {String} itemname  物品名
+     * @param {String} itemName  物品名
      * @param {Number} number  物品数量
      * @param {Number} price  单价
-     * @param {String} damageRecordDesc  描述
+     * @param {String} description  描述
      * @param {String} imgs  图片Url
      * @param {String} videos  视频Url
      */
-    async itemAddAPI ({ itemname, number, price, damageRecordDesc, imgs, videos }) {
-      return await api.ITEM_ADD_API({ itemname, number, price, damageRecordDesc, imgs, videos })
+    async itemAddAPI ({ itemName, number, price, description, imgs, videos }) {
+      return await api.ITEM_ADD_API({ itemName, number, price, description, imgs, videos })
     },
     /**
      * @description 添加物品请求
-     * @param {String} itemname  物品名
+     * @param {String} itemName  物品名
      * @param {Number} number  物品数量
      * @param {Number} price  单价
-     * @param {String} damageRecordDesc  描述
+     * @param {String} description  描述
      * @param {String} imgs  图片Url
      * @param {String} videos  视频Url
      */
-    itemAdd ({ itemname, number, price, damageRecordDesc, imgs, videos }) {
-      this.itemAddAPI({ itemname, number, price, damageRecordDesc, imgs, videos })
+    itemAdd ({ itemName, number, price, description, imgs, videos }) {
+      this.itemAddAPI({ itemName, number, price, description, imgs, videos })
         .then(v => {
-          if ('itemid' in v || 'itemId' in v) {
+          if (v === null) {
             this.$message({
               message: '上传成功',
               type: 'success'
             })
             this.ruleForm = {
-              itemname: '',
+              itemName: '',
               number: 1,
               price: null,
-              damageRecordDesc: '',
+              description: '',
               imgs: '',
               videos: ''
             }
             this.$refs.ruleForm.clearValidate()
             this.$refs.img.clearFiles()
             this.dialogVisible = false
+            this.buttonLoading = false
           } else if (v === 'fail') {
             this.$message.error('上传失败')
+            this.buttonLoading = false
+          } else if (v.status >= 40000) {
+            this.$log.push({
+              message: '错误代码' + v.status + ',' + v.message,
+              type: 'warning'
+            })
+            return this.$notify({
+              title: v.message,
+              message: '错误代码' + v.status,
+              position: 'bottom-left',
+              type: 'warning'
+            })
           }
         })
     },
@@ -319,10 +332,12 @@ export default {
      */
     imgUpload (file) {
       const formData = new FormData()
-      formData.append('file', file)
+      formData.append('file', new Blob([file.raw], { type: file.raw.type }))
+      console.log(new Blob([file.raw], { type: file.raw.type }))
+      this.buttonLoading = true
       this.imgUploadAPI(formData)
         .then(v => {
-          if (v.split('/')[0] === 'http:') {
+          if (v.split('/')[0] === 'http:' || v.split('/')[0] === 'https:') {
             if (this.imgType === 'image') {
               this.ruleForm.imgs = v
               this.ruleForm.videos = ''
@@ -331,15 +346,27 @@ export default {
               this.ruleForm.videos = v
             }
             this.itemAdd({
-              itemname: this.ruleForm.itemname,
+              itemName: this.ruleForm.itemName,
               number: this.ruleForm.number,
               price: this.ruleForm.price,
-              damageRecordDesc: this.ruleForm.damageRecordDesc,
+              description: this.ruleForm.description,
               imgs: this.ruleForm.imgs,
               videos: this.ruleForm.videos
             })
           } else if (v === 'fail') {
-            this.$message.error('上传失败')
+            this.$message.error('上传失败 || 返回数据有误')
+            this.buttonLoading = false
+          } else if (v.status >= 40000) {
+            this.$log.push({
+              message: '错误代码' + v.status + ',' + v.message,
+              type: 'warning'
+            })
+            return this.$notify({
+              title: v.message,
+              message: '错误代码' + v.status,
+              position: 'bottom-left',
+              type: 'warning'
+            })
           }
         })
     },
