@@ -266,7 +266,7 @@
 
 <script>
 import axios from "axios";
-import util from '@/libs/util';
+// import util from '@/libs/util';
 
 export default {
   name: "FundManagement",
@@ -351,6 +351,7 @@ export default {
       this.listLoading = true;
       axios
         .get("http://localhost:9090/fundsVo/page", {
+          timeout: 5000,
           params: this.listQuery,
           headers: {
             "Content-Type": "application/json",

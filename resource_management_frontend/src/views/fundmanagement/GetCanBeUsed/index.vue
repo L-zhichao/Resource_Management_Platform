@@ -84,6 +84,7 @@ export default {
       this.listLoading = true;
       axios
         .get("http://localhost:9090/fundsVo/page", {
+          timeout: 5000,
           params: this.listQuery,
           headers: {
             "Content-Type": "application/json"

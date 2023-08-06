@@ -3,8 +3,8 @@ import { uniqueId } from 'lodash'
 // 菜单导入
 import fundmanagement from './modules/fundmanagement'
 import itemManagement from './modules/ItemManagement'
-import resource from './modules/resource'
 import editorQuill from './modules/editorQuill'
+// import resource from './modules/resource'
 
 /**
  * @description 给菜单数据补充上 path 字段
@@ -27,15 +27,16 @@ export const menuHeader = supplementPath([
   itemManagement,
   // 资金管理
   fundmanagement,
-  // 考试资源
-  resource,
+  // 文本编辑器
   editorQuill
+  // 考试资源
+  // resource
 ])
 
 export const menuAside = supplementPath([
   { path: '/index', title: '首页', icon: 'home' },
   itemManagement,
   fundmanagement,
-  resource,
   editorQuill
+  // resource
 ])
