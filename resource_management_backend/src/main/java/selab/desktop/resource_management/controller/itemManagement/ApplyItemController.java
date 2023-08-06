@@ -28,7 +28,9 @@ public class ApplyItemController {
 
     @Operation(summary = "所有物品申请信息展示模块")
     @PostMapping("/showApply")
-    public JsonResult<List<ApplyItemVo>> showApply(){
+    public JsonResult<List<ApplyItemVo>> showApply(HttpServletRequest request){
+        Object name = request.getSession().getAttribute("name");
+        System.out.println(name);
         List<ApplyItemVo> applyItemVos = applyItemService.selectAllApply();
         JsonResult<List<ApplyItemVo>> applyItemVosJsonResult = new JsonResult<>(JsonResult.SUCCESS,null,applyItemVos);
         return applyItemVosJsonResult;

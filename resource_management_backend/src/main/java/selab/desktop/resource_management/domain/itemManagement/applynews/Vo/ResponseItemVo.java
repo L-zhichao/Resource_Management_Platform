@@ -12,9 +12,9 @@ import java.util.Date;
 @Data
 public class ResponseItemVo {
     @Schema(description = "物品申请信息id")
-    private Long applyId;
+    private String applyId;
     @Schema(description = "回应人")
-    private String resonseUser;
+    private String responseUser;
     @Schema(description = "回应信息状态(-1为未读，1为已读)")
     private Integer status;
     @Schema(description = "回应结果(同意与否2为同意，0为否)")

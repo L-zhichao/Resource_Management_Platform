@@ -7,6 +7,7 @@ import org.springframework.validation.BindException;
 import selab.desktop.resource_management.exception.fundManagement.FundInsertException;
 import selab.desktop.resource_management.exception.fundManagement.IDNotFundException;
 import selab.desktop.resource_management.exception.itemManagement.ApplyUpdateException;
+import selab.desktop.resource_management.exception.itemManagement.FileIploadException;
 import selab.desktop.resource_management.exception.itemManagement.ItemExistsException;
 import selab.desktop.resource_management.exception.itemManagement.UpdateResponseStatusException;
 import selab.desktop.resource_management.exception.userManagment.*;
@@ -59,5 +60,12 @@ public class ExceptionHandle {
        return new JsonResult<>(50005,"未知异常",null);
    }
 
+   @ExceptionHandler(RuntimeException.class)
+    public JsonResult<Void> fileException(RuntimeException e){
+        if(e instanceof FileIploadException){
+            return new JsonResult<>(40007,"文件上传失败",null);
+        }
+        return new JsonResult<>(40009,"后端未知异常",null);
+    }
 
     }

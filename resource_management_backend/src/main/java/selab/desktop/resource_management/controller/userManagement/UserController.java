@@ -76,7 +76,7 @@ public class UserController {
     }
 
     @GetMapping("/log")
-    public JsonResult<List<UserLog>> log(@RequestParam Long current,@RequestParam Long size){
+    public JsonResult<List<UserLog>> log(@RequestParam(defaultValue = "1") Long current,@RequestParam Long size){
         List<UserLog> userLogs = userLogService.queryAll(current, size);
         JsonResult<List<UserLog>> listJsonResult = new JsonResult<>(JsonResult.SUCCESS,null,userLogs);
         return listJsonResult;

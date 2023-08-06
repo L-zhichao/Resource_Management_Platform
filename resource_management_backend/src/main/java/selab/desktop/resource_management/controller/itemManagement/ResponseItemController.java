@@ -43,9 +43,11 @@ public class ResponseItemController {
         return listJsonResult;
     }
 
-    @PostMapping("/readed")
-    public JsonResult<Void> readResponse(@RequestBody Long applyId){
-      responseItemService.updateResponseStatus(applyId);
+    @GetMapping("/readed")
+    public JsonResult<Void> readResponse(@RequestParam Long applyId){
+//        Long aLong = Long.getLong(applyId);
+        System.out.println("==============="+applyId);
+        responseItemService.updateResponseStatus(applyId);
       return new JsonResult<>(JsonResult.SUCCESS,null,null);
     }
 }

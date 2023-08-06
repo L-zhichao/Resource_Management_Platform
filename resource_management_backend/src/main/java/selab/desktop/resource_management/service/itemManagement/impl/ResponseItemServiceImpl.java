@@ -82,11 +82,11 @@ public class ResponseItemServiceImpl extends ServiceImpl<ResponseItemMapper, Res
     }
     private ResponseItemVo responseItemToresponseItemVo(ResponseItem responseItem){
         ResponseItemVo responseItemVo = new ResponseItemVo();
-        responseItemVo.setApplyId(responseItem.getApplyId());
+        responseItemVo.setApplyId(responseItem.getApplyId().toString());
         responseItemVo.setStatus(responseItem.getStatus());
         responseItemVo.setResponseTime(responseItem.getResponseTime());
         responseItemVo.setResult(responseItem.getResult());
-        responseItemVo.setResonseUser(responseItem.getResponseUser());
+        responseItemVo.setResponseUser(responseItem.getResponseUser());
         responseItemVo.setReason(responseItem.getReason());
         return responseItemVo;
     }

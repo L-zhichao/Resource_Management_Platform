@@ -23,7 +23,7 @@ public class ItemServiceImpl implements ItemService {
     public Page<Item> selectAllItem(int page, int size, String search){
     LambdaQueryWrapper<Item> wrapper = Wrappers.lambdaQuery();
     if (StringUtils.isNotBlank(search)){
-            wrapper.like(Item::getItemname,search);
+            wrapper.like(Item::getItemName,search);
         }
     Page<Item> selectPage=itemMapper.selectPage(new Page(page,size),wrapper);
     return selectPage;
@@ -31,7 +31,7 @@ public class ItemServiceImpl implements ItemService {
 
     public void addItem(Item item){
         QueryWrapper<Item> queryWrapper = new QueryWrapper();
-        queryWrapper.eq("itemname", item.getItemname());
+        queryWrapper.eq("item_name", item.getItemName());
         List<Item> items = itemMapper.selectList(queryWrapper);
         if (items.size() > 0) {
             throw new ItemExistsException("物品已经存在");
@@ -44,6 +44,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     public void updateItem(Item item){
+        System.out.println("============="+item.getItemId());
         itemMapper.updateById(item);
     }
 
