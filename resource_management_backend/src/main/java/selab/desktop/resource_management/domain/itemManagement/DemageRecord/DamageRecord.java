@@ -18,6 +18,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @Tag(name = "物品损毁模型")
 public class DamageRecord {
+
     @Schema(description = "主键id")
     @TableId
     private Long damageRecordId;
@@ -26,11 +27,10 @@ public class DamageRecord {
     @Schema(description = "记录时间")
     private Date damageRecordTime;
     @Schema(description = "物品名称")
-    @TableField("itemname")
     private String itemName;
     @Schema(description = "上传者")
     @TableField("username")
-    private String userName;
+    private String username;
     @Schema(description = "管理员是否已读")
     private Boolean damageRecordIsread;
     @Schema(description = "上传图片")

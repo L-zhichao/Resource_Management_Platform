@@ -1,5 +1,6 @@
 package selab.desktop.resource_management.domain.fundManagement.Vo;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Data
+@TableName("funds_log")
 @AllArgsConstructor
 @NoArgsConstructor
 public class LogVo {
