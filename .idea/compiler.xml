@@ -7,10 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="resource_management" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="resource_management" target="17" />
       <module name="resource_management_backend" target="1.5" />
     </bytecodeTargetLevel>
   </component>
