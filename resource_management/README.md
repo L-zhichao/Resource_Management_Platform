@@ -13,7 +13,7 @@
 
 # 安装环境
 
-打开项目文件夹，将终端切换到项目目录
+打开resource_management-ui目录，将终端切换到项目目录
 
 ## 安装依赖
 
@@ -24,7 +24,7 @@ npm i
 ## 项目内启动(开发调试)
 
 ```shell
-npm run serve
+node .\app.js
 ```
 
 若启动失败，进行以下尝试
