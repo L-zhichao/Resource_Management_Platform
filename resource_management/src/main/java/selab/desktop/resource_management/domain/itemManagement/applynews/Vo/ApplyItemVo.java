@@ -11,13 +11,13 @@ import java.util.Date;
 @Data
 public class ApplyItemVo {
     @Schema(description = "申请人")
-     @NotEmpty
+    @NotEmpty
     private String applyUser;
     @Schema(description = "申请内容")
-     @NotEmpty
+    @NotEmpty
     private String content;
     @Schema(description = "申请金额")
-     @Min(0)
+    @Min(0)
     private Double money;
     @Schema(description = "申请状态(-1为未读，1为已读)")
     private Integer status;

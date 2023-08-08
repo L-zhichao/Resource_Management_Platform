@@ -67,12 +67,12 @@ public class FundsController {
             fundsVo.setUpdateTime(new Date());
             log.info("增加资金");
             fundsService.save(fundsVo);
-            return new JsonResult<>(JsonResult.SUCCESS, null, "增加成功");
+            return new JsonResult<>(JsonResult.SUCCESS, "增加成功",null );
         } else {
             fundsVo.setUpdateTime(new Date());
             log.info("更新资金");
             fundsService.updateById(fundsVo);
-            return new JsonResult<>(JsonResult.SUCCESS, null, "更新成功");
+            return new JsonResult<>(JsonResult.SUCCESS, "更新成功", null);
         }
     }
 
@@ -82,7 +82,8 @@ public class FundsController {
     public JsonResult<String> delete(@PathVariable Long id) {
         log.info("根据主键ID删除某项资金");
         log.info("删除成功");
-        return new JsonResult<>(JsonResult.SUCCESS, null, "删除成功");
+        fundsService.removeById(id);
+        return new JsonResult<>(JsonResult.SUCCESS, "删除成功",null );
 
     }
 
