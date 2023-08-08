@@ -61,11 +61,12 @@ public class UserController {
      */
     @Operation(summary = "登录模块")
     @PostMapping("/login")
- public JsonResult<UserVo> login(@RequestBody UserLogin userLogin, HttpSession httpSession, HttpServletRequest request){
+ public JsonResult<UserVo> login(@RequestBody UserLogin userLogin,HttpSession session,HttpServletRequest request){
         UserVo userVo = userServiceImpl.login(userLogin.getUsername(), userLogin.getPassword());
-        httpSession.setAttribute("name", userVo.getName());
-        httpSession.setAttribute("username", userVo.getUsername());
-        httpSession.setAttribute("userStatus", userVo.getUserStatus());
+        session.setAttribute("name", userVo.getName());
+        session.setAttribute("username", userVo.getUsername());
+        session.setAttribute("userStatus", userVo.getUserStatus());
+        session.setAttribute("token",userVo.getToken());
         UserLog userLog = new UserLog();
         userLog.setUserId(userVo.getUuid());
         String origin = request.getHeader("Origin");
@@ -77,7 +78,7 @@ public class UserController {
         return jsonResult;
     }
 
-    @Operation(summary = "用户登录")
+    @Operation(summary = "用户登录日志")
     @GetMapping("/log")
     public JsonResult<List<UserLog>> log(@RequestParam(defaultValue = "1") Long current,@RequestParam Long size){
         List<UserLog> userLogs = userLogService.queryAll(current, size);
@@ -85,7 +86,7 @@ public class UserController {
         return listJsonResult;
     }
 
-    @Operation(summary = "查询登录")
+    @Operation(summary = "查询登录条数")
     @GetMapping("/count")
    public JsonResult<Long> queryLogCount(){
         Long count = userLogService.queryForCount();

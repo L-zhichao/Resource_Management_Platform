@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>selab.resource</groupId>
-	<artifactId>resource_management_backend</artifactId>
+	<artifactId>resource_management</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>resource_management_backend</name>
 	<description>resource_management_backend</description>

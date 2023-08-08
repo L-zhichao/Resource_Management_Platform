@@ -31,12 +31,13 @@ public class ItemServiceImpl implements ItemService {
 
     public void addItem(Item item){
         QueryWrapper<Item> queryWrapper = new QueryWrapper();
-        queryWrapper.eq("item_name", item.getItemName());
-        List<Item> items = itemMapper.selectList(queryWrapper);
-        if (items.size() > 0) {
-            throw new ItemExistsException("物品已经存在");
+        queryWrapper.eq("item_name", item.getItemName()).eq("price",item.getPrice());
+        Item item1 = itemMapper.selectOne(queryWrapper);
+        if (item1 != null) {
+           throw new ItemExistsException("物品已经存在");
+        }else {
+            itemMapper.insert(item);
         }
-         itemMapper.insert(item);
     }
 
     public Item getItemById(Long id){

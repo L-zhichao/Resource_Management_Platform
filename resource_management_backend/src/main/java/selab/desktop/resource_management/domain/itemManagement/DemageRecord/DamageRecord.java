@@ -36,7 +36,8 @@ public class DamageRecord {
     @Schema(description = "上传图片")
     private String damageRecordImg;
     @Schema(description = "管理员是否已处理")
-    private Boolean damageRecordIshandle;
+    @TableField("damage_record_ishandle")
+    private Boolean damageRecordIsHandle;
 
 
 }

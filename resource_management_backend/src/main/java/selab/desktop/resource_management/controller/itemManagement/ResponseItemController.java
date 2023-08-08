@@ -46,8 +46,8 @@ public class ResponseItemController {
     }
 
     @Operation(summary = "读取响应")
-    @PostMapping("/readed")
-    public JsonResult<Void> readResponse(@RequestBody Long applyId){
+    @GetMapping("/readed")
+    public JsonResult<Void> readResponse(@RequestParam Long applyId){
       responseItemService.updateResponseStatus(applyId);
       return new JsonResult<>(JsonResult.SUCCESS,null,null);
     }

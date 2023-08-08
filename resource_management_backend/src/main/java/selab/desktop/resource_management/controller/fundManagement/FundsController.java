@@ -22,7 +22,7 @@ import java.util.List;
 
 @Slf4j
 @Tag(name = "资金管理controller")
-@CrossOrigin
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RequestMapping("/fundsVo")
 @RestController
 public class FundsController {
@@ -32,13 +32,6 @@ public class FundsController {
     @Autowired
     private LogService logService;
 
-    @GetMapping
-    @Operation(summary = "展示目前总资产")
-    @Transactional
-    public JsonResult<List<FundsVo>> getAllFunds() {
-        log.info("展示目前总资产");
-        return new JsonResult<>(JsonResult.SUCCESS, null, fundsService.list());
-    }
 
     @GetMapping("/fundsVo/byName")
     @Operation(summary = "根据名字查询")

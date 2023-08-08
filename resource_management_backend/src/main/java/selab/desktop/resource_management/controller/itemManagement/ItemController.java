@@ -6,8 +6,8 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.system.ApplicationHome;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -90,6 +90,7 @@ public class ItemController {
                 b[i] = bytes[i];
             }
             String type = HexUtil.encodeHexStr(b).toUpperCase();
+            System.out.println(type);
             if (type.contains("FFD8FF")) {
                 type = "JPG";
             } else if (type.contains("89504E47")) {
@@ -98,13 +99,16 @@ public class ItemController {
                 type = "GIF";
             } else if (type.contains("424D")) {
                 type = "BMP";
+            } else if (type.contains("0000001C")) {
+                type = "mp4";
             } else {
                 type = "jpeg";
             }
             // 设置文件地址
             ApplicationHome applicationHome = new ApplicationHome(this.getClass());
-            String destDir = applicationHome.getDir().getParentFile()
-                    .getParentFile().getAbsolutePath() + "\\src\\main\\resources\\static\\img\\item";
+            String absolutePath = applicationHome.getDir().getParentFile()
+                    .getParentFile().getAbsolutePath();
+            String destDir = absolutePath + "\\imgs\\item";
             String fileName = UUID.randomUUID().toString();
             String path = StrUtil.format("{}/{}." + type, destDir, fileName);
             try {
@@ -115,22 +119,28 @@ public class ItemController {
                 System.out.println("Exception: " + ex);
                 ex.printStackTrace();
             }
-            String url = "http://localhost:9090/img/item/"+fileName+"."+type;
+            String filePath ="http://localhost:9090/item/img-find/"+fileName+"."+type;
 //            //成功响应
-            return new JsonResult<String>(JsonResult.SUCCESS, null,url);
+            return new JsonResult<String>(JsonResult.SUCCESS, null,filePath);
         } catch (IOException e) {
             //失败响应
-            return new JsonResult<>(50056, "图片上传失败", null);
+            return new JsonResult<>(50056, "图片或视频上传失败", null);
         }
     }
     @Operation(summary = "图片查询")
-    @GetMapping("/img-find")
-    public JsonResult<String > fingImg(String url) {
+    @GetMapping("/img-find/{filePath}")
+    public String fingImg(@PathVariable String filePath, HttpServletResponse response) {
+        response.setContentType("image/jpeg");
+        response.setHeader("Access-Control-Allow-Origin","http://127.0.0.1:5500");
+        response.setHeader("Access-Control-Allow-Credentials","true");
+        ApplicationHome applicationHome = new ApplicationHome(this.getClass());
+        String absolutePath = applicationHome.getDir().getParentFile()
+                .getParentFile().getAbsolutePath();
+        String path =  absolutePath.replaceAll("\\\\","/")+"/imgs/item/"+filePath;
         try {
-            String substring = url.substring(url.indexOf('/', 8));
-            substring="D://"+substring;
-            File file = new  File(substring);
-            System.out.println(substring);
+
+            File file = new  File(path);
+
             FileInputStream fis = new FileInputStream(file);
 
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -149,11 +159,7 @@ public class ItemController {
             String extension = null;
             if (dotIndex > 0 && dotIndex < fileName.length() - 1) {
                 extension = fileName.substring(dotIndex + 1).toLowerCase();
-                System.out.println("File Extension: " + extension);
-            } else {
-                System.out.println("File has no extension.");
             }
-
             String base64Image;
             if ("png".equalsIgnoreCase(extension)) {
                 base64Image = "data:image/png;base64," + Base64.getEncoder().encodeToString(imageBytes);
@@ -165,11 +171,10 @@ public class ItemController {
                 // 默认处理为普通文件类型
                 base64Image = Base64.getEncoder().encodeToString(imageBytes);
             }
-
-            return new JsonResult<>(JsonResult.SUCCESS, null, base64Image);
+            return base64Image;
         } catch (IOException e) {
             e.printStackTrace();
-            return new JsonResult<>(500, "图片读取失败", null);
         }
+        return null;
     }
 }

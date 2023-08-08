@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.validation.BindException;
 import selab.desktop.resource_management.exception.fundManagement.FundInsertException;
 import selab.desktop.resource_management.exception.fundManagement.IDNotFundException;
-import selab.desktop.resource_management.exception.itemManagement.ApplyUpdateException;
-import selab.desktop.resource_management.exception.itemManagement.FileIploadException;
-import selab.desktop.resource_management.exception.itemManagement.ItemExistsException;
-import selab.desktop.resource_management.exception.itemManagement.UpdateResponseStatusException;
+import selab.desktop.resource_management.exception.itemManagement.*;
 import selab.desktop.resource_management.exception.userManagment.*;
 import selab.desktop.resource_management.utils.JsonResult;
 
@@ -48,7 +45,7 @@ public class ExceptionHandle {
        }else if (e instanceof FundInsertException) {
             return new JsonResult<>(50002, "增加资金异常", null);
        } else if (e instanceof ItemExistsException) {
-           return new JsonResult<>(40006,"物品已经存在异常",null);
+           return new JsonResult<>(40006,"该物品已经存在，添加需修改数量",null);
        } else if (e instanceof UserLogInsertException) {
            return new JsonResult<>(50003,"用户日志记录异常",null);
        } else if (e instanceof ApplyUpdateException) {
