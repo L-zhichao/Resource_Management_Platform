@@ -11,13 +11,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ItemPage {
-
-    @Schema(description = "条数")
+    @Schema(description = "每页页数")
     private Long total;
-
-    @Schema(description = "起始页")
+    @Schema(description = "当前页数")
     private Long totalPage;
-
     @Schema(description = "物品")
     private List<Item> items;
 

@@ -6,11 +6,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import selab.desktop.resource_management.domain.itemManagement.applynews.ResponseItem;
-import selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ResponseItemUpload;
+import selab.desktop.resource_management.domain.itemManagement.applynews.DTO.ResponseItemDTO;
 import selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ResponseItemVo;
+import selab.desktop.resource_management.exception.itemManagement.UpdateResponseStatusException;
 import selab.desktop.resource_management.exception.userManagment.UserInsertException;
-import selab.desktop.resource_management.mapper.itemManagement.ApplyItemMapper;
 import selab.desktop.resource_management.mapper.itemManagement.ResponseItemMapper;
+import selab.desktop.resource_management.service.itemManagement.ApplyItemService;
 import selab.desktop.resource_management.service.itemManagement.ResponseItemService;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ResponseItemServiceImpl extends ServiceImpl<ResponseItemMapper, ResponseItem> implements ResponseItemService {
     private final ResponseItemMapper responseItemMapper;
-    private final ApplyItemMapper applyItemMapper;
+    private final ApplyItemService applyItemService;
     @Override
     public List<ResponseItemVo> selectAllUnreadResonse(String name) {
 
@@ -36,9 +37,9 @@ public class ResponseItemServiceImpl extends ServiceImpl<ResponseItemMapper, Res
     }
 
     @Override
-    public void saveResonse(ResponseItemUpload responseItemUpload, String name) {
-
-        ResponseItem responseItem = responseItemUploadToResponseItem(responseItemUpload, name);
+    public void saveResonse(ResponseItemDTO responseItemDTO) {
+        applyItemService.updateApplyStatus(responseItemDTO.getApplyId());
+        ResponseItem responseItem = responseItemUploadToResponseItem(responseItemDTO);
         int rows = responseItemMapper.insert(responseItem);
         if(rows != 1){
             throw new UserInsertException("回应上传未知异常");
@@ -56,23 +57,36 @@ public class ResponseItemServiceImpl extends ServiceImpl<ResponseItemMapper, Res
         });
         return responseItemVos;
     }
-    private ResponseItem responseItemUploadToResponseItem(ResponseItemUpload responseItemUpload,String username){
+
+    @Override
+    public void updateResponseStatus(Long applyId) {
+        LambdaQueryWrapper<ResponseItem> responseItemLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        responseItemLambdaQueryWrapper.eq(ResponseItem::getApplyId,applyId);
+        ResponseItem responseItem = responseItemMapper.selectOne(responseItemLambdaQueryWrapper);
+        responseItem.setStatus(ResponseItem.Response_READED);
+        int rows = responseItemMapper.updateById(responseItem);
+        if(rows != 1){
+            throw new UpdateResponseStatusException("更改回应状态未知异常");
+        }
+    }
+
+    private ResponseItem responseItemUploadToResponseItem(ResponseItemDTO responseItemDTO){
         ResponseItem responseItem = new ResponseItem();
-        responseItem.setApplyId(responseItemUpload.getApplyId());
-        responseItem.setResult(responseItemUpload.getResult());
-        responseItem.setResponseUser(username);
-        responseItem.setReason(responseItem.getReason());
-        responseItem.setResponseTime(responseItemUpload.getResponseTime());
-        responseItem.setApplyUser(responseItemUpload.getName());
+        responseItem.setApplyId(responseItemDTO.getApplyId());
+        responseItem.setResult(responseItemDTO.getResult());
+        responseItem.setResponseUser(responseItemDTO.getResponseName());
+        responseItem.setReason(responseItemDTO.getReason());
+        responseItem.setResponseTime(responseItemDTO.getResponseTime());
+        responseItem.setApplyUser(responseItemDTO.getApplyName());
         return responseItem;
     }
     private ResponseItemVo responseItemToresponseItemVo(ResponseItem responseItem){
         ResponseItemVo responseItemVo = new ResponseItemVo();
-        responseItemVo.setApplyId(responseItem.getApplyId());
+        responseItemVo.setApplyId(responseItem.getApplyId().toString());
         responseItemVo.setStatus(responseItem.getStatus());
         responseItemVo.setResponseTime(responseItem.getResponseTime());
         responseItemVo.setResult(responseItem.getResult());
-        responseItemVo.setResonseUser(responseItem.getResponseUser());
+        responseItemVo.setResponseUser(responseItem.getResponseUser());
         responseItemVo.setReason(responseItem.getReason());
         return responseItemVo;
     }

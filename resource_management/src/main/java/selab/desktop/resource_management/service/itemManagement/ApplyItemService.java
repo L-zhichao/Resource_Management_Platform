@@ -3,7 +3,8 @@ package selab.desktop.resource_management.service.itemManagement;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.stereotype.Service;
 import selab.desktop.resource_management.domain.itemManagement.applynews.ApplyItem;
-import selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ApplyItemUpload;
+import selab.desktop.resource_management.domain.itemManagement.applynews.DTO.ApplyItemDTO;
+import selab.desktop.resource_management.domain.itemManagement.applynews.Vo.ApplyItemVo;
 
 import java.util.List;
 
@@ -12,10 +13,9 @@ public interface ApplyItemService extends IService<ApplyItem> {
 
      /**
       *  申请上传
-      * @param applyItemUpload 申请上传实体类
-      * @param name   申请人名字
+      * @param applyItemDTO 申请上传实体类
       */
-     void saveApply(ApplyItemUpload applyItemUpload, String name);
+     void saveApply(ApplyItemDTO applyItemDTO);
 
 
 
@@ -23,13 +23,18 @@ public interface ApplyItemService extends IService<ApplyItem> {
       *  查询所有申请信息
       *  @return 所有申请集合
       */
-     List<ApplyItem> selectAllApply();
+     List<ApplyItemVo> selectAllApply();
 
      /**
       *  查询所有未读申请
       * @return
       */
-     List<ApplyItem> selectAllUnreadApply();
+     List<ApplyItemVo> selectAllUnreadApply();
 
+     /**
+      *  更改apply的状态
+      * @param applyId  申请id
+      */
+   void updateApplyStatus(Long applyId);
 
 }

@@ -1,6 +1,6 @@
 package selab.desktop.resource_management.service.itemManagement;
 
-import selab.desktop.resource_management.domain.itemManagement.item.DamageRecord;
+import selab.desktop.resource_management.domain.itemManagement.DemageRecord.DamageRecord;
 
 import java.util.List;
 

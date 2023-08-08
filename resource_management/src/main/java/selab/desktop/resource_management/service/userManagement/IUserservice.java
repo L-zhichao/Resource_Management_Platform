@@ -3,8 +3,8 @@ package selab.desktop.resource_management.service.userManagement;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.stereotype.Service;
 import selab.desktop.resource_management.domain.userManagement.User;
-import selab.desktop.resource_management.domain.userManagement.vo.UserReturn;
 import selab.desktop.resource_management.domain.userManagement.vo.UserVo;
+import selab.desktop.resource_management.domain.userManagement.DTO.UserDTO;
 
 @Service
 public interface IUserservice extends IService<User> {
@@ -14,9 +14,9 @@ public interface IUserservice extends IService<User> {
 
     /**
      *  注册用户
-     * @param userVo
+     * @param userDTO
      */
-    void register(UserVo userVo);
+    void register(UserDTO userDTO);
 
 
     /**
@@ -26,6 +26,6 @@ public interface IUserservice extends IService<User> {
      * @return   当前用户
      */
 
-    UserReturn login(String username, String password);
+    UserVo login(String username, String password);
 
 }

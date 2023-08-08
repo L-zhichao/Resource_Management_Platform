@@ -3,7 +3,7 @@ package selab.desktop.resource_management.service.itemManagement.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import selab.desktop.resource_management.domain.itemManagement.item.DamageRecord;
+import selab.desktop.resource_management.domain.itemManagement.DemageRecord.DamageRecord;
 import selab.desktop.resource_management.mapper.itemManagement.DamageRecordMapper;
 import selab.desktop.resource_management.service.itemManagement.DamageRecordService;
 
@@ -34,7 +34,6 @@ public class DamageRecordServiceImpl implements DamageRecordService {
     @Override
     public List<DamageRecord> findAllDamageRecord() {
         QueryWrapper queryWrapper=new QueryWrapper();
-        queryWrapper.eq("ishandle",false);
         List<DamageRecord> damageRecords = damageRecordMapper.selectList(queryWrapper);
         return damageRecords;
     }
@@ -47,7 +46,7 @@ public class DamageRecordServiceImpl implements DamageRecordService {
     @Override
     public void updateIsHandle(Long damageRecordId) {
         DamageRecord damageRecord = damageRecordMapper.selectById(damageRecordId);
-        damageRecord.setDamageRecordIshandle(true);
+        damageRecord.setDamageRecordIsHandle(true);
         damageRecordMapper.updateById(damageRecord);
     }
 

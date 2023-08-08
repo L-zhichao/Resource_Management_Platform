@@ -6,7 +6,7 @@ import lombok.Data;
 @Schema(description = "登录成功返回对象模板")
 @Data
 public class UserReturn {
-    @Schema(description = "用户id")
+    @Schema(description = "uuid")
     private Long uuid;
     @Schema(description = "用户名")
     private String username;

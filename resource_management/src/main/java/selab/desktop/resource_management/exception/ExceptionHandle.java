@@ -6,11 +6,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.validation.BindException;
 import selab.desktop.resource_management.exception.fundManagement.FundInsertException;
 import selab.desktop.resource_management.exception.fundManagement.IDNotFundException;
-import selab.desktop.resource_management.exception.itemManagement.ItemExistsException;
-import selab.desktop.resource_management.exception.userManagment.PasswordNotMatchException;
-import selab.desktop.resource_management.exception.userManagment.UserInsertException;
-import selab.desktop.resource_management.exception.userManagment.UserNotFundException;
-import selab.desktop.resource_management.exception.userManagment.UsernameDuplicatedException;
+import selab.desktop.resource_management.exception.itemManagement.*;
+import selab.desktop.resource_management.exception.userManagment.*;
 import selab.desktop.resource_management.utils.JsonResult;
 
 @RestControllerAdvice
@@ -48,11 +45,24 @@ public class ExceptionHandle {
        }else if (e instanceof FundInsertException) {
             return new JsonResult<>(50002, "增加资金异常", null);
        } else if (e instanceof ItemExistsException) {
-           return new JsonResult<>(40006,"物品已经存在异常",null);
+           return new JsonResult<>(40006,"该物品已经存在，添加需修改数量",null);
+       } else if (e instanceof UserLogInsertException) {
+           return new JsonResult<>(50003,"用户日志记录异常",null);
+       } else if (e instanceof ApplyUpdateException) {
+           return new JsonResult<>(50004,"申请状态更改未知异常",null);
+       } else if (e instanceof UpdateResponseStatusException) {
+           return new JsonResult<>(50006,"更改回应状态未知异常",null);
        }
 
        return new JsonResult<>(50005,"未知异常",null);
    }
 
+   @ExceptionHandler(RuntimeException.class)
+    public JsonResult<Void> fileException(RuntimeException e){
+        if(e instanceof FileIploadException){
+            return new JsonResult<>(40007,"文件上传失败",null);
+        }
+        return new JsonResult<>(40009,"后端未知异常",null);
+    }
 
     }
