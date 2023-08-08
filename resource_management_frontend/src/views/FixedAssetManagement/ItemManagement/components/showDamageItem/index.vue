@@ -12,6 +12,7 @@
       :data="tableData"
       :key="randomKey"
       style="width: 100%"
+      empty-text="没有物品损坏或已全部完成处理"
       v-loading="loadAnimation">
       <el-table-column
         prop="damageRecordTime"
@@ -139,18 +140,15 @@ export default {
       this.loadAnimation = true
       this.radioChange_timeout = setTimeout(() => {
         if (this.radio === '待处理') {
-          this.tableData = this.allTableData.tableDataFinish
-        } else {
           this.tableData = this.allTableData.tableDataWait
+        } else {
+          this.tableData = this.allTableData.tableDataFinish
         }
         this.loadAnimation = false
       }, 300)
-      // if (this.radio === '待处理') {
-      //   this.tableData = this.allTableData.tableDataFinish
-      // } else {
-      //   this.tableData = this.allTableData.tableDataWait
-      // }
-      // this.loadAnimation = false
+    },
+    async showImgAPI (url) {
+      return await api.SHOW_IMG_API(url)
     },
     /**
      * @description 损坏物品查询请求api
@@ -164,44 +162,50 @@ export default {
      */
     itemSearchDamage ({ username = null }) {
       this.itemSearchDamageAPI({ username })
-        .then(v => {
+        .then(async v => {
           if (v === 'fail') {
             this.loadAnimation = false
             return this.$message.error('信息获取失败')
           } else if (v.status >= 40000) {
+            this.loadAnimation = false
             this.$log.push({
-              message: '错误代码' + v.status + ',' + v.message,
+              message: '错误代码:' + v.status + ',' + v.message,
               type: 'warning'
             })
             return this.$notify({
               title: v.message,
-              message: '错误代码' + v.status,
+              message: '错误代码:' + v.status,
               position: 'bottom-left',
               type: 'warning'
             })
           }
-          this.allTableData.tableDataWait = v.filter((item, index) => {
-            if (item.damageRecordIsHandle === 'false') {
-              item.imgs = item.damageRecordImg.split('//////////')
-              // item.imgs = item.damageRecordImg
+          for (let i = 0; i < v.length; i++) {
+            v[i].imgs = v[i].damageRecordImg.split('//////////')
+            for (let j = 0; j < v[i].imgs.length; j++) {
+              await this.showImgAPI(v[i].imgs[j])
+                .then(value => {
+                  v[i].imgs[j] = value
+                })
+            }
+          }
+          this.allTableData.tableDataWait = await v.filter((item, index) => {
+            if (item.damageRecordIsHandle === false) {
               item.number = item.damageRecordDesc.split('//////////')[1]
               item.damageRecordDesc = item.damageRecordDesc.split('//////////')[0]
               return item
             }
           })
-          this.allTableData.tableDataFinish = v.filter((item, index) => {
-            if (item.damageRecordIsHandle === 'true') {
-              item.imgs = item.damageRecordImg.split('//////////')
-              // item.imgs = item.damageRecordImg
+          this.allTableData.tableDataFinish = await v.filter((item, index) => {
+            if (item.damageRecordIsHandle === true) {
               item.number = item.damageRecordDesc.split('//////////')[1]
               item.damageRecordDesc = item.damageRecordDesc.split('//////////')[0]
               return item
             }
           })
           if (this.radio === '待处理') {
-            this.tableData = this.allTableData.tableDataFinish
-          } else {
             this.tableData = this.allTableData.tableDataWait
+          } else {
+            this.tableData = this.allTableData.tableDataFinish
           }
           this.loadAnimation = false
         })
@@ -232,12 +236,12 @@ export default {
             this.$message.error('删除失败')
           } else if (v.status >= 40000) {
             this.$log.push({
-              message: '错误代码' + v.status + ',' + v.message,
+              message: '错误代码:' + v.status + ',' + v.message,
               type: 'warning'
             })
             return this.$notify({
               title: v.message,
-              message: '错误代码' + v.status,
+              message: '错误代码:' + v.status,
               position: 'bottom-left',
               type: 'warning'
             })
@@ -270,12 +274,12 @@ export default {
             this.$message.error('处理失败')
           } else if (v.status >= 40000) {
             this.$log.push({
-              message: '错误代码' + v.status + ',' + v.message,
+              message: '错误代码:' + v.status + ',' + v.message,
               type: 'warning'
             })
             return this.$notify({
               title: v.message,
-              message: '错误代码' + v.status,
+              message: '错误代码:' + v.status,
               position: 'bottom-left',
               type: 'warning'
             })

@@ -129,12 +129,12 @@ export default {
             this.$message.error('删除失败')
           } else if (v.status >= 40000) {
             this.$log.push({
-              message: '错误代码' + v.status + ',' + v.message,
+              message: '错误代码:' + v.status + ',' + v.message,
               type: 'warning'
             })
             return this.$notify({
               title: v.message,
-              message: '错误代码' + v.status,
+              message: '错误代码:' + v.status,
               position: 'bottom-left',
               type: 'warning'
             })

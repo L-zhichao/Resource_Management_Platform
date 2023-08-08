@@ -68,8 +68,8 @@ function createService () {
             // code === 40005 代表 未找到以下ID
             return { status: 40005, message: '未找到以下ID' }
           case 40006:
-            // code === 40006 代表 物品已经存在异常
-            return { status: 40006, message: '物品已经存在异常' }
+            // code === 40006 代表 该物品已经存在，添加需修改数量
+            return { status: 40006, message: '该物品已经存在，添加需修改数量' }
           case 40009:
             // code === 40009 代表 后端未知异常
             return { status: 40009, message: '后端未知异常' }
@@ -94,12 +94,12 @@ function createService () {
           default:
             // 未设置的 code
             this.$log.push({
-              message: '错误代码' + code + ':' + (dataAxios.message || dataAxios.msg),
+              message: '错误代码:' + code + ':' + (dataAxios.message || dataAxios.msg),
               type: 'warning'
             })
             this.$notify({
               title: `没有设置状态码${code}的相应数据`,
-              message: '错误代码' + code + ':' + (dataAxios.message || dataAxios.msg),
+              message: '错误代码:' + code + ':' + (dataAxios.message || dataAxios.msg),
               position: 'bottom-left',
               type: 'warning'
             })

@@ -136,7 +136,7 @@
     <!-- 顶部两个按钮其二换出的 dialog -->
     <damageItemReport :dialogArouse="dialogOldItemArouseChangesNumber" :oldItemId_Name="oldItemId_Name"/>
     <!-- 右侧管理员按钮 -->
-    <addNewItem :dialogArouse="addNewItemArouseChangesNumber"/>
+    <addNewItem :dialogArouse="addNewItemArouseChangesNumber" @addSuccess="addSuccess"/>
     <!-- 列表管理员编辑按钮 -->
     <changeItem :dialogArouse="dialogChangeItemArouseChangesNumber" :changeItemInformation="changeItemInformation" @changeItemSuccess="changeItemSuccess" @dialogVideoPlayerArouse="dialogVideoPlayerArouse"/>
     <!-- 视频播放器 -->
@@ -228,12 +228,6 @@ export default {
         search: this.inputSearch
       })
     },
-    // handlePrevClick (val) {
-
-    // },
-    // handleNextClick (val) {
-
-    // },
     /**
      * @description 搜索框聚焦触发
      * @param {String} that 输入框ref
@@ -247,6 +241,9 @@ export default {
      */
     searchEnter (that) {
       this.$refs[that].blur()
+    },
+    async showImgAPI (url) {
+      return await api.SHOW_IMG_API(url)
     },
     /**
      * @description 物品查询请求api
@@ -271,12 +268,12 @@ export default {
             return this.$message.error('获取失败')
           } else if (v.status >= 40000) {
             this.$log.push({
-              message: '错误代码' + v.status + ',' + v.message,
+              message: '错误代码:' + v.status + ',' + v.message,
               type: 'warning'
             })
             return this.$notify({
               title: v.message,
-              message: '错误代码' + v.status,
+              message: '错误代码:' + v.status,
               position: 'bottom-left',
               type: 'warning'
             })
@@ -284,6 +281,19 @@ export default {
           this.tableData = JSON.parse(JSON.stringify(v.items))
           for (let i = 0; i < this.tableData.length; i++) {
             this.tableData[i].img = ''
+            if (this.tableData[i].imgs !== '') {
+              this.tableData[i].urlSave = this.tableData[i].imgs
+              this.showImgAPI(this.tableData[i].imgs)
+                .then(v => {
+                  this.tableData[i].imgs = v
+                })
+            } else {
+              this.tableData[i].urlSave = this.tableData[i].videos
+              this.showImgAPI(this.tableData[i].videos)
+                .then(v => {
+                  this.tableData[i].videos = v
+                })
+            }
           }
           this.pagination.allPage = v.totalPage
           this.pagination.allData = v.total
@@ -311,12 +321,31 @@ export default {
      */
     changeItemSuccess (row) {
       const data = this.tableData
+      let newIndex = null
       this.tableData.map((item, index) => {
         if (item.itemId === row.itemId) {
           data[index] = row
+          newIndex = index
         }
       })
-      this.tableData = data
+      if (row.imgs.split('/')[0] === 'http:' || row.imgs.split('/')[0] === 'https:' || row.videos.split('/')[0] === 'http:' || row.videos.split('/')[0] === 'https:') {
+        if (data[newIndex].imgs !== '') {
+          this.showImgAPI(data[newIndex].imgs)
+            .then(v => {
+              data[newIndex].imgs = v
+              this.tableData = data
+            })
+        } else {
+          this.showImgAPI(data[newIndex].videos)
+            .then(v => {
+              data[newIndex].videos = v
+              this.tableData = data
+            })
+        }
+      }
+      // setTimeout(() => {
+      //   this.randomKey = Math.random()
+      // }, 100)
       this.randomKey = Math.random()
     },
     /**
@@ -342,6 +371,16 @@ export default {
     dialogVideoPlayerArouse (url) {
       this.videoUrl = url
       this.dialogVideoPlayer++
+    },
+    /**
+     * @description 物品增加成功触发
+     */
+    addSuccess () {
+      this.itemSearch({
+        page: this.pagination.currentPage,
+        pageSize: this.pagination.pageSize,
+        search: this.inputSearch
+      })
     }
   },
   mounted () {

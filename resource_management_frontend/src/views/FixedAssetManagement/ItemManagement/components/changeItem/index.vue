@@ -108,7 +108,8 @@ export default {
         description: '',
         img: '',
         imgs: '',
-        videos: ''
+        videos: '',
+        urlSave: ''
       },
       imgType: null,
       rules: {
@@ -376,7 +377,8 @@ export default {
               description: '',
               img: '',
               imgs: '',
-              videos: ''
+              videos: '',
+              urlSave: ''
             }
             this.$refs.ruleForm.clearValidate()
             if (this.oldImgView === false) {
@@ -390,12 +392,12 @@ export default {
             this.buttonLoading = false
           } else if (v.status >= 40000) {
             this.$log.push({
-              message: '错误代码' + v.status + ',' + v.message,
+              message: '错误代码:' + v.status + ',' + v.message,
               type: 'warning'
             })
             return this.$notify({
               title: v.message,
-              message: '错误代码' + v.status,
+              message: '错误代码:' + v.status,
               position: 'bottom-left',
               type: 'warning'
             })
@@ -420,7 +422,7 @@ export default {
       this.imgUploadAPI(formData)
         .then(v => {
           if (v.split('/')[0] === 'http:' || v.split('/')[0] === 'https:') {
-            console.log()
+            this.ruleForm.urlSave = v
             if (this.imgType === 'image') {
               this.ruleForm.imgs = v
               this.ruleForm.videos = ''
@@ -441,12 +443,12 @@ export default {
             this.buttonLoading = false
           } else if (v.status >= 40000) {
             this.$log.push({
-              message: '错误代码' + v.status + ',' + v.message,
+              message: '错误代码:' + v.status + ',' + v.message,
               type: 'warning'
             })
             return this.$notify({
               title: v.message,
-              message: '错误代码' + v.status,
+              message: '错误代码:' + v.status,
               position: 'bottom-left',
               type: 'warning'
             })
@@ -485,7 +487,8 @@ export default {
           description: '',
           img: '',
           imgs: '',
-          videos: ''
+          videos: '',
+          url: ''
         }
         this.buttonLoading = false
         this.$refs.ruleForm.clearValidate()
@@ -505,8 +508,8 @@ export default {
               number: this.ruleForm.number,
               price: this.ruleForm.price,
               description: this.ruleForm.description,
-              imgs: this.ruleForm.imgs,
-              videos: this.ruleForm.videos
+              imgs: this.ruleForm.imgs && this.ruleForm.urlSave,
+              videos: this.ruleForm.videos && this.ruleForm.urlSave
             })
           } else {
             this.imgUpload(this.ruleForm.img)

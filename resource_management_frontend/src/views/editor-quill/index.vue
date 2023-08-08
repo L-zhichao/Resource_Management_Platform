@@ -1,7 +1,7 @@
 <template>
   <d2-container>
-    <!-- <d2-ueditor v-model="text"/> -->
-    <d2-quill
+    <!-- <ueditor v-model="text"/> -->
+    <quill
       style="min-height: 200px; margin-bottom: 20px;"
       v-model="value"/>
   </d2-container>

@@ -18,7 +18,7 @@
         </el-input>
       </el-form-item>
       <el-form-item label="损坏详情" prop="inputText">
-        <el-input type="textarea" v-model="ruleForm.inputText"></el-input>
+        <el-input type="textarea" v-model="ruleForm.inputText" @blur="textProcessing"></el-input>
       </el-form-item>
       <el-form-item label="上传图片" prop="img">
         <el-upload
@@ -272,12 +272,12 @@ export default {
           } else if (v.status >= 40000) {
             this.imgUrlData = ['', '', '', '', '']
             this.$log.push({
-              message: '错误代码' + v.status + ',' + v.message,
+              message: '错误代码:' + v.status + ',' + v.message,
               type: 'warning'
             })
             return this.$notify({
               title: v.message,
-              message: '错误代码' + v.status,
+              message: '错误代码:' + v.status,
               position: 'bottom-left',
               type: 'warning'
             })
@@ -323,17 +323,25 @@ export default {
           } else if (v.status >= 40000) {
             this.imgUrlData = ['', '', '', '', '']
             this.$log.push({
-              message: '错误代码' + v.status + ',' + v.message,
+              message: '错误代码:' + v.status + ',' + v.message,
               type: 'warning'
             })
             return this.$notify({
               title: v.message,
-              message: '错误代码' + v.status,
+              message: '错误代码:' + v.status,
               position: 'bottom-left',
               type: 'warning'
             })
           }
         })
+    },
+    /**
+     * @description 申请说明处理
+     */
+    textProcessing () {
+      const reg1 = new RegExp('/', 'g')
+      const data = this.ruleForm.inputText.replace(reg1, '')
+      this.ruleForm.inputText = data
     },
     /**
      * @description 更新上传的图片

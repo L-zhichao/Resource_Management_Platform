@@ -62,7 +62,7 @@
 // import util from '@/libs/util'
 import api from '@/api'
 export default {
-  name: 'DialogAddNewItem',
+  name: 'addNewItem',
   props: {
     // 检测 dialog 被唤起
     dialogArouse: {
@@ -302,17 +302,18 @@ export default {
             this.$refs.img.clearFiles()
             this.dialogVisible = false
             this.buttonLoading = false
+            this.$emit('addSuccess')
           } else if (v === 'fail') {
             this.$message.error('上传失败')
             this.buttonLoading = false
           } else if (v.status >= 40000) {
             this.$log.push({
-              message: '错误代码' + v.status + ',' + v.message,
+              message: '错误代码:' + v.status + ',' + v.message,
               type: 'warning'
             })
             return this.$notify({
               title: v.message,
-              message: '错误代码' + v.status,
+              message: '错误代码:' + v.status,
               position: 'bottom-left',
               type: 'warning'
             })
@@ -357,12 +358,12 @@ export default {
             this.buttonLoading = false
           } else if (v.status >= 40000) {
             this.$log.push({
-              message: '错误代码' + v.status + ',' + v.message,
+              message: '错误代码:' + v.status + ',' + v.message,
               type: 'warning'
             })
             return this.$notify({
               title: v.message,
-              message: '错误代码' + v.status,
+              message: '错误代码:' + v.status,
               position: 'bottom-left',
               type: 'warning'
             })

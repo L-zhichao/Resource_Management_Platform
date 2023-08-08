@@ -11,7 +11,6 @@
         <el-table-column align="center" label="id" prop="id"></el-table-column>
         <el-table-column align="center" label="资产" prop="asset"></el-table-column>
         <el-table-column align="center" label="资产价值" prop="assetValue"></el-table-column>
-        <el-table-column align="center" label="是否可支配(是/否)" prop="judge"></el-table-column>
         <el-table-column align="center" label="创建时间" prop="updateTime">
           <template slot-scope="scope">
             <i class="el-icon-time"></i>&nbsp;
@@ -36,7 +35,7 @@
 
 <script>
 import axios from "axios";
-
+import util from "@/libs/util";
 export default {
   name: "getCanBeUsed",
   data() {
@@ -48,7 +47,8 @@ export default {
       listQuery: {
         page: 1,
         pageSize: 10
-      }
+      },
+       userAdministratorPermissions: util.cookies.get('userStatus') === '0' || true
     };
   },
   created() {

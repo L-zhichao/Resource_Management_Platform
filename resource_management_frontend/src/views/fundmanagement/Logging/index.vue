@@ -19,11 +19,11 @@
           </el-form-item>
 
           <el-form-item>
-            <el-button @click="loadData" type="primary">查询</el-button>
+            <el-button @click="loadData" type="primary" v-if="!userAdministratorPermissions">查询</el-button>
           </el-form-item>
 
           <el-form-item>
-            <el-button @click="fetchData" type="danger">重置</el-button>
+            <el-button @click="fetchData" type="danger"  v-if="userAdministratorPermissions">重置</el-button>
           </el-form-item>
         </el-form>
       </el-form>
@@ -88,7 +88,7 @@
 
 <script>
 import axios from "axios";
-
+import util from "@/libs/util";
 export default {
   name: 'logging',
   data() {
@@ -133,6 +133,7 @@ export default {
         pageSize: 10, // 默认的页面大小
         updateTime: "", // 用于存储 updateTime 参数
       },
+       userAdministratorPermissions: util.cookies.get('userStatus') === '0' || false
     };
   },
   created() {
