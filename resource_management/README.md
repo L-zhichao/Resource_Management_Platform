@@ -9,4 +9,40 @@
 **技术支持**
    > 后端： 项目采用 springboot + mybatis plus  框架
 > 
-   > 前端：
+   > 前端：基于vue2,使用 vue-cli3 构建,使用npm进行包管理,基于axios进行二次封装
+
+# 安装环境
+
+打开项目文件夹，将终端切换到项目目录
+
+## 安装依赖
+
+```shell
+npm i
+```
+
+## 项目内启动(开发调试)
+
+```shell
+npm run serve
+```
+
+若启动失败，进行以下尝试
+
+修改package.json，在相关构建命令之前加入SET NODE_OPTIONS=--openssl-legacy-provider
+
+```json
+"scripts": {
+   "serve": "SET NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+   "build": "SET NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build"
+},
+```
+
+## 项目打包
+
+```shell
+npm run build
+```
+
+<a href="https://github.com/d2-projects/d2-admin" target="_blank"><img src="https://raw.githubusercontent.com/FairyEver/d2-admin/master/docs/image/d2-admin@2x.png" width="200"></a>
+
