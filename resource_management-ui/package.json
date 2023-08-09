@@ -1,5 +1,5 @@
 {
-  "name": "resource_management_frontend",
+  "name": "resource_management-ui",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -7,6 +7,10 @@
     "build": "vite build",
     "preview": "vite preview"
   },
+"scripts": {
+   "serve": "SET NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+   "build": "SET NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build"
+},
   "dependencies": {
     "vue": "^3.3.4"
   },
