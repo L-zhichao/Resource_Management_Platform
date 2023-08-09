@@ -24,7 +24,7 @@ import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin(origins = "http://127.0.0.1:8080")
 @RestController
 @RequestMapping("/damage/record")
 @Tag(name = "物品损坏上报记录controller层")

@@ -12,7 +12,7 @@ import selab.desktop.resource_management.utils.JsonResult;
 
 
 import java.util.List;
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin(origins = "http://127.0.0.1:8080")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/item")

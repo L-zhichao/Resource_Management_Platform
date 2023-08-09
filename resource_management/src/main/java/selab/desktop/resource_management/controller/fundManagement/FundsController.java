@@ -22,7 +22,7 @@ import java.util.List;
 
 @Slf4j
 @Tag(name = "资金管理controller")
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin(origins = "http://127.0.0.1:8080")
 @RequestMapping("/fundsVo")
 @RestController
 public class FundsController {
