@@ -168,7 +168,6 @@
 import dayjs from 'dayjs'
 import { mapActions } from 'vuex'
 import localeMixin from '@/locales/mixin.js'
-// import axios from 'axios'
 import api from '@/api'
 // import util from '@/libs/util'
 export default {

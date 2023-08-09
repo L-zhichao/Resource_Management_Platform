@@ -4,6 +4,8 @@ import { get } from 'lodash'
 import util from '@/libs/util'
 import { errorLog, errorCreate } from './tools'
 
+axios.defaults.withCredentials = true // 允许使用cookie
+
 /**
  * @description 创建请求实例
  */

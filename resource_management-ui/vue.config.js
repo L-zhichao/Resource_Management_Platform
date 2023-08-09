@@ -38,7 +38,17 @@ module.exports = {
   lintOnSave: true,
   devServer: {
     publicPath, // 和 publicPath 保持一致
-    disableHostCheck: process.env.NODE_ENV === 'development' // 关闭 host check，方便使用 ngrok 之类的内网转发工具
+    disableHostCheck: process.env.NODE_ENV === 'development', // 关闭 host check，方便使用 ngrok 之类的内网转发工具
+    proxy: {
+      // 以“/a”作为开头的axios请求都会进行代理
+      '': {
+        target: 'http://localhost:9090/', // 请求目标服务器的url
+        changeOrigin: true, // 是否跨域（选为true）
+        pathRewrite: {
+          '^': '' // 将axios请求url中的 '' 进行重写
+        }
+      }
+    }
   },
   css: {
     loaderOptions: {
