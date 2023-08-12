@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import java.util.Date;
 @Data
-@TableName("fundsmgm")
 public class FundsVo {
     @TableId
     @Schema(description = "自增主键雪花ID")

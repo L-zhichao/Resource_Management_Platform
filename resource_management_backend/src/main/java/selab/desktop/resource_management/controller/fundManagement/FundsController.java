@@ -47,6 +47,7 @@ public class FundsController {
                                           @Parameter(description = "每页页数") int pageSize) {
         Page<FundsVo> mPage = new Page<>(page, pageSize);
         fundsService.page(mPage);
+        log.info("查询所有资产");
         return new JsonResult<>(JsonResult.SUCCESS, null, mPage);
     }
 
