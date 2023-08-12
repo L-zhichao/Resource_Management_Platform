@@ -1,5 +1,6 @@
 package selab.desktop.resource_management.controller.fundManagement;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,6 +33,15 @@ public class FundsController {
         return new JsonResult<>(JsonResult.SUCCESS, null, fundsService.list());
     }
 
+    @GetMapping("/fundsVo/byName")
+    @Operation(summary = "根据名字查询")
+    @Transactional
+    public JsonResult<FundsVo> getFundsByAsset(String name){
+        QueryWrapper<FundsVo> wrapper = new QueryWrapper<>();
+        wrapper.like("asset",name);
+
+        return new JsonResult<>(JsonResult.SUCCESS,null,fundsService.getOne(wrapper));
+    }
     @GetMapping("/fundsVo/{id}")
     @Operation(summary = "根据ID查询")
     @Transactional
